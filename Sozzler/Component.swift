@@ -18,8 +18,8 @@ func ==(lhs: Component, rhs: Component) -> Bool {
 @objc(Component)
 class Component: NSManagedObject, Comparable {
 
-    @NSManaged var quantity_d: NSNumber
-    @NSManaged var quantity_n: NSNumber
+    @NSManaged var quantity_d: Int16
+    @NSManaged var quantity_n: Int16
     @NSManaged var quantity_s: String
     @NSManaged var ingredient: Ingredient
     @NSManaged var unit: Unit
@@ -35,7 +35,7 @@ class Component: NSManagedObject, Comparable {
         return Swift.sorted(componentArray, { $0 > $1 })
     }
     
-    class func create(quantity_n: Int, quantity_d: Int, unit: Unit, ingredient: Ingredient, recipe: Recipe, context: NSManagedObjectContext) -> Component {
+    class func create(quantity_n: Int16, quantity_d: Int16, unit: Unit, ingredient: Ingredient, recipe: Recipe, context: NSManagedObjectContext) -> Component {
         
         return CoreDataHelper.create("Component", context: context, initializer: {
             (entity, context) in

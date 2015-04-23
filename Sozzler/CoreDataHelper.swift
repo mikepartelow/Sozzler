@@ -13,7 +13,26 @@ class CoreDataHelper {
         
         return 0
     }
+
+    class func find(entityName: String, predicate: NSPredicate, context: NSManagedObjectContext) -> NSManagedObject? {
+        var obj: NSManagedObject?
+            
+        let fetchRequest = NSFetchRequest(entityName: entityName)
+        fetchRequest.predicate = predicate
+            
+        // FIXME: error handling
+        if let results = context.executeFetchRequest(fetchRequest, error: nil) {
+            if results.count == 1 {
+                obj = (results[0] as! NSManagedObject)
+            } else if results.count > 1 {
+                // FIXME: do something
+                NSLog("more than one result in CoreDataHelper.find(\(entityName))")
+            }
+        }
+        return obj
+    }
     
+
     class func create(entityName: String, context: NSManagedObjectContext,
         initializer: (entity: NSEntityDescription, context: NSManagedObjectContext) -> NSManagedObject) -> NSManagedObject {
             

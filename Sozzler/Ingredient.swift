@@ -5,7 +5,7 @@ import CoreData
 class Ingredient: NSManagedObject {
 
     @NSManaged var name: String
-    @NSManaged var recipe_count: NSNumber
+    @NSManaged var recipe_count: Int16
     @NSManaged var components: NSSet
 
     class func create(name: String, context: NSManagedObjectContext) -> Ingredient {
@@ -16,5 +16,10 @@ class Ingredient: NSManagedObject {
                 return ingredient
             }
         ) as! Ingredient
+    }
+    
+    class func find(name: String, context: NSManagedObjectContext) -> Ingredient? {
+        let predicate = NSPredicate(format: "name == %@", name)
+        return CoreDataHelper.find("Ingredient", predicate: predicate, context: context) as! Ingredient?
     }
 }

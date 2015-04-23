@@ -66,4 +66,13 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         tableView.layoutIfNeeded()
         tableView.reloadData()
     }
+    
+    @IBAction func unwindToRecipes(sender: UIStoryboardSegue)
+    {
+        if let arvc = sender.sourceViewController as? AddRecipeViewController {
+            if arvc.added {
+                refresh()
+            }
+        }
+    }
 }

@@ -5,9 +5,9 @@ import CoreData
 class Recipe: NSManagedObject {
 
     @NSManaged var name: String
-    @NSManaged var rating: NSNumber
+    @NSManaged var rating: Int16
     @NSManaged var text: String
-    @NSManaged var component_count: NSNumber
+    @NSManaged var component_count: Int16
     @NSManaged var components: NSSet
     
     class func fetchRequest() -> NSFetchRequest {
@@ -26,7 +26,7 @@ class Recipe: NSManagedObject {
         return CoreDataHelper.count("Recipe", context: context)
     }
 
-    class func create(name: String, withRating rating: Int, withText text: String, inContext context: NSManagedObjectContext) -> Recipe {
+    class func create(name: String, withRating rating: Int16, withText text: String, inContext context: NSManagedObjectContext) -> Recipe {
         let predicate = NSPredicate(format: "name == %@", name)
         
         let recipe = CoreDataHelper.create("Recipe", context: context, initializer: { (entity, context) in
