@@ -8,7 +8,10 @@ class RecipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        recipeTextView!.text = recipe!.string
         navigationItem.title = recipe!.name
+        
+        let sortedComponents = Component.sorted(recipe!.components)
+        let componentText = "\n".join(map(sortedComponents, { $0.string }))
+        recipeTextView!.text = "\(componentText)\n\n\(recipe!.text)"
     }
 }

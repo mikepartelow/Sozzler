@@ -9,10 +9,6 @@ class Recipe: NSManagedObject {
     @NSManaged var text: String
     @NSManaged var component_count: NSNumber
     @NSManaged var components: NSSet
-
-    var string: String {
-        return "foo"
-    }
     
     class func fetchRequest() -> NSFetchRequest {
         let fetchRequest = NSFetchRequest(entityName: "Recipe")
@@ -45,9 +41,26 @@ class Recipe: NSManagedObject {
     }
 
     class func populate(context: NSManagedObjectContext) {
-        Recipe.create("disgusting artichoke", withRating: 5, withText: "not as bad as it sounds", inContext: context)
-        Recipe.create("disgusting asparagus", withRating: 4, withText: "worse than it sounds", inContext: context)
-        Recipe.create("disgusting rutabaga", withRating: 3, withText: "only marginally worse than it sounds", inContext: context)
+        let oz = Unit.create("ounce", context: context)
+        let tsp = Unit.create("tsp", context: context)
+        
+        var artichoke = Ingredient.create("artichoke", context: context)
+        var asparagus = Ingredient.create("asparagus", context: context)
+        var limeJuice = Ingredient.create("lime juice", context: context)
+        var lemonJuice = Ingredient.create("lemon juice", context: context)
+        
+        var r = Recipe.create("disgusting artichoke", withRating: 5, withText: "not as bad as it sounds", inContext: context)
+        Component.create(1, quantity_d: 2, unit: oz, ingredient: artichoke, recipe: r, context: context)
+        Component.create(1, quantity_d: 1, unit: oz, ingredient: limeJuice, recipe: r, context: context)
+        
+        r = Recipe.create("disgusting asparagus", withRating: 4, withText: "worse than it sounds", inContext: context)
+        Component.create(2, quantity_d: 1, unit: oz, ingredient: asparagus, recipe: r, context: context)
+        Component.create(1, quantity_d: 4, unit: tsp, ingredient: limeJuice, recipe: r, context: context)
+
+        r = Recipe.create("disgusting rutabaga", withRating: 3, withText: "only marginally worse than it sounds", inContext: context)
+        Component.create(1, quantity_d: 3, unit: oz, ingredient: asparagus, recipe: r, context: context)
+        Component.create(1, quantity_d: 1, unit: oz, ingredient: limeJuice, recipe: r, context: context)
+        Component.create(1, quantity_d: 1, unit: tsp, ingredient: lemonJuice, recipe: r, context: context)
         
         context.save(nil)
     }
