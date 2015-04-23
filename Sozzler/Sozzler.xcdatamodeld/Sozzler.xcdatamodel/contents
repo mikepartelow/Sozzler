@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Component" syncable="YES">
+    <entity name="Component" representedClassName="PRODUCT_MODULE_NAME.Component" syncable="YES">
         <attribute name="quantity_d" attributeType="Integer 16" minValueString="1" syncable="YES"/>
         <attribute name="quantity_n" attributeType="Integer 16" syncable="YES"/>
         <attribute name="quantity_s" optional="YES" attributeType="String" syncable="YES"/>
@@ -8,25 +8,25 @@
         <relationship name="recipe" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="components" inverseEntity="Recipe" syncable="YES"/>
         <relationship name="unit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Unit" syncable="YES"/>
     </entity>
-    <entity name="Ingredient" syncable="YES">
+    <entity name="Ingredient" representedClassName="PRODUCT_MODULE_NAME.Ingredient" syncable="YES">
         <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="recipe_count" attributeType="Integer 16" minValueString="0" syncable="YES"/>
         <relationship name="components" toMany="YES" deletionRule="Nullify" destinationEntity="Component" inverseName="ingredient" inverseEntity="Component" syncable="YES"/>
     </entity>
-    <entity name="Recipe" syncable="YES">
+    <entity name="Recipe" representedClassName="Recipe" syncable="YES">
         <attribute name="component_count" attributeType="Integer 16" minValueString="0" syncable="YES"/>
         <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="rating" attributeType="Integer 16" minValueString="0" maxValueString="5" defaultValueString="0" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="components" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Component" inverseName="recipe" inverseEntity="Component" syncable="YES"/>
     </entity>
-    <entity name="Unit" syncable="YES">
+    <entity name="Unit" representedClassName="PRODUCT_MODULE_NAME.Unit" syncable="YES">
         <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
     </entity>
     <elements>
         <element name="Component" positionX="-36" positionY="18" width="128" height="135"/>
         <element name="Ingredient" positionX="-54" positionY="0" width="128" height="90"/>
-        <element name="Unit" positionX="-63" positionY="-18" width="128" height="60"/>
         <element name="Recipe" positionX="-45" positionY="36" width="128" height="120"/>
+        <element name="Unit" positionX="-63" positionY="-18" width="128" height="60"/>
     </elements>
 </model>

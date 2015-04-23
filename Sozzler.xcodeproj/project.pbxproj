@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40B643EF1AE8C17300EEBBCA /* RecipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */; };
+		40B643F41AE8C35400EEBBCA /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F01AE8C35300EEBBCA /* Ingredient.swift */; };
+		40B643F51AE8C35400EEBBCA /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F11AE8C35300EEBBCA /* Unit.swift */; };
+		40B643F61AE8C35400EEBBCA /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F21AE8C35300EEBBCA /* Recipe.swift */; };
+		40B643F71AE8C35400EEBBCA /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F31AE8C35300EEBBCA /* Component.swift */; };
+		40B643F91AE8C48200EEBBCA /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F81AE8C48200EEBBCA /* CoreDataHelper.swift */; };
 		40F65BAE1AE8BAE000D15898 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F65BAD1AE8BAE000D15898 /* AppDelegate.swift */; };
 		40F65BB11AE8BAE000D15898 /* Sozzler.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40F65BAF1AE8BAE000D15898 /* Sozzler.xcdatamodeld */; };
 		40F65BB31AE8BAE000D15898 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F65BB21AE8BAE000D15898 /* ViewController.swift */; };
@@ -27,6 +33,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTableViewController.swift; sourceTree = "<group>"; };
+		40B643F01AE8C35300EEBBCA /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		40B643F11AE8C35300EEBBCA /* Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
+		40B643F21AE8C35300EEBBCA /* Recipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		40B643F31AE8C35300EEBBCA /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		40B643F81AE8C48200EEBBCA /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		40F65BA81AE8BAE000D15898 /* Sozzler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sozzler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40F65BAC1AE8BAE000D15898 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40F65BAD1AE8BAE000D15898 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,8 +92,14 @@
 			isa = PBXGroup;
 			children = (
 				40F65BAD1AE8BAE000D15898 /* AppDelegate.swift */,
+				40B643F01AE8C35300EEBBCA /* Ingredient.swift */,
+				40B643F11AE8C35300EEBBCA /* Unit.swift */,
+				40B643F21AE8C35300EEBBCA /* Recipe.swift */,
+				40B643F31AE8C35300EEBBCA /* Component.swift */,
 				40F65BB21AE8BAE000D15898 /* ViewController.swift */,
 				40F65BB41AE8BAE000D15898 /* Main.storyboard */,
+				40B643F81AE8C48200EEBBCA /* CoreDataHelper.swift */,
+				40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */,
 				40F65BB71AE8BAE000D15898 /* Images.xcassets */,
 				40F65BB91AE8BAE000D15898 /* LaunchScreen.xib */,
 				40F65BAF1AE8BAE000D15898 /* Sozzler.xcdatamodeld */,
@@ -216,6 +234,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				40F65BB31AE8BAE000D15898 /* ViewController.swift in Sources */,
+				40B643EF1AE8C17300EEBBCA /* RecipeTableViewController.swift in Sources */,
+				40B643F61AE8C35400EEBBCA /* Recipe.swift in Sources */,
+				40B643F41AE8C35400EEBBCA /* Ingredient.swift in Sources */,
+				40B643F51AE8C35400EEBBCA /* Unit.swift in Sources */,
+				40B643F71AE8C35400EEBBCA /* Component.swift in Sources */,
+				40B643F91AE8C48200EEBBCA /* CoreDataHelper.swift in Sources */,
 				40F65BAE1AE8BAE000D15898 /* AppDelegate.swift in Sources */,
 				40F65BB11AE8BAE000D15898 /* Sozzler.xcdatamodeld in Sources */,
 			);
@@ -413,6 +437,7 @@
 				40F65BCC1AE8BAE100D15898 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		40F65BCD1AE8BAE100D15898 /* Build configuration list for PBXNativeTarget "SozzlerTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +446,7 @@
 				40F65BCF1AE8BAE100D15898 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
