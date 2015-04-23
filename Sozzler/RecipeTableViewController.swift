@@ -2,10 +2,10 @@ import UIKit
 import CoreData
 
 class RecipeTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-
-    var frc: NSFetchedResultsController?
     let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
-
+    
+    var frc: NSFetchedResultsController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -16,6 +16,16 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         }
         
         refresh()
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let navController = segue.destinationViewController as! UINavigationController
+        
+        if segue.identifier == "recipeDetails" {
+            let rvc = navController.topViewController! as! RecipeViewController
+            let index = tableView.indexPathForSelectedRow()!
+            rvc.recipe = frc!.objectAtIndexPath(index) as? Recipe
+        }
     }
 
     // NSFetchedResultsControllerDelegate
@@ -49,6 +59,8 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         
         // FIXME: nil seems like a bad idea
         frc!.performFetch(nil)
+        
+        navigationItem.title = "Recipes"
         
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()

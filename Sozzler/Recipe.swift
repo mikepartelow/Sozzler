@@ -10,6 +10,10 @@ class Recipe: NSManagedObject {
     @NSManaged var component_count: NSNumber
     @NSManaged var components: NSSet
 
+    var string: String {
+        return "foo"
+    }
+    
     class func fetchRequest() -> NSFetchRequest {
         let fetchRequest = NSFetchRequest(entityName: "Recipe")
         
