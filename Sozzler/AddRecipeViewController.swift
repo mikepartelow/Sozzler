@@ -3,6 +3,7 @@ import UIKit
 class AddRecipeViewController: UIViewController {
     let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
 
+    @IBOutlet weak var recipeName: UITextField!
     var added = false
     
     override func viewDidLoad() {
@@ -17,7 +18,7 @@ class AddRecipeViewController: UIViewController {
         var artichoke = Ingredient.find("artichoke", context: moc)!
         var limeJuice = Ingredient.find("lime juice", context: moc)!
         
-        var r = Recipe.create("disgusting eggplant", withRating: 4, withText: "inconcievably worse than it sounds", inContext: moc)
+        var r = Recipe.create(recipeName!.text, withRating: 4, withText: "inconcievably worse than it sounds", inContext: moc)
         Component.create(2, quantity_d: 3, unit: oz, ingredient: artichoke, recipe: r, context: moc)
         Component.create(1, quantity_d: 2, unit: oz, ingredient: limeJuice, recipe: r, context: moc)
         r.component_count = 2
