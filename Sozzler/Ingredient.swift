@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 import CoreData
 
 @objc(Ingredient)
@@ -7,6 +7,16 @@ class Ingredient: NSManagedObject {
     @NSManaged var name: String
     @NSManaged var recipe_count: Int16
     @NSManaged var components: NSSet
+
+    class func fetchRequest() -> NSFetchRequest {
+        let app = UIApplication.sharedApplication().delegate as! AppDelegate
+        let fetchRequest = NSFetchRequest(entityName: "Ingredient")
+        let sortByName              = NSSortDescriptor(key: "name", ascending: true)
+        
+        fetchRequest.sortDescriptors = [sortByName]
+        
+        return fetchRequest
+    }
 
     class func create(name: String, context: NSManagedObjectContext) -> Ingredient {
         return CoreDataHelper.create("Ingredient", context: context, initializer: {

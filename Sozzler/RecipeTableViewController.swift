@@ -88,6 +88,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     //
     // NSFetchedResultsControllerDelegate
 
+    // FIXME: DRY
     func refresh() {
         // FIXME: progress indicator is needed especially during onSort()
         

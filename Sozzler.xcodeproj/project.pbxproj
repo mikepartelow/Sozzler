@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		400832AE1AE9F53100112198 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400832AD1AE9F53100112198 /* UserSettings.swift */; };
+		400832B21AEA098800112198 /* AddIngredientToComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400832B11AEA098800112198 /* AddIngredientToComponentViewController.swift */; };
 		40B643EF1AE8C17300EEBBCA /* RecipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */; };
 		40B643F41AE8C35400EEBBCA /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F01AE8C35300EEBBCA /* Ingredient.swift */; };
 		40B643F51AE8C35400EEBBCA /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F11AE8C35300EEBBCA /* Unit.swift */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		400832AD1AE9F53100112198 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSettings.swift; path = ../UserSettings.swift; sourceTree = "<group>"; };
+		400832B11AEA098800112198 /* AddIngredientToComponentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddIngredientToComponentViewController.swift; path = ../AddIngredientToComponentViewController.swift; sourceTree = "<group>"; };
 		40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTableViewController.swift; sourceTree = "<group>"; };
 		40B643F01AE8C35300EEBBCA /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		40B643F11AE8C35300EEBBCA /* Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 		40F65BAA1AE8BAE000D15898 /* Sozzler */ = {
 			isa = PBXGroup;
 			children = (
+				400832B11AEA098800112198 /* AddIngredientToComponentViewController.swift */,
 				40F65BAD1AE8BAE000D15898 /* AppDelegate.swift */,
 				40B643F01AE8C35300EEBBCA /* Ingredient.swift */,
 				40B643F11AE8C35300EEBBCA /* Unit.swift */,
@@ -242,6 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				400832B21AEA098800112198 /* AddIngredientToComponentViewController.swift in Sources */,
 				40F65BB31AE8BAE000D15898 /* ViewController.swift in Sources */,
 				400832AE1AE9F53100112198 /* UserSettings.swift in Sources */,
 				40B643EF1AE8C17300EEBBCA /* RecipeTableViewController.swift in Sources */,

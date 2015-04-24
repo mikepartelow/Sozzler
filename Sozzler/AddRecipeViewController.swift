@@ -1,30 +1,47 @@
 import UIKit
 
-class AddRecipeViewController: UIViewController {
+class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
 
     @IBOutlet weak var recipeName: UITextField!
+    @IBOutlet weak var componentTable: UITableView!
+
     var added = false
+    var recipe: Recipe?
+    var components: [Component] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        recipe = Recipe.create("", withRating: 1, withText: "", inContext: moc)
 
-        // Do any additional setup after loading the view.
+        componentTable!.dataSource = self
+        componentTable!.delegate = self
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return components.count + 1
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell: UITableViewCell
+        
+        if indexPath.row == components.count {
+            cell = componentTable.dequeueReusableCellWithIdentifier("addComponentCell") as! UITableViewCell
+        } else {
+            cell = componentTable.dequeueReusableCellWithIdentifier("componentCell") as! UITableViewCell
+            cell.textLabel!.text = components[indexPath.row].string
+        }
+        
+//        recipeComponentTableView.sizeToFit()
+        
+        return cell
     }
 
+
     @IBAction func onDone(sender: UIBarButtonItem) {
-        let oz = Unit.find("ounce", context: moc)!
-        
-        var artichoke = Ingredient.find("artichoke", context: moc)!
-        var limeJuice = Ingredient.find("lime juice", context: moc)!
-        
-        var r = Recipe.create(recipeName!.text, withRating: 4, withText: "inconcievably worse than it sounds", inContext: moc)
-        Component.create(2, quantity_d: 3, unit: oz, ingredient: artichoke, recipe: r, context: moc)
-        Component.create(1, quantity_d: 2, unit: oz, ingredient: limeJuice, recipe: r, context: moc)
-        r.component_count = 2
-        
-        artichoke.recipe_count += 1
-        limeJuice.recipe_count += 1
+        recipe!.name = recipeName!.text
+        recipe!.component_count = Int16(components.count)
         
         var error: NSError?
         if moc.save(&error) {
@@ -33,6 +50,20 @@ class AddRecipeViewController: UIViewController {
         } else {
             // FIXME: alert!
             NSLog("\(error)")
+        }
+    }
+    
+    @IBAction func unwindToAddRecipe(sender: UIStoryboardSegue)
+    {
+        if let aitcvc = sender.sourceViewController as? AddIngredientToComponentViewController {
+            if let ingredient = aitcvc.ingredient {
+                let u = Unit.find("ounce", context: moc)
+                let c = Component.create(1, quantity_d: 1, unit: u!, ingredient: ingredient, recipe: recipe!, context: moc)
+                c.ingredient.recipe_count += 1
+                components.append(c)
+
+                componentTable.reloadData()
+            }
         }
     }
 }
