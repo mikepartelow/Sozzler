@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 import CoreData
 
 @objc(Recipe)
@@ -11,13 +11,22 @@ class Recipe: NSManagedObject {
     @NSManaged var components: NSSet
     
     class func fetchRequest() -> NSFetchRequest {
+        let app = UIApplication.sharedApplication().delegate as! AppDelegate
+        
         let fetchRequest = NSFetchRequest(entityName: "Recipe")
         
         let sortByRating            = NSSortDescriptor(key: "rating", ascending: false)
         let sortByName              = NSSortDescriptor(key: "name", ascending: true)
         let sortByComponentCount    = NSSortDescriptor(key: "component_count", ascending: false)
         
-        fetchRequest.sortDescriptors = [sortByName, sortByRating, sortByComponentCount]
+        switch app.userSettings.recipeSortOrder {
+        case .Rating:
+            fetchRequest.sortDescriptors = [sortByRating, sortByName, sortByComponentCount]
+        case .Name:
+            fetchRequest.sortDescriptors = [sortByName, sortByRating, sortByComponentCount]
+        case .NumberOfIngredients:
+            fetchRequest.sortDescriptors = [sortByComponentCount, sortByRating, sortByName]
+        }
         
         return fetchRequest
     }
@@ -49,18 +58,18 @@ class Recipe: NSManagedObject {
         var limeJuice = Ingredient.create("lime juice", context: context)
         var lemonJuice = Ingredient.create("lemon juice", context: context)
         
-        var r = Recipe.create("disgusting artichoke", withRating: 5, withText: "not as bad as it sounds", inContext: context)
+        var r = Recipe.create("a disgusting artichoke", withRating: 1, withText: "not as bad as it sounds", inContext: context)
         Component.create(1, quantity_d: 2, unit: oz, ingredient: artichoke, recipe: r, context: context)
         Component.create(1, quantity_d: 1, unit: oz, ingredient: limeJuice, recipe: r, context: context)
         r.component_count = 2
         
-        r = Recipe.create("disgusting asparagus", withRating: 4, withText: "worse than it sounds", inContext: context)
+        r = Recipe.create("b disgusting asparagus", withRating: 2, withText: "worse than it sounds", inContext: context)
         Component.create(2, quantity_d: 1, unit: oz, ingredient: asparagus, recipe: r, context: context)
         Component.create(1, quantity_d: 4, unit: tsp, ingredient: limeJuice, recipe: r, context: context)
         r.component_count = 2
 
         let text = "\n".join(map((0..<30), { "long recipe text \($0)" }))
-        r = Recipe.create("disgusting rutabaga", withRating: 3, withText: text, inContext: context)
+        r = Recipe.create("c disgusting rutabaga", withRating: 3, withText: text, inContext: context)
         Component.create(1, quantity_d: 3, unit: oz, ingredient: asparagus, recipe: r, context: context)
         Component.create(1, quantity_d: 1, unit: oz, ingredient: limeJuice, recipe: r, context: context)
         Component.create(1, quantity_d: 1, unit: tsp, ingredient: lemonJuice, recipe: r, context: context)

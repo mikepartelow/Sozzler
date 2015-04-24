@@ -43,6 +43,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="mFJ-jO-2I1">
+                        <barButtonItem key="leftBarButtonItem" title="Sort" id="Eb1-ei-QT9">
+                            <connections>
+                                <action selector="onSort:" destination="g9a-k6-D3V" id="4Hv-gQ-it9"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="M04-Du-MJ0">
                             <connections>
                                 <segue destination="tSw-Xf-p1h" kind="presentation" id="0Gl-Mw-J5a"/>

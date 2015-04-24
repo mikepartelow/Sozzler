@@ -2,22 +2,60 @@ import UIKit
 import CoreData
 
 class RecipeTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-    let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+    let app: AppDelegate
+    let moc: NSManagedObjectContext
     
     var frc: NSFetchedResultsController?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    required init!(coder aDecoder: NSCoder!) {
+        app = UIApplication.sharedApplication().delegate as! AppDelegate
+        moc = app.managedObjectContext!
+        super.init(coder: aDecoder)
 
-        tableView.delegate = self
-        
         if Recipe.count(moc) == 0 {
             Recipe.populate(moc)
         }
-        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.delegate = self
         refresh()
     }
 
+    @IBAction func onSort(sender: UIBarButtonItem) {
+        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        
+        let sortByName = UIAlertAction(title: "Sort by Name", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.app.userSettings.recipeSortOrder = .Name
+            self.refresh()
+        })
+
+        let sortByRating = UIAlertAction(title: "Sort by Rating", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.app.userSettings.recipeSortOrder = .Rating
+            self.refresh()
+        })
+
+        let sortByNumberOfIngredients = UIAlertAction(title: "Sort by Number of Ingredients", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.app.userSettings.recipeSortOrder = .NumberOfIngredients
+            self.refresh()
+        })
+
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+        })
+
+        sheet.addAction(sortByName)
+        sheet.addAction(sortByRating)
+        sheet.addAction(sortByNumberOfIngredients)
+        sheet.addAction(cancel)
+
+        presentViewController(sheet, animated: true, completion: nil)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let navController = segue.destinationViewController as! UINavigationController
         
@@ -51,6 +89,8 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     // NSFetchedResultsControllerDelegate
 
     func refresh() {
+        // FIXME: progress indicator is needed especially during onSort()
+        
         let fetchRequest = Recipe.fetchRequest()
         
         frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
@@ -60,7 +100,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         // FIXME: nil seems like a bad idea
         frc!.performFetch(nil)
         
-        navigationItem.title = "Recipes"
+        navigationItem.title = "Recipes by \(app.userSettings.recipeSortOrderName)"
         
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()
