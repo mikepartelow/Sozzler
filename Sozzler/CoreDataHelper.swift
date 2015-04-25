@@ -1,8 +1,9 @@
 import CoreData
 
 class CoreDataHelper {
-    class func count(entityName: String, context: NSManagedObjectContext) -> Int {
+    class func count(entityName: String, predicate: NSPredicate?, context: NSManagedObjectContext) -> Int {
         let fetchRequest = NSFetchRequest(entityName: entityName)
+        fetchRequest.predicate = predicate
         
         // FIXME: error handling
         let fetchedResults = context.executeFetchRequest(fetchRequest, error: nil)

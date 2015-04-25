@@ -63,8 +63,14 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             added = true
             performSegueWithIdentifier("unwindToRecipes", sender: self)
         } else {
-            // FIXME: alert!
+            // FIXME: on error, name edit is cleared out. don't do that.
+            
             NSLog("\(error)")
+            let errorMessage = error!.userInfo![NSLocalizedDescriptionKey] as! String
+            var alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .Alert)
+            let cancelAction = UIAlertAction(title: "Oops", style: .Default) { (action: UIAlertAction!) -> Void in }
+            alert.addAction(cancelAction)
+            presentViewController(alert, animated: true, completion: nil)
         }
     }
     
@@ -73,6 +79,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         if let vc = sender.sourceViewController as? AddIngredientToComponentViewController {
         } else if let vc = sender.sourceViewController as? AddQuantityToComponentViewController {
             if let unit = vc.unit {
+                // FIXME: should Component.create take [Int,Int] to put this logic in Component?
                 let quantity_d = Int16(vc.quantity_f![1])
                 let quantity_n = Int16((vc.quantity_f![1] * vc.quantity_i!) + vc.quantity_f![0])
                 
@@ -80,7 +87,6 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
                 components.append(c)
                 
                 componentTable.reloadData()
-
             }
         }
     }

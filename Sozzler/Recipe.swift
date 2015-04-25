@@ -32,8 +32,14 @@ class Recipe: NSManagedObject {
     }
     
     class func count(context: NSManagedObjectContext) -> Int {
-        return CoreDataHelper.count("Recipe", context: context)
+        return CoreDataHelper.count("Recipe", predicate: nil, context: context)
     }
+    
+    class func countByName(name: String, context: NSManagedObjectContext) -> Int {
+        let predicate = NSPredicate(format: "name == %@", name)
+        return CoreDataHelper.count("Recipe", predicate: predicate, context: context)
+    }
+    
 
     class func create(name: String, withRating rating: Int16, withText text: String, inContext context: NSManagedObjectContext) -> Recipe {
         let predicate = NSPredicate(format: "name == %@", name)
@@ -88,5 +94,43 @@ extension Recipe {
         if !deleted {
             setPrimitiveValue(components.count, forKey: "component_count")
         }
+    }
+    
+    func validate(error: NSErrorPointer) -> Bool {
+        var errorMessage = ""
+        
+        if components.count < 1 {
+            errorMessage = "Please add at least one ingredient."
+        } else if name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).isEmpty {
+            errorMessage = "Please add a name for your recipe."
+        } else if Recipe.countByName(name, context: managedObjectContext!) > 1 {
+            errorMessage = "Sorry, that name is already taken."
+        } else {
+            return true
+        }
+        
+        if !errorMessage.isEmpty {
+            if error != nil {
+                error.memory = NSError(domain: "CoreData", code: 1, userInfo: [NSLocalizedDescriptionKey: errorMessage])
+            }
+        }
+        
+        return false
+    }
+    
+    override func validateForUpdate(error: NSErrorPointer) -> Bool {
+        if !super.validateForUpdate(error) {
+            return false
+        }
+        
+        return validate(error)
+    }
+    
+    override func validateForInsert(error: NSErrorPointer) -> Bool {
+        if !super.validateForInsert(error) {
+            return false
+        }
+        
+        return validate(error)
     }
 }
