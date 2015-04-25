@@ -7,11 +7,18 @@ class AddQuantityToComponentViewController: UIViewController, UIPickerViewDelega
     @IBOutlet weak var fractionPicker: UIPickerView!
     @IBOutlet weak var unitPicker: UIPickerView!
     
+    var ingredient: Ingredient?
+    
     let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
     let frc: NSFetchedResultsController
     
-    let integers = ["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-    let fractions = ["", "⅛", "¼", "½", "¾", "⅓", "⅔"]
+    let integers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    let fractions = ["⅛", "¼", "½", "¾", "⅓", "⅔"]
+    let fractionArrs = [[1, 8], [1, 4], [1, 2], [3, 4], [1, 3], [2, 3]]
+        
+    var quantity_i: Int?
+    var quantity_f: [Int]?
+    var unit: Unit?
     
     required init(coder aDecoder: NSCoder) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -33,6 +40,8 @@ class AddQuantityToComponentViewController: UIViewController, UIPickerViewDelega
         
         unitPicker.delegate = self
         unitPicker.dataSource = self
+        
+        navigationItem.title = ingredient!.name
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -66,4 +75,12 @@ class AddQuantityToComponentViewController: UIViewController, UIPickerViewDelega
         }
     }
 
+    @IBAction func onDone(sender: UIBarButtonItem) {
+        let selectedUnit = unitPicker.selectedRowInComponent(0)
+        unit        = frc.objectAtIndexPath(NSIndexPath(forRow: selectedUnit, inSection: 0)) as? Unit
+        quantity_i  = integers[integerPicker.selectedRowInComponent(0)]
+        quantity_f  = fractionArrs[fractionPicker.selectedRowInComponent(0)]
+        
+        performSegueWithIdentifier("unwindToAddRecipe", sender: self)
+    }
 }

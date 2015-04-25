@@ -221,7 +221,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="o0i-Js-DSq" kind="show" id="Nle-hA-n5o"/>
+                                    <segue destination="o0i-Js-DSq" kind="show" identifier="addQuantityToComponent" id="Nle-hA-n5o"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -252,8 +252,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vbs-sR-0PY">
-                                <rect key="frame" x="16" y="443" width="64" height="162"/>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vbs-sR-0PY" userLabel="integerPicker">
+                                <rect key="frame" x="24" y="422" width="64" height="162"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="bw3-f1-0Yx"/>
                                     <constraint firstAttribute="width" constant="96" id="hCh-lR-eCO"/>
@@ -264,14 +264,14 @@
                                     </mask>
                                 </variation>
                             </pickerView>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B3x-Sg-GaT">
-                                <rect key="frame" x="88" y="443" width="64" height="162"/>
+                            <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B3x-Sg-GaT" userLabel="fractionPicture">
+                                <rect key="frame" x="88" y="433" width="64" height="162"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="eSL-1o-PEY"/>
                                 </constraints>
                             </pickerView>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mad-px-wup">
-                                <rect key="frame" x="160" y="443" width="424" height="162"/>
+                            <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mad-px-wup" userLabel="ingredientPicker">
+                                <rect key="frame" x="160" y="433" width="424" height="162"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="281" id="lm2-R6-sFo"/>
                                 </constraints>
@@ -285,21 +285,39 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="mad-px-wup" firstAttribute="trailing" secondItem="Ia5-qE-4Ha" secondAttribute="trailingMargin" id="Jvw-om-OUq"/>
-                            <constraint firstAttribute="bottom" secondItem="mad-px-wup" secondAttribute="bottom" constant="-5" id="KHb-PT-MJO"/>
+                            <constraint firstAttribute="bottom" secondItem="mad-px-wup" secondAttribute="bottom" constant="16" id="KHb-PT-MJO"/>
                             <constraint firstItem="B3x-Sg-GaT" firstAttribute="leading" secondItem="Vbs-sR-0PY" secondAttribute="trailing" constant="8" symbolic="YES" id="Lp0-bm-Xpt"/>
-                            <constraint firstAttribute="bottom" secondItem="B3x-Sg-GaT" secondAttribute="bottom" constant="-5" id="NyQ-mz-dua"/>
+                            <constraint firstAttribute="bottom" secondItem="B3x-Sg-GaT" secondAttribute="bottom" constant="16" id="NyQ-mz-dua"/>
                             <constraint firstItem="B3x-Sg-GaT" firstAttribute="top" secondItem="IeB-KH-DPY" secondAttribute="bottom" constant="379" id="RKQ-ZP-HVm"/>
                             <constraint firstItem="Vbs-sR-0PY" firstAttribute="top" secondItem="IeB-KH-DPY" secondAttribute="bottom" constant="379" id="TJn-ao-w2E"/>
+                            <constraint firstItem="mad-px-wup" firstAttribute="leading" secondItem="B3x-Sg-GaT" secondAttribute="trailing" constant="8" id="cl6-Hd-0Nf"/>
                             <constraint firstItem="mad-px-wup" firstAttribute="top" secondItem="IeB-KH-DPY" secondAttribute="bottom" constant="379" id="fkY-k7-SkK"/>
                             <constraint firstItem="mad-px-wup" firstAttribute="leading" secondItem="B3x-Sg-GaT" secondAttribute="trailing" constant="8" symbolic="YES" id="jeo-hp-O2i"/>
-                            <constraint firstAttribute="bottom" secondItem="Vbs-sR-0PY" secondAttribute="bottom" constant="-5" id="pUk-fa-fi0"/>
+                            <constraint firstItem="Vbs-sR-0PY" firstAttribute="leading" secondItem="Ia5-qE-4Ha" secondAttribute="leadingMargin" constant="8" id="oc4-GA-fYr"/>
+                            <constraint firstAttribute="bottom" secondItem="Vbs-sR-0PY" secondAttribute="bottom" constant="16" id="pUk-fa-fi0"/>
                             <constraint firstItem="Vbs-sR-0PY" firstAttribute="leading" secondItem="Ia5-qE-4Ha" secondAttribute="leadingMargin" id="pv3-1q-4YQ"/>
+                            <constraint firstItem="B3x-Sg-GaT" firstAttribute="leading" secondItem="Vbs-sR-0PY" secondAttribute="trailing" constant="8" id="sRs-kS-xdn"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="TJn-ao-w2E"/>
+                                <exclude reference="pv3-1q-4YQ"/>
+                                <exclude reference="Lp0-bm-Xpt"/>
+                                <exclude reference="RKQ-ZP-HVm"/>
+                                <exclude reference="fkY-k7-SkK"/>
+                                <exclude reference="jeo-hp-O2i"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Select Quantity" id="MDo-Uk-zhp">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Nzt-RO-QNZ">
                             <connections>
-                                <segue destination="qeD-0z-1DZ" kind="unwind" unwindAction="unwindToAddIngredientToComponent:" id="AbI-gz-nZN"/>
+                                <segue destination="qeD-0z-1DZ" kind="unwind" identifier="unwindToAddIngredientToComponent" unwindAction="unwindToAddIngredientToComponent:" id="AbI-gz-nZN"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="xDx-Yk-dcK">
+                            <connections>
+                                <action selector="onDone:" destination="GL4-Ag-gko" id="jgq-8o-AZr"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -307,6 +325,7 @@
                         <outlet property="fractionPicker" destination="B3x-Sg-GaT" id="LXG-cQ-bbQ"/>
                         <outlet property="integerPicker" destination="Vbs-sR-0PY" id="Mop-JY-Jdo"/>
                         <outlet property="unitPicker" destination="mad-px-wup" id="mhR-j9-wYZ"/>
+                        <segue destination="qeD-0z-1DZ" kind="unwind" identifier="unwindToAddRecipe" unwindAction="unwindToAddRecipe:" id="UWP-uS-hPu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OZC-r9-THW" userLabel="First Responder" sceneMemberID="firstResponder"/>

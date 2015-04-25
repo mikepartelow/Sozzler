@@ -40,6 +40,17 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
     //
     // NSFetchedResultsControllerDelegate
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "addQuantityToComponent" {
+            let nav = segue.destinationViewController as! UINavigationController
+            let addQuantityToComponentViewController = nav.topViewController as! AddQuantityToComponentViewController
+            let idx = tableView.indexPathForSelectedRow()
+            
+            addQuantityToComponentViewController.ingredient = (frc!.objectAtIndexPath(idx!) as! Ingredient)
+        }
+
+    }
+    
     // FIXME: DRY
     func refresh() {
         let fetchRequest = Ingredient.fetchRequest()

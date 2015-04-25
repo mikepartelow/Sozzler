@@ -55,14 +55,16 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBAction func unwindToAddRecipe(sender: UIStoryboardSegue)
     {
-        if let aitcvc = sender.sourceViewController as? AddIngredientToComponentViewController {
-            if let ingredient = aitcvc.ingredient {
+        if let vc = sender.sourceViewController as? AddIngredientToComponentViewController {
+        } else if let vc = sender.sourceViewController as? AddQuantityToComponentViewController {
+            if let unit = vc.unit {
                 let u = Unit.find("ounce", context: moc)
-                let c = Component.create(1, quantity_d: 1, unit: u!, ingredient: ingredient, recipe: recipe!, context: moc)
+                let c = Component.create(1, quantity_d: 1, unit: unit, ingredient: vc.ingredient!, recipe: recipe!, context: moc)
                 c.ingredient.recipe_count += 1
                 components.append(c)
-
+                
                 componentTable.reloadData()
+
             }
         }
     }
