@@ -18,7 +18,7 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         ingredient = (frc!.objectAtIndexPath(indexPath) as! Ingredient)
-        performSegueWithIdentifier("unwindToAddRecipe", sender: self)
+//        performSegueWithIdentifier("unwindToAddRecipe", sender: self)
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -56,4 +56,17 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
         tableView.reloadData()
     }
 
+    @IBAction func unwindToAddIngredientToComponent(sender: UIStoryboardSegue)
+    {
+//        if let aitcvc = sender.sourceViewController as? AddIngredientToComponentViewController {
+//            if let ingredient = aitcvc.ingredient {
+//                let u = Unit.find("ounce", context: moc)
+//                let c = Component.create(1, quantity_d: 1, unit: u!, ingredient: ingredient, recipe: recipe!, context: moc)
+//                c.ingredient.recipe_count += 1
+//                components.append(c)
+//                
+//                componentTable.reloadData()
+//            }
+//        }
+    }
 }

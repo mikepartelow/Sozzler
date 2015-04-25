@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		400832AE1AE9F53100112198 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400832AD1AE9F53100112198 /* UserSettings.swift */; };
 		400832B21AEA098800112198 /* AddIngredientToComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400832B11AEA098800112198 /* AddIngredientToComponentViewController.swift */; };
+		400BF0D71AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400BF0D61AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift */; };
 		40B643EF1AE8C17300EEBBCA /* RecipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */; };
 		40B643F41AE8C35400EEBBCA /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F01AE8C35300EEBBCA /* Ingredient.swift */; };
 		40B643F51AE8C35400EEBBCA /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F11AE8C35300EEBBCA /* Unit.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		400832AD1AE9F53100112198 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSettings.swift; path = ../UserSettings.swift; sourceTree = "<group>"; };
 		400832B11AEA098800112198 /* AddIngredientToComponentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddIngredientToComponentViewController.swift; path = ../AddIngredientToComponentViewController.swift; sourceTree = "<group>"; };
+		400BF0D61AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuantityToComponentViewController.swift; sourceTree = "<group>"; };
 		40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTableViewController.swift; sourceTree = "<group>"; };
 		40B643F01AE8C35300EEBBCA /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		40B643F11AE8C35300EEBBCA /* Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				40B643F31AE8C35300EEBBCA /* Component.swift */,
 				40F65BB21AE8BAE000D15898 /* ViewController.swift */,
 				40F65BB41AE8BAE000D15898 /* Main.storyboard */,
+				400BF0D61AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift */,
 				40C99BE91AE9455C00F197C9 /* AddRecipeViewController.swift */,
 				40B643F81AE8C48200EEBBCA /* CoreDataHelper.swift */,
 				40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */,
@@ -194,6 +197,7 @@
 				TargetAttributes = {
 					40F65BA71AE8BAE000D15898 = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = ZY6MQPKQ94;
 					};
 					40F65BBF1AE8BAE100D15898 = {
 						CreatedOnToolsVersion = 6.3;
@@ -257,6 +261,7 @@
 				40B643F91AE8C48200EEBBCA /* CoreDataHelper.swift in Sources */,
 				40F65BAE1AE8BAE000D15898 /* AppDelegate.swift in Sources */,
 				40C99BEA1AE9455C00F197C9 /* AddRecipeViewController.swift in Sources */,
+				400BF0D71AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift in Sources */,
 				40F65BB11AE8BAE000D15898 /* Sozzler.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,9 +389,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Sozzler/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -394,9 +402,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Sozzler/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

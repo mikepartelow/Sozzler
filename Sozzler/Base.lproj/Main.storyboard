@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Q6d-vt-tGz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Q6d-vt-tGz">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Recipe Table View Controller-->
@@ -219,6 +220,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="o0i-Js-DSq" kind="show" id="Nle-hA-n5o"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -235,6 +239,80 @@
                 <exit id="LrM-OJ-KJ1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4197" y="1234"/>
+        </scene>
+        <!--Choose Quantity-->
+        <scene sceneID="BVb-a6-afz">
+            <objects>
+                <viewController title="Choose Quantity" id="GL4-Ag-gko" customClass="AddQuantityToComponentViewController" customModule="Sozzler" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IeB-KH-DPY"/>
+                        <viewControllerLayoutGuide type="bottom" id="Dfg-iV-GCP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ia5-qE-4Ha">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vbs-sR-0PY">
+                                <rect key="frame" x="16" y="443" width="64" height="162"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="bw3-f1-0Yx"/>
+                                    <constraint firstAttribute="width" constant="96" id="hCh-lR-eCO"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="hCh-lR-eCO"/>
+                                    </mask>
+                                </variation>
+                            </pickerView>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B3x-Sg-GaT">
+                                <rect key="frame" x="88" y="443" width="64" height="162"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="eSL-1o-PEY"/>
+                                </constraints>
+                            </pickerView>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mad-px-wup">
+                                <rect key="frame" x="160" y="443" width="424" height="162"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="281" id="lm2-R6-sFo"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="lm2-R6-sFo"/>
+                                    </mask>
+                                </variation>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mad-px-wup" firstAttribute="trailing" secondItem="Ia5-qE-4Ha" secondAttribute="trailingMargin" id="Jvw-om-OUq"/>
+                            <constraint firstAttribute="bottom" secondItem="mad-px-wup" secondAttribute="bottom" constant="-5" id="KHb-PT-MJO"/>
+                            <constraint firstItem="B3x-Sg-GaT" firstAttribute="leading" secondItem="Vbs-sR-0PY" secondAttribute="trailing" constant="8" symbolic="YES" id="Lp0-bm-Xpt"/>
+                            <constraint firstAttribute="bottom" secondItem="B3x-Sg-GaT" secondAttribute="bottom" constant="-5" id="NyQ-mz-dua"/>
+                            <constraint firstItem="B3x-Sg-GaT" firstAttribute="top" secondItem="IeB-KH-DPY" secondAttribute="bottom" constant="379" id="RKQ-ZP-HVm"/>
+                            <constraint firstItem="Vbs-sR-0PY" firstAttribute="top" secondItem="IeB-KH-DPY" secondAttribute="bottom" constant="379" id="TJn-ao-w2E"/>
+                            <constraint firstItem="mad-px-wup" firstAttribute="top" secondItem="IeB-KH-DPY" secondAttribute="bottom" constant="379" id="fkY-k7-SkK"/>
+                            <constraint firstItem="mad-px-wup" firstAttribute="leading" secondItem="B3x-Sg-GaT" secondAttribute="trailing" constant="8" symbolic="YES" id="jeo-hp-O2i"/>
+                            <constraint firstAttribute="bottom" secondItem="Vbs-sR-0PY" secondAttribute="bottom" constant="-5" id="pUk-fa-fi0"/>
+                            <constraint firstItem="Vbs-sR-0PY" firstAttribute="leading" secondItem="Ia5-qE-4Ha" secondAttribute="leadingMargin" id="pv3-1q-4YQ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Select Quantity" id="MDo-Uk-zhp">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Nzt-RO-QNZ">
+                            <connections>
+                                <segue destination="qeD-0z-1DZ" kind="unwind" unwindAction="unwindToAddIngredientToComponent:" id="AbI-gz-nZN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="fractionPicker" destination="B3x-Sg-GaT" id="LXG-cQ-bbQ"/>
+                        <outlet property="integerPicker" destination="Vbs-sR-0PY" id="Mop-JY-Jdo"/>
+                        <outlet property="unitPicker" destination="mad-px-wup" id="mhR-j9-wYZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OZC-r9-THW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="qeD-0z-1DZ" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="5643" y="1234"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xy1-Md-L6a">
@@ -289,6 +367,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jGb-tb-BED" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3417" y="1234"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="LBI-Rc-2xo">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="o0i-Js-DSq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Zv8-dt-1cI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="GL4-Ag-gko" kind="relationship" relationship="rootViewController" id="6Tg-WB-LhF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8hE-iO-7bN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4925" y="1234"/>
         </scene>
     </scenes>
 </document>
