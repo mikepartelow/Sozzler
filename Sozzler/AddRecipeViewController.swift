@@ -38,6 +38,23 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         return cell
     }
 
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
+            let component = self.components.removeAtIndex(indexPath.row)
+            self.moc.deleteObject(component)
+            self.componentTable.reloadData()
+
+            tableView.editing = false
+        }
+        
+        return [ deleteAction ]
+    }
+
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        // even if it does nothing this needs to be here if we want to get a delete event
+    }
+
 
     @IBAction func onDone(sender: UIBarButtonItem) {
         recipe!.name = recipeName!.text
