@@ -23,6 +23,7 @@ class Ingredient: NSManagedObject {
             (entity, context) -> NSManagedObject in
                 let ingredient = Ingredient(entity: entity, insertIntoManagedObjectContext: context)
                 ingredient.name = name
+                ingredient.recipe_count = 0
                 return ingredient
             }
         ) as! Ingredient
@@ -31,5 +32,26 @@ class Ingredient: NSManagedObject {
     class func find(name: String, context: NSManagedObjectContext) -> Ingredient? {
         let predicate = NSPredicate(format: "name == %@", name)
         return CoreDataHelper.find("Ingredient", predicate: predicate, context: context) as! Ingredient?
+    }
+}
+
+// saving and validation
+//
+extension Ingredient {
+    override func willSave() {
+        if !deleted {
+            var recipeCounts: [Recipe:Int] = [:]
+            
+            for component in components.allObjects as! [Component] {
+                if recipeCounts[component.recipe] == nil {
+                   recipeCounts[component.recipe] = 1
+                } else {
+                    recipeCounts[component.recipe]! += 1
+                }
+            }
+            
+            let count = recipeCounts.values.array.reduce(0, combine: +)
+            setPrimitiveValue(count, forKey: "recipe_count")
+        }
     }
 }

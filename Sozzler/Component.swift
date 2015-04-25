@@ -48,5 +48,5 @@ class Component: NSManagedObject, Comparable {
             return component
         }) as! Component
     }
-
 }
+

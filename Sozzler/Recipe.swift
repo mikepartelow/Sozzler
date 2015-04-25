@@ -43,6 +43,7 @@ class Recipe: NSManagedObject {
             recipe.name = name
             recipe.rating = rating
             recipe.text = text
+            recipe.component_count = 0
             return recipe
         })
         
@@ -57,33 +58,35 @@ class Recipe: NSManagedObject {
         var asparagus = Ingredient.create("asparagus", context: context)
         var limeJuice = Ingredient.create("lime juice", context: context)
         var lemonJuice = Ingredient.create("lemon juice", context: context)
-        
+
         var r = Recipe.create("a disgusting artichoke", withRating: 1, withText: "not as bad as it sounds", inContext: context)
         Component.create(1, quantity_d: 2, unit: oz, ingredient: artichoke, recipe: r, context: context)
         Component.create(1, quantity_d: 1, unit: oz, ingredient: limeJuice, recipe: r, context: context)
-        r.component_count = 2
         
         r = Recipe.create("b disgusting asparagus", withRating: 2, withText: "worse than it sounds", inContext: context)
         Component.create(2, quantity_d: 1, unit: oz, ingredient: asparagus, recipe: r, context: context)
         Component.create(1, quantity_d: 4, unit: tsp, ingredient: limeJuice, recipe: r, context: context)
-        r.component_count = 2
 
         let text = "\n".join(map((0..<30), { "long recipe text \($0)" }))
         r = Recipe.create("c disgusting rutabaga", withRating: 3, withText: text, inContext: context)
         Component.create(1, quantity_d: 3, unit: oz, ingredient: asparagus, recipe: r, context: context)
         Component.create(1, quantity_d: 1, unit: oz, ingredient: limeJuice, recipe: r, context: context)
         Component.create(1, quantity_d: 1, unit: tsp, ingredient: lemonJuice, recipe: r, context: context)
-        r.component_count = 3
-        
-        artichoke.recipe_count = 1
-        asparagus.recipe_count = 2
-        limeJuice.recipe_count = 3
-        lemonJuice.recipe_count = 1
         
         var error: NSError?
         if context.save(&error) {            
         } else {
             NSLog("\(error)")
+        }
+    }
+}
+
+// saving and validation
+//
+extension Recipe {
+    override func willSave() {
+        if !deleted {
+            setPrimitiveValue(components.count, forKey: "component_count")
         }
     }
 }

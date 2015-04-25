@@ -55,10 +55,8 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         // even if it does nothing this needs to be here if we want to get a delete event
     }
 
-
     @IBAction func onDone(sender: UIBarButtonItem) {
         recipe!.name = recipeName!.text
-        recipe!.component_count = Int16(components.count)
         
         var error: NSError?
         if moc.save(&error) {
@@ -79,7 +77,6 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
                 let quantity_n = Int16((vc.quantity_f![1] * vc.quantity_i!) + vc.quantity_f![0])
                 
                 let c = Component.create(quantity_n, quantity_d: quantity_d, unit: unit, ingredient: vc.ingredient!, recipe: recipe!, context: moc)
-                c.ingredient.recipe_count += 1
                 components.append(c)
                 
                 componentTable.reloadData()
