@@ -18,8 +18,8 @@ class Ingredient: NSManagedObject {
         return fetchRequest
     }
 
-    class func create(name: String, context: NSManagedObjectContext) -> Ingredient {
-        return CoreDataHelper.create("Ingredient", context: context, initializer: {
+    class func create(name: String) -> Ingredient {
+        return CoreDataHelper.create("Ingredient", initializer: {
             (entity, context) -> NSManagedObject in
                 let ingredient = Ingredient(entity: entity, insertIntoManagedObjectContext: context)
                 ingredient.name = name
@@ -29,9 +29,9 @@ class Ingredient: NSManagedObject {
         ) as! Ingredient
     }
     
-    class func find(name: String, context: NSManagedObjectContext) -> Ingredient? {
+    class func find(name: String) -> Ingredient? {
         let predicate = NSPredicate(format: "name == %@", name)
-        return CoreDataHelper.find("Ingredient", predicate: predicate, context: context) as! Ingredient?
+        return CoreDataHelper.find("Ingredient", predicate: predicate) as! Ingredient?
     }
 }
 

@@ -35,11 +35,12 @@ class Component: NSManagedObject, Comparable {
         return Swift.sorted(componentArray, { $0 > $1 })
     }
     
-    class func create(quantity_n: Int16, quantity_d: Int16, unit: Unit, ingredient: Ingredient, recipe: Recipe, context: NSManagedObjectContext) -> Component {
+    class func create(quantity_n: Int16, quantity_d: Int16, unit: Unit, ingredient: Ingredient, recipe: Recipe) -> Component {
         
-        return CoreDataHelper.create("Component", context: context, initializer: {
+        return CoreDataHelper.create("Component", initializer: {
             (entity, context) in
             let component = Component(entity: entity, insertIntoManagedObjectContext: context)
+            
             component.quantity_n    = quantity_n
             component.quantity_d    = quantity_d
             component.unit          = unit

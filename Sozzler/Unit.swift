@@ -16,13 +16,13 @@ class Unit: NSManagedObject {
         return fetchRequest
     }
 
-    class func find(name: String, context: NSManagedObjectContext) -> Unit? {
+    class func find(name: String) -> Unit? {
         let predicate = NSPredicate(format: "name == %@", name)
-        return CoreDataHelper.find("Unit", predicate: predicate, context: context) as! Unit?
+        return CoreDataHelper.find("Unit", predicate: predicate) as! Unit?
     }
     
-    class func create(name: String, context: NSManagedObjectContext) -> Unit {
-        return CoreDataHelper.create("Unit", context: context, initializer: {
+    class func create(name: String) -> Unit {
+        return CoreDataHelper.create("Unit", initializer: {
             (entity, context) -> NSManagedObject in
                 let unit = Unit(entity: entity, insertIntoManagedObjectContext: context)
                 unit.name = name

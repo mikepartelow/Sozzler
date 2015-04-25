@@ -12,8 +12,8 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         moc = app.managedObjectContext!
         super.init(coder: aDecoder)
 
-        if Recipe.count(moc) == 0 {
-            Recipe.populate(moc)
+        if Recipe.count() == 0 {
+            Recipe.populate()
         }
     }
     

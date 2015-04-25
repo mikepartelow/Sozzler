@@ -13,7 +13,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        recipe = Recipe.create("", withRating: 1, withText: "", inContext: moc)
+        recipe = Recipe.create("", withRating: 1, withText: "")
 
         componentTable!.dataSource = self
         componentTable!.delegate = self
@@ -41,6 +41,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
             let component = self.components.removeAtIndex(indexPath.row)
+            NSLog("FIXME: don't moc twiddle here, put that in CoreDataHelper")
             self.moc.deleteObject(component)
             self.componentTable.reloadData()
 
@@ -83,7 +84,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
                 let quantity_d = Int16(vc.quantity_f![1])
                 let quantity_n = Int16((vc.quantity_f![1] * vc.quantity_i!) + vc.quantity_f![0])
                 
-                let c = Component.create(quantity_n, quantity_d: quantity_d, unit: unit, ingredient: vc.ingredient!, recipe: recipe!, context: moc)
+                let c = Component.create(quantity_n, quantity_d: quantity_d, unit: unit, ingredient: vc.ingredient!, recipe: recipe!)
                 components.append(c)
                 
                 componentTable.reloadData()

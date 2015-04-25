@@ -9,7 +9,11 @@ class Recipe: NSManagedObject {
     @NSManaged var text: String
     @NSManaged var component_count: Int16
     @NSManaged var components: NSSet
-    
+}
+
+// querying
+//
+extension Recipe {
     class func fetchRequest() -> NSFetchRequest {
         let app = UIApplication.sharedApplication().delegate as! AppDelegate
         
@@ -31,20 +35,23 @@ class Recipe: NSManagedObject {
         return fetchRequest
     }
     
-    class func count(context: NSManagedObjectContext) -> Int {
-        return CoreDataHelper.count("Recipe", predicate: nil, context: context)
+    class func count() -> Int {
+        return CoreDataHelper.count("Recipe", predicate: nil)
     }
     
-    class func countByName(name: String, context: NSManagedObjectContext) -> Int {
+    class func countByName(name: String) -> Int {
         let predicate = NSPredicate(format: "name == %@", name)
-        return CoreDataHelper.count("Recipe", predicate: predicate, context: context)
+        return CoreDataHelper.count("Recipe", predicate: predicate)
     }
-    
+}
 
-    class func create(name: String, withRating rating: Int16, withText text: String, inContext context: NSManagedObjectContext) -> Recipe {
+// creation
+//
+extension Recipe {
+    class func create(name: String, withRating rating: Int16, withText text: String) -> Recipe {
         let predicate = NSPredicate(format: "name == %@", name)
         
-        let recipe = CoreDataHelper.create("Recipe", context: context, initializer: { (entity, context) in
+        let recipe = CoreDataHelper.create("Recipe", initializer: { (entity, context) in
             let recipe = Recipe(entity: entity, insertIntoManagedObjectContext: context)
             recipe.name = name
             recipe.rating = rating
@@ -56,31 +63,33 @@ class Recipe: NSManagedObject {
         return recipe as! Recipe
     }
 
-    class func populate(context: NSManagedObjectContext) {
-        let oz = Unit.create("ounce", context: context)
-        let tsp = Unit.create("tsp", context: context)
+    class func populate() {
+        let oz = Unit.create("ounce")
+        let tsp = Unit.create("tsp")
         
-        var artichoke = Ingredient.create("artichoke", context: context)
-        var asparagus = Ingredient.create("asparagus", context: context)
-        var limeJuice = Ingredient.create("lime juice", context: context)
-        var lemonJuice = Ingredient.create("lemon juice", context: context)
+        var artichoke = Ingredient.create("artichoke")
+        var asparagus = Ingredient.create("asparagus")
+        var limeJuice = Ingredient.create("lime juice")
+        var lemonJuice = Ingredient.create("lemon juice")
 
-        var r = Recipe.create("a disgusting artichoke", withRating: 1, withText: "not as bad as it sounds", inContext: context)
-        Component.create(1, quantity_d: 2, unit: oz, ingredient: artichoke, recipe: r, context: context)
-        Component.create(1, quantity_d: 1, unit: oz, ingredient: limeJuice, recipe: r, context: context)
+        var r = Recipe.create("a disgusting artichoke", withRating: 1, withText: "not as bad as it sounds")
+        Component.create(1, quantity_d: 2, unit: oz, ingredient: artichoke, recipe: r)
+        Component.create(1, quantity_d: 1, unit: oz, ingredient: limeJuice, recipe: r)
         
-        r = Recipe.create("b disgusting asparagus", withRating: 2, withText: "worse than it sounds", inContext: context)
-        Component.create(2, quantity_d: 1, unit: oz, ingredient: asparagus, recipe: r, context: context)
-        Component.create(1, quantity_d: 4, unit: tsp, ingredient: limeJuice, recipe: r, context: context)
+        r = Recipe.create("b disgusting asparagus", withRating: 2, withText: "worse than it sounds")
+        Component.create(2, quantity_d: 1, unit: oz, ingredient: asparagus, recipe: r)
+        Component.create(1, quantity_d: 4, unit: tsp, ingredient: limeJuice, recipe: r)
 
         let text = "\n".join(map((0..<30), { "long recipe text \($0)" }))
-        r = Recipe.create("c disgusting rutabaga", withRating: 3, withText: text, inContext: context)
-        Component.create(1, quantity_d: 3, unit: oz, ingredient: asparagus, recipe: r, context: context)
-        Component.create(1, quantity_d: 1, unit: oz, ingredient: limeJuice, recipe: r, context: context)
-        Component.create(1, quantity_d: 1, unit: tsp, ingredient: lemonJuice, recipe: r, context: context)
+        r = Recipe.create("c disgusting rutabaga", withRating: 3, withText: text)
+        Component.create(1, quantity_d: 3, unit: oz, ingredient: asparagus, recipe: r)
+        Component.create(1, quantity_d: 1, unit: oz, ingredient: limeJuice, recipe: r)
+        Component.create(1, quantity_d: 1, unit: tsp, ingredient: lemonJuice, recipe: r)
         
+        let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+        NSLog("FIXME: put this in CDH, no moc here")
         var error: NSError?
-        if context.save(&error) {            
+        if moc.save(&error) {
         } else {
             NSLog("\(error)")
         }
@@ -103,7 +112,7 @@ extension Recipe {
             errorMessage = "Please add at least one ingredient."
         } else if name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).isEmpty {
             errorMessage = "Please add a name for your recipe."
-        } else if Recipe.countByName(name, context: managedObjectContext!) > 1 {
+        } else if Recipe.countByName(name) > 1 {
             errorMessage = "Sorry, that name is already taken."
         } else {
             return true
