@@ -51,9 +51,9 @@ class AddQuantityToComponentViewController: UIViewController, UIPickerViewDelega
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch pickerView {
         case integerPicker:
-            return integers.count
+            return integers.count + 1
         case fractionPicker:
-            return fractions.count
+            return fractions.count + 1
         case unitPicker:
             return frc.sections![component].numberOfObjects!
         default:
@@ -64,9 +64,9 @@ class AddQuantityToComponentViewController: UIViewController, UIPickerViewDelega
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
         switch pickerView {
         case integerPicker:
-            return "\(integers[row])"
+            return row == 0 ? "" : "\(integers[row-1])"
         case fractionPicker:
-            return fractions[row]
+            return row == 0 ? "" : fractions[row-1]
         case unitPicker:
             let unit = frc.objectAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) as! Unit
             return unit.name
@@ -76,10 +76,14 @@ class AddQuantityToComponentViewController: UIViewController, UIPickerViewDelega
     }
 
     @IBAction func onDone(sender: UIBarButtonItem) {
-        let selectedUnit = unitPicker.selectedRowInComponent(0)
-        unit        = frc.objectAtIndexPath(NSIndexPath(forRow: selectedUnit, inSection: 0)) as? Unit
-        quantity_i  = integers[integerPicker.selectedRowInComponent(0)]
-        quantity_f  = fractionArrs[fractionPicker.selectedRowInComponent(0)]
+        let selectedUnit        = unitPicker.selectedRowInComponent(0)
+        unit                    = frc.objectAtIndexPath(NSIndexPath(forRow: selectedUnit, inSection: 0)) as? Unit
+        
+        let selectedInteger     = integerPicker.selectedRowInComponent(0)
+        quantity_i              = selectedInteger == 0 ? 0 : integers[selectedInteger-1]
+
+        let selectedFraction    = fractionPicker.selectedRowInComponent(0)
+        quantity_f              = selectedFraction == 0 ? [0, 1] : fractionArrs[selectedFraction-1]
         
         performSegueWithIdentifier("unwindToAddRecipe", sender: self)
     }

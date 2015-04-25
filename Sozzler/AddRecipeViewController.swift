@@ -58,8 +58,10 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         if let vc = sender.sourceViewController as? AddIngredientToComponentViewController {
         } else if let vc = sender.sourceViewController as? AddQuantityToComponentViewController {
             if let unit = vc.unit {
-                let u = Unit.find("ounce", context: moc)
-                let c = Component.create(1, quantity_d: 1, unit: unit, ingredient: vc.ingredient!, recipe: recipe!, context: moc)
+                let quantity_d = Int16(vc.quantity_f![1])
+                let quantity_n = Int16((vc.quantity_f![1] * vc.quantity_i!) + vc.quantity_f![0])
+                
+                let c = Component.create(quantity_n, quantity_d: quantity_d, unit: unit, ingredient: vc.ingredient!, recipe: recipe!, context: moc)
                 c.ingredient.recipe_count += 1
                 components.append(c)
                 
