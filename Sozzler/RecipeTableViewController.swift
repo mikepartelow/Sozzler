@@ -24,6 +24,9 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
 
         //        navigationItem.leftBarButtonItem =
 
+        tableView.registerNib(UINib(nibName: "RecipeCell", bundle: nil), forCellReuseIdentifier: "RecipeCell")
+        tableView.rowHeight = UITableViewAutomaticDimension
+
         refresh()
     }
 
@@ -70,6 +73,14 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         }
     }
 
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 64;
+    }
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        performSegueWithIdentifier("recipeDetails", sender: self)
+    }
+    
     // NSFetchedResultsControllerDelegate
     //
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -81,11 +92,11 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("RecipeCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("RecipeCell", forIndexPath: indexPath) as! RecipeCell
         let recipe = frc!.objectAtIndexPath(indexPath) as! Recipe
         
-        cell.textLabel!.text = recipe.name
-        cell.detailTextLabel!.text = "detail"
+        cell.recipeName!.text = recipe.name
+        cell.ingredients!.text = "detail"
         
         return cell
     }

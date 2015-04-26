@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4006030F1AEC964600A11957 /* olive-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 4006030D1AEC964600A11957 /* olive-off.png */; };
 		400603101AEC964600A11957 /* olive-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 4006030E1AEC964600A11957 /* olive-on.png */; };
+		400603131AEC98CE00A11957 /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400603111AEC98CE00A11957 /* RecipeCell.swift */; };
+		400603141AEC98CE00A11957 /* RecipeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 400603121AEC98CE00A11957 /* RecipeCell.xib */; };
 		400832AE1AE9F53100112198 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400832AD1AE9F53100112198 /* UserSettings.swift */; };
 		400832B21AEA098800112198 /* AddIngredientToComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400832B11AEA098800112198 /* AddIngredientToComponentViewController.swift */; };
 		400BF0D71AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400BF0D61AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift */; };
@@ -44,6 +46,8 @@
 /* Begin PBXFileReference section */
 		4006030D1AEC964600A11957 /* olive-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-off.png"; sourceTree = "<group>"; };
 		4006030E1AEC964600A11957 /* olive-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-on.png"; sourceTree = "<group>"; };
+		400603111AEC98CE00A11957 /* RecipeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
+		400603121AEC98CE00A11957 /* RecipeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecipeCell.xib; sourceTree = "<group>"; };
 		400832AD1AE9F53100112198 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSettings.swift; path = ../UserSettings.swift; sourceTree = "<group>"; };
 		400832B11AEA098800112198 /* AddIngredientToComponentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddIngredientToComponentViewController.swift; path = ../AddIngredientToComponentViewController.swift; sourceTree = "<group>"; };
 		400BF0D61AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuantityToComponentViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 		40F65BAA1AE8BAE000D15898 /* Sozzler */ = {
 			isa = PBXGroup;
 			children = (
+				400603111AEC98CE00A11957 /* RecipeCell.swift */,
+				400603121AEC98CE00A11957 /* RecipeCell.xib */,
 				400832B11AEA098800112198 /* AddIngredientToComponentViewController.swift */,
 				40F65BAD1AE8BAE000D15898 /* AppDelegate.swift */,
 				40B643F01AE8C35300EEBBCA /* Ingredient.swift */,
@@ -242,6 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40F65BB61AE8BAE000D15898 /* Main.storyboard in Resources */,
+				400603141AEC98CE00A11957 /* RecipeCell.xib in Resources */,
 				400603101AEC964600A11957 /* olive-on.png in Resources */,
 				40F65BBB1AE8BAE000D15898 /* LaunchScreen.xib in Resources */,
 				40F65BB81AE8BAE000D15898 /* Images.xcassets in Resources */,
@@ -267,6 +274,7 @@
 				40DC56681AEC669500449B8A /* IngredientTableViewController.swift in Sources */,
 				40F65BB31AE8BAE000D15898 /* ViewController.swift in Sources */,
 				400832AE1AE9F53100112198 /* UserSettings.swift in Sources */,
+				400603131AEC98CE00A11957 /* RecipeCell.swift in Sources */,
 				40B643EF1AE8C17300EEBBCA /* RecipeTableViewController.swift in Sources */,
 				40DC566A1AEC730E00449B8A /* RecipeTableNavViewController.swift in Sources */,
 				40B643F61AE8C35400EEBBCA /* Recipe.swift in Sources */,
