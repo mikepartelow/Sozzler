@@ -61,7 +61,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         let ingredient = frc!.objectAtIndexPath(indexPath) as! Ingredient
         
         cell.textLabel!.text = ingredient.name
-        
+        cell.detailTextLabel!.text = "\(ingredient.recipe_count) recipes"
         return cell
     }
     //
