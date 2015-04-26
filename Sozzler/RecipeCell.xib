@@ -7,21 +7,21 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="RecipeCell" rowHeight="64" id="KGk-i7-Jjw" customClass="RecipeCell" customModule="Sozzler" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="262" height="64"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="RecipeCell" rowHeight="82" id="KGk-i7-Jjw" customClass="RecipeCell" customModule="Sozzler" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="262" height="82"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Recipe Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTh-hM-mmo">
-                        <rect key="frame" x="1" y="0.0" width="104" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="4" y="4" width="221" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" misplaced="YES" text="Ingredients" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1F9-Gl-aG5">
-                        <rect key="frame" x="1" y="42" width="384" height="21"/>
+                        <rect key="frame" x="4" y="70" width="221" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="384" id="0Ft-Oy-lPZ"/>
                         </constraints>
@@ -34,39 +34,90 @@
                             </mask>
                         </variation>
                     </label>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rOS-WT-Cld" customClass="RatingView" customModule="Sozzler" customModuleProvider="target">
+                        <rect key="frame" x="4" y="40" width="112" height="16"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="112" id="6K3-RF-obd"/>
+                            <constraint firstAttribute="height" constant="16" id="6iN-QP-ISC"/>
+                            <constraint firstAttribute="height" constant="16" id="7Yd-1E-6jx"/>
+                            <constraint firstAttribute="width" constant="112" id="SUV-4M-5jt"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="6K3-RF-obd"/>
+                                <exclude reference="7Yd-1E-6jx"/>
+                            </mask>
+                        </variation>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="1F9-Gl-aG5" firstAttribute="top" secondItem="lTh-hM-mmo" secondAttribute="bottom" constant="21" id="0N8-jz-gxo"/>
+                    <constraint firstAttribute="bottom" secondItem="1F9-Gl-aG5" secondAttribute="bottom" constant="4" id="0nI-b0-bhx"/>
+                    <constraint firstItem="rOS-WT-Cld" firstAttribute="leading" secondItem="1F9-Gl-aG5" secondAttribute="leading" id="2FA-Xi-xzl"/>
+                    <constraint firstAttribute="trailing" secondItem="lTh-hM-mmo" secondAttribute="trailing" constant="8" id="9sv-vj-Swd"/>
+                    <constraint firstAttribute="trailing" secondItem="rOS-WT-Cld" secondAttribute="trailing" constant="8" id="BAh-Ra-qQY"/>
+                    <constraint firstItem="rOS-WT-Cld" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="DHA-8z-cDG"/>
                     <constraint firstItem="1F9-Gl-aG5" firstAttribute="leading" secondItem="lTh-hM-mmo" secondAttribute="leading" id="HSc-aF-gYz"/>
-                    <constraint firstAttribute="trailing" secondItem="lTh-hM-mmo" secondAttribute="trailing" constant="16" id="HnA-02-FMs"/>
+                    <constraint firstAttribute="trailing" secondItem="lTh-hM-mmo" secondAttribute="trailing" constant="117" id="HnA-02-FMs"/>
+                    <constraint firstItem="rOS-WT-Cld" firstAttribute="top" secondItem="lTh-hM-mmo" secondAttribute="bottom" constant="8" id="JHK-RO-lYk"/>
+                    <constraint firstItem="rOS-WT-Cld" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="4" id="JWw-gp-o37"/>
                     <constraint firstItem="1F9-Gl-aG5" firstAttribute="top" secondItem="lTh-hM-mmo" secondAttribute="bottom" constant="21" id="Lwx-3e-hxl"/>
                     <constraint firstAttribute="bottom" secondItem="1F9-Gl-aG5" secondAttribute="bottom" constant="8" id="NU3-TJ-tGC"/>
-                    <constraint firstItem="lTh-hM-mmo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="SLt-cr-N6E"/>
+                    <constraint firstItem="lTh-hM-mmo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="RCf-TA-elu"/>
+                    <constraint firstAttribute="trailing" secondItem="1F9-Gl-aG5" secondAttribute="trailing" constant="48" id="RpR-du-iLd"/>
+                    <constraint firstItem="lTh-hM-mmo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="SLt-cr-N6E"/>
+                    <constraint firstItem="lTh-hM-mmo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="Tlj-dc-RKs"/>
+                    <constraint firstItem="rOS-WT-Cld" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="WZv-Dc-vXI"/>
+                    <constraint firstItem="rOS-WT-Cld" firstAttribute="top" secondItem="lTh-hM-mmo" secondAttribute="bottom" constant="4" id="XP0-WH-Ql5"/>
                     <constraint firstItem="1F9-Gl-aG5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="bBd-8C-hSK"/>
+                    <constraint firstItem="1F9-Gl-aG5" firstAttribute="top" secondItem="rOS-WT-Cld" secondAttribute="bottom" constant="4" id="bqQ-vz-DkT"/>
                     <constraint firstAttribute="bottom" secondItem="1F9-Gl-aG5" secondAttribute="bottom" id="c7F-dA-nO8"/>
-                    <constraint firstItem="1F9-Gl-aG5" firstAttribute="top" secondItem="lTh-hM-mmo" secondAttribute="bottom" constant="8" symbolic="YES" id="coY-zu-SaJ"/>
-                    <constraint firstItem="1F9-Gl-aG5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="eaF-yj-Zwk"/>
+                    <constraint firstItem="1F9-Gl-aG5" firstAttribute="top" secondItem="lTh-hM-mmo" secondAttribute="bottom" constant="23" id="coY-zu-SaJ"/>
+                    <constraint firstItem="1F9-Gl-aG5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="eaF-yj-Zwk"/>
+                    <constraint firstItem="lTh-hM-mmo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="epc-xC-adL"/>
                     <constraint firstItem="1F9-Gl-aG5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-7" id="fom-bi-ZMS"/>
-                    <constraint firstItem="lTh-hM-mmo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="fqh-oC-01Y"/>
+                    <constraint firstItem="lTh-hM-mmo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="fqh-oC-01Y"/>
                     <constraint firstItem="lTh-hM-mmo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="gFk-U7-NsG"/>
+                    <constraint firstAttribute="trailing" secondItem="rOS-WT-Cld" secondAttribute="trailing" constant="4" id="gQs-I0-OlX"/>
                     <constraint firstItem="lTh-hM-mmo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="gaY-2S-RMg"/>
                     <constraint firstAttribute="trailing" secondItem="1F9-Gl-aG5" secondAttribute="trailing" constant="-8" id="ivV-cF-cbO"/>
-                    <constraint firstItem="1F9-Gl-aG5" firstAttribute="top" secondItem="lTh-hM-mmo" secondAttribute="bottom" constant="8" symbolic="YES" id="qG5-xy-2Dp"/>
-                    <constraint firstAttribute="trailing" secondItem="1F9-Gl-aG5" secondAttribute="trailing" constant="16" id="rT3-y4-Zie"/>
+                    <constraint firstItem="rOS-WT-Cld" firstAttribute="top" secondItem="lTh-hM-mmo" secondAttribute="bottom" constant="4" id="lRy-PW-Dyh"/>
+                    <constraint firstItem="1F9-Gl-aG5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="niz-ec-YiT"/>
+                    <constraint firstItem="lTh-hM-mmo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="oNX-FL-vvF"/>
+                    <constraint firstItem="1F9-Gl-aG5" firstAttribute="top" secondItem="lTh-hM-mmo" secondAttribute="bottom" constant="23" id="qG5-xy-2Dp"/>
+                    <constraint firstAttribute="trailing" secondItem="1F9-Gl-aG5" secondAttribute="trailing" constant="-163" id="rT3-y4-Zie"/>
+                    <constraint firstItem="1F9-Gl-aG5" firstAttribute="top" secondItem="rOS-WT-Cld" secondAttribute="bottom" constant="4" id="ryL-IR-Kh6"/>
                     <constraint firstAttribute="bottom" secondItem="1F9-Gl-aG5" secondAttribute="bottom" id="vB8-Dr-5hb"/>
                     <constraint firstItem="1F9-Gl-aG5" firstAttribute="top" secondItem="lTh-hM-mmo" secondAttribute="bottom" constant="21" id="xcs-df-z5W"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
+                        <exclude reference="HnA-02-FMs"/>
+                        <exclude reference="SLt-cr-N6E"/>
+                        <exclude reference="epc-xC-adL"/>
+                        <exclude reference="fqh-oC-01Y"/>
                         <exclude reference="gFk-U7-NsG"/>
                         <exclude reference="gaY-2S-RMg"/>
+                        <exclude reference="oNX-FL-vvF"/>
+                        <exclude reference="BAh-Ra-qQY"/>
+                        <exclude reference="DHA-8z-cDG"/>
+                        <exclude reference="JHK-RO-lYk"/>
+                        <exclude reference="JWw-gp-o37"/>
+                        <exclude reference="WZv-Dc-vXI"/>
+                        <exclude reference="gQs-I0-OlX"/>
                         <exclude reference="0N8-jz-gxo"/>
                         <exclude reference="HSc-aF-gYz"/>
                         <exclude reference="Lwx-3e-hxl"/>
+                        <exclude reference="NU3-TJ-tGC"/>
                         <exclude reference="bBd-8C-hSK"/>
                         <exclude reference="c7F-dA-nO8"/>
+                        <exclude reference="coY-zu-SaJ"/>
+                        <exclude reference="eaF-yj-Zwk"/>
                         <exclude reference="fom-bi-ZMS"/>
                         <exclude reference="ivV-cF-cbO"/>
+                        <exclude reference="qG5-xy-2Dp"/>
+                        <exclude reference="rT3-y4-Zie"/>
                         <exclude reference="vB8-Dr-5hb"/>
                         <exclude reference="xcs-df-z5W"/>
                     </mask>
@@ -74,9 +125,10 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="ingredients" destination="1F9-Gl-aG5" id="2qC-cv-ur2"/>
+                <outlet property="ratingView" destination="rOS-WT-Cld" id="AJG-nj-1fe"/>
                 <outlet property="recipeName" destination="lTh-hM-mmo" id="jlf-hZ-1KM"/>
             </connections>
-            <point key="canvasLocation" x="312" y="306"/>
+            <point key="canvasLocation" x="312" y="292"/>
         </tableViewCell>
     </objects>
 </document>

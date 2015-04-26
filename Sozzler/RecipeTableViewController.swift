@@ -74,7 +74,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     }
 
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 64;
+        return 88;
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -97,6 +97,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         
         cell.recipeName!.text = recipe.name
         cell.ingredients!.text = "detail"
+        cell.ratingView!.rating = Int(recipe.rating)
         
         return cell
     }
