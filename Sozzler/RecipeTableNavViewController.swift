@@ -9,6 +9,9 @@ class RecipeTableNavViewController: UINavigationController {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = mainStoryboard.instantiateViewControllerWithIdentifier("RecipeTableView") as! RecipeTableViewController
 
+        viewController.navigationItem.leftBarButtonItem = nil
+        viewController.navigationItem.rightBarButtonItem = nil
+        
         pushViewController(viewController, animated: false)
     }
 }
