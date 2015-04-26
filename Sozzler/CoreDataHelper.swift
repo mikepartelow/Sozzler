@@ -69,6 +69,7 @@ class CoreDataHelper {
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
     }
     
-    class func factoryReset() {        
+    class func factoryReset() {
+        // FIXME: do it!
     }
 }
