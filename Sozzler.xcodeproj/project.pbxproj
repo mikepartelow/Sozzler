@@ -50,8 +50,8 @@
 		4006030E1AEC964600A11957 /* olive-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-on.png"; sourceTree = "<group>"; };
 		400603111AEC98CE00A11957 /* RecipeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
 		400603121AEC98CE00A11957 /* RecipeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecipeCell.xib; sourceTree = "<group>"; };
-		400603151AECA1A600A11957 /* RatingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RatingView.xib; sourceTree = "<group>"; };
-		400603171AECA1BC00A11957 /* RatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RatingView.swift; path = Sozzler/RatingView.swift; sourceTree = "<group>"; };
+		400603151AECA1A600A11957 /* RatingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RatingView.xib; path = ../RatingView.xib; sourceTree = "<group>"; };
+		400603171AECA1BC00A11957 /* RatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		400832AD1AE9F53100112198 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSettings.swift; path = ../UserSettings.swift; sourceTree = "<group>"; };
 		400832B11AEA098800112198 /* AddIngredientToComponentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddIngredientToComponentViewController.swift; path = ../AddIngredientToComponentViewController.swift; sourceTree = "<group>"; };
 		400BF0D61AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuantityToComponentViewController.swift; sourceTree = "<group>"; };
@@ -99,8 +99,6 @@
 		40F65B9F1AE8BAE000D15898 = {
 			isa = PBXGroup;
 			children = (
-				400603151AECA1A600A11957 /* RatingView.xib */,
-				400603171AECA1BC00A11957 /* RatingView.swift */,
 				40F65BAA1AE8BAE000D15898 /* Sozzler */,
 				40F65BC31AE8BAE100D15898 /* SozzlerTests */,
 				40F65BA91AE8BAE000D15898 /* Products */,
@@ -126,6 +124,8 @@
 				40B643F01AE8C35300EEBBCA /* Ingredient.swift */,
 				40B643F11AE8C35300EEBBCA /* Unit.swift */,
 				40B643F21AE8C35300EEBBCA /* Recipe.swift */,
+				400603151AECA1A600A11957 /* RatingView.xib */,
+				400603171AECA1BC00A11957 /* RatingView.swift */,
 				40DC56671AEC669500449B8A /* IngredientTableViewController.swift */,
 				40B643F31AE8C35300EEBBCA /* Component.swift */,
 				40DC56691AEC730E00449B8A /* RecipeTableNavViewController.swift */,
