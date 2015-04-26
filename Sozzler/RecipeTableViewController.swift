@@ -11,7 +11,8 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         super.init(coder: aDecoder)
 
         if Recipe.count() == 0 {
-            Recipe.populate()
+            CannedRecipeSource().fetch()
+            CoreDataHelper.save(nil)
         }
     }
     

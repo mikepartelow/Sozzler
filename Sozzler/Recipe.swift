@@ -65,35 +65,30 @@ extension Recipe {
         
         return recipe as! Recipe
     }
-
-    class func populate() {
-        let oz = Unit.create("ounce")
-        let tsp = Unit.create("tsp")
+    
+    class func create(recipeDict: NSDictionary) -> Recipe? {
+        let name        = recipeDict["name"]        as! String
+        let rating      = recipeDict["rating"]      as! Int
+        let text        = recipeDict["notes"]       as! String
+        let components  = recipeDict["components"]  as! [NSDictionary]
         
-        var artichoke = Ingredient.create("artichoke")
-        var asparagus = Ingredient.create("asparagus")
-        var limeJuice = Ingredient.create("lime juice")
-        var lemonJuice = Ingredient.create("lemon juice")
-
-        var r = Recipe.create("a disgusting artichoke", withRating: 1, withText: "not as bad as it sounds")
-        Component.create(1, quantity_d: 2, unit: oz, ingredient: artichoke, recipe: r)
-        Component.create(1, quantity_d: 1, unit: oz, ingredient: limeJuice, recipe: r)
+        let recipe = Recipe.create(name, withRating: Int16(rating), withText: text)
         
-        r = Recipe.create("b disgusting asparagus", withRating: 2, withText: "worse than it sounds")
-        Component.create(2, quantity_d: 1, unit: oz, ingredient: asparagus, recipe: r)
-        Component.create(1, quantity_d: 4, unit: tsp, ingredient: limeJuice, recipe: r)
-
-        let text = "\n".join(map((0..<30), { "long recipe text \($0)" }))
-        r = Recipe.create("c disgusting rutabaga", withRating: 3, withText: text)
-        Component.create(1, quantity_d: 3, unit: oz, ingredient: asparagus, recipe: r)
-        Component.create(1, quantity_d: 1, unit: oz, ingredient: limeJuice, recipe: r)
-        Component.create(1, quantity_d: 1, unit: tsp, ingredient: lemonJuice, recipe: r)
-        
-        var error: NSError?
-        if CoreDataHelper.save(&error) {
-        } else {
-            NSLog("\(error)")
+        for componentDict in components {
+            let quantity        = componentDict["quantity"]     as! String
+            let unitName        = componentDict["measure"]      as! String
+            let ingredientName  = componentDict["ingredient"]   as! String
+            
+            let unit            = Unit.findOrCreate(unitName)
+            let ingredient      = Ingredient.findOrCreate(ingredientName)
+            
+            let (quantity_n, quantity_d) = Component.parseQuantity(quantity)
+            // FIXME: should probably bounds check quantity_n/d before downcast
+            //
+            let component       = Component.create(Int16(quantity_n), quantity_d: Int16(quantity_d), unit: unit, ingredient: ingredient, recipe: recipe)
         }
+        
+        return recipe
     }
 }
 
@@ -105,6 +100,10 @@ extension Recipe {
             setPrimitiveValue(components.count, forKey: "component_count")
         }
     }
+    
+    // FIXME: additional validations
+    //
+    //        0 < rating <= 5
     
     func validate(error: NSErrorPointer) -> Bool {
         var errorMessage = ""

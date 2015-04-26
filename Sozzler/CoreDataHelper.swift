@@ -53,9 +53,9 @@ class CoreDataHelper {
             return obj!
     }
 
-    class func save(inout error: NSError?) -> Bool {
+    class func save(error: NSErrorPointer) -> Bool {
         let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
-        return moc.save(&error)
+        return moc.save(error)
     }
     
     class func delete(obj: NSManagedObject) {

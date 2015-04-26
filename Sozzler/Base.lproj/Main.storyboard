@@ -473,6 +473,7 @@
                     <connections>
                         <segue destination="Q6d-vt-tGz" kind="relationship" relationship="viewControllers" id="8bL-B4-wBn"/>
                         <segue destination="8oJ-zc-fdf" kind="relationship" relationship="viewControllers" id="BS0-aH-yYO"/>
+                        <segue destination="sn0-yJ-DH0" kind="relationship" relationship="viewControllers" id="sB0-Jx-JxU"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NW9-vA-FRT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -528,6 +529,62 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gwT-XP-su7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1171" y="1990"/>
+        </scene>
+        <!--Data Nav-->
+        <scene sceneID="L06-cD-tLt">
+            <objects>
+                <navigationController title="Data Nav" id="sn0-yJ-DH0" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Data" image="olive-on.png" id="dhK-Qi-RbU"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vqO-29-45F">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="TPs-VM-CSV" kind="relationship" relationship="rootViewController" id="wbl-ff-go3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B4a-q5-oE5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="393" y="2814"/>
+        </scene>
+        <!--Data-->
+        <scene sceneID="qsD-Px-7qK">
+            <objects>
+                <viewController title="Data" id="TPs-VM-CSV" customClass="DataViewController" customModule="Sozzler" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fhA-XC-brp"/>
+                        <viewControllerLayoutGuide type="bottom" id="G7M-Jf-ioO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Pqy-JQ-GHB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bKN-Vy-tL8">
+                                <rect key="frame" x="16" y="64" width="108" height="30"/>
+                                <state key="normal" title="Export Recipes">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onExportRecipes:" destination="TPs-VM-CSV" eventType="touchUpInside" id="vNa-B2-AbV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqO-hD-X5O">
+                                <rect key="frame" x="16" y="102" width="182" height="30"/>
+                                <state key="normal" title="Import Recipes From Web">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onImportFromWeb:" destination="TPs-VM-CSV" eventType="touchUpInside" id="sJQ-wV-e7I"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Di6-LY-LYh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="osO-ZM-ixM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1171" y="2814"/>
         </scene>
         <!--Ingredients Nav-->
         <scene sceneID="Hv9-0o-c6y">

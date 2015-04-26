@@ -29,4 +29,12 @@ class Unit: NSManagedObject {
             }
         ) as! Unit
     }
+    
+    class func findOrCreate(name: String) -> Unit {
+        if let unit = Unit.find(name) {
+            return unit
+        } else {
+            return Unit.create(name)
+        }
+    }
 }
