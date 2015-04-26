@@ -8,7 +8,7 @@
         <!--Recipe Table View Controller-->
         <scene sceneID="9Q3-oS-b09">
             <objects>
-                <tableViewController id="g9a-k6-D3V" customClass="RecipeTableViewController" customModule="Sozzler" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="RecipeTableView" id="g9a-k6-D3V" customClass="RecipeTableViewController" customModule="Sozzler" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="t91-pI-PDQ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -44,11 +44,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="mFJ-jO-2I1">
-                        <barButtonItem key="leftBarButtonItem" title="Sort" id="Eb1-ei-QT9">
-                            <connections>
-                                <action selector="onSort:" destination="g9a-k6-D3V" id="4Hv-gQ-it9"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="M04-Du-MJ0">
                             <connections>
                                 <segue destination="tSw-Xf-p1h" kind="presentation" id="0Gl-Mw-J5a"/>
@@ -370,6 +365,19 @@
             </objects>
             <point key="canvasLocation" x="2743" y="1234"/>
         </scene>
+        <!--Recipe Table Nav View Controller-->
+        <scene sceneID="m7l-Bl-heX">
+            <objects>
+                <navigationController id="maj-lL-bX2" customClass="RecipeTableNavViewController" customModule="Sozzler" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PFZ-LZ-eLp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TRM-mM-v4M" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1902" y="1990"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="5Pe-8W-CYh">
             <objects>
@@ -447,6 +455,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="maj-lL-bX2" kind="show" id="R9O-2A-ryu"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

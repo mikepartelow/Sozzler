@@ -38,15 +38,13 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         presentViewController(sheet, animated: true, completion: nil)
     }
     
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        let navController = segue.destinationViewController as! UINavigationController
-//        
-//        if segue.identifier == "recipeDetails" {
-//            let rvc = navController.topViewController! as! RecipeViewController
-//            let index = tableView.indexPathForSelectedRow()!
-//            rvc.recipe = frc!.objectAtIndexPath(index) as? Recipe
-//        }
-//    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let navController = segue.destinationViewController as! UINavigationController
+        let rtvc = navController.topViewController! as! RecipeTableViewController
+        
+        let index = tableView.indexPathForSelectedRow()!
+        rtvc.ingredient = frc!.objectAtIndexPath(index) as? Ingredient
+    }
     
     // NSFetchedResultsControllerDelegate
     //

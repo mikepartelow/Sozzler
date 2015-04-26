@@ -5,6 +5,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     let userSettings = (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings
     
     var frc: NSFetchedResultsController?
+    var ingredient: Ingredient?
     
     required init!(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
@@ -17,6 +18,12 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
+
+        // FIXME: use this to add the Sort button when we're root view controller, but not when we're coming from IngredientTable
+        //        IngredientTable should display Back
+
+        //        navigationItem.leftBarButtonItem =
+
         refresh()
     }
 
@@ -89,14 +96,21 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     func refresh() {
         // FIXME: progress indicator is needed especially during onSort()
         //        modal grey translucent alert with swriy : howto?
-        frc = Recipe.fetchedResultsController()
+
+        let predicate: NSPredicate?
+        if ingredient != nil {
+            predicate = NSPredicate(format: "ANY components.ingredient.name == %@", ingredient!.name)
+            navigationItem.title = "Recipes with \(ingredient!.name)"
+        } else {
+            predicate = nil
+            navigationItem.title = "Recipes by \(userSettings.recipeSortOrderName)"
+        }
         
+        frc = Recipe.fetchedResultsController(predicate: predicate)
         frc!.delegate = self
-        
+
         // FIXME: nil seems like a bad idea
         frc!.performFetch(nil)
-        
-        navigationItem.title = "Recipes by \(userSettings.recipeSortOrderName)"
         
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()

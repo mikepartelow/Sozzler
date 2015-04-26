@@ -14,10 +14,13 @@ class Recipe: NSManagedObject {
 // querying
 //
 extension Recipe {
-    class func fetchedResultsController() -> NSFetchedResultsController {
+    class func fetchedResultsController(predicate: NSPredicate? = nil) -> NSFetchedResultsController {
         let app = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let fetchRequest = NSFetchRequest(entityName: "Recipe")
+        if predicate != nil {
+            fetchRequest.predicate = predicate
+        }
         
         let sortByRating            = NSSortDescriptor(key: "rating", ascending: false)
         let sortByName              = NSSortDescriptor(key: "name", ascending: true)
