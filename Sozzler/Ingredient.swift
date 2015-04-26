@@ -11,9 +11,16 @@ class Ingredient: NSManagedObject {
     class func fetchedResultsController() -> NSFetchedResultsController {
         let app = UIApplication.sharedApplication().delegate as! AppDelegate
         let fetchRequest = NSFetchRequest(entityName: "Ingredient")
+
         let sortByName              = NSSortDescriptor(key: "name", ascending: true)
+        let sortByRecipeCount       = NSSortDescriptor(key: "recipe_count", ascending: false)
         
-        fetchRequest.sortDescriptors = [sortByName]
+        switch app.userSettings.ingredientSortOrder {
+        case .Name:
+            fetchRequest.sortDescriptors = [sortByName, sortByRecipeCount]
+        case .NumberOfRecipes:
+            fetchRequest.sortDescriptors = [sortByRecipeCount, sortByName]
+        }
         
         return CoreDataHelper.fetchedResultsController(fetchRequest)
     }

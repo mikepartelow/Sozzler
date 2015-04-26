@@ -454,7 +454,13 @@
                             <outlet property="delegate" destination="j5N-gx-ycc" id="mJm-4f-YEd"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Z9S-Rm-ZDT"/>
+                    <navigationItem key="navigationItem" id="Z9S-Rm-ZDT">
+                        <barButtonItem key="leftBarButtonItem" title="Sort" id="0oO-LS-QHw">
+                            <connections>
+                                <action selector="onSort:" destination="j5N-gx-ycc" id="TeB-Fn-6NX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gwT-XP-su7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

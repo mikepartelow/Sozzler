@@ -23,15 +23,15 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     @IBAction func onSort(sender: UIBarButtonItem) {
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         
-        let sortByName = UIAlertAction(title: "Sort by Name", style: .Default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            self.userSettings.recipeSortOrder = .Name
-            self.refresh()
-        })
-
         let sortByRating = UIAlertAction(title: "Sort by Rating", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
             self.userSettings.recipeSortOrder = .Rating
+            self.refresh()
+        })
+
+        let sortByName = UIAlertAction(title: "Sort by Name", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.userSettings.recipeSortOrder = .Name
             self.refresh()
         })
 
@@ -45,8 +45,8 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             (alert: UIAlertAction!) -> Void in
         })
 
-        sheet.addAction(sortByName)
         sheet.addAction(sortByRating)
+        sheet.addAction(sortByName)
         sheet.addAction(sortByNumberOfIngredients)
         sheet.addAction(cancel)
 

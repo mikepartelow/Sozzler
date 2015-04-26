@@ -12,32 +12,31 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         refresh()
     }
     
-//    @IBAction func onSort(sender: UIBarButtonItem) {
-//        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-//        
-//        let sortByName = UIAlertAction(title: "Sort by Name", style: .Default, handler: {
-//            (alert: UIAlertAction!) -> Void in
-//            self.userSettings.ingredientSortOrder = .Name
-//            self.refresh()
-//        })
-//        
-//        let sortByNumberOfIngredients = UIAlertAction(title: "Sort by Number of Recipes", style: .Default, handler: {
-//            (alert: UIAlertAction!) -> Void in
-//            self.userSettings.ingredientSortOrder = .NumberOfRecipes
-//            self.refresh()
-//        })
-//        
-//        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
-//            (alert: UIAlertAction!) -> Void in
-//        })
-//        
-//        sheet.addAction(sortByName)
-//        sheet.addAction(sortByRating)
-//        sheet.addAction(sortByNumberOfIngredients)
-//        sheet.addAction(cancel)
-//        
-//        presentViewController(sheet, animated: true, completion: nil)
-//    }
+    @IBAction func onSort(sender: UIBarButtonItem) {
+        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        
+        let sortByName = UIAlertAction(title: "Sort by Name", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.userSettings.ingredientSortOrder = .Name
+            self.refresh()
+        })
+        
+        let sortByNumberOfIngredients = UIAlertAction(title: "Sort by Number of Recipes", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.userSettings.ingredientSortOrder = .NumberOfRecipes
+            self.refresh()
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+        })
+        
+        sheet.addAction(sortByName)
+        sheet.addAction(sortByNumberOfIngredients)
+        sheet.addAction(cancel)
+        
+        presentViewController(sheet, animated: true, completion: nil)
+    }
     
 //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 //        let navController = segue.destinationViewController as! UINavigationController
@@ -81,7 +80,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         // FIXME: nil seems like a bad idea
         frc!.performFetch(nil)
         
-        navigationItem.title = "Ingredients" //FIXME: by \(userSettings.recipeSortOrderName)"
+        navigationItem.title = "Ingredients by \(userSettings.ingredientSortOrderName)"
         
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()
