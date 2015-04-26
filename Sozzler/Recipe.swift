@@ -14,7 +14,7 @@ class Recipe: NSManagedObject {
 // querying
 //
 extension Recipe {
-    class func fetchRequest() -> NSFetchRequest {
+    class func fetchedResultsController() -> NSFetchedResultsController {
         let app = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let fetchRequest = NSFetchRequest(entityName: "Recipe")
@@ -32,7 +32,7 @@ extension Recipe {
             fetchRequest.sortDescriptors = [sortByComponentCount, sortByRating, sortByName]
         }
         
-        return fetchRequest
+        return CoreDataHelper.fetchedResultsController(fetchRequest)
     }
     
     class func count() -> Int {
@@ -86,10 +86,8 @@ extension Recipe {
         Component.create(1, quantity_d: 1, unit: oz, ingredient: limeJuice, recipe: r)
         Component.create(1, quantity_d: 1, unit: tsp, ingredient: lemonJuice, recipe: r)
         
-        let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
-        NSLog("FIXME: put this in CDH, no moc here")
         var error: NSError?
-        if moc.save(&error) {
+        if CoreDataHelper.save(&error) {
         } else {
             NSLog("\(error)")
         }

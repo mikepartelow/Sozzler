@@ -2,8 +2,6 @@ import UIKit
 import CoreData
 
 class AddIngredientToComponentViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-    let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
-    
     var frc: NSFetchedResultsController?
     var ingredient: Ingredient?
     
@@ -53,9 +51,7 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
     
     // FIXME: DRY
     func refresh() {
-        let fetchRequest = Ingredient.fetchRequest()
-        
-        frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
+        frc = Ingredient.fetchedResultsController()
         
         frc!.delegate = self
         

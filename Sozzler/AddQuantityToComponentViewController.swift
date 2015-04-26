@@ -23,7 +23,7 @@ class AddQuantityToComponentViewController: UIViewController, UIPickerViewDelega
     required init(coder aDecoder: NSCoder) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
-        frc = NSFetchedResultsController(fetchRequest: Unit.fetchRequest(), managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
+        frc = Unit.fetchedResultsController()
         frc.performFetch(nil)
         
         super.init(coder: aDecoder)

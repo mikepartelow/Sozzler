@@ -6,14 +6,13 @@ class Unit: NSManagedObject {
 
     @NSManaged var name: String
 
-    class func fetchRequest() -> NSFetchRequest {
-        let app = UIApplication.sharedApplication().delegate as! AppDelegate
+    class func fetchedResultsController() -> NSFetchedResultsController {
         let fetchRequest = NSFetchRequest(entityName: "Unit")
         let sortByName = NSSortDescriptor(key: "name", ascending: true)
         
         fetchRequest.sortDescriptors = [sortByName]
         
-        return fetchRequest
+        return CoreDataHelper.fetchedResultsController(fetchRequest)
     }
 
     class func find(name: String) -> Unit? {

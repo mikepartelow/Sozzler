@@ -37,7 +37,6 @@ class CoreDataHelper {
         }
         return obj
     }
-    
 
     class func create(entityName: String,
         initializer: (entity: NSEntityDescription, context: NSManagedObjectContext) -> NSManagedObject) -> NSManagedObject {
@@ -52,5 +51,21 @@ class CoreDataHelper {
             }
             
             return obj!
+    }
+
+    class func save(inout error: NSError?) -> Bool {
+        let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+        return moc.save(&error)
+    }
+    
+    class func delete(obj: NSManagedObject) {
+        let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+        moc.deleteObject(obj)
+    }
+    
+    class func fetchedResultsController(fetchRequest: NSFetchRequest) -> NSFetchedResultsController {
+        let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
     }
 }

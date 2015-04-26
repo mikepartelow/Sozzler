@@ -2,14 +2,11 @@ import UIKit
 import CoreData
 
 class RecipeTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-    let app: AppDelegate
-    let moc: NSManagedObjectContext
+    let userSettings = (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings
     
     var frc: NSFetchedResultsController?
     
     required init!(coder aDecoder: NSCoder!) {
-        app = UIApplication.sharedApplication().delegate as! AppDelegate
-        moc = app.managedObjectContext!
         super.init(coder: aDecoder)
 
         if Recipe.count() == 0 {
@@ -28,19 +25,19 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         
         let sortByName = UIAlertAction(title: "Sort by Name", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            self.app.userSettings.recipeSortOrder = .Name
+            self.userSettings.recipeSortOrder = .Name
             self.refresh()
         })
 
         let sortByRating = UIAlertAction(title: "Sort by Rating", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            self.app.userSettings.recipeSortOrder = .Rating
+            self.userSettings.recipeSortOrder = .Rating
             self.refresh()
         })
 
         let sortByNumberOfIngredients = UIAlertAction(title: "Sort by Number of Ingredients", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            self.app.userSettings.recipeSortOrder = .NumberOfIngredients
+            self.userSettings.recipeSortOrder = .NumberOfIngredients
             self.refresh()
         })
 
@@ -90,18 +87,15 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
 
     // FIXME: DRY
     func refresh() {
-        // FIXME: progress indicator is needed especially during onSort()
-        
-        let fetchRequest = Recipe.fetchRequest()
-        
-        frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
+        // FIXME: progress indicator is needed especially during onSort()        
+        frc = Recipe.fetchedResultsController()
         
         frc!.delegate = self
         
         // FIXME: nil seems like a bad idea
         frc!.performFetch(nil)
         
-        navigationItem.title = "Recipes by \(app.userSettings.recipeSortOrderName)"
+        navigationItem.title = "Recipes by \(userSettings.recipeSortOrderName)"
         
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()

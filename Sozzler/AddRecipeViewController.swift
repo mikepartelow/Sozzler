@@ -41,8 +41,8 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
             let component = self.components.removeAtIndex(indexPath.row)
-            NSLog("FIXME: don't moc twiddle here, put that in CoreDataHelper")
-            self.moc.deleteObject(component)
+
+            CoreDataHelper.delete(component)
             self.componentTable.reloadData()
 
             tableView.editing = false
