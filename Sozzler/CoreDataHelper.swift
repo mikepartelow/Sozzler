@@ -37,7 +37,20 @@ class CoreDataHelper {
         }
         return obj
     }
-
+    
+    class func all(entityName: String) -> [NSManagedObject] {
+        let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+        
+        let fetchRequest = NSFetchRequest(entityName: entityName)
+        
+        // FIXME: error handling
+        if let results = moc.executeFetchRequest(fetchRequest, error: nil) {
+            return results as! [NSManagedObject]
+        }
+        
+        return []
+    }
+    
     class func create(entityName: String,
         initializer: (entity: NSEntityDescription, context: NSManagedObjectContext) -> NSManagedObject) -> NSManagedObject {
             let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
@@ -70,6 +83,11 @@ class CoreDataHelper {
     }
     
     class func factoryReset() {
-        // FIXME: do it!
+        let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+
+        map(CoreDataHelper.all("Component"), { moc.deleteObject($0) })
+        map(CoreDataHelper.all("Unit"), { moc.deleteObject($0) })
+        map(CoreDataHelper.all("Ingredient"), { moc.deleteObject($0) })
+        map(CoreDataHelper.all("Recipe"), { moc.deleteObject($0) })
     }
 }
