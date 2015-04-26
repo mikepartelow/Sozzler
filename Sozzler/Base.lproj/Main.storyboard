@@ -130,6 +130,7 @@
                     <navigationItem key="navigationItem" id="nkQ-wf-Pnl"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="ratingView" destination="ubz-ng-dA7" id="9rT-AO-XPL"/>
                         <outlet property="recipeTextView" destination="xjL-To-Zeg" id="Cbk-MA-o85"/>
                     </connections>
                 </viewController>

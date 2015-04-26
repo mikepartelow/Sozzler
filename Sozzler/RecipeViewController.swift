@@ -5,6 +5,7 @@ class RecipeViewController: UIViewController {
     
     @IBOutlet weak var recipeTextView: UITextView!
     
+    @IBOutlet weak var ratingView: RatingView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -13,5 +14,6 @@ class RecipeViewController: UIViewController {
         let sortedComponents = Component.sorted(recipe!.components)
         let componentText = "\n".join(map(sortedComponents, { $0.string }))
         recipeTextView!.text = "\(componentText)\n\n\(recipe!.text)"
+        ratingView!.rating = Int(recipe!.rating)
     }
 }
