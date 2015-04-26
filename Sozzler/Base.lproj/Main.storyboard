@@ -337,7 +337,7 @@
         <scene sceneID="xy1-Md-L6a">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Q6d-vt-tGz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Recipes" id="od7-fs-4ec"/>
+                    <tabBarItem key="tabBarItem" title="Recipes" image="olive-on.png" id="od7-fs-4ec"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MZr-co-C2O">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -492,7 +492,7 @@
         <scene sceneID="Hv9-0o-c6y">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8oJ-zc-fdf" userLabel="Ingredients Nav" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Ingredients" id="SBo-Yr-S7t"/>
+                    <tabBarItem key="tabBarItem" title="Ingredients" image="olive-on.png" id="SBo-Yr-S7t"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="KS5-H5-bEc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -508,4 +508,7 @@
             <point key="canvasLocation" x="393" y="1990"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="olive-on.png" width="16" height="16"/>
+    </resources>
 </document>
