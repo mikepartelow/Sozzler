@@ -87,7 +87,8 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
 
     // FIXME: DRY
     func refresh() {
-        // FIXME: progress indicator is needed especially during onSort()        
+        // FIXME: progress indicator is needed especially during onSort()
+        //        modal grey translucent alert with swriy : howto?
         frc = Recipe.fetchedResultsController()
         
         frc!.delegate = self
