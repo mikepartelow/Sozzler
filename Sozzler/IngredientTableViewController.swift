@@ -6,12 +6,25 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
     
     var frc: NSFetchedResultsController?
     
+    var shouldRefresh = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
-        refresh()
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "data.reset", object: nil)
     }
     
+    func dataReset() {
+        shouldRefresh = true
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        if shouldRefresh {
+            refresh()
+        }
+    }
+
     @IBAction func onSort(sender: UIBarButtonItem) {
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         
@@ -83,5 +96,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()
         tableView.reloadData()
+        
+        shouldRefresh = false
     }
 }

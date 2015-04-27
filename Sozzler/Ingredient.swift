@@ -40,6 +40,14 @@ class Ingredient: NSManagedObject {
         let predicate = NSPredicate(format: "name == %@", name)
         return CoreDataHelper.find("Ingredient", predicate: predicate) as! Ingredient?
     }
+    
+    class func findOrCreate(name: String) -> Ingredient {
+        if let ingredient = Ingredient.find(name) {
+            return ingredient
+        } else {
+            return Ingredient.create(name)
+        }
+    }
 }
 
 // saving and validation
