@@ -7,11 +7,13 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     var frc: NSFetchedResultsController?
     var ingredient: Ingredient?
     
+    var shouldRefresh = true
+    
     required init!(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
 
         if Recipe.count() == 0 {
-            CannedRecipeSource().fetch()
+            CannedRecipeSource().splorp()
             CoreDataHelper.save(nil)
         }
     }
@@ -27,8 +29,18 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
 
         tableView.registerNib(UINib(nibName: "RecipeCell", bundle: nil), forCellReuseIdentifier: "RecipeCell")
         tableView.rowHeight = UITableViewAutomaticDimension
-
-        refresh()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "data.reset", object: nil)
+    }
+    
+    func dataReset() {
+        shouldRefresh = true
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        if shouldRefresh {
+            refresh()
+        }
     }
 
     @IBAction func onSort(sender: UIBarButtonItem) {
@@ -128,6 +140,8 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()
         tableView.reloadData()
+        
+        shouldRefresh = false
     }
     
     @IBAction func unwindToRecipes(sender: UIStoryboardSegue)

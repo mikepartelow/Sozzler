@@ -4,7 +4,7 @@ import UIKit
 import CoreData
 
 class CannedRecipeSource {
-    func fetch() -> [Recipe] {
+    func splorp() -> [Recipe] {
         let recipeDicts = [
             [
                 "name"          : "Disgusting Artichoke",

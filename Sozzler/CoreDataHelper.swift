@@ -2,6 +2,7 @@ import CoreData
 import UIKit
 
 class CoreDataHelper {
+    
     class func count(entityName: String, predicate: NSPredicate?) -> Int {
         let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
 

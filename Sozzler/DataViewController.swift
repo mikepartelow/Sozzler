@@ -16,16 +16,16 @@ class DataViewController: UIViewController {
             CoreDataHelper.factoryReset()
             
             // FIXME: need an alert to select URL
-            // FIXME: need a spinner while the import does its thing
+            // FIXME: need a spinner while the import does its thing : http://stackoverflow.com/questions/26881625/how-to-use-mbprogresshud-with-swift : or maybe write own? how hard can it be...
             
             UrlRecipeSource(url: NSURL(string: "http://sainttoad.com/muddler/recipes.json")!, completion: { (recipes) -> () in
                 // FIXME: handle errors
                 NSLog("\(recipes?.count)")
                 CoreDataHelper.save(nil)
                 
+                NSNotificationCenter.defaultCenter().postNotificationName("data.reset", object: self)
+
                 // FIXME: tell user it worked
-                
-                // FIXME: tell controllers that they must reload()
             }).fetch()
         }
         
@@ -38,24 +38,20 @@ class DataViewController: UIViewController {
     }
     
     @IBAction func onImportCanned(sender: UIButton) {
-        // FIXME: ask user whether to MERGE or REPLACE existing recipes.
-        //        how to deal with dups?
-        //
-        //        for now, warn and REPLACE
-        
         var alert = UIAlertController(title: "", message: "Imported recipes will replace all existing recipes.", preferredStyle: .Alert)
         
         let doitAction = UIAlertAction(title: "Do it", style: .Default) { (action: UIAlertAction!) -> Void in
             CoreDataHelper.factoryReset()
             
-            CannedRecipeSource().fetch()
+            CannedRecipeSource().splorp() // splorp is the sound of canned food leaving the can
             
             // FIXME: handle errors
             CoreDataHelper.save(nil)
             
-            // FIXME: tell user it worked
+            NSNotificationCenter.defaultCenter().postNotificationName("data.reset", object: self)
+
             
-            // FIXME: tell controllers that they must reload()
+            // FIXME: tell user it worked            
         }
         
         let cancelAction = UIAlertAction(title: "Forget it", style: .Default) { (action: UIAlertAction!) -> Void in }
