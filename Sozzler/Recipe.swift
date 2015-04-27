@@ -38,6 +38,10 @@ extension Recipe {
         return CoreDataHelper.fetchedResultsController(fetchRequest)
     }
     
+    class func all() -> [Recipe] {
+        return CoreDataHelper.all("Recipe") as! [Recipe]
+    }
+    
     class func count() -> Int {
         return CoreDataHelper.count("Recipe", predicate: nil)
     }
@@ -89,6 +93,29 @@ extension Recipe {
         }
         
         return recipe
+    }
+
+}
+//    var dictionary: NSDictionary {
+//        return [
+//            "name"          : name,
+//            "rating"        : rating,
+//            "text"          : text,
+//            "components"    : components.allObjects.map { $0.dictionary }
+//        ]
+//    }
+//
+extension NSDictionary {
+    convenience init(_ recipe: Recipe) {
+        self.init()
+        setValue(recipe.name, forKey: "name")
+
+//                "rating"        : rating,
+//                "text"          : text,
+//                "components"    : components.allObjects.map { $0.dictionary }
+//            ]
+//        }
+
     }
 }
 
