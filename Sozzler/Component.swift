@@ -79,3 +79,16 @@ extension Component {
         return (quantity_n, quantity_d)
     }
 }
+
+extension NSMutableDictionary {
+    convenience init(component: Component) {
+        self.init()
+        
+        let quantity = "\(component.quantity_n)/\(component.quantity_d)"
+
+        setValue(quantity, forKey: "quantity")
+        
+        setValue(component.unit.name, forKey: "unit")
+        setValue(component.ingredient.name, forKey: "ingredient")
+    }
+}

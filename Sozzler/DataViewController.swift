@@ -1,48 +1,49 @@
 import UIKit
+import MessageUI
 
-class DataViewController: UIViewController{ //, MFMailComposeViewControllerDelegate {
+class DataViewController: UIViewController, MFMailComposeViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     @IBAction func onExportRecipes(sender: UIButton) {
-        let recipeDicts = map(Recipe.all(), { NSDictionary($0) })
+        var composer = MFMailComposeViewController()
+        
+        composer.mailComposeDelegate = self
+        composer.setSubject("FIXME (name of app) recipes export")
+        composer.setMessageBody("my recipes in JSON format", isHTML: true)
+
+        // FIXME: set default addressee to "device owner" if there's an API for that
+        // FIXME: is JSON "user friendly"?
+        
+        // need to connect physical device to really send email
+        //
+        // https://developer.apple.com/library/prerelease/ios/documentation/Foundation/Reference/NSJSONSerialization_Class/index.html
+        // https://medium.com/swift-programming/4-json-in-swift-144bf5f88ce4
+        // http://www.raywenderlich.com/1980/email-tutorial-for-ios-how-to-import-and-export-app-data-via-email-in-your-ios-app
+        
+        let recipeDicts = map(Recipe.all(), { NSMutableDictionary(recipe: $0 as Recipe) })
+        let options = NSJSONWritingOptions.PrettyPrinted
+        
+        if let data = NSJSONSerialization.dataWithJSONObject(recipeDicts, options: options, error: nil) {
+            if let string = NSString(data: data, encoding: NSUTF8StringEncoding) {
+                NSLog("\(string)")
+
+                let data = string.dataUsingEncoding(NSUTF8StringEncoding)
+                let base64Data = data!.base64EncodedDataWithOptions(.allZeros)
+
+                composer.addAttachmentData(NSData(base64EncodedData: base64Data, options: .allZeros), mimeType: "application/json", fileName: "recipe.json")
+                
+                presentViewController(composer, animated: true, completion: nil)
+            }
+        }
     }
-//        var composer = MFMailComposeViewController()
-//        composer.mailComposeDelegate = self
-//        composer.setSubject("FIXME (name of app) recipes export")
-//        composer.setMessageBody("my recipes in JSON format", isHTML: true)
-//        // FIXME: set default addressee to "device owner" if there's an API for that
-//        // FIXME: is JSON "user friendly"?
-//        
-//        // need to connect physical device to really send email
-//        //
-//        // https://developer.apple.com/library/prerelease/ios/documentation/Foundation/Reference/NSJSONSerialization_Class/index.html
-//        // https://medium.com/swift-programming/4-json-in-swift-144bf5f88ce4
-//        // http://www.raywenderlich.com/1980/email-tutorial-for-ios-how-to-import-and-export-app-data-via-email-in-your-ios-app
-//        
-//        let recipes = Recipe.all(managedObjectContext).map { $0.dictionary }
-//        
-//        var options = NSJSONWritingOptions.PrettyPrinted
-//        if let data = NSJSONSerialization.dataWithJSONObject(recipes, options: options, error: nil) {
-//            if let string = NSString(data: data, encoding: NSUTF8StringEncoding) {
-//                NSLog("\(string)")
-//                
-//                let data = string.dataUsingEncoding(NSUTF8StringEncoding)
-//                let base64Data = data!.base64EncodedDataWithOptions(.allZeros)
-//                
-//                composer.addAttachmentData(NSData(base64EncodedData: base64Data, options: .allZeros), mimeType: "application/json", fileName: "recipe.json")
-//                
-//                presentViewController(composer, animated: true, completion: nil)
-//            }
-//        }
-//    }
-//    
-//    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
-//        dismissViewControllerAnimated(true, completion: nil)
-//    }
-//    
+
+    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+//
 //    func textFieldShouldReturn(textField: UITextField) -> Bool {
 //        textField.resignFirstResponder()
 //        return true

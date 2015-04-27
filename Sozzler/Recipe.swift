@@ -96,26 +96,18 @@ extension Recipe {
     }
 
 }
-//    var dictionary: NSDictionary {
-//        return [
-//            "name"          : name,
-//            "rating"        : rating,
-//            "text"          : text,
-//            "components"    : components.allObjects.map { $0.dictionary }
-//        ]
-//    }
-//
-extension NSDictionary {
-    convenience init(_ recipe: Recipe) {
+
+extension NSMutableDictionary {
+    convenience init(recipe: Recipe) {
         self.init()
-        setValue(recipe.name, forKey: "name")
 
-//                "rating"        : rating,
-//                "text"          : text,
-//                "components"    : components.allObjects.map { $0.dictionary }
-//            ]
-//        }
-
+        setValue(recipe.name,               forKey: "name")
+        setValue(Int(recipe.rating),        forKey: "rating")
+        setValue(recipe.text,               forKey: "text")
+        
+        let components = map(recipe.components.allObjects, { NSMutableDictionary(component: $0 as! Component) })
+        
+        setValue(components, forKey: "components")
     }
 }
 
