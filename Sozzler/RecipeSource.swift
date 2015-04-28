@@ -27,7 +27,31 @@ class CannedRecipeSource {
             [
                 "name"          : "Disgusting Asparagus",
                 "rating"        : 4,
-                "notes"         : "worse than it sounds",
+                "notes"         : "worse than it sounds\n" +
+                                  "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                                  "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
+                    "LAST LINE HERE",
+                
                 "components"    : [
                     [
                         "quantity"      : "1",
