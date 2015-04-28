@@ -110,12 +110,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RecipeCell", forIndexPath: indexPath) as! RecipeCell
-        let recipe = frc!.objectAtIndexPath(indexPath) as! Recipe
-        
-        cell.recipeName!.text = recipe.name
-        cell.ingredients!.text = "detail"
-        cell.ratingView!.rating = Int(recipe.rating)
-        
+        cell.recipe = (frc!.objectAtIndexPath(indexPath) as! Recipe)
         return cell
     }
     
