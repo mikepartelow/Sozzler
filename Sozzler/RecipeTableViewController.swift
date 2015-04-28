@@ -16,11 +16,13 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             CannedRecipeSource().splorp()
             CoreDataHelper.save(nil)
         }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
+        tableView.dataSource = self
 
         // FIXME: use this to add the Sort button when we're root view controller, but not when we're coming from IngredientTable
         //        IngredientTable should display Back
@@ -83,6 +85,8 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             let rvc = navController.topViewController! as! RecipeViewController
             let index = tableView.indexPathForSelectedRow()!
             rvc.recipe = frc!.objectAtIndexPath(index) as? Recipe
+            
+            tableView.deselectRowAtIndexPath(index, animated: false)
         }
     }
 
@@ -114,6 +118,43 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         
         return cell
     }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
+     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
+            let recipe = self.frc!.objectAtIndexPath(indexPath) as! Recipe
+
+            for component in recipe.components.allObjects as! [Component] {
+                // FIXME: duplicated effort! will be recalculated in willSave() but if we don't change the Ingredient, willSave() *wont* be called..
+                //
+                component.ingredient.recipe_count -= 1
+                assert(component.ingredient.recipe_count >= 0, "recipe count went negative")
+                CoreDataHelper.delete(component)
+            }
+            CoreDataHelper.delete(recipe)
+            
+            var error: NSError?
+            if CoreDataHelper.save(&error) {
+                self.refresh()
+            } else {
+                // FIXME:
+                // alert: could not blah blah
+                NSLog("Save Failed!: \(error)")
+            }
+            
+            tableView.editing = false
+        }
+        
+        return [ deleteAction ]
+    }
+
     //
     // NSFetchedResultsControllerDelegate
 
