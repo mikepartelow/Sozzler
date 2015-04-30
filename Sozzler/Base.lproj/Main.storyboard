@@ -64,25 +64,19 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vmi-9I-4HI">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="357"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Rating:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8VM-dQ-LuZ">
-                                                <rect key="frame" x="8" y="8" width="88" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8VM-dQ-LuZ">
+                                                <rect key="frame" x="8" y="8" width="55" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ubz-ng-dA7" customClass="RatingView" customModule="Sozzler" customModuleProvider="target">
-                                                <rect key="frame" x="112" y="8" width="112" height="16"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubz-ng-dA7" customClass="RatingView" customModule="Sozzler" customModuleProvider="target">
+                                                <rect key="frame" x="79" y="11" width="112" height="16"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="112" id="9d7-mh-dBN"/>
                                                     <constraint firstAttribute="height" constant="16" id="tCV-Nk-KzL"/>
                                                 </constraints>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="9d7-mh-dBN"/>
-                                                        <exclude reference="tCV-Nk-KzL"/>
-                                                    </mask>
-                                                </variation>
                                             </view>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjL-To-Zeg">
                                                 <rect key="frame" x="5" y="37" width="590" height="300"/>
@@ -98,7 +92,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="xjL-To-Zeg" secondAttribute="bottom" constant="20" symbolic="YES" id="2Dq-Sq-aAt"/>
-                                            <constraint firstItem="ubz-ng-dA7" firstAttribute="centerY" secondItem="8VM-dQ-LuZ" secondAttribute="centerY" constant="-8" id="5n9-yE-F0c"/>
+                                            <constraint firstItem="ubz-ng-dA7" firstAttribute="centerY" secondItem="8VM-dQ-LuZ" secondAttribute="centerY" id="5n9-yE-F0c"/>
                                             <constraint firstItem="8VM-dQ-LuZ" firstAttribute="top" secondItem="Vmi-9I-4HI" secondAttribute="top" constant="8" id="6cg-QE-tsg"/>
                                             <constraint firstItem="xjL-To-Zeg" firstAttribute="leading" secondItem="Vmi-9I-4HI" secondAttribute="leading" constant="5" id="9Ps-kk-I2k"/>
                                             <constraint firstItem="ubz-ng-dA7" firstAttribute="top" secondItem="8VM-dQ-LuZ" secondAttribute="top" id="AeL-Bh-Ojo"/>
