@@ -18,7 +18,7 @@ class RecipeViewController: UIViewController {
         ratingView!.rating = Int(recipe!.rating)
         
         let fit = recipeTextView.sizeThatFits(recipeTextView.contentSize)
-        recipeTextViewHeight.constant = fit.height + 64 // FIXME: 64??
+        recipeTextViewHeight.constant = fit.height + 84 // FIXME: magic number
         
         recipeTextView.setNeedsUpdateConstraints()
 
