@@ -6,6 +6,8 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var recipeName: UITextField!
     @IBOutlet weak var componentTable: UITableView!
 
+    @IBOutlet weak var ratingView: RatingView!
+    
     var added = false
     var recipe: Recipe?
     var components: [Component] = []
@@ -17,6 +19,18 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
 
         componentTable!.dataSource = self
         componentTable!.delegate = self
+    }
+    
+    @IBAction func onRatingStep(sender: UIStepper) {
+        let rating = Int16(sender.value)
+        if rating < 0 {
+            sender.value = 0
+        } else if rating > 5 {
+            sender.value = 5
+        } else {
+            recipe!.rating = rating
+            ratingView!.rating = Int(rating)
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
