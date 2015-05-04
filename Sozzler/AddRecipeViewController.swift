@@ -5,6 +5,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
 
     @IBOutlet weak var recipeName: UITextField!
     @IBOutlet weak var componentTable: UITableView!
+    @IBOutlet weak var componentTableHeight: NSLayoutConstraint!
 
     @IBOutlet weak var ratingView: RatingView!
     @IBOutlet weak var recipeText: UITextView!
@@ -13,7 +14,6 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var added = false
     var recipe: Recipe?
-    var components: [Component] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +26,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         recipeText.text = recipeTextPlaceholder
         recipeText.textColor = UIColor.lightGrayColor()
         recipeText.delegate = self
+        resizeComponentsTable()
     }
     
     @IBAction func onRatingStep(sender: UIStepper) {
@@ -58,39 +59,51 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
 
+    func resizeComponentsTable() {
+        let height = CGFloat(min(44*6, max(44, componentTable.contentSize.height))) // FIXME: wtf magic number
+        componentTableHeight.constant = height
+        componentTable.setNeedsUpdateConstraints()
+        componentTable.scrollToRowAtIndexPath(NSIndexPath(forItem: recipe!.components.count, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+    }
+
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return components.count + 1
+        return recipe!.components.count + 1
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell
         
-        if indexPath.row == components.count {
+        if indexPath.row == recipe!.components.count {
             cell = componentTable.dequeueReusableCellWithIdentifier("addComponentCell") as! UITableViewCell
         } else {
             cell = componentTable.dequeueReusableCellWithIdentifier("componentCell") as! UITableViewCell
-            cell.textLabel!.text = components[indexPath.row].string
+            cell.textLabel!.text = recipe!.components.allObjects[indexPath.row].string
         }
-        
-//        recipeComponentTableView.sizeToFit()
         
         return cell
     }
 
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
-            let component = self.components.removeAtIndex(indexPath.row)
-
+            let component = self.recipe!.components.allObjects[indexPath.row] as! Component
+            
+            self.recipe!.components.removeObject(component)
+            
             CoreDataHelper.delete(component)
+            
             self.componentTable.reloadData()
-
+            self.resizeComponentsTable()
+            
             tableView.editing = false
         }
         
         return [ deleteAction ]
     }
 
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return indexPath.row < recipe!.components.count
+    }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         // even if it does nothing this needs to be here if we want to get a delete event
@@ -125,10 +138,10 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
                 let quantity_d = Int16(vc.quantity_f![1])
                 let quantity_n = Int16((vc.quantity_f![1] * vc.quantity_i!) + vc.quantity_f![0])
                 
-                let c = Component.create(quantity_n, quantity_d: quantity_d, unit: unit, ingredient: vc.ingredient!, recipe: recipe!)
-                components.append(c)
+                Component.create(quantity_n, quantity_d: quantity_d, unit: unit, ingredient: vc.ingredient!, recipe: recipe!)
                 
                 componentTable.reloadData()
+                resizeComponentsTable()
             }
         }
     }

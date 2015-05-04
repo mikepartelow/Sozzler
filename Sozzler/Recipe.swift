@@ -8,7 +8,7 @@ class Recipe: NSManagedObject {
     @NSManaged var rating: Int16
     @NSManaged var text: String
     @NSManaged var component_count: Int16
-    @NSManaged var components: NSSet
+    @NSManaged var components: NSMutableSet
 }
 
 // querying

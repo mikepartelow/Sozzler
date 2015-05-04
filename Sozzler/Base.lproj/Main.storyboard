@@ -210,7 +210,7 @@
                                     <action selector="onRatingStep:" destination="vvM-8B-AZE" eventType="valueChanged" id="ZLo-dB-3CE"/>
                                 </connections>
                             </stepper>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Cme-xI-olH" userLabel="Component Table">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Cme-xI-olH" userLabel="Component Table">
                                 <rect key="frame" x="16" y="139" width="568" height="196"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -243,7 +243,7 @@
                                 </prototypes>
                             </tableView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="olF-dE-YVU">
-                                <rect key="frame" x="16" y="335" width="584" height="265"/>
+                                <rect key="frame" x="16" y="343" width="584" height="257"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -261,7 +261,7 @@
                             <constraint firstItem="3GR-CX-vSj" firstAttribute="leading" secondItem="wuf-he-hcg" secondAttribute="leadingMargin" id="EBI-c4-qsJ"/>
                             <constraint firstAttribute="trailing" secondItem="g3e-4w-VJt" secondAttribute="trailing" constant="307" id="Ew3-zU-RLn"/>
                             <constraint firstItem="Cme-xI-olH" firstAttribute="trailing" secondItem="wuf-he-hcg" secondAttribute="trailingMargin" id="Ffe-8M-1uh"/>
-                            <constraint firstItem="olF-dE-YVU" firstAttribute="top" secondItem="Cme-xI-olH" secondAttribute="bottom" id="Gyw-Xt-hDH"/>
+                            <constraint firstItem="olF-dE-YVU" firstAttribute="top" secondItem="Cme-xI-olH" secondAttribute="bottom" constant="8" id="Gyw-Xt-hDH"/>
                             <constraint firstItem="Cme-xI-olH" firstAttribute="leading" secondItem="wuf-he-hcg" secondAttribute="leadingMargin" id="Gz0-lw-TDS"/>
                             <constraint firstItem="ywy-eo-ixU" firstAttribute="centerY" secondItem="vEj-9E-ccq" secondAttribute="centerY" constant="-1.5" id="IeP-1a-78G"/>
                             <constraint firstItem="wd7-gC-8gE" firstAttribute="top" secondItem="Cme-xI-olH" secondAttribute="bottom" constant="8" id="KZ0-Z1-HPo"/>
@@ -316,6 +316,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="componentTable" destination="Cme-xI-olH" id="zTb-N8-1tD"/>
+                        <outlet property="componentTableHeight" destination="95H-Z3-VWq" id="ejN-Tn-AuW"/>
                         <outlet property="ratingView" destination="g3e-4w-VJt" id="oDX-eK-giK"/>
                         <outlet property="recipeName" destination="vEj-9E-ccq" id="vSL-rU-LuP"/>
                         <outlet property="recipeText" destination="olF-dE-YVU" id="gIa-pu-9Eb"/>
@@ -511,10 +512,10 @@
             </objects>
             <point key="canvasLocation" x="1902" y="1990"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Add Ingredient To Component Nav-->
         <scene sceneID="5Pe-8W-CYh">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QrR-so-p0U" sceneMemberID="viewController">
+                <navigationController title="Add Ingredient To Component Nav" automaticallyAdjustsScrollViewInsets="NO" id="QrR-so-p0U" userLabel="Add Ingredient To Component Nav" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cTm-Sh-JzW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -529,10 +530,10 @@
             </objects>
             <point key="canvasLocation" x="4229" y="1234"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Choose Quantity Nav-->
         <scene sceneID="LBI-Rc-2xo">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="o0i-Js-DSq" sceneMemberID="viewController">
+                <navigationController title="Choose Quantity Nav" automaticallyAdjustsScrollViewInsets="NO" id="o0i-Js-DSq" userLabel="Choose Quantity Nav" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Zv8-dt-1cI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
