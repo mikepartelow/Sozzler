@@ -1,12 +1,15 @@
 import UIKit
 
-class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
     let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
 
     @IBOutlet weak var recipeName: UITextField!
     @IBOutlet weak var componentTable: UITableView!
 
     @IBOutlet weak var ratingView: RatingView!
+    @IBOutlet weak var recipeText: UITextView!
+    
+    let recipeTextPlaceholder = "Stir with ice, strain into chilled rocks glass."
     
     var added = false
     var recipe: Recipe?
@@ -19,6 +22,10 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
 
         componentTable!.dataSource = self
         componentTable!.delegate = self
+        
+        recipeText.text = recipeTextPlaceholder
+        recipeText.textColor = UIColor.lightGrayColor()
+        recipeText.delegate = self
     }
     
     @IBAction func onRatingStep(sender: UIStepper) {
@@ -32,6 +39,25 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             ratingView!.rating = Int(rating)
         }
     }
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        if textView == recipeText {
+            if recipeText!.text == recipeTextPlaceholder {
+                recipeText!.text = ""
+                recipeText!.textColor = UIColor.blackColor()
+            }
+        }
+    }
+
+    func textViewDidEndEditing(textView: UITextView) {
+        if textView == recipeText {
+            if recipeText!.text.isEmpty {
+                recipeText!.text = recipeTextPlaceholder
+                recipeText!.textColor = UIColor.lightGrayColor()
+            }
+        }
+    }
+
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return components.count + 1
@@ -72,6 +98,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
 
     @IBAction func onDone(sender: UIBarButtonItem) {
         recipe!.name = recipeName!.text
+        recipe!.text = recipeText!.text
         
         var error: NSError?
         if moc.save(&error) {
