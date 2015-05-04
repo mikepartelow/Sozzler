@@ -18,6 +18,7 @@
 		400BF0D71AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400BF0D61AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift */; };
 		4029C9071AED341300D5F0C9 /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029C9061AED341300D5F0C9 /* DataViewController.swift */; };
 		4029C9091AED3AB300D5F0C9 /* RecipeSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029C9081AED3AB300D5F0C9 /* RecipeSource.swift */; };
+		409480AA1AF838A100543FFB /* EditRecipeNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409480A91AF838A100543FFB /* EditRecipeNavViewController.swift */; };
 		40B643EF1AE8C17300EEBBCA /* RecipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */; };
 		40B643F41AE8C35400EEBBCA /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F01AE8C35300EEBBCA /* Ingredient.swift */; };
 		40B643F51AE8C35400EEBBCA /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F11AE8C35300EEBBCA /* Unit.swift */; };
@@ -59,6 +60,7 @@
 		400BF0D61AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuantityToComponentViewController.swift; sourceTree = "<group>"; };
 		4029C9061AED341300D5F0C9 /* DataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		4029C9081AED3AB300D5F0C9 /* RecipeSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeSource.swift; sourceTree = "<group>"; };
+		409480A91AF838A100543FFB /* EditRecipeNavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditRecipeNavViewController.swift; sourceTree = "<group>"; };
 		40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTableViewController.swift; sourceTree = "<group>"; };
 		40B643F01AE8C35300EEBBCA /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		40B643F11AE8C35300EEBBCA /* Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
@@ -121,32 +123,33 @@
 		40F65BAA1AE8BAE000D15898 /* Sozzler */ = {
 			isa = PBXGroup;
 			children = (
-				400603111AEC98CE00A11957 /* RecipeCell.swift */,
-				400603121AEC98CE00A11957 /* RecipeCell.xib */,
 				400832B11AEA098800112198 /* AddIngredientToComponentViewController.swift */,
-				40F65BAD1AE8BAE000D15898 /* AppDelegate.swift */,
-				40B643F01AE8C35300EEBBCA /* Ingredient.swift */,
-				40B643F11AE8C35300EEBBCA /* Unit.swift */,
-				40B643F21AE8C35300EEBBCA /* Recipe.swift */,
-				400603151AECA1A600A11957 /* RatingView.xib */,
-				400603171AECA1BC00A11957 /* RatingView.swift */,
-				40DC56671AEC669500449B8A /* IngredientTableViewController.swift */,
-				40B643F31AE8C35300EEBBCA /* Component.swift */,
-				40DC56691AEC730E00449B8A /* RecipeTableNavViewController.swift */,
-				40F65BB21AE8BAE000D15898 /* ViewController.swift */,
-				40F65BB41AE8BAE000D15898 /* Main.storyboard */,
 				400BF0D61AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift */,
 				40C99BE91AE9455C00F197C9 /* AddRecipeViewController.swift */,
+				40F65BAD1AE8BAE000D15898 /* AppDelegate.swift */,
+				40B643F31AE8C35300EEBBCA /* Component.swift */,
 				40B643F81AE8C48200EEBBCA /* CoreDataHelper.swift */,
-				40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */,
+				4029C9061AED341300D5F0C9 /* DataViewController.swift */,
 				40F65BB71AE8BAE000D15898 /* Images.xcassets */,
+				40B643F01AE8C35300EEBBCA /* Ingredient.swift */,
+				40DC56671AEC669500449B8A /* IngredientTableViewController.swift */,
 				40F65BB91AE8BAE000D15898 /* LaunchScreen.xib */,
+				40F65BB41AE8BAE000D15898 /* Main.storyboard */,
+				400603171AECA1BC00A11957 /* RatingView.swift */,
+				400603151AECA1A600A11957 /* RatingView.xib */,
+				40B643F21AE8C35300EEBBCA /* Recipe.swift */,
+				400603111AEC98CE00A11957 /* RecipeCell.swift */,
+				400603121AEC98CE00A11957 /* RecipeCell.xib */,
+				4029C9081AED3AB300D5F0C9 /* RecipeSource.swift */,
+				40DC56691AEC730E00449B8A /* RecipeTableNavViewController.swift */,
+				40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */,
+				40C99BE71AE92C6500F197C9 /* RecipeViewController.swift */,
 				40F65BAF1AE8BAE000D15898 /* Sozzler.xcdatamodeld */,
 				40F65BAB1AE8BAE000D15898 /* Supporting Files */,
-				40C99BE71AE92C6500F197C9 /* RecipeViewController.swift */,
+				40B643F11AE8C35300EEBBCA /* Unit.swift */,
 				400832AD1AE9F53100112198 /* UserSettings.swift */,
-				4029C9061AED341300D5F0C9 /* DataViewController.swift */,
-				4029C9081AED3AB300D5F0C9 /* RecipeSource.swift */,
+				40F65BB21AE8BAE000D15898 /* ViewController.swift */,
+				409480A91AF838A100543FFB /* EditRecipeNavViewController.swift */,
 			);
 			path = Sozzler;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				40F65BAE1AE8BAE000D15898 /* AppDelegate.swift in Sources */,
 				40C99BEA1AE9455C00F197C9 /* AddRecipeViewController.swift in Sources */,
 				400BF0D71AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift in Sources */,
+				409480AA1AF838A100543FFB /* EditRecipeNavViewController.swift in Sources */,
 				40F65BB11AE8BAE000D15898 /* Sozzler.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
