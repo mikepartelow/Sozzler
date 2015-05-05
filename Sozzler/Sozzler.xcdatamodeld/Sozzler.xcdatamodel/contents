@@ -3,7 +3,6 @@
     <entity name="Component" representedClassName="Component" syncable="YES">
         <attribute name="quantity_d" attributeType="Integer 16" minValueString="1" syncable="YES"/>
         <attribute name="quantity_n" attributeType="Integer 16" syncable="YES"/>
-        <attribute name="quantity_s" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="ingredient" maxCount="1" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="components" inverseEntity="Ingredient" syncable="YES"/>
         <relationship name="recipe" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="components" inverseEntity="Recipe" syncable="YES"/>
         <relationship name="unit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Unit" syncable="YES"/>
@@ -24,7 +23,7 @@
         <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Component" positionX="-36" positionY="18" width="128" height="135"/>
+        <element name="Component" positionX="-36" positionY="18" width="128" height="120"/>
         <element name="Ingredient" positionX="-54" positionY="0" width="128" height="90"/>
         <element name="Recipe" positionX="-45" positionY="36" width="128" height="120"/>
         <element name="Unit" positionX="-63" positionY="-18" width="128" height="60"/>

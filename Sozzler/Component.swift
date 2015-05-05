@@ -20,13 +20,50 @@ class Component: NSManagedObject, Comparable {
 
     @NSManaged var quantity_d: Int16
     @NSManaged var quantity_n: Int16
-    @NSManaged var quantity_s: String
     @NSManaged var ingredient: Ingredient
     @NSManaged var unit: Unit
     @NSManaged var recipe: Recipe
 
     var string: String {
-        return "\(quantity_n)/\(quantity_d) \(unit.name) \(ingredient.name)"
+        var quantity = ""
+        
+        // FIXME: should be a hash table, obviously
+        
+        if quantity_n > 0 {
+            let whole = quantity_n / quantity_d
+            let rem = quantity_n % quantity_d
+            var frac: String
+            
+            switch quantity_d {
+            case 8:
+                frac = rem == 1 ? "⅛" : "\(rem)/8"
+            case 4:
+                if rem == 1 {
+                    frac = "¼"
+                } else if rem == 3 {
+                    frac = "¾"
+                } else {
+                    frac = "\(rem)/4"
+                }
+            case 3:
+                if rem == 1 {
+                    frac = "⅓"
+                } else if rem == 2 {
+                    frac = "⅔"
+                } else {
+                    frac = "\(rem)/3"
+                }
+            case 2:
+                frac = rem == 1 ? "½" : "\(rem)/2"
+            default:
+                frac = ""
+            }
+            
+            quantity = whole > 0 ? "\(whole) \(frac)" : "\(frac)"
+        }
+        
+        return "\(quantity) \(unit.name) \(ingredient.name)".stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+
     }
     
     class func sorted(components: NSSet) -> [Component] {
