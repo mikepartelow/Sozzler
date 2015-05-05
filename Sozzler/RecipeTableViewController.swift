@@ -110,7 +110,8 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RecipeCell", forIndexPath: indexPath) as! RecipeCell
-        cell.recipe = (frc!.objectAtIndexPath(indexPath) as! Recipe)
+        let recipe = (frc!.objectAtIndexPath(indexPath) as! Recipe)
+        cell.populate(recipe)
         return cell
     }
     
@@ -172,10 +173,11 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
 
         // FIXME: nil seems like a bad idea
         frc!.performFetch(nil)
-        
+
+        tableView.reloadData()
+
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()
-        tableView.reloadData()
         
         shouldRefresh = false
     }
