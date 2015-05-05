@@ -10,6 +10,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var ratingView: RatingView!
     @IBOutlet weak var recipeText: UITextView!
     
+    @IBOutlet weak var ratingStepper: UIStepper!
     let recipeTextPlaceholder = "Stir with ice, strain into chilled rocks glass."
     
     var added = false
@@ -19,7 +20,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         
         if recipe == nil {
-            recipe = Recipe.create("", withRating: 1, withText: "")
+            recipe = Recipe.create("", withRating: 0, withText: "")
             recipeText.text = recipeTextPlaceholder
             recipeText.textColor = UIColor.lightGrayColor()
         } else {
@@ -31,18 +32,14 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         componentTable!.dataSource = self
         componentTable!.delegate = self
         recipeText.delegate = self
+        
+        ratingStepper!.value = Double(recipe!.rating)
     }
     
     @IBAction func onRatingStep(sender: UIStepper) {
         let rating = Int16(sender.value)
-        if rating < 0 {
-            sender.value = 0
-        } else if rating > 5 {
-            sender.value = 5
-        } else {
-            recipe!.rating = rating
-            ratingView!.rating = Int(rating)
-        }
+        recipe!.rating = rating
+        ratingView!.rating = Int(rating)
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
