@@ -129,7 +129,7 @@
                     <navigationItem key="navigationItem" id="nkQ-wf-Pnl">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="3xX-xL-Stq">
                             <connections>
-                                <segue destination="rV2-WU-44v" kind="presentation" id="9fK-Zn-H3d"/>
+                                <segue destination="rV2-WU-44v" kind="presentation" identifier="editRecipe" id="9fK-Zn-H3d"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

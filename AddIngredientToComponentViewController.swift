@@ -46,7 +46,6 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
             
             addQuantityToComponentViewController.ingredient = (frc!.objectAtIndexPath(idx!) as! Ingredient)
         }
-
     }
     
     // FIXME: DRY

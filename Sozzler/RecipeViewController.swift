@@ -24,4 +24,13 @@ class RecipeViewController: UIViewController {
 
         //http://stackoverflow.com/questions/27652334/uitextview-inside-uiscrollview-with-autolayout
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "editRecipe" {
+            let nav = segue.destinationViewController as! UINavigationController
+            let addRecipeViewController = nav.topViewController as! AddRecipeViewController
+            
+            addRecipeViewController.recipe = recipe
+        }
+    }
 }

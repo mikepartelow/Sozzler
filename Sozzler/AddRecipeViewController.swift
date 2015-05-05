@@ -18,15 +18,19 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        recipe = Recipe.create("", withRating: 1, withText: "")
+        if recipe == nil {
+            recipe = Recipe.create("", withRating: 1, withText: "")
+            recipeText.text = recipeTextPlaceholder
+            recipeText.textColor = UIColor.lightGrayColor()
+        } else {
+            recipeName!.text = recipe!.name
+            recipeText!.text = recipe!.text
+            ratingView!.rating = Int(recipe!.rating)
+        }
 
         componentTable!.dataSource = self
         componentTable!.delegate = self
-        
-        recipeText.text = recipeTextPlaceholder
-        recipeText.textColor = UIColor.lightGrayColor()
         recipeText.delegate = self
-        resizeComponentsTable()
     }
     
     @IBAction func onRatingStep(sender: UIStepper) {
@@ -60,10 +64,11 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
     func resizeComponentsTable() {
-        let height = CGFloat(min(44*6, max(44, componentTable.contentSize.height))) // FIXME: wtf magic number
+        NSLog("\(componentTable.contentSize.height)")
+        let height = CGFloat(min(44*8, max(44, componentTable.contentSize.height))) // FIXME: wtf magic number
         componentTableHeight.constant = height
         componentTable.setNeedsUpdateConstraints()
-        componentTable.scrollToRowAtIndexPath(NSIndexPath(forItem: recipe!.components.count, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+        componentTable.scrollToRowAtIndexPath(NSIndexPath(forItem: recipe!.components.count-1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
     }
 
     
@@ -81,6 +86,10 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.textLabel!.text = recipe!.components.allObjects[indexPath.row].string
         }
         
+        // FIXME: not happy with doing this here, very brute force. But anyhwere else and "edit recipe" involves equally ugly contortions.
+        //
+        resizeComponentsTable()
+        
         return cell
     }
 
@@ -93,7 +102,6 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             CoreDataHelper.delete(component)
             
             self.componentTable.reloadData()
-            self.resizeComponentsTable()
             
             tableView.editing = false
         }
@@ -141,7 +149,6 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
                 Component.create(quantity_n, quantity_d: quantity_d, unit: unit, ingredient: vc.ingredient!, recipe: recipe!)
                 
                 componentTable.reloadData()
-                resizeComponentsTable()
             }
         }
     }
