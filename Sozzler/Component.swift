@@ -27,39 +27,25 @@ class Component: NSManagedObject, Comparable {
     var string: String {
         var quantity = ""
         
-        // FIXME: should be a hash table, obviously
-        
         if quantity_n > 0 {
             let whole = quantity_n / quantity_d
             let rem = quantity_n % quantity_d
-            var frac: String
             
-            switch quantity_d {
-            case 8:
-                frac = rem == 1 ? "⅛" : "\(rem)/8"
-            case 4:
-                if rem == 1 {
-                    frac = "¼"
-                } else if rem == 3 {
-                    frac = "¾"
-                } else {
-                    frac = "\(rem)/4"
+            if rem > 0 {
+                let fancyFractions = ["1/8" : "⅛", "1/4" : "¼", "3/4" : "¾", "1/2" : "½", "1/3" : "⅓" , "2/3" : "⅔"]
+                var frac = "\(rem)/\(quantity_d)"
+                if (fancyFractions[frac] != nil) {
+                    frac = fancyFractions[frac]!
                 }
-            case 3:
-                if rem == 1 {
-                    frac = "⅓"
-                } else if rem == 2 {
-                    frac = "⅔"
+            
+                if whole > 0 {
+                    quantity = "\(whole) \(frac)"
                 } else {
-                    frac = "\(rem)/3"
+                    quantity = "\(frac)"
                 }
-            case 2:
-                frac = rem == 1 ? "½" : "\(rem)/2"
-            default:
-                frac = ""
+            } else {
+                quantity = "\(whole)"
             }
-            
-            quantity = whole > 0 ? "\(whole) \(frac)" : "\(frac)"
         }
         
         return "\(quantity) \(unit.name) \(ingredient.name)".stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
