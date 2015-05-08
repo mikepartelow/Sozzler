@@ -70,6 +70,38 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         presentViewController(alert, animated: true, completion: nil)
     }
     
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    }
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
+            let ingredient = self.frc!.objectAtIndexPath(indexPath) as! Ingredient
+
+            if ingredient.recipe_count > 0 {
+                self.errorAlert("Ingredient is used by a recipe", button: "OK")
+            } else {
+                CoreDataHelper.delete(ingredient)
+            
+                var error: NSError?
+                if CoreDataHelper.save(&error) {
+                    self.refresh()
+                } else {
+                    // FIXME:
+                    // alert: could not blah blah
+                    NSLog("Delete Failed!: \(error)")
+                }
+            }
+            
+            tableView.editing = false
+        }
+        
+        return [ deleteAction ]
+    }
+    
     @IBAction func onSort(sender: UIBarButtonItem) {
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         
@@ -117,8 +149,10 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         let ingredient = frc!.objectAtIndexPath(indexPath) as! Ingredient
         
         cell.textLabel!.text = ingredient.name
+        
         let plural = ingredient.recipe_count > 1 ? "s" : ""
         cell.detailTextLabel!.text = "\(ingredient.recipe_count) recipe\(plural)"
+        
         return cell
     }
     

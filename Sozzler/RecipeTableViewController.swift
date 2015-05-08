@@ -132,7 +132,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         
     }
     
-     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
             let recipe = self.frc!.objectAtIndexPath(indexPath) as! Recipe
 
