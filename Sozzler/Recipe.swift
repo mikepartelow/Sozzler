@@ -25,17 +25,21 @@ extension Recipe {
         let sortByRating            = NSSortDescriptor(key: "rating", ascending: false)
         let sortByName              = NSSortDescriptor(key: "name", ascending: true)
         let sortByComponentCount    = NSSortDescriptor(key: "component_count", ascending: false)
+        let sectionNameKeyPath: String
         
         switch app.userSettings.recipeSortOrder {
         case .Rating:
+            sectionNameKeyPath = "rating"
             fetchRequest.sortDescriptors = [sortByRating, sortByName, sortByComponentCount]
         case .Name:
+            sectionNameKeyPath = "name"
             fetchRequest.sortDescriptors = [sortByName, sortByRating, sortByComponentCount]
         case .NumberOfIngredients:
+            sectionNameKeyPath = "component_count"
             fetchRequest.sortDescriptors = [sortByComponentCount, sortByRating, sortByName]
         }
         
-        return CoreDataHelper.fetchedResultsController(fetchRequest)
+        return CoreDataHelper.fetchedResultsController(fetchRequest, sectionNameKeyPath: sectionNameKeyPath)
     }
     
     class func all() -> [Recipe] {

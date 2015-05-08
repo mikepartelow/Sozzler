@@ -114,6 +114,15 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         cell.populate(recipe)
         return cell
     }
+
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
+        return frc!.sectionIndexTitles
+    }
+    
+    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+        return frc!.sectionForSectionIndexTitle(title, atIndex: index)
+    }
+
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true

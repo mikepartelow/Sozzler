@@ -1,9 +1,11 @@
 import UIKit
 import CoreData
 
+// http://stackoverflow.com/questions/2809192/core-data-fetchedresultscontroller-question-what-is-sections-for
+
 class IngredientTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     let userSettings = (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings
-    
+
     var frc: NSFetchedResultsController?
     
     var shouldRefresh = true
@@ -24,7 +26,50 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
             refresh()
         }
     }
+    
+    func errorAlert(title: String, button: String) {
+        var alert = UIAlertController(title: title, message: "", preferredStyle: .Alert)
+        let action = UIAlertAction(title: button, style: .Default) { (action: UIAlertAction!) -> Void in }
+        alert.addAction(action)
+        presentViewController(alert, animated: true, completion: nil)
+    }
 
+    @IBAction func onAdd(sender: UIBarButtonItem) {
+        var alert = UIAlertController(title: "Add Ingredient", message: "", preferredStyle: .Alert)
+        
+        let addAction = UIAlertAction(title: "Add", style: .Default) { (action: UIAlertAction!) -> Void in
+            let textField = alert.textFields![0] as! UITextField
+            let ingredientName = textField.text
+            
+            if let ingredient = Ingredient.find(ingredientName) {
+                self.errorAlert("Ingredient already exists.", button: "Oops")
+            } else {
+                Ingredient.create(ingredientName)
+                
+                var error: NSError?
+                if CoreDataHelper.save(&error) {
+                    self.refresh()
+                } else {
+                    // FIXME:
+                    // alert: could not blah blah
+                    NSLog("Save Failed!: \(error)")
+                }
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in
+        }
+        
+        alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
+            textField.placeholder = "Disgusting Artichoke"
+        }
+        
+        alert.addAction(addAction)
+        alert.addAction(cancelAction)
+        
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func onSort(sender: UIBarButtonItem) {
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         
@@ -59,8 +104,6 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         rtvc.ingredient = frc!.objectAtIndexPath(index) as? Ingredient
     }
     
-    // NSFetchedResultsControllerDelegate
-    //
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return frc!.sections!.count
     }
@@ -74,11 +117,28 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         let ingredient = frc!.objectAtIndexPath(indexPath) as! Ingredient
         
         cell.textLabel!.text = ingredient.name
-        cell.detailTextLabel!.text = "\(ingredient.recipe_count) recipes"
+        let plural = ingredient.recipe_count > 1 ? "s" : ""
+        cell.detailTextLabel!.text = "\(ingredient.recipe_count) recipe\(plural)"
         return cell
     }
-    //
-    // NSFetchedResultsControllerDelegate
+    
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
+        
+        switch userSettings.ingredientSortOrder {
+            case .Name:
+                return frc!.sectionIndexTitles
+            default:
+                return []
+        }
+    }
+    
+    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+        return frc!.sectionForSectionIndexTitle(title, atIndex: index)
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return CGFloat(52)
+    }
     
     // FIXME: DRY
     func refresh() {

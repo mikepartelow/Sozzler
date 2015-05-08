@@ -77,10 +77,10 @@ class CoreDataHelper {
         moc.deleteObject(obj)
     }
     
-    class func fetchedResultsController(fetchRequest: NSFetchRequest) -> NSFetchedResultsController {
+    class func fetchedResultsController(fetchRequest: NSFetchRequest, sectionNameKeyPath: String? = nil) -> NSFetchedResultsController {
         let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
 
-        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: sectionNameKeyPath, cacheName: nil)
     }
     
     class func factoryReset() {

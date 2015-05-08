@@ -35,8 +35,14 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
         
         return cell
     }
-    //
-    // NSFetchedResultsControllerDelegate
+
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
+        return frc!.sectionIndexTitles
+    }
+    
+    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+        return frc!.sectionForSectionIndexTitle(title, atIndex: index)
+    }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addQuantityToComponent" {

@@ -196,7 +196,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vEj-9E-ccq">
-                                <rect key="frame" x="70" y="29" width="506" height="21"/>
+                                <rect key="frame" x="70" y="28" width="506" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -283,7 +283,7 @@
                             <constraint firstItem="Cme-xI-olH" firstAttribute="trailing" secondItem="wuf-he-hcg" secondAttribute="trailingMargin" id="Ffe-8M-1uh"/>
                             <constraint firstItem="olF-dE-YVU" firstAttribute="top" secondItem="Cme-xI-olH" secondAttribute="bottom" constant="8" id="Gyw-Xt-hDH"/>
                             <constraint firstItem="Cme-xI-olH" firstAttribute="leading" secondItem="wuf-he-hcg" secondAttribute="leadingMargin" id="Gz0-lw-TDS"/>
-                            <constraint firstItem="ywy-eo-ixU" firstAttribute="centerY" secondItem="vEj-9E-ccq" secondAttribute="centerY" constant="-1.5" id="IeP-1a-78G"/>
+                            <constraint firstItem="ywy-eo-ixU" firstAttribute="centerY" secondItem="vEj-9E-ccq" secondAttribute="centerY" id="IeP-1a-78G"/>
                             <constraint firstItem="wd7-gC-8gE" firstAttribute="top" secondItem="Cme-xI-olH" secondAttribute="bottom" constant="8" id="KZ0-Z1-HPo"/>
                             <constraint firstItem="yRS-XK-Thg" firstAttribute="top" secondItem="3GR-CX-vSj" secondAttribute="bottom" constant="8" id="PWu-fA-uIT"/>
                             <constraint firstItem="B0l-nM-rdb" firstAttribute="leading" secondItem="g3e-4w-VJt" secondAttribute="trailing" constant="16" id="Qen-g2-j6p"/>
@@ -309,12 +309,12 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="mN0-3z-wpw"/>
+                                <exclude reference="ZLg-Gb-PHT"/>
+                                <exclude reference="fIo-hY-zDo"/>
                                 <exclude reference="2Ct-6g-TPg"/>
                                 <exclude reference="Ew3-zU-RLn"/>
                                 <exclude reference="n1X-Ee-v5t"/>
                                 <exclude reference="xO7-VC-Ouo"/>
-                                <exclude reference="ZLg-Gb-PHT"/>
-                                <exclude reference="fIo-hY-zDo"/>
                                 <exclude reference="dqY-Jb-G0q"/>
                                 <exclude reference="5Se-D9-YIs"/>
                                 <exclude reference="8L8-Gq-Vco"/>
@@ -357,14 +357,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ingredientCell" textLabel="8kQ-Tt-OFd" style="IBUITableViewCellStyleDefault" id="4de-dB-lhp">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ingredientCell" textLabel="8kQ-Tt-OFd" rowHeight="84" style="IBUITableViewCellStyleDefault" id="4de-dB-lhp">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4de-dB-lhp" id="nik-wA-PUc">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8kQ-Tt-OFd">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -595,14 +595,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="IngredientCell" textLabel="xvZ-2M-L0n" detailTextLabel="dW0-oa-BzE" style="IBUITableViewCellStyleSubtitle" id="nBc-qU-9kL">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="IngredientCell" textLabel="xvZ-2M-L0n" detailTextLabel="dW0-oa-BzE" rowHeight="84" style="IBUITableViewCellStyleSubtitle" id="nBc-qU-9kL">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nBc-qU-9kL" id="Zlm-8a-Xmw">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xvZ-2M-L0n">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -628,6 +628,11 @@
                         <barButtonItem key="leftBarButtonItem" title="Sort" id="0oO-LS-QHw">
                             <connections>
                                 <action selector="onSort:" destination="j5N-gx-ycc" id="TeB-Fn-6NX"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="QzI-qs-UHt">
+                            <connections>
+                                <action selector="onAdd:" destination="j5N-gx-ycc" id="hHE-Qh-xos"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -666,7 +671,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bKN-Vy-tL8">
-                                <rect key="frame" x="16" y="64" width="108" height="30"/>
+                                <rect key="frame" x="16" y="64" width="156" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="Export Recipes">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -675,7 +681,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqO-hD-X5O">
-                                <rect key="frame" x="16" y="102" width="182" height="30"/>
+                                <rect key="frame" x="16" y="102" width="267" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="Import Recipes From Web">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -684,7 +691,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cdj-fu-t3F">
-                                <rect key="frame" x="16" y="140" width="162" height="30"/>
+                                <rect key="frame" x="16" y="140" width="231" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="Import Default Recipes">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
