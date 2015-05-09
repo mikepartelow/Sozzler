@@ -11,7 +11,7 @@ class DataViewController: UIViewController, MFMailComposeViewControllerDelegate 
         var composer = MFMailComposeViewController()
         
         composer.mailComposeDelegate = self
-        composer.setSubject("FIXME (name of app) recipes export")
+        composer.setSubject("Sozzler recipes export")
         composer.setMessageBody("my recipes in JSON format", isHTML: true)
 
         // FIXME: set default addressee to "device owner" if there's an API for that
