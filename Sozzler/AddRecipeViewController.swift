@@ -65,7 +65,8 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         let height = CGFloat(min(44*8, max(44, componentTable.contentSize.height))) // FIXME: wtf magic number
         componentTableHeight.constant = height
         componentTable.setNeedsUpdateConstraints()
-        componentTable.scrollToRowAtIndexPath(NSIndexPath(forItem: recipe!.components.count-1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+        // don't change this too much or https://trello.com/c/l4EfQLaI/86-add-9-ingredients-to-recipe-components-table-freaks-out
+        componentTable.scrollToRowAtIndexPath(NSIndexPath(forItem: recipe!.components.count, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
     }
 
     
@@ -85,6 +86,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         
         // FIXME: not happy with doing this here, very brute force. But anyhwere else and "edit recipe" involves equally ugly contortions.
         //
+        // FIXME: this is the cause of https://trello.com/c/l4EfQLaI/86-add-9-ingredients-to-recipe-components-table-freaks-out
         resizeComponentsTable()
         
         return cell

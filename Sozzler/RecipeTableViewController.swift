@@ -116,7 +116,12 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     }
 
     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
-        return frc!.sectionIndexTitles
+        switch userSettings.recipeSortOrder {
+        case .Name, .Rating:
+            return frc!.sectionIndexTitles
+        default:
+            return []
+        }
     }
     
     override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {

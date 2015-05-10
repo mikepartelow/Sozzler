@@ -157,7 +157,6 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
-        
         switch userSettings.ingredientSortOrder {
             case .Name:
                 return frc!.sectionIndexTitles
