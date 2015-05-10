@@ -50,6 +50,10 @@ class DataViewController: UIViewController, MFMailComposeViewControllerDelegate 
 //    }
     
     @IBAction func onImportFromWeb(sender: UIButton) {
+        show modal to get url
+        do progress as described: http://ux.stackexchange.com/questions/28159/is-there-a-standard-iphone-way-of-displaying-an-actionless-confirmation-message
+        
+        
         var alert = UIAlertController(title: "", message: "Imported recipes will replace all existing recipes.", preferredStyle: .Alert)
         
         let doitAction = UIAlertAction(title: "Do it", style: .Destructive) { (action: UIAlertAction!) -> Void in
