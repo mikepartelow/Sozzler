@@ -2,33 +2,43 @@ import UIKit
 
 class WebRecipeImportViewController: UIViewController {
     @IBOutlet weak var url: UITextField!
+    @IBOutlet weak var progress: UIProgressView!
+    @IBOutlet weak var button: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        progress.progress = 0
     }
     
-
     @IBAction func onImport(sender: UIButton) {
 //        status label "fetching data..."
+
 //        do progress as described: http://ux.stackexchange.com/questions/28159/is-there-a-standard-iphone-way-of-displaying-an-actionless-confirmation-message
                 
         var alert = UIAlertController(title: "", message: "Imported recipes will replace all existing recipes.", preferredStyle: .Alert)
         
         let doitAction = UIAlertAction(title: "Do it", style: .Destructive) { (action: UIAlertAction!) -> Void in
+            self.progress.progress += 0.25
+            
             CoreDataHelper.factoryReset()
             
-            // FIXME: need an alert to select URL: http://nshipster.com/uialertcontroller/
-            // FIXME: need a spinner while the import does its thing : http://stackoverflow.com/questions/26881625/how-to-use-mbprogresshud-with-swift : or maybe write own? how hard can it be...
+            self.progress.progress += 0.25
+            
             
 //            "http://sainttoad.com/muddler/recipes.json"
             
             UrlRecipeSource(url: NSURL(string: self.url!.text!)!, completion: { (recipes) -> () in
+                self.progress.progress += 0.50
+
                 // FIXME: handle errors
                 NSLog("\(recipes?.count)")
                 CoreDataHelper.save(nil)
                 
                 NSNotificationCenter.defaultCenter().postNotificationName("data.reset", object: self)
                 
-                // FIXME: tell user it worked
+                self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                    // FIXME: http://stackoverflow.com/questions/24659845/unwind-segue-and-nav-button-items-not-triggering-after-tab-bar-controller-added
+                    self.performSegueWithIdentifier("unwindToRecipes", sender: self)
+                })
             }).fetch()
         }
         

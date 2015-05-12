@@ -564,7 +564,7 @@
                                     <constraint firstAttribute="width" constant="52" id="Zd8-ss-voq"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="http://sainttoad.com/muddler/recipes.json" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1vA-Dt-Rrz">
@@ -572,8 +572,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y1h-jZ-Yoh">
-                                <rect key="frame" x="267" y="120" width="67" height="30"/>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="PHB-Nq-ujb">
+                                <rect key="frame" x="233" y="127" width="150" height="2"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="2" id="d1n-Ht-zGm"/>
+                                </constraints>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y1h-jZ-Yoh">
+                                <rect key="frame" x="267" y="137" width="67" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="67" id="68i-nG-1CF"/>
                                 </constraints>
@@ -588,9 +594,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="y1h-jZ-Yoh" firstAttribute="top" secondItem="PHB-Nq-ujb" secondAttribute="bottom" constant="8" id="1DN-nW-HH0"/>
                             <constraint firstItem="y1h-jZ-Yoh" firstAttribute="top" secondItem="1vA-Dt-Rrz" secondAttribute="bottom" constant="8" id="58h-Mg-CB5"/>
+                            <constraint firstItem="PHB-Nq-ujb" firstAttribute="top" secondItem="gCn-Ot-j85" secondAttribute="bottom" constant="8" id="5IA-pd-ciM"/>
                             <constraint firstAttribute="centerX" secondItem="y1h-jZ-Yoh" secondAttribute="centerX" id="5ai-0u-kah"/>
                             <constraint firstItem="y1h-jZ-Yoh" firstAttribute="top" secondItem="gCn-Ot-j85" secondAttribute="bottom" constant="56" id="91r-Wg-GDG"/>
+                            <constraint firstItem="PHB-Nq-ujb" firstAttribute="leading" secondItem="sHi-rq-OMQ" secondAttribute="leading" constant="8" id="M4I-AW-V2J"/>
+                            <constraint firstItem="PHB-Nq-ujb" firstAttribute="top" secondItem="1vA-Dt-Rrz" secondAttribute="bottom" constant="8" id="MFq-Bl-lXa"/>
                             <constraint firstItem="7aa-qo-1X4" firstAttribute="centerY" secondItem="1vA-Dt-Rrz" secondAttribute="centerY" id="Owg-ne-v6C"/>
                             <constraint firstItem="pST-VT-x1W" firstAttribute="top" secondItem="y1h-jZ-Yoh" secondAttribute="bottom" constant="450" id="b30-If-cM3"/>
                             <constraint firstAttribute="trailing" secondItem="1vA-Dt-Rrz" secondAttribute="trailing" constant="8" id="c9h-3x-zNi"/>
@@ -600,22 +610,31 @@
                             <constraint firstItem="y1h-jZ-Yoh" firstAttribute="leading" secondItem="sHi-rq-OMQ" secondAttribute="leading" constant="277" id="o82-Is-d77"/>
                             <constraint firstItem="1vA-Dt-Rrz" firstAttribute="leading" secondItem="7aa-qo-1X4" secondAttribute="trailing" constant="8" id="pwH-qu-auj"/>
                             <constraint firstItem="1vA-Dt-Rrz" firstAttribute="leading" secondItem="7aa-qo-1X4" secondAttribute="trailing" constant="8" id="qGp-En-KvW"/>
+                            <constraint firstItem="pST-VT-x1W" firstAttribute="top" secondItem="PHB-Nq-ujb" secondAttribute="bottom" constant="8" id="qWv-FD-5XG"/>
+                            <constraint firstAttribute="trailing" secondItem="PHB-Nq-ujb" secondAttribute="trailing" constant="8" id="ujy-UD-Y8C"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="5IA-pd-ciM"/>
+                                <exclude reference="1DN-nW-HH0"/>
                                 <exclude reference="o82-Is-d77"/>
+                                <exclude reference="b30-If-cM3"/>
+                                <exclude reference="qWv-FD-5XG"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Import From Web" id="ACN-oe-KlL">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="70N-Lu-Zww">
                             <connections>
-                                <segue destination="WuK-QJ-b5l" kind="unwind" unwindAction="unwindToData:" id="pD3-93-4rf"/>
+                                <segue destination="WuK-QJ-b5l" kind="unwind" identifier="unwindToData" unwindAction="unwindToData:" id="pD3-93-4rf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="button" destination="y1h-jZ-Yoh" id="sw9-W8-Jg0"/>
+                        <outlet property="progress" destination="PHB-Nq-ujb" id="G6e-AL-EzU"/>
                         <outlet property="url" destination="1vA-Dt-Rrz" id="DDX-LP-sX6"/>
+                        <segue destination="WuK-QJ-b5l" kind="unwind" identifier="unwindToRecipes" unwindAction="unwindToAddRecipe:" id="LYM-bg-fOz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0iV-we-e3t" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -662,7 +681,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="ASp-fc-gEv">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="oo7-Sb-6q1" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBarController" automaticallyAdjustsScrollViewInsets="NO" id="oo7-Sb-6q1" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="bNh-sk-b7n">
