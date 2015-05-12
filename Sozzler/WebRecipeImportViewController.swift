@@ -17,6 +17,9 @@ class WebRecipeImportViewController: UIViewController {
         var alert = UIAlertController(title: "", message: "Imported recipes will replace all existing recipes.", preferredStyle: .Alert)
         
         let doitAction = UIAlertAction(title: "Do it", style: .Destructive) { (action: UIAlertAction!) -> Void in
+            
+            // FIXME: disable controls
+
             self.progress.progress += 0.25
             
             CoreDataHelper.factoryReset()
@@ -27,6 +30,9 @@ class WebRecipeImportViewController: UIViewController {
 //            "http://sainttoad.com/muddler/recipes.json"
             
             UrlRecipeSource(url: NSURL(string: self.url!.text!)!, completion: { (recipes) -> () in
+                
+                // FIXME: do .25 inside fetch() somehow
+                
                 self.progress.progress += 0.50
 
                 // FIXME: handle errors
@@ -34,11 +40,7 @@ class WebRecipeImportViewController: UIViewController {
                 CoreDataHelper.save(nil)
                 
                 NSNotificationCenter.defaultCenter().postNotificationName("data.reset", object: self)
-                
-                self.dismissViewControllerAnimated(true, completion: { () -> Void in
-                    // FIXME: http://stackoverflow.com/questions/24659845/unwind-segue-and-nav-button-items-not-triggering-after-tab-bar-controller-added
-                    self.performSegueWithIdentifier("unwindToRecipes", sender: self)
-                })
+                self.performSegueWithIdentifier("unwindToTabBar", sender: self)
             }).fetch()
         }
         

@@ -635,6 +635,7 @@
                         <outlet property="progress" destination="PHB-Nq-ujb" id="G6e-AL-EzU"/>
                         <outlet property="url" destination="1vA-Dt-Rrz" id="DDX-LP-sX6"/>
                         <segue destination="WuK-QJ-b5l" kind="unwind" identifier="unwindToRecipes" unwindAction="unwindToAddRecipe:" id="LYM-bg-fOz"/>
+                        <segue destination="WuK-QJ-b5l" kind="unwind" identifier="unwindToTabBar" unwindAction="unwindToTabBar:" id="b2X-uj-mOe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0iV-we-e3t" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -678,10 +679,10 @@
             </objects>
             <point key="canvasLocation" x="5737" y="1234"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Sozzler Tab Bar Controller-->
         <scene sceneID="ASp-fc-gEv">
             <objects>
-                <tabBarController storyboardIdentifier="tabBarController" automaticallyAdjustsScrollViewInsets="NO" id="oo7-Sb-6q1" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="oo7-Sb-6q1" customClass="SozzlerTabBarController" customModule="Sozzler" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="bNh-sk-b7n">
