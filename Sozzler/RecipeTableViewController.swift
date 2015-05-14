@@ -116,10 +116,9 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     }
 
     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
-        switch userSettings.recipeSortOrder {
-        case .Name, .Rating:
+        if userSettings.recipeSortOrder == .Name {
             return frc!.sectionIndexTitles
-        default:
+        } else {
             return []
         }
     }
