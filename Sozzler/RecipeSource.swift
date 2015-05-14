@@ -5,9 +5,10 @@ import CoreData
 
 class CannedRecipeSource {
     func splorp() -> [Recipe] {
-        let path = NSBundle.mainBundle().pathForResource("recipes", ofType: "json")
-        let recipesJson = NSData(contentsOfMappedFile: path!)
-        let recipeDicts = NSJSONSerialization.JSONObjectWithData(recipesJson!, options: NSJSONReadingOptions.MutableContainers, error: nil) as! [NSDictionary]
+        let path = NSBundle.mainBundle().pathForResource("recipes", ofType: "json")!
+        let url = NSURL(fileURLWithPath: path)!
+        let recipesJson = NSData(contentsOfURL: url, options: NSDataReadingOptions.DataReadingMappedIfSafe, error: nil)
+        let recipeDicts = NSJSONSerialization.JSONObjectWithData(recipesJson!, options: nil, error: nil) as! [NSDictionary]
         
         // FIXME: error reporting not just filtering
         //
