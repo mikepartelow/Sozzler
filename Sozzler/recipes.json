@@ -114,7 +114,7 @@
          {
             "quantity":"3/4",
             "measure":"oz",
-            "ingredient":"simple syrup (1:1)"
+            "ingredient":"simple syrup"
          },
          {
             "quantity":"3/4",
@@ -146,7 +146,7 @@
          {
             "quantity":"1/2",
             "measure":"oz",
-            "ingredient":"simple syrup (1:1)"
+            "ingredient":"simple syrup"
          },
          {
             "quantity":"1/2",
@@ -232,7 +232,7 @@
          {
             "quantity":"1/2",
             "measure":"oz",
-            "ingredient":"simple syrup (1:1)"
+            "ingredient":"simple syrup"
          },
          {
             "quantity":"2",
@@ -446,7 +446,7 @@
          {
             "quantity":"",
             "measure":"",
-            "ingredient":"shortbread (optional)"
+            "ingredient":"shortbread"
          }
       ],
       "notes":"Stir with ice in a mixing glass, strain into a chilled cocktail glass. Serve with shortbread on the side."
@@ -473,7 +473,7 @@
          {
             "quantity":"1/2",
             "measure":"oz",
-            "ingredient":"simple syrup (1:1)"
+            "ingredient":"simple syrup"
          },
          {
             "quantity":"1",
@@ -510,10 +510,10 @@
          {
             "quantity":"1",
             "measure":"",
-            "ingredient":"maraschino cherry (optional)"
+            "ingredient":"maraschino cherry"
          }
       ],
-      "notes":"In an old fashioned glass, dash the bitters on to the sugar cube. Add the orange wheel and optional cherry. Muddle well. \nFill glass with ice cubes, add bourbon, stir.\n\nReally quite nice with Bulleit."
+      "notes":"In an old fashioned glass, dash the bitters on to the sugar cube. Add the orange wheel and cherry. Muddle well. \nFill glass with ice cubes, add bourbon, stir.\n\nReally quite nice with Bulleit."
    },
    {
       "name":"Bronx Cocktail, Dale's Version",
@@ -542,7 +542,7 @@
          {
             "quantity":"1",
             "measure":"dash",
-            "ingredient":"bitters (optional)"
+            "ingredient":"bitters"
          },
          {
             "quantity":"",
@@ -601,7 +601,7 @@
          {
             "quantity":"1",
             "measure":"oz",
-            "ingredient":"simple syrup (1:1)"
+            "ingredient":"simple syrup"
          },
          {
             "quantity":"3/4",
@@ -611,7 +611,7 @@
          {
             "quantity":"",
             "measure":"",
-            "ingredient":"lime wheel (optional)"
+            "ingredient":"lime wheel"
          }
       ],
       "notes":"Shake with ice, strain into old fashioned glass. Garnish with lime wheel.\n\nGreat with Junipero."
@@ -692,7 +692,7 @@
          {
             "quantity":"1",
             "measure":"oz",
-            "ingredient":"simple syrup (1:1)"
+            "ingredient":"simple syrup"
          },
          {
             "quantity":"3/4",
@@ -795,7 +795,7 @@
          {
             "quantity":"1",
             "measure":"oz",
-            "ingredient":"demerara simple syrup (1:1)"
+            "ingredient":"demerara simple syrup"
          },
          {
             "quantity":"3/4",
@@ -822,7 +822,7 @@
          {
             "quantity":"1/2",
             "measure":"oz",
-            "ingredient":"simple syrup (1:1)"
+            "ingredient":"simple syrup"
          },
          {
             "quantity":"1/8",
@@ -935,7 +935,7 @@
          {
             "quantity":"3/4",
             "measure":"oz",
-            "ingredient":"simple syrup (1:1)"
+            "ingredient":"simple syrup"
          },
          {
             "quantity":"5",
@@ -984,7 +984,7 @@
          {
             "quantity":"1",
             "measure":"oz",
-            "ingredient":"simple syrup (1:1)"
+            "ingredient":"simple syrup"
          },
          {
             "quantity":"2",
@@ -1063,7 +1063,7 @@
          {
             "quantity":"1",
             "measure":"g",
-            "ingredient":"saffron (optional)"
+            "ingredient":"saffron"
          }
       ],
       "notes":"shake with ice, strain into a crushed-ice filled collins glass. lay back, and put your mind on your money."
@@ -1139,7 +1139,7 @@
          {
             "quantity":"3/4",
             "measure":"oz",
-            "ingredient":"simple syrup (1:1)"
+            "ingredient":"simple syrup"
          },
          {
             "quantity":"1/2",
@@ -1235,7 +1235,7 @@
          {
             "quantity":"3/4",
             "measure":"oz",
-            "ingredient":"simple syrup (1:1)"
+            "ingredient":"simple syrup"
          },
          {
             "quantity":"1/4",
@@ -1311,7 +1311,7 @@
          {
             "quantity":"1",
             "measure":"oz",
-            "ingredient":"simple syrup (1:1)"
+            "ingredient":"simple syrup"
          },
          {
             "quantity":"3/4",
@@ -1496,7 +1496,7 @@
          {
             "quantity":"1/4",
             "measure":"oz",
-            "ingredient":"simple syrup (2:1) (optional)"
+            "ingredient":"simple syrup"
          }
       ],
       "notes":"Fill double old fashioned glass with crushed ice. Dump ice and other ingredients into shaker. Shake vigorously. Dump shaker contents into glass.\n\nGarnish with lime shell and spanked mint leaves.\n\nJamaican = Appleton Estates 12\nDemerara = El Dorado 12\nCura\u00e7ao = Senior Orange Colored\nOrgeat = Small Hand Foods"
@@ -1673,7 +1673,7 @@
          {
             "quantity":"1/4",
             "measure":"oz",
-            "ingredient":"agave syrup (optional)"
+            "ingredient":"agave syrup"
          },
          {
             "quantity":"",
@@ -1791,7 +1791,7 @@
          {
             "quantity":"1/2",
             "measure":"oz",
-            "ingredient":"simple syrup (1:1)"
+            "ingredient":"simple syrup"
          },
          {
             "quantity":"5",
@@ -1924,7 +1924,7 @@
          {
             "quantity":"",
             "measure":"",
-            "ingredient":"orange slice (optional)"
+            "ingredient":"orange slice"
          },
          {
             "quantity":"",
@@ -2086,10 +2086,10 @@
          {
             "quantity":"1",
             "measure":"",
-            "ingredient":"maraschino cherry (optional)"
+            "ingredient":"maraschino cherry"
          }
       ],
-      "notes":"In an old fashioned glass, dash the bitters on to the sugar cube. Add the orange slice and optional cherry. Muddle well. \nFill glass with ice cubes, add rye, stir.\n\nReally quite nice with Old West Rendezvous Rye."
+      "notes":"In an old fashioned glass, dash the bitters on to the sugar cube. Add the orange slice and cherry. Muddle well. \nFill glass with ice cubes, add rye, stir.\n\nReally quite nice with Old West Rendezvous Rye."
    },
    {
       "name":"Old Flame",
@@ -2123,7 +2123,7 @@
          {
             "quantity":"",
             "measure":"",
-            "ingredient":"orange peel (optional)"
+            "ingredient":"orange peel"
          }
       ],
       "notes":"Shake with ice, strain into a chilled cocktail glass, garnish with flamed orange peel."
@@ -2263,7 +2263,7 @@
          {
             "quantity":"1",
             "measure":"oz",
-            "ingredient":"simple syrup (1:1)"
+            "ingredient":"simple syrup"
          },
          {
             "quantity":"1",
@@ -2359,7 +2359,7 @@
          {
             "quantity":"1/2",
             "measure":"oz",
-            "ingredient":"demerara simple syrup (2:1)"
+            "ingredient":"demerara simple syrup"
          },
          {
             "quantity":"4",
@@ -2460,7 +2460,7 @@
          {
             "quantity":"1",
             "measure":"dash",
-            "ingredient":"bitters (optional)"
+            "ingredient":"bitters"
          },
          {
             "quantity":"",
@@ -2613,7 +2613,7 @@
          {
             "quantity":"3/4",
             "measure":"oz",
-            "ingredient":"simple syrup (1:1)"
+            "ingredient":"simple syrup"
          },
          {
             "quantity":"1",
@@ -2829,7 +2829,7 @@
          {
             "quantity":"1",
             "measure":"oz",
-            "ingredient":"simple syrup (1:1)"
+            "ingredient":"simple syrup"
          },
          {
             "quantity":"3/4",
@@ -2930,7 +2930,7 @@
          {
             "quantity":"1",
             "measure":"oz",
-            "ingredient":"simple syrup (1:1)"
+            "ingredient":"simple syrup"
          },
          {
             "quantity":"3/4",
@@ -2999,7 +2999,7 @@
          {
             "quantity":"1/2",
             "measure":"oz",
-            "ingredient":"simple syrup (1:1)"
+            "ingredient":"simple syrup"
          },
          {
             "quantity":"1",
