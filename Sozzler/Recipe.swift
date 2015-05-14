@@ -77,14 +77,14 @@ extension Recipe {
     class func create(recipeDict: NSDictionary) -> Recipe? {
         let name        = recipeDict["name"]        as! String
         let rating      = recipeDict["rating"]      as! Int
-        let text        = recipeDict["notes"]       as! String
+        let text        = recipeDict["text"]       as! String
         let components  = recipeDict["components"]  as! [NSDictionary]
         
         let recipe = Recipe.create(name, withRating: Int16(rating), withText: text)
         
         for componentDict in components {
             let quantity        = componentDict["quantity"]     as! String
-            let unitName        = componentDict["measure"]      as! String
+            let unitName        = componentDict["unit"]         as! String
             let ingredientName  = componentDict["ingredient"]   as! String
             
             let unit            = Unit.findOrCreate(unitName)
