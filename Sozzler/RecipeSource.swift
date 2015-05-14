@@ -5,68 +5,9 @@ import CoreData
 
 class CannedRecipeSource {
     func splorp() -> [Recipe] {
-        let recipeDicts = [
-            [
-                "name"          : "Disgusting Artichoke",
-                "rating"        : 5,
-                "notes"         : "really not as bad as it sounds",
-                "components"    : [
-                    [
-                        "quantity"      : "1/2",
-                        "measure"       : "oz",
-                        "ingredient"    : "artichoke"
-                    ],
-                    [
-                        "quantity"      : "2",
-                        "measure"       : "oz",
-                        "ingredient"    : "disgusting"
-                    ]
-                ]
-            ],
-
-            [
-                "name"          : "Disgusting Asparagus",
-                "rating"        : 4,
-                "notes"         : "worse than it sounds\n" +
-                                  "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                                  "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "lots of text with lots of width blah blah blahblahblahbalhblahbalbhalbha\n" +
-                    "LAST LINE HERE",
-                
-                "components"    : [
-                    [
-                        "quantity"      : "1",
-                        "measure"       : "oz",
-                        "ingredient"    : "asparagus"
-                    ],
-                    [
-                        "quantity"      : "1/2",
-                        "measure"       : "oz",
-                        "ingredient"    : "lemon juice"
-                    ]
-                ]
-            ]
-            
-        ]
+        let path = NSBundle.mainBundle().pathForResource("recipes", ofType: "json")
+        let recipesJson = NSData(contentsOfMappedFile: path!)
+        let recipeDicts = NSJSONSerialization.JSONObjectWithData(recipesJson!, options: NSJSONReadingOptions.MutableContainers, error: nil) as! [NSDictionary]
         
         // FIXME: error reporting not just filtering
         //

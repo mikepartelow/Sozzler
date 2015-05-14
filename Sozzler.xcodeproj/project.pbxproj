@@ -30,6 +30,7 @@
 		40C99BEA1AE9455C00F197C9 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C99BE91AE9455C00F197C9 /* AddRecipeViewController.swift */; };
 		40DC56681AEC669500449B8A /* IngredientTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DC56671AEC669500449B8A /* IngredientTableViewController.swift */; };
 		40DC566A1AEC730E00449B8A /* RecipeTableNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DC56691AEC730E00449B8A /* RecipeTableNavViewController.swift */; };
+		40F136E71B04547F00C51EAA /* recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 40F136E61B04547F00C51EAA /* recipes.json */; };
 		40F64AE21B01AD0C006D2223 /* WebRecipeImportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F64AE11B01AD0C006D2223 /* WebRecipeImportViewController.swift */; };
 		40F65BAE1AE8BAE000D15898 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F65BAD1AE8BAE000D15898 /* AppDelegate.swift */; };
 		40F65BB11AE8BAE000D15898 /* Sozzler.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40F65BAF1AE8BAE000D15898 /* Sozzler.xcdatamodeld */; };
@@ -74,6 +75,7 @@
 		40C99BE91AE9455C00F197C9 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
 		40DC56671AEC669500449B8A /* IngredientTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientTableViewController.swift; sourceTree = "<group>"; };
 		40DC56691AEC730E00449B8A /* RecipeTableNavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTableNavViewController.swift; sourceTree = "<group>"; };
+		40F136E61B04547F00C51EAA /* recipes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recipes.json; sourceTree = "<group>"; };
 		40F64AE11B01AD0C006D2223 /* WebRecipeImportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebRecipeImportViewController.swift; sourceTree = "<group>"; };
 		40F65BA81AE8BAE000D15898 /* Sozzler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sozzler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40F65BAC1AE8BAE000D15898 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				4006030D1AEC964600A11957 /* olive-off.png */,
 				4006030E1AEC964600A11957 /* olive-on.png */,
 				40F65BAC1AE8BAE000D15898 /* Info.plist */,
+				40F136E61B04547F00C51EAA /* recipes.json */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				400603161AECA1A600A11957 /* RatingView.xib in Resources */,
 				40F65BB81AE8BAE000D15898 /* Images.xcassets in Resources */,
 				4006030F1AEC964600A11957 /* olive-off.png in Resources */,
+				40F136E71B04547F00C51EAA /* recipes.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

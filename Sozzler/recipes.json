@@ -1,0 +1,49 @@
+ [
+  {
+  "created_at":"2014-12-03T18:00:17Z",
+  "id":99,
+  "name":"3 by 5",
+  "rating":4,
+  "text":"2 oz Campari sorbet\n3/4 oz lime juice\n3/4 oz creme de cassis \n\nShake into chilled cocktail glass",
+  "updated_at":"2014-12-03T18:00:17Z",
+  "components":[
+                {
+                "quantity":"2",
+                "measure":"oz",
+                "ingredient":"Campari sorbet"
+                },
+                {
+                "quantity":"3/4",
+                "measure":"oz",
+                "ingredient":"lime juice"
+                },
+                {
+                "quantity":"3/4",
+                "measure":"oz",
+                "ingredient":"creme de cassis"
+                }
+                ],
+  "notes":"Shake into chilled cocktail glass"
+  },
+{
+  "created_at":"2014-08-13T18:45:57Z",
+  "id":97,
+  "name":"Yakuza Godfather (Oyabun)",
+  "rating":4,
+  "text":"1 1/2 ounce Yamazaki 12\n3/4 ounce amaretto\n\nBuild over ice in a rocks glass.  Stir.",
+  "updated_at":"2014-08-13T18:45:57Z",
+  "components":[
+                {
+                "quantity":"1 1/2",
+                "measure":"oz",
+                "ingredient":"Yamazaki 12"
+                },
+                {
+                "quantity":"3/4",
+                "measure":"oz",
+                "ingredient":"amaretto"
+                }
+                ],
+  "notes":"Build over ice in a rocks glass. Stir."
+  }
+  ]
