@@ -1,5 +1,6 @@
 import UIKit
 import MessageUI
+import AddressBook
 
 class DataViewController: UIViewController, MFMailComposeViewControllerDelegate {
 
@@ -13,8 +14,6 @@ class DataViewController: UIViewController, MFMailComposeViewControllerDelegate 
         composer.mailComposeDelegate = self
         composer.setSubject("Sozzler recipes export")
         composer.setMessageBody("my recipes in JSON format", isHTML: true)
-
-        // FIXME: set default addressee to "device owner" if there's an API for that
         
         let recipeDicts = map(Recipe.all(), { NSMutableDictionary(recipe: $0 as Recipe) })
         let options = NSJSONWritingOptions.PrettyPrinted
