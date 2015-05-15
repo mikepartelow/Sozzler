@@ -42,6 +42,8 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
 
         tableView.tableHeaderView = searchController!.searchBar
         searchController!.searchBar.sizeToFit()
+
+        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "data.reset", object: nil)
     }
@@ -71,19 +73,12 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             self.refresh()
         })
 
-//        let sortByNumberOfIngredients = UIAlertAction(title: "Sort by Number of Ingredients", style: .Default, handler: {
-//            (alert: UIAlertAction!) -> Void in
-//            self.userSettings.recipeSortOrder = .NumberOfIngredients
-//            self.refresh()
-//        })
-
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
             (alert: UIAlertAction!) -> Void in
         })
 
         sheet.addAction(sortByName)
         sheet.addAction(sortByRating)        
-//        sheet.addAction(sortByNumberOfIngredients)
         sheet.addAction(cancel)
 
         presentViewController(sheet, animated: true, completion: nil)
@@ -230,16 +225,4 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         searchText = searchController.searchBar.text
         refresh()
     }
-
-//    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
-//        // do the filter
-////        http://useyourloaf.com/blog/2015/02/16/updating-to-the-ios-8-search-controller.html
-////        http://www.raywenderlich.com/76519/add-table-view-search-swift
-//        // http://shrikar.com/swift-ios-tutorial-uisearchbar-and-uisearchbardelegate/
-//        
-    
-    // https://github.com/kharrison/CodeExamples/blob/master/WorldFacts/WorldFacts/UYLCountryTableViewController.m
-//        return true
-    // 
-//    }
 }
