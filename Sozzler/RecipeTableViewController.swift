@@ -1,13 +1,15 @@
 import UIKit
 import CoreData
 
-class RecipeTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
+class RecipeTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchBarDelegate {
     let userSettings = (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings
     
     var frc: NSFetchedResultsController?
     var ingredient: Ingredient?
     
     var shouldRefresh = true
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     required init!(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
@@ -16,14 +18,18 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             CannedRecipeSource().splorp()
             CoreDataHelper.save(nil)
         }
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
         tableView.delegate = self
         tableView.dataSource = self
+        
+        searchBar.delegate = self
 
+        
         // FIXME: use this to add the Sort button when we're root view controller, but not when we're coming from IngredientTable
         //        IngredientTable should display Back
 
@@ -105,7 +111,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return frc!.sections![section].numberOfObjects!
+        return frc!.sections![section].numberOfObjects! + 1
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -117,9 +123,9 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
 
     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
         if userSettings.recipeSortOrder == .Name {
-            return frc!.sectionIndexTitles
+            return [ UITableViewIndexSearch ] + frc!.sectionIndexTitles
         } else {
-            return []
+            return [ UITableViewIndexSearch ]
         }
     }
     
@@ -177,7 +183,11 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             predicate = NSPredicate(format: "ANY components.ingredient.name == %@", ingredient!.name)
             navigationItem.title = "Recipes with \(ingredient!.name)"
         } else {
-            predicate = nil
+            if searchBar!.text != "" {
+                predicate = NSPredicate(format: "name contains[c] %@", searchBar!.text)
+            } else {
+                predicate = nil
+            }
             navigationItem.title = "Recipes by \(userSettings.recipeSortOrderName)"
         }
         
@@ -204,10 +214,34 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         }
     }
 
-    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
-        // do the filter
-        http://useyourloaf.com/blog/2015/02/16/updating-to-the-ios-8-search-controller.html
-        http://www.raywenderlich.com/76519/add-table-view-search-swift
-        return true
+//    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+//        searchActive = true;
+//    }
+//    
+//    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+//        searchActive = false;
+//    }
+//    
+//    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+//        searchActive = false;
+//    }
+//    
+//    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+//        searchActive = false;
+//    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        NSLog("filter: \(searchText)")
+        refresh()
     }
+
+//    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
+//        // do the filter
+////        http://useyourloaf.com/blog/2015/02/16/updating-to-the-ios-8-search-controller.html
+////        http://www.raywenderlich.com/76519/add-table-view-search-swift
+//        // http://shrikar.com/swift-ios-tutorial-uisearchbar-and-uisearchbardelegate/
+//        
+//        return true
+    // 
+//    }
 }
