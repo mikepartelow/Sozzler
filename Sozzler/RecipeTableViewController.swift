@@ -1,7 +1,7 @@
 import UIKit
 import CoreData
 
-class RecipeTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchBarDelegate {
+class RecipeTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     let userSettings = (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings
     
     var frc: NSFetchedResultsController?
@@ -9,11 +9,14 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     
     var shouldRefresh = true
     
-    @IBOutlet weak var searchBar: UISearchBar!
+    var searchController: UISearchController?
+    
+    var searchText = ""
     
     required init!(coder aDecoder: NSCoder!) {
+        searchController = UISearchController(searchResultsController: nil)
         super.init(coder: aDecoder)
-
+        
         if Recipe.count() == 0 {
             CannedRecipeSource().splorp()
             CoreDataHelper.save(nil)
@@ -22,21 +25,23 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         tableView.delegate = self
         tableView.dataSource = self
-        
-        searchBar.delegate = self
-
-        
-        // FIXME: use this to add the Sort button when we're root view controller, but not when we're coming from IngredientTable
-        //        IngredientTable should display Back
-
-        //        navigationItem.leftBarButtonItem =
 
         tableView.registerNib(UINib(nibName: "RecipeCell", bundle: nil), forCellReuseIdentifier: "RecipeCell")
         tableView.rowHeight = UITableViewAutomaticDimension
+
+        definesPresentationContext = true
+        refresh()
+
+        searchController = UISearchController(searchResultsController: nil)
+        searchController!.searchResultsUpdater = self
+        searchController!.searchBar.delegate = self
+        searchController!.dimsBackgroundDuringPresentation = false
+
+        tableView.tableHeaderView = searchController!.searchBar
+        searchController!.searchBar.sizeToFit()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "data.reset", object: nil)
     }
@@ -86,7 +91,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let navController = segue.destinationViewController as! UINavigationController
-        
+                
         if segue.identifier == "recipeDetails" {
             let rvc = navController.topViewController! as! RecipeViewController
             let index = tableView.indexPathForSelectedRow()!
@@ -111,7 +116,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return frc!.sections![section].numberOfObjects! + 1
+        return frc!.sections![section].numberOfObjects! // + 1
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -123,9 +128,10 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
 
     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
         if userSettings.recipeSortOrder == .Name {
-            return [ UITableViewIndexSearch ] + frc!.sectionIndexTitles
+//            return [ UITableViewIndexSearch ] + frc!.sectionIndexTitles
+            return frc!.sectionIndexTitles
         } else {
-            return [ UITableViewIndexSearch ]
+            return [ ] //UITableViewIndexSearch ]
         }
     }
     
@@ -170,21 +176,14 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         return [ deleteAction ]
     }
 
-    //
-    // NSFetchedResultsControllerDelegate
-
-    // FIXME: DRY
     func refresh() {
-        // FIXME: progress indicator is needed especially during onSort()
-        //        modal grey translucent alert with swriy : howto?
-
         let predicate: NSPredicate?
         if ingredient != nil {
             predicate = NSPredicate(format: "ANY components.ingredient.name == %@", ingredient!.name)
             navigationItem.title = "Recipes with \(ingredient!.name)"
         } else {
-            if searchBar!.text != "" {
-                predicate = NSPredicate(format: "name contains[c] %@", searchBar!.text)
+            if searchText != "" {
+                predicate = NSPredicate(format: "name contains[c] %@", searchController!.searchBar.text)
             } else {
                 predicate = nil
             }
@@ -201,6 +200,10 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
 
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()
+
+        searchController!.searchBar.searchBarStyle = UISearchBarStyle.Minimal
+        searchController!.searchBar.sizeToFit()
+
         
         shouldRefresh = false
     }
@@ -212,6 +215,11 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
                 refresh()
             }
         }
+    }
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        searchText = searchController.searchBar.text
+        refresh()
     }
 
 //    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
@@ -230,10 +238,10 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
 //        searchActive = false;
 //    }
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        NSLog("filter: \(searchText)")
-        refresh()
-    }
+//    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+//        NSLog("filter: \(searchText)")
+//        refresh()
+//    }
 
 //    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
 //        // do the filter
@@ -241,6 +249,8 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
 ////        http://www.raywenderlich.com/76519/add-table-view-search-swift
 //        // http://shrikar.com/swift-ios-tutorial-uisearchbar-and-uisearchbardelegate/
 //        
+    
+    // https://github.com/kharrison/CodeExamples/blob/master/WorldFacts/WorldFacts/UYLCountryTableViewController.m
 //        return true
     // 
 //    }
