@@ -115,6 +115,15 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         // even if it does nothing this needs to be here if we want to get a delete event
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "addIngredient" {
+            let index = componentTable.indexPathForSelectedRow()!
+            
+            componentTable.deselectRowAtIndexPath(index, animated: false)
+        }
+    }
+
 
     @IBAction func onDone(sender: UIBarButtonItem) {
         recipe!.name = recipeName!.text
