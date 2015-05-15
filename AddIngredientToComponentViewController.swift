@@ -11,12 +11,8 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
         refresh()
     }
     
-    // NSFetchedResultsControllerDelegate
-    //
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         ingredient = (frc!.objectAtIndexPath(indexPath) as! Ingredient)
-//        performSegueWithIdentifier("unwindToAddRecipe", sender: self)
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

@@ -10,24 +10,17 @@ class Ingredient: NSManagedObject {
 
     class func fancyName(name: String) -> String {
         return name.capitalizedString
-//        return name.replaceRange(name.startIndex...name.startIndex, with: String(name[name.startIndex]).capitalizedString)
     }
     
-    class func fetchedResultsController() -> NSFetchedResultsController {
+    class func fetchedResultsController(sortOrder: UserSettings.IngredientSortOrder=UserSettings.IngredientSortOrder.Name) -> NSFetchedResultsController {
         let app = UIApplication.sharedApplication().delegate as! AppDelegate
         let fetchRequest = NSFetchRequest(entityName: "Ingredient")
 
         let sortByName              = NSSortDescriptor(key: "name", ascending: true)
         let sortByRecipeCount       = NSSortDescriptor(key: "recipe_count", ascending: false)
         
-        switch app.userSettings.ingredientSortOrder {
-        case .Name:
+        if sortOrder == .Name {
             fetchRequest.sortDescriptors = [sortByName, sortByRecipeCount]
-        case .NumberOfRecipes:
-            // FIXME: it seems only 1 character is allowed in the section index title. so 40 become "4" and the index is confusing
-            //
-//            sectionNameKeyPath = "recipe_count"
-            fetchRequest.sortDescriptors = [sortByRecipeCount, sortByName]
         }
 
         return CoreDataHelper.fetchedResultsController(fetchRequest, sectionNameKeyPath: "name")

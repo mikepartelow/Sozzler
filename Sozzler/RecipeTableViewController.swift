@@ -70,8 +70,8 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             (alert: UIAlertAction!) -> Void in
         })
 
-        sheet.addAction(sortByRating)
         sheet.addAction(sortByName)
+        sheet.addAction(sortByRating)        
         sheet.addAction(sortByNumberOfIngredients)
         sheet.addAction(cancel)
 

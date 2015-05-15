@@ -2,8 +2,8 @@ import Foundation
 
 class UserSettings {
     enum RecipeSortOrder: Int {
-        case Rating = 0
-        case Name
+        case Name = 0
+        case Rating
         case NumberOfIngredients
     }
     
@@ -61,6 +61,11 @@ class UserSettings {
             return ""
         }
     }
+    
+    func reset() {
+        _recipeSortOrder = .Name
+        _ingredientSortOrder = .Name
+    }
 
     init() {
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -69,14 +74,14 @@ class UserSettings {
         if let recipeSortOrder = RecipeSortOrder(rawValue: recipeSortOrderDefault) {
             _recipeSortOrder = recipeSortOrder
         } else {
-            _recipeSortOrder = RecipeSortOrder.Rating
+            _recipeSortOrder = .Name
         }
         
         let ingredientSortOrderDefault = defaults.integerForKey("ingredientSortOrder")
         if let ingredientSortOrder = IngredientSortOrder(rawValue: ingredientSortOrderDefault) {
             _ingredientSortOrder = ingredientSortOrder
         } else {
-            _ingredientSortOrder = IngredientSortOrder.Name
+            _ingredientSortOrder = .Name
         }
 
     }

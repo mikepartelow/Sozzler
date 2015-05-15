@@ -37,12 +37,13 @@ class DataViewController: UIViewController, MFMailComposeViewControllerDelegate 
     }
    
     @IBAction func onImportCanned(sender: UIButton) {
-        var alert = UIAlertController(title: "", message: "Imported recipes will replace all existing recipes.", preferredStyle: .Alert)
+        var alert = UIAlertController(title: "", message: "Restore default recipes and settings?", preferredStyle: .Alert)
         
         let doitAction = UIAlertAction(title: "Do it", style: .Destructive) { (action: UIAlertAction!) -> Void in
             CoreDataHelper.factoryReset()
             
             CannedRecipeSource().splorp() // splorp is the sound of canned food leaving the can
+            (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings.reset()
             
             // FIXME: handle errors
             CoreDataHelper.save(nil)

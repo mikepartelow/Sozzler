@@ -118,8 +118,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addIngredient" {
-            let index = componentTable.indexPathForSelectedRow()!
-            
+            let index = componentTable.indexPathForSelectedRow()!            
             componentTable.deselectRowAtIndexPath(index, animated: false)
         }
     }
