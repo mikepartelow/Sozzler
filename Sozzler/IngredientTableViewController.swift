@@ -102,32 +102,6 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         return [ deleteAction ]
     }
     
-    @IBAction func onSort(sender: UIBarButtonItem) {
-        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-        
-        let sortByName = UIAlertAction(title: "Sort by Name", style: .Default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            self.userSettings.ingredientSortOrder = .Name
-            self.refresh()
-        })
-        
-        let sortByNumberOfIngredients = UIAlertAction(title: "Sort by Number of Recipes", style: .Default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            self.userSettings.ingredientSortOrder = .NumberOfRecipes
-            self.refresh()
-        })
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
-            (alert: UIAlertAction!) -> Void in
-        })
-        
-        sheet.addAction(sortByName)
-        sheet.addAction(sortByNumberOfIngredients)
-        sheet.addAction(cancel)
-        
-        presentViewController(sheet, animated: true, completion: nil)
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let navController = segue.destinationViewController as! UINavigationController
         let rtvc = navController.topViewController! as! RecipeTableViewController
@@ -157,12 +131,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
-        switch userSettings.ingredientSortOrder {
-            case .Name:
-                return frc!.sectionIndexTitles
-            default:
-                return []
-        }
+        return frc!.sectionIndexTitles
     }
     
     override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
@@ -184,7 +153,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         // FIXME: nil seems like a bad idea
         frc!.performFetch(nil)
         
-        navigationItem.title = "Ingredients by \(userSettings.ingredientSortOrderName)"
+        navigationItem.title = "Ingredients"
         
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()

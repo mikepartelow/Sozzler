@@ -12,16 +12,12 @@ class Ingredient: NSManagedObject {
         return name.capitalizedString
     }
     
-    class func fetchedResultsController(sortOrder: UserSettings.IngredientSortOrder=UserSettings.IngredientSortOrder.Name) -> NSFetchedResultsController {
+    class func fetchedResultsController() -> NSFetchedResultsController {
         let app = UIApplication.sharedApplication().delegate as! AppDelegate
         let fetchRequest = NSFetchRequest(entityName: "Ingredient")
 
         let sortByName              = NSSortDescriptor(key: "name", ascending: true)
-        let sortByRecipeCount       = NSSortDescriptor(key: "recipe_count", ascending: false)
-        
-        if sortOrder == .Name {
-            fetchRequest.sortDescriptors = [sortByName, sortByRecipeCount]
-        }
+        fetchRequest.sortDescriptors = [sortByName]
 
         return CoreDataHelper.fetchedResultsController(fetchRequest, sectionNameKeyPath: "name")
     }

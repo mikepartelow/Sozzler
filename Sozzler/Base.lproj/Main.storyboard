@@ -631,11 +631,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Z9S-Rm-ZDT">
-                        <barButtonItem key="leftBarButtonItem" title="Sort" id="0oO-LS-QHw">
-                            <connections>
-                                <action selector="onSort:" destination="j5N-gx-ycc" id="TeB-Fn-6NX"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="QzI-qs-UHt">
                             <connections>
                                 <action selector="onAdd:" destination="j5N-gx-ycc" id="hHE-Qh-xos"/>
