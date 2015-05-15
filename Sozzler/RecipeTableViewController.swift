@@ -1,7 +1,7 @@
 import UIKit
 import CoreData
 
-class RecipeTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class RecipeTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
     let userSettings = (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings
     
     var frc: NSFetchedResultsController?
@@ -202,5 +202,12 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
                 refresh()
             }
         }
+    }
+
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
+        // do the filter
+        http://useyourloaf.com/blog/2015/02/16/updating-to-the-ios-8-search-controller.html
+        http://www.raywenderlich.com/76519/add-table-view-search-swift
+        return true
     }
 }
