@@ -62,7 +62,7 @@ class UserSettings {
         }
     }
     
-    func reset() {
+    func factoryReset() {
         _recipeSortOrder = .Name
         _ingredientSortOrder = .Name
     }
