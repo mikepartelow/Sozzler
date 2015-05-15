@@ -71,11 +71,11 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             self.refresh()
         })
 
-        let sortByNumberOfIngredients = UIAlertAction(title: "Sort by Number of Ingredients", style: .Default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            self.userSettings.recipeSortOrder = .NumberOfIngredients
-            self.refresh()
-        })
+//        let sortByNumberOfIngredients = UIAlertAction(title: "Sort by Number of Ingredients", style: .Default, handler: {
+//            (alert: UIAlertAction!) -> Void in
+//            self.userSettings.recipeSortOrder = .NumberOfIngredients
+//            self.refresh()
+//        })
 
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
             (alert: UIAlertAction!) -> Void in
@@ -83,7 +83,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
 
         sheet.addAction(sortByName)
         sheet.addAction(sortByRating)        
-        sheet.addAction(sortByNumberOfIngredients)
+//        sheet.addAction(sortByNumberOfIngredients)
         sheet.addAction(cancel)
 
         presentViewController(sheet, animated: true, completion: nil)
@@ -91,7 +91,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let navController = segue.destinationViewController as! UINavigationController
-                
+        
         if segue.identifier == "recipeDetails" {
             let rvc = navController.topViewController! as! RecipeViewController
             let index = tableView.indexPathForSelectedRow()!
@@ -128,15 +128,24 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
 
     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
         if userSettings.recipeSortOrder == .Name {
-//            return [ UITableViewIndexSearch ] + frc!.sectionIndexTitles
-            return frc!.sectionIndexTitles
+            return [ UITableViewIndexSearch ] + frc!.sectionIndexTitles
         } else {
-            return [ ] //UITableViewIndexSearch ]
+            return []
         }
     }
     
     override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
-        return frc!.sectionForSectionIndexTitle(title, atIndex: index)
+        if userSettings.recipeSortOrder == .Name {
+            if index > 0 {
+                return frc!.sectionForSectionIndexTitle(title, atIndex: index - 1)
+            } else {
+                let searchBarFrame = searchController!.searchBar.frame
+                tableView.scrollRectToVisible(searchBarFrame, animated: false)
+                return NSNotFound
+            }
+        } else {
+            return frc!.sectionForSectionIndexTitle(title, atIndex: index)
+        }
     }
 
     
@@ -221,27 +230,6 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         searchText = searchController.searchBar.text
         refresh()
     }
-
-//    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-//        searchActive = true;
-//    }
-//    
-//    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-//        searchActive = false;
-//    }
-//    
-//    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-//        searchActive = false;
-//    }
-//    
-//    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-//        searchActive = false;
-//    }
-    
-//    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-//        NSLog("filter: \(searchText)")
-//        refresh()
-//    }
 
 //    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
 //        // do the filter
