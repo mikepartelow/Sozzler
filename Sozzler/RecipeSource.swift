@@ -17,7 +17,7 @@ class URLRecipeSource {
         
         // FIXME: error reporting not just filtering
         //
-        return filter(map(recipeDicts, { Recipe.create($0) }), { $0 != nil }).map { $0! }        
+        return filter(map(recipeDicts, { Recipe.create($0) }), { $0 != nil }).map { $0! }
     }
 }
 

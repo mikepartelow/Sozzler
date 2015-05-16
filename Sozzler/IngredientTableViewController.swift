@@ -62,6 +62,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         
         alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
             textField.placeholder = "Disgusting Artichoke"
+            textField.autocapitalizationType = UITextAutocapitalizationType.Words
         }
         
         alert.addAction(addAction)

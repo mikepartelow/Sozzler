@@ -34,7 +34,7 @@ class Ingredient: NSManagedObject {
     }
     
     class func find(name: String) -> Ingredient? {
-        let predicate = NSPredicate(format: "name == %@", Ingredient.fancyName(name))
+        let predicate = NSPredicate(format: "name ==[c] %@", Ingredient.fancyName(name))
         return CoreDataHelper.find("Ingredient", predicate: predicate) as! Ingredient?
     }
     
@@ -64,6 +64,7 @@ extension Ingredient {
             }
             
             let count = recipeCounts.values.array.reduce(0, combine: +)
+            setPrimitiveValue(Ingredient.fancyName(name), forKey: "name")
             setPrimitiveValue(count, forKey: "recipe_count")
         }
     }

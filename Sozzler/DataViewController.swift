@@ -41,12 +41,16 @@ class DataViewController: UIViewController, MFMailComposeViewControllerDelegate 
         
         let doitAction = UIAlertAction(title: "Do it", style: .Destructive) { (action: UIAlertAction!) -> Void in
             CoreDataHelper.factoryReset()
+            
             (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings.factoryReset()
 
             CannedRecipeSource().read()
+            NSLog("recipe count: \(Recipe.count())")
             
             // FIXME: handle errors
-            CoreDataHelper.save(nil)
+            var error: NSError?
+            CoreDataHelper.save(&error)
+            NSLog("\(error)")
             
             NSNotificationCenter.defaultCenter().postNotificationName("data.reset", object: self)
             self.tabBarController!.selectedIndex = 0

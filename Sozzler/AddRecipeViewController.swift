@@ -20,7 +20,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         
         if recipe == nil {
-            recipe = Recipe.create("", withRating: 0, withText: "")
+            recipe = Recipe.create("x", withRating: 0, withText: "")
             recipeText.text = recipeTextPlaceholder
             recipeText.textColor = UIColor.lightGrayColor()
         } else {
@@ -28,6 +28,8 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             recipeText!.text = recipe!.text
             ratingView!.rating = Int(recipe!.rating)
         }
+
+        recipeName.autocapitalizationType = UITextAutocapitalizationType.Words
 
         componentTable!.dataSource = self
         componentTable!.delegate = self
@@ -122,7 +124,6 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             componentTable.deselectRowAtIndexPath(index, animated: false)
         }
     }
-
 
     @IBAction func onDone(sender: UIBarButtonItem) {
         recipe!.name = recipeName!.text

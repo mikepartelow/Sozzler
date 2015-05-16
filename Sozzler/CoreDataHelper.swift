@@ -90,5 +90,11 @@ class CoreDataHelper {
         map(CoreDataHelper.all("Unit"), { moc.deleteObject($0) })
         map(CoreDataHelper.all("Ingredient"), { moc.deleteObject($0) })
         map(CoreDataHelper.all("Recipe"), { moc.deleteObject($0) })
+
+        // FIXME: handle errors
+        var error: NSError?
+        CoreDataHelper.save(&error)
+        NSLog("\(error)")
+        NSLog("recipe count: \(Recipe.count())")        
     }
 }

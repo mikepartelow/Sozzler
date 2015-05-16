@@ -47,8 +47,10 @@ extension Recipe {
     }
     
     class func countByName(name: String) -> Int {
-        let predicate = NSPredicate(format: "name == %@", name)
-        return CoreDataHelper.count("Recipe", predicate: predicate)
+        let predicate = NSPredicate(format: "name == %@", Recipe.fancyName(name))
+        let count = CoreDataHelper.count("Recipe", predicate: predicate)
+        NSLog("counted: [\(Recipe.fancyName(name))] = \(count)")
+        return count
     }
 }
 
@@ -56,14 +58,15 @@ extension Recipe {
 //
 extension Recipe {
     class func create(name: String, withRating rating: Int16, withText text: String) -> Recipe {
-        let predicate = NSPredicate(format: "name == %@", name)
-        
+        NSLog("create: [\(name)]")
+
         let recipe = CoreDataHelper.create("Recipe", initializer: { (entity, context) in
             let recipe = Recipe(entity: entity, insertIntoManagedObjectContext: context)
-            recipe.name = name
+            recipe.name = Recipe.fancyName(name)
             recipe.rating = rating
             recipe.text = text
             recipe.component_count = 0
+            NSLog("create: count: \(Recipe.countByName(recipe.name))")
             return recipe
         })
         
@@ -114,8 +117,25 @@ extension NSMutableDictionary {
 // saving and validation
 //
 extension Recipe {
+    class func fancyName(name: String) -> String {
+        return name
+        
+        // something is wrong with this and it screws up name uniqueness validation
+        
+        
+//        let capitalizedName: String
+//        if !name.isEmpty && String(name[name.startIndex]) == String(name[name.startIndex]).capitalizedString {
+//            capitalizedName = name
+//        } else {
+//            capitalizedName = name.capitalizedString
+//        }
+//        
+//        return capitalizedName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    }
+    
     override func willSave() {
         if !deleted {
+            setPrimitiveValue(Recipe.fancyName(name), forKey: "name")
             setPrimitiveValue(components.count, forKey: "component_count")
         }
     }
@@ -131,7 +151,7 @@ extension Recipe {
             errorMessage = "Please add at least one ingredient."
         } else if name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).isEmpty {
             errorMessage = "Please add a name for your recipe."
-        } else if Recipe.countByName(name) > 1 {
+        } else if Recipe.countByName(Recipe.fancyName(name)) > 1 {
             errorMessage = "Sorry, that name is already taken."
         } else {
             return true
