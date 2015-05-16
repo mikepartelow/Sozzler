@@ -15,11 +15,11 @@ class RatingView: UIView {
             let images = [ image0, image1, image2, image3, image4 ]
             
             for i in 0..<rating {
-                images[i].image = UIImage(named: "olive-on.png")
+                images[i].image = UIImage(named: "olive-paperclip-32.png")
             }
             
             for j in rating..<5 {
-                images[j].image = UIImage(named: "olive-off.png")
+                images[j].image = UIImage(named: "olive3-pick only-32.png")
             }
         }
     }
