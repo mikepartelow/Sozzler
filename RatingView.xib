@@ -19,35 +19,35 @@
             <rect key="frame" x="0.0" y="0.0" width="112" height="16"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="olive-paperclip-32.png" translatesAutoresizingMaskIntoConstraints="NO" id="FWM-ju-2yY">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="olive3-pick only-32.png" translatesAutoresizingMaskIntoConstraints="NO" id="FWM-ju-2yY">
                     <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="16" id="ScW-66-2gV"/>
                         <constraint firstAttribute="height" constant="16" id="scE-H9-4VX"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="olive-paperclip-32.png" translatesAutoresizingMaskIntoConstraints="NO" id="Syn-1A-XHw">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="olive3-pick only-32.png" translatesAutoresizingMaskIntoConstraints="NO" id="Syn-1A-XHw">
                     <rect key="frame" x="24" y="0.0" width="16" height="16"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="16" id="BCb-Ke-84q"/>
                         <constraint firstAttribute="height" constant="16" id="L6t-EM-TqP"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="olive-paperclip-32.png" translatesAutoresizingMaskIntoConstraints="NO" id="9Iy-nU-Dtp">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="olive3-pick only-32.png" translatesAutoresizingMaskIntoConstraints="NO" id="9Iy-nU-Dtp">
                     <rect key="frame" x="48" y="0.0" width="16" height="16"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="16" id="1zj-bd-Ff0"/>
                         <constraint firstAttribute="height" constant="16" id="TR7-eF-G14"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="olive-paperclip-32.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ6-Cw-oDz">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="olive3-pick only-32.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ6-Cw-oDz">
                     <rect key="frame" x="72" y="0.0" width="16" height="16"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="16" id="6pf-wg-WiC"/>
                         <constraint firstAttribute="height" constant="16" id="ZwD-FI-2NX"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="olive-paperclip-32.png" translatesAutoresizingMaskIntoConstraints="NO" id="ude-jl-3JV">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="olive3-pick only-32.png" translatesAutoresizingMaskIntoConstraints="NO" id="ude-jl-3JV">
                     <rect key="frame" x="96" y="0.0" width="16" height="16"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="16" id="EC3-c2-VGt"/>
@@ -74,6 +74,6 @@
         </view>
     </objects>
     <resources>
-        <image name="olive-paperclip-32.png" width="32" height="32"/>
+        <image name="olive3-pick only-32.png" width="32" height="32"/>
     </resources>
 </document>
