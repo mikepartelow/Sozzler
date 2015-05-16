@@ -67,6 +67,11 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             refresh()
         }
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        becomeFirstResponder()
+    }
 
     @IBAction func onSort(sender: UIBarButtonItem) {
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
@@ -100,6 +105,8 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         if segue.identifier == "recipeDetails" {
             let rvc = navController.topViewController! as! RecipeViewController
             let index = tableView.indexPathForSelectedRow()!
+            NSLog("index: \(index.row) \(index.section))")
+
             rvc.recipe = frc!.objectAtIndexPath(index) as? Recipe
             
             tableView.deselectRowAtIndexPath(index, animated: false)
@@ -236,5 +243,36 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         searchText = searchController.searchBar.text
         refresh()
+    }
+
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
+        if event.subtype == UIEventSubtype.MotionShake {
+            let indexPath: NSIndexPath
+            
+            if userSettings.recipeSortOrder == .Name {
+                let randomSection = Int(arc4random_uniform(UInt32(Recipe.count())))
+                
+                // FIXME: what if no recipes at all?
+                indexPath = NSIndexPath(forRow: 0, inSection: randomSection)
+            } else if userSettings.recipeSortOrder == .Rating {
+                let fiveStarSection = 0
+                let limit = frc!.sections![fiveStarSection].numberOfObjects!
+                let randomRow = Int(arc4random_uniform(UInt32(limit)))
+                
+                // FIXME: what if there aren't any five star recipes?
+                // FIXME: what if no recipes at all?
+                indexPath = NSIndexPath(forRow: randomRow, inSection: fiveStarSection)
+            } else {
+                // FIXME: what if no recipes at all?
+                indexPath = NSIndexPath(forRow: 0, inSection: 0)
+            }
+            
+            tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+            performSegueWithIdentifier("recipeDetails", sender: self)
+        }
     }
 }
