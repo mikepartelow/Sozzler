@@ -18,6 +18,8 @@
 		400BF0D71AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400BF0D61AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift */; };
 		4029C9071AED341300D5F0C9 /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029C9061AED341300D5F0C9 /* DataViewController.swift */; };
 		4029C9091AED3AB300D5F0C9 /* RecipeSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029C9081AED3AB300D5F0C9 /* RecipeSource.swift */; };
+		406879381B078F350079D885 /* olive-paperclip-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 406879371B078F350079D885 /* olive-paperclip-120.png */; };
+		4068793A1B078F8F0079D885 /* olive-paperclip-180.png in Resources */ = {isa = PBXBuildFile; fileRef = 406879391B078F8F0079D885 /* olive-paperclip-180.png */; };
 		409480AA1AF838A100543FFB /* EditRecipeNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409480A91AF838A100543FFB /* EditRecipeNavViewController.swift */; };
 		40B643EF1AE8C17300EEBBCA /* RecipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */; };
 		40B643F41AE8C35400EEBBCA /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F01AE8C35300EEBBCA /* Ingredient.swift */; };
@@ -61,6 +63,8 @@
 		400BF0D61AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuantityToComponentViewController.swift; sourceTree = "<group>"; };
 		4029C9061AED341300D5F0C9 /* DataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		4029C9081AED3AB300D5F0C9 /* RecipeSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeSource.swift; sourceTree = "<group>"; };
+		406879371B078F350079D885 /* olive-paperclip-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "olive-paperclip-120.png"; path = "../../../Downloads/olive-paperclip/olive-paperclip-120.png"; sourceTree = "<group>"; };
+		406879391B078F8F0079D885 /* olive-paperclip-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "olive-paperclip-180.png"; path = "../../../Downloads/olive-paperclip/olive-paperclip-180.png"; sourceTree = "<group>"; };
 		409480A91AF838A100543FFB /* EditRecipeNavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditRecipeNavViewController.swift; sourceTree = "<group>"; };
 		40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTableViewController.swift; sourceTree = "<group>"; };
 		40B643F01AE8C35300EEBBCA /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
@@ -159,6 +163,8 @@
 		40F65BAB1AE8BAE000D15898 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				406879391B078F8F0079D885 /* olive-paperclip-180.png */,
+				406879371B078F350079D885 /* olive-paperclip-120.png */,
 				4006030D1AEC964600A11957 /* olive-off.png */,
 				4006030E1AEC964600A11957 /* olive-on.png */,
 				40F65BAC1AE8BAE000D15898 /* Info.plist */,
@@ -265,10 +271,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4068793A1B078F8F0079D885 /* olive-paperclip-180.png in Resources */,
 				40F65BB61AE8BAE000D15898 /* Main.storyboard in Resources */,
 				400603141AEC98CE00A11957 /* RecipeCell.xib in Resources */,
 				400603101AEC964600A11957 /* olive-on.png in Resources */,
 				40F65BBB1AE8BAE000D15898 /* LaunchScreen.xib in Resources */,
+				406879381B078F350079D885 /* olive-paperclip-120.png in Resources */,
 				400603161AECA1A600A11957 /* RatingView.xib in Resources */,
 				40F65BB81AE8BAE000D15898 /* Images.xcassets in Resources */,
 				4006030F1AEC964600A11957 /* olive-off.png in Resources */,
