@@ -20,7 +20,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         
         if recipe == nil {
-            recipe = Recipe.create("x", withRating: 0, withText: "")
+            recipe = Recipe.create("", withRating: 0, withText: "")
             recipeText.text = recipeTextPlaceholder
             recipeText.textColor = UIColor.lightGrayColor()
         } else {

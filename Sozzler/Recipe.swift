@@ -47,9 +47,10 @@ extension Recipe {
     }
     
     class func countByName(name: String) -> Int {
-        let predicate = NSPredicate(format: "name == %@", Recipe.fancyName(name))
+        let searchName = Recipe.fancyName(name)
+        let predicate = NSPredicate(format: "name == %@", searchName)
         let count = CoreDataHelper.count("Recipe", predicate: predicate)
-        NSLog("counted: [\(Recipe.fancyName(name))] = \(count)")
+        NSLog("counted: [\(searchName)] = \(count)")
         return count
     }
 }
@@ -118,24 +119,16 @@ extension NSMutableDictionary {
 //
 extension Recipe {
     class func fancyName(name: String) -> String {
-        return name
-        
-        // something is wrong with this and it screws up name uniqueness validation
-        
-        
-//        let capitalizedName: String
-//        if !name.isEmpty && String(name[name.startIndex]) == String(name[name.startIndex]).capitalizedString {
-//            capitalizedName = name
-//        } else {
-//            capitalizedName = name.capitalizedString
-//        }
-//        
-//        return capitalizedName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        let trimmedName = name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        if !trimmedName.isEmpty && String(trimmedName[trimmedName.startIndex]) == String(trimmedName[trimmedName.startIndex]).capitalizedString {
+            return trimmedName
+        } else {
+            return trimmedName.capitalizedString
+        }
     }
     
     override func willSave() {
         if !deleted {
-            setPrimitiveValue(Recipe.fancyName(name), forKey: "name")
             setPrimitiveValue(components.count, forKey: "component_count")
         }
     }
@@ -146,12 +139,17 @@ extension Recipe {
     
     func validate(error: NSErrorPointer) -> Bool {
         var errorMessage = ""
-        
+
+        // have to do this to get accurate name uniqueness count.
+        // if we don't, we may be searching for "XX" while this recipe is named " XX" -- so no dup!
+        //
+        setPrimitiveValue(Recipe.fancyName(name), forKey: "name")
+
         if components.count < 1 {
             errorMessage = "Please add at least one ingredient."
         } else if name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).isEmpty {
             errorMessage = "Please add a name for your recipe."
-        } else if Recipe.countByName(Recipe.fancyName(name)) > 1 {
+        } else if Recipe.countByName(name) > 1 {
             errorMessage = "Sorry, that name is already taken."
         } else {
             return true
