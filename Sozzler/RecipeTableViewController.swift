@@ -9,12 +9,12 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     
     var shouldRefresh = true
     
+    var searchEnabled = false
     var searchController: UISearchController?
     
     var searchText = ""
     
     required init!(coder aDecoder: NSCoder!) {
-        searchController = UISearchController(searchResultsController: nil)
         super.init(coder: aDecoder)
         
         if Recipe.count() == 0 {
@@ -32,18 +32,22 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         tableView.registerNib(UINib(nibName: "RecipeCell", bundle: nil), forCellReuseIdentifier: "RecipeCell")
         tableView.rowHeight = UITableViewAutomaticDimension
 
-        definesPresentationContext = true
-        refresh()
+        searchEnabled = (ingredient == nil)
+        
+        if searchEnabled {
+            definesPresentationContext = true
+            refresh()
 
-        searchController = UISearchController(searchResultsController: nil)
-        searchController!.searchResultsUpdater = self
-        searchController!.searchBar.delegate = self
-        searchController!.dimsBackgroundDuringPresentation = false
+            searchController = UISearchController(searchResultsController: nil)
+            searchController!.searchResultsUpdater = self
+            searchController!.searchBar.delegate = self
+            searchController!.dimsBackgroundDuringPresentation = false
 
-        tableView.tableHeaderView = searchController!.searchBar
-        searchController!.searchBar.sizeToFit()
+            tableView.tableHeaderView = searchController!.searchBar
+            searchController!.searchBar.sizeToFit()
 
-        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+            tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+        }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "data.reset", object: nil)
     }
@@ -104,14 +108,12 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         performSegueWithIdentifier("recipeDetails", sender: self)
     }
     
-    // NSFetchedResultsControllerDelegate
-    //
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return frc!.sections!.count
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return frc!.sections![section].numberOfObjects! // + 1
+        return frc!.sections![section].numberOfObjects!
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -122,15 +124,19 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     }
 
     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
-        if userSettings.recipeSortOrder == .Name {
+        if ingredient != nil || searchText != "" || userSettings.recipeSortOrder != .Name {
+            return []
+        }
+        
+        if searchEnabled {
             return [ UITableViewIndexSearch ] + frc!.sectionIndexTitles
         } else {
-            return []
+            return frc!.sectionIndexTitles
         }
     }
     
     override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
-        if userSettings.recipeSortOrder == .Name {
+        if searchEnabled && userSettings.recipeSortOrder == .Name {
             if index > 0 {
                 return frc!.sectionForSectionIndexTitle(title, atIndex: index - 1)
             } else {
@@ -149,7 +155,6 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
@@ -187,7 +192,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             navigationItem.title = "Recipes with \(ingredient!.name)"
         } else {
             if searchText != "" {
-                predicate = NSPredicate(format: "name contains[c] %@", searchController!.searchBar.text)
+                predicate = NSPredicate(format: "(name contains[c] %@) OR (components.ingredient.name contains[c] %@)", searchText, searchText)
             } else {
                 predicate = nil
             }
@@ -205,9 +210,10 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()
 
-        searchController!.searchBar.searchBarStyle = UISearchBarStyle.Minimal
-        searchController!.searchBar.sizeToFit()
-
+//        if searchEnabled {
+//            searchController!.searchBar.searchBarStyle = UISearchBarStyle.Minimal
+////            searchController!.searchBar.sizeToFit()
+//        }
         
         shouldRefresh = false
     }
