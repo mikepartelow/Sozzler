@@ -43,7 +43,7 @@ class DataViewController: UIViewController, MFMailComposeViewControllerDelegate 
             CoreDataHelper.factoryReset()
             (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings.factoryReset()
 
-            CannedRecipeSource().splorp() // splorp is the sound of canned food leaving the can
+            CannedRecipeSource().read()
             
             // FIXME: handle errors
             CoreDataHelper.save(nil)

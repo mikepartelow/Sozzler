@@ -6,7 +6,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var userSettings = UserSettings()
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
 
+        var alert = UIAlertController(title: "", message: "Replace all existing recipes?", preferredStyle: .Alert)
+        
+        let doitAction = UIAlertAction(title: "Do it", style: .Destructive) { (action: UIAlertAction!) -> Void in
+            CoreDataHelper.factoryReset()
+            URLRecipeSource(url: url).read()
+            
+            // FIXME: handle errors
+            CoreDataHelper.save(nil)
+            
+            NSNotificationCenter.defaultCenter().postNotificationName("data.imported", object: self)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Forget it", style: .Default) { (action: UIAlertAction!) -> Void in }
+        
+        alert.addAction(doitAction)
+        alert.addAction(cancelAction)
+        
+        window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+        
+        return true
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         return true

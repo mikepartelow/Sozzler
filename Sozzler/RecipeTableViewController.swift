@@ -18,7 +18,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         super.init(coder: aDecoder)
         
         if Recipe.count() == 0 {
-            CannedRecipeSource().splorp()
+            CannedRecipeSource().read()
             CoreDataHelper.save(nil)
         }
     }
@@ -50,10 +50,16 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "data.reset", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataImported", name: "data.imported", object: nil)
+
     }
     
     func dataReset() {
         shouldRefresh = true
+    }
+    
+    func dataImported() {
+        refresh()
     }
     
     override func viewWillAppear(animated: Bool) {
