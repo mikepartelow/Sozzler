@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // FIXME: handle errors
             CoreDataHelper.save(nil)
             
+            if let tabs = self.window?.rootViewController as? UITabBarController {
+                tabs.selectedIndex = 0
+            }
             NSNotificationCenter.defaultCenter().postNotificationName("data.imported", object: self)
         }
         

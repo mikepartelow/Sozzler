@@ -12,8 +12,8 @@ class DataViewController: UIViewController, MFMailComposeViewControllerDelegate 
         var composer = MFMailComposeViewController()
         
         composer.mailComposeDelegate = self
-        composer.setSubject("Sozzler recipes export")
-        composer.setMessageBody("my recipes in JSON format", isHTML: true)
+        composer.setSubject("Sozzler Recipes")
+        composer.setMessageBody("My Sozzler Recipes", isHTML: true)
         
         let recipeDicts = map(Recipe.all(), { NSMutableDictionary(recipe: $0 as Recipe) })
         let options = NSJSONWritingOptions.PrettyPrinted
@@ -25,7 +25,7 @@ class DataViewController: UIViewController, MFMailComposeViewControllerDelegate 
                 let data = string.dataUsingEncoding(NSUTF8StringEncoding)
                 let base64Data = data!.base64EncodedDataWithOptions(.allZeros)
 
-                composer.addAttachmentData(NSData(base64EncodedData: base64Data, options: .allZeros), mimeType: "application/json", fileName: "recipe.json")
+                composer.addAttachmentData(NSData(base64EncodedData: base64Data, options: .allZeros), mimeType: "application/json", fileName: "Sozzler Recipes.sozzler")
                 
                 presentViewController(composer, animated: true, completion: nil)
             }
