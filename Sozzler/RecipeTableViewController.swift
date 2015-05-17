@@ -80,12 +80,14 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             (alert: UIAlertAction!) -> Void in
             self.userSettings.recipeSortOrder = .Rating
             self.refresh()
+            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
         })
 
         let sortByName = UIAlertAction(title: "Sort by Name", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
             self.userSettings.recipeSortOrder = .Name
             self.refresh()
+            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
         })
 
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
