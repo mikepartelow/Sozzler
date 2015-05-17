@@ -19,6 +19,12 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        recipeName.autocapitalizationType = UITextAutocapitalizationType.Words
+        
+        componentTable!.dataSource = self
+        componentTable!.delegate = self
+        recipeText.delegate = self
+        
         if recipe == nil {
             recipe = Recipe.create("", withRating: 0, withText: "")
             recipeText.text = recipeTextPlaceholder
@@ -28,14 +34,13 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             recipeText!.text = recipe!.text
             ratingView!.rating = Int(recipe!.rating)
         }
-
-        recipeName.autocapitalizationType = UITextAutocapitalizationType.Words
-
-        componentTable!.dataSource = self
-        componentTable!.delegate = self
-        recipeText.delegate = self
-        
+        resizeComponentsTable()
         ratingStepper!.value = Double(recipe!.rating)
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        resizeComponentsTable()
     }
     
     @IBAction func onRatingStep(sender: UIStepper) {
@@ -67,8 +72,6 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         let height = CGFloat(min(44*8, max(44, componentTable.contentSize.height))) // FIXME: wtf magic number
         componentTableHeight.constant = height
         componentTable.setNeedsUpdateConstraints()
-        // don't change this too much or https://trello.com/c/l4EfQLaI/86-add-9-ingredients-to-recipe-components-table-freaks-out
-        componentTable.scrollToRowAtIndexPath(NSIndexPath(forItem: recipe!.components.count, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
     }
 
     
@@ -153,6 +156,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
                 
                 componentTable.reloadData()
                 resizeComponentsTable()
+                componentTable.scrollToRowAtIndexPath(NSIndexPath(forItem: recipe!.components.count, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
             }
         }
     }
