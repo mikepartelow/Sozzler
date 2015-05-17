@@ -672,7 +672,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="745" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bKN-Vy-tL8">
-                                <rect key="frame" x="223" y="80" width="154" height="32"/>
+                                <rect key="frame" x="223" y="96" width="154" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="ZZO-vk-dTD"/>
                                 </constraints>
@@ -685,7 +685,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="746" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cdj-fu-t3F">
-                                <rect key="frame" x="230" y="120" width="140" height="32"/>
+                                <rect key="frame" x="230" y="160" width="140" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="IRH-0Z-wX6"/>
                                 </constraints>
@@ -700,11 +700,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="bKN-Vy-tL8" firstAttribute="top" secondItem="fhA-XC-brp" secondAttribute="bottom" constant="16" id="5L1-oW-pFo"/>
+                            <constraint firstItem="bKN-Vy-tL8" firstAttribute="top" secondItem="fhA-XC-brp" secondAttribute="bottom" constant="32" id="5L1-oW-pFo"/>
                             <constraint firstAttribute="trailing" secondItem="cdj-fu-t3F" secondAttribute="trailing" constant="20" symbolic="YES" id="9da-ja-l2k"/>
                             <constraint firstAttribute="trailing" secondItem="bKN-Vy-tL8" secondAttribute="trailing" constant="20" symbolic="YES" id="Bcc-VZ-PzJ"/>
                             <constraint firstItem="cdj-fu-t3F" firstAttribute="top" secondItem="fhA-XC-brp" secondAttribute="bottom" constant="16" id="Bea-Vh-5TN"/>
-                            <constraint firstItem="cdj-fu-t3F" firstAttribute="top" secondItem="bKN-Vy-tL8" secondAttribute="bottom" constant="8" id="PtT-Bj-2fx"/>
+                            <constraint firstItem="cdj-fu-t3F" firstAttribute="top" secondItem="bKN-Vy-tL8" secondAttribute="bottom" constant="32" id="PtT-Bj-2fx"/>
                             <constraint firstItem="G7M-Jf-ioO" firstAttribute="top" secondItem="cdj-fu-t3F" secondAttribute="bottom" constant="8" symbolic="YES" id="V0y-I3-hNe"/>
                             <constraint firstAttribute="centerX" secondItem="bKN-Vy-tL8" secondAttribute="centerX" id="WtT-LY-7dU"/>
                             <constraint firstItem="cdj-fu-t3F" firstAttribute="top" secondItem="bKN-Vy-tL8" secondAttribute="bottom" constant="80" id="heY-Ht-Rj5"/>
