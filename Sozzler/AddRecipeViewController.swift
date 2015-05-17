@@ -123,6 +123,11 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
 
+    @IBAction func onCancel(sender: UIBarButtonItem) {
+        moc.rollback()
+        performSegueWithIdentifier("unwindToRecipes", sender: self)
+    }
+    
     @IBAction func onDone(sender: UIBarButtonItem) {
         recipe!.name = recipeName!.text
         recipe!.text = recipeText!.text

@@ -325,7 +325,7 @@
                     <navigationItem key="navigationItem" title="Add Recipe" id="U9u-Qd-UH8">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="2JF-Hs-1uJ">
                             <connections>
-                                <segue destination="dtn-kK-1MD" kind="unwind" identifier="unwindToRecipes" unwindAction="unwindToRecipes:" id="o3p-N0-eah"/>
+                                <action selector="onCancel:" destination="vvM-8B-AZE" id="2bu-hK-3SR"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="R7r-nr-VoU">
@@ -341,6 +341,7 @@
                         <outlet property="ratingView" destination="g3e-4w-VJt" id="oDX-eK-giK"/>
                         <outlet property="recipeName" destination="vEj-9E-ccq" id="vSL-rU-LuP"/>
                         <outlet property="recipeText" destination="olF-dE-YVU" id="gIa-pu-9Eb"/>
+                        <segue destination="dtn-kK-1MD" kind="unwind" identifier="unwindToRecipes" unwindAction="unwindToRecipes:" id="Vy0-Jj-sLF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OpO-yD-K1Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
