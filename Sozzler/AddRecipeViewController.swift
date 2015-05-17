@@ -85,12 +85,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             cell = componentTable.dequeueReusableCellWithIdentifier("componentCell") as! UITableViewCell
             cell.textLabel!.text = recipe!.components.allObjects[indexPath.row].string
         }
-        
-        // FIXME: not happy with doing this here, very brute force. But anyhwere else and "edit recipe" involves equally ugly contortions.
-        //
-        // FIXME: this is the cause of https://trello.com/c/l4EfQLaI/86-add-9-ingredients-to-recipe-components-table-freaks-out
-        resizeComponentsTable()
-        
+                
         return cell
     }
 
@@ -157,6 +152,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
                 Component.create(quantity_n, quantity_d: quantity_d, unit: unit, ingredient: vc.ingredient!, recipe: recipe!)
                 
                 componentTable.reloadData()
+                resizeComponentsTable()
             }
         }
     }
