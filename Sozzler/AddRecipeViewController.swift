@@ -23,6 +23,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         
         componentTable!.dataSource = self
         componentTable!.delegate = self
+        
         recipeText.delegate = self
         
         if recipe == nil {
@@ -34,8 +35,15 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             recipeText!.text = recipe!.text
             ratingView!.rating = Int(recipe!.rating)
         }
+        
         resizeComponentsTable()
+        componentTable!.editing = true
+        
         ratingStepper!.value = Double(recipe!.rating)
+        
+        for component in recipe!.sortedComponents {
+            NSLog("\(component.ingredient.name) : \(component.index)")
+        }
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -69,26 +77,20 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
 
     func resizeComponentsTable() {
         NSLog("\(componentTable.contentSize.height)")
-        let height = CGFloat(min(44*8, max(44, componentTable.contentSize.height))) // FIXME: wtf magic number
-        componentTableHeight.constant = height
+        let height = componentTable.contentSize.height
+
+        componentTableHeight.constant = min(height, 6*(height / CGFloat(recipe!.components.count)))
         componentTable.setNeedsUpdateConstraints()
     }
 
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipe!.sortedComponents.count + 1
+        return recipe!.sortedComponents.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell
-        
-        if indexPath.row == recipe!.sortedComponents.count {
-            cell = componentTable.dequeueReusableCellWithIdentifier("addComponentCell") as! UITableViewCell
-        } else {
-            cell = componentTable.dequeueReusableCellWithIdentifier("componentCell") as! UITableViewCell
-            cell.textLabel!.text = recipe!.sortedComponents[indexPath.row].string
-        }
-                
+        let cell = componentTable.dequeueReusableCellWithIdentifier("componentCell") as! UITableViewCell
+        cell.textLabel!.text = recipe!.sortedComponents[indexPath.row].string
         return cell
     }
 
@@ -97,12 +99,15 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             let component = self.recipe!.sortedComponents[indexPath.row]
             
             self.recipe!.components.removeObject(component)
-            
             CoreDataHelper.delete(component)
-            
             self.componentTable.reloadData()
+            self.resizeComponentsTable()
+            self.componentTable.scrollToRowAtIndexPath(NSIndexPath(forItem: self.recipe!.sortedComponents.count-1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
             
-            tableView.editing = false
+            for (index, component) in enumerate(self.recipe!.sortedComponents) {
+                component.index = Int16(index)
+            }
+
         }
         
         return [ deleteAction ]
@@ -116,13 +121,6 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         // even if it does nothing this needs to be here if we want to get a delete event
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "addIngredient" {
-            let index = componentTable.indexPathForSelectedRow()!            
-            componentTable.deselectRowAtIndexPath(index, animated: false)            
-        }
-    }
-
     @IBAction func onCancel(sender: UIBarButtonItem) {
         moc.rollback()
         performSegueWithIdentifier("unwindToRecipes", sender: self)
@@ -157,12 +155,34 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
                 let quantity_d = Int16(vc.quantity_f![1])
                 let quantity_n = Int16((vc.quantity_f![1] * vc.quantity_i!) + vc.quantity_f![0])
                 
-                Component.create(quantity_n, quantity_d: quantity_d, unit: unit, ingredient: vc.ingredient!, recipe: recipe!)
+                Component.create(quantity_n, quantity_d: quantity_d, unit: unit, ingredient: vc.ingredient!, recipe: recipe!, index: Int16(recipe!.components.count))
                 
                 componentTable.reloadData()
                 resizeComponentsTable()
-                componentTable.scrollToRowAtIndexPath(NSIndexPath(forItem: recipe!.sortedComponents.count, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+                componentTable.scrollToRowAtIndexPath(NSIndexPath(forItem: recipe!.sortedComponents.count-1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
             }
         }
+    }
+    
+    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
+        NSLog("\(fromIndexPath.row) => \(toIndexPath.row)")
+        
+        var sortedComponents = recipe!.sortedComponents
+        
+        if toIndexPath.row < fromIndexPath.row {
+            map(sortedComponents[toIndexPath.row..<fromIndexPath.row], { (component) in
+                component.index += 1
+            })
+        } else if fromIndexPath.row < toIndexPath.row {
+            map(sortedComponents[fromIndexPath.row+1...toIndexPath.row], { (component) in
+                component.index -= 1
+            })
+        }
+        
+        sortedComponents[fromIndexPath.row].index = Int16(toIndexPath.row)
     }
 }

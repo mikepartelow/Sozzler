@@ -12,7 +12,7 @@ class Recipe: NSManagedObject {
     
     var sortedComponents: [Component] {
         let componentArray = components.allObjects as! [Component]
-        return Swift.sorted(componentArray, >)
+        return Swift.sorted(componentArray, <)
     }
 }
 
