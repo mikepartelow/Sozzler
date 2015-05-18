@@ -254,13 +254,18 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="300" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="olF-dE-YVU">
-                                <rect key="frame" x="16" y="227" width="568" height="263"/>
+                                <rect key="frame" x="16" y="227" width="568" height="365"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="263" id="Kv2-2I-w4s"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Kv2-2I-w4s"/>
+                                    </mask>
+                                </variation>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -283,6 +288,7 @@
                             <constraint firstItem="olF-dE-YVU" firstAttribute="top" secondItem="eEP-yo-NoJ" secondAttribute="bottom" constant="8" id="bS6-aE-s3r"/>
                             <constraint firstItem="olF-dE-YVU" firstAttribute="trailing" secondItem="wuf-he-hcg" secondAttribute="trailingMargin" id="dkU-Sf-EZu"/>
                             <constraint firstItem="g3e-4w-VJt" firstAttribute="leading" secondItem="yRS-XK-Thg" secondAttribute="trailing" constant="8" id="eWs-RO-p4x"/>
+                            <constraint firstItem="wd7-gC-8gE" firstAttribute="top" secondItem="olF-dE-YVU" secondAttribute="bottom" constant="8" id="jGU-1c-DKP"/>
                             <constraint firstItem="3GR-CX-vSj" firstAttribute="leading" secondItem="wuf-he-hcg" secondAttribute="leadingMargin" id="lJL-WK-dER"/>
                             <constraint firstItem="Cme-xI-olH" firstAttribute="trailing" secondItem="vEj-9E-ccq" secondAttribute="trailing" id="zNe-i1-mNr"/>
                             <constraint firstItem="Cme-xI-olH" firstAttribute="leading" secondItem="3GR-CX-vSj" secondAttribute="leading" id="zsk-Fe-it6"/>

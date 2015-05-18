@@ -40,9 +40,8 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         resizeComponentsTable()
         componentTable!.editing = true
         
-        for component in recipe!.sortedComponents {
-            NSLog("\(component.ingredient.name) : \(component.index)")
-        }
+        let scrollPoint = CGPointMake(0, recipeText.frame.origin.y)
+        recipeText.setContentOffset(scrollPoint, animated: false)
     }
 
     override func viewDidAppear(animated: Bool) {
