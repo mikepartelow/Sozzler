@@ -76,17 +76,17 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
 
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipe!.components.count + 1
+        return recipe!.sortedComponents.count + 1
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell
         
-        if indexPath.row == recipe!.components.count {
+        if indexPath.row == recipe!.sortedComponents.count {
             cell = componentTable.dequeueReusableCellWithIdentifier("addComponentCell") as! UITableViewCell
         } else {
             cell = componentTable.dequeueReusableCellWithIdentifier("componentCell") as! UITableViewCell
-            cell.textLabel!.text = recipe!.components.allObjects[indexPath.row].string
+            cell.textLabel!.text = recipe!.sortedComponents[indexPath.row].string
         }
                 
         return cell
@@ -94,7 +94,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
 
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
-            let component = self.recipe!.components.allObjects[indexPath.row] as! Component
+            let component = self.recipe!.sortedComponents[indexPath.row]
             
             self.recipe!.components.removeObject(component)
             
@@ -109,7 +109,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return indexPath.row < recipe!.components.count
+        return indexPath.row < recipe!.sortedComponents.count
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -161,7 +161,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
                 
                 componentTable.reloadData()
                 resizeComponentsTable()
-                componentTable.scrollToRowAtIndexPath(NSIndexPath(forItem: recipe!.components.count, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+                componentTable.scrollToRowAtIndexPath(NSIndexPath(forItem: recipe!.sortedComponents.count, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
             }
         }
     }

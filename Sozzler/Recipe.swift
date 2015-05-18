@@ -9,6 +9,11 @@ class Recipe: NSManagedObject {
     @NSManaged var text: String
     @NSManaged var component_count: Int16
     @NSManaged var components: NSMutableSet
+    
+    var sortedComponents: [Component] {
+        let componentArray = components.allObjects as! [Component]
+        return Swift.sorted(componentArray, >)
+    }
 }
 
 // querying

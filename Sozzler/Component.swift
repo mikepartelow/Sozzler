@@ -51,13 +51,7 @@ class Component: NSManagedObject, Comparable {
         return "\(quantity) \(unit.name) \(ingredient.name)".stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
 
     }
-    
-    class func sorted(components: NSSet) -> [Component] {
-        let componentArray = components.allObjects as! [Component]
-
-        return Swift.sorted(componentArray, { $0 > $1 })
-    }
-    
+        
     class func create(quantity_n: Int16, quantity_d: Int16, unit: Unit, ingredient: Ingredient, recipe: Recipe) -> Component {
         
         return CoreDataHelper.create("Component", initializer: {
