@@ -44,11 +44,13 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
             if let ingredient = Ingredient.find(ingredientName) {
                 self.errorAlert("Ingredient already exists.", button: "Oops")
             } else {
-                Ingredient.create(ingredientName)
+                let ingredient = Ingredient.create(ingredientName)
                 
                 var error: NSError?
                 if CoreDataHelper.save(&error) {
                     self.refresh()
+                    let indexPath = self.frc!.indexPathForObject(ingredient)
+                    self.tableView.selectRowAtIndexPath(indexPath!, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
                 } else {
                     // FIXME:
                     // alert: could not blah blah

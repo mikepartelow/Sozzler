@@ -63,7 +63,56 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
         tableView.layoutIfNeeded()
         tableView.reloadData()
     }
+    
+    func errorAlert(title: String, button: String) {
+        var alert = UIAlertController(title: title, message: "", preferredStyle: .Alert)
+        let action = UIAlertAction(title: button, style: .Default) { (action: UIAlertAction!) -> Void in }
+        alert.addAction(action)
+        presentViewController(alert, animated: true, completion: nil)
+    }
 
+    @IBAction func onAdd(sender: UIBarButtonItem) {
+        var alert = UIAlertController(title: "Add Ingredient", message: "", preferredStyle: .Alert)
+        
+        let addAction = UIAlertAction(title: "Add", style: .Default) { (action: UIAlertAction!) -> Void in
+            let textField = alert.textFields![0] as! UITextField
+            let ingredientName = textField.text
+            
+            if let ingredient = Ingredient.find(ingredientName) {
+                self.errorAlert("Ingredient already exists.", button: "Oops")
+            } else {
+                let ingredient = Ingredient.create(ingredientName)
+                
+                var error: NSError?
+                // NOTE: unlike in IngredientTableViewController we can't save here because the moc has a partially construted, invalid Recipe
+                //
+                if ingredient.validateForInsert(&error) {
+                    self.refresh()
+                    let indexPath = self.frc!.indexPathForObject(ingredient)
+                    self.tableView.selectRowAtIndexPath(indexPath!, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+                } else {
+                    // FIXME:
+                    // alert: could not blah blah
+                    NSLog("Save Failed!: \(error)")
+                }
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in
+        }
+        
+        alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
+            textField.placeholder = "Disgusting Artichoke"
+            textField.autocapitalizationType = UITextAutocapitalizationType.Words
+        }
+        
+        alert.addAction(addAction)
+        alert.addAction(cancelAction)
+        
+        presentViewController(alert, animated: true, completion: nil)
+    }
+
+    
     @IBAction func unwindToAddIngredientToComponent(sender: UIStoryboardSegue)
     {
     }
