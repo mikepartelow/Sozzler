@@ -52,7 +52,7 @@ class Component: NSManagedObject, Comparable {
 
     }
         
-    class func create(quantity_n: Int16, quantity_d: Int16, unit: Unit, ingredient: Ingredient, recipe: Recipe, index: Int16=0) -> Component {
+    class func create(quantity_n: Int16, quantity_d: Int16, unit: Unit, ingredient: Ingredient, recipe: Recipe, index: Int16) -> Component {
         
         return CoreDataHelper.create("Component", initializer: {
             (entity, context) in
@@ -108,5 +108,6 @@ extension NSMutableDictionary {
         
         setValue(component.unit.name, forKey: "unit")
         setValue(component.ingredient.name, forKey: "ingredient")
+        setValue(Int(component.index), forKey: "index")
     }
 }

@@ -49,12 +49,6 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         resizeComponentsTable()
     }
     
-    @IBAction func onRatingStep(sender: UIStepper) {
-        let rating = Int16(sender.value)
-        recipe!.rating = rating
-        ratingView!.rating = Int(rating)
-    }
-    
     func textViewDidBeginEditing(textView: UITextView) {
         if textView == recipeText {
             if recipeText!.text == recipeTextPlaceholder {
@@ -127,6 +121,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func onDone(sender: UIBarButtonItem) {
         recipe!.name = recipeName!.text
         recipe!.text = recipeText!.text
+        recipe!.rating = Int16(ratingView!.rating)
         
         var error: NSError?
         if moc.save(&error) {
