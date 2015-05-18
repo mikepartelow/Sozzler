@@ -224,11 +224,6 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
 
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()
-
-//        if searchEnabled {
-//            searchController!.searchBar.searchBarStyle = UISearchBarStyle.Minimal
-////            searchController!.searchBar.sizeToFit()
-//        }
         
         shouldRefresh = false
     }
@@ -238,6 +233,8 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         if let arvc = sender.sourceViewController as? AddRecipeViewController {
             if arvc.added {
                 refresh()
+                let indexPath = self.frc!.indexPathForObject(arvc.recipe!)
+                self.tableView.selectRowAtIndexPath(indexPath!, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
             }
         }
     }
