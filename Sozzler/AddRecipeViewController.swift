@@ -10,7 +10,6 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var ratingView: RatingView!
     @IBOutlet weak var recipeText: UITextView!
     
-    @IBOutlet weak var ratingStepper: UIStepper!
     let recipeTextPlaceholder = "Stir with ice, strain into chilled rocks glass."
     
     var added = false
@@ -36,10 +35,10 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             ratingView!.rating = Int(recipe!.rating)
         }
         
+        ratingView!.editing = true
+        
         resizeComponentsTable()
         componentTable!.editing = true
-        
-        ratingStepper!.value = Double(recipe!.rating)
         
         for component in recipe!.sortedComponents {
             NSLog("\(component.ingredient.name) : \(component.index)")
