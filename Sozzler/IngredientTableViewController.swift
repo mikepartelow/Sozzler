@@ -3,20 +3,44 @@ import CoreData
 
 // http://stackoverflow.com/questions/2809192/core-data-fetchedresultscontroller-question-what-is-sections-for
 
-class IngredientTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class IngredientTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     let userSettings = (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings
 
     var frc: NSFetchedResultsController?
     
     var shouldRefresh = true
     
+    var searchController: UISearchController?
+    var searchText = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
 
+        tableView.rowHeight = UITableViewAutomaticDimension
+
+        definesPresentationContext = true
+        refresh()
+        
+        searchController = UISearchController(searchResultsController: nil)
+        searchController!.searchResultsUpdater = self
+        searchController!.searchBar.delegate = self
+        searchController!.dimsBackgroundDuringPresentation = false
+        
+        tableView.tableHeaderView = searchController!.searchBar
+        searchController!.searchBar.sizeToFit()
+        
+        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "data.reset", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "recipe.deleted", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "recipe.updated", object: nil)
     }
     
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 56;
+    }
+
     func dataReset() {
         shouldRefresh = true
     }
@@ -111,6 +135,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         
         let index = tableView.indexPathForSelectedRow()!
         rtvc.ingredient = frc!.objectAtIndexPath(index) as? Ingredient
+        tableView.deselectRowAtIndexPath(index, animated: false)
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -134,11 +159,21 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
-        return frc!.sectionIndexTitles
+        if searchText != "" {
+            return []
+        } else {
+            return [ UITableViewIndexSearch ] + frc!.sectionIndexTitles
+        }
     }
     
     override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
-        return frc!.sectionForSectionIndexTitle(title, atIndex: index)
+        if index > 0 {
+            return frc!.sectionForSectionIndexTitle(title, atIndex: index - 1)
+        } else {
+            let searchBarFrame = searchController!.searchBar.frame
+            tableView.scrollRectToVisible(searchBarFrame, animated: false)
+            return NSNotFound
+        }
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -147,9 +182,13 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
     
     // FIXME: DRY
     func refresh() {
-        // FIXME: progress indicator is needed especially during onSort()
-        //        modal grey translucent alert with swriy : howto?
-        frc = Ingredient.fetchedResultsController()
+        let predicate: NSPredicate?
+        if searchText != "" {
+            predicate = NSPredicate(format: "name contains[c] %@", searchText)
+        } else {
+            predicate = nil
+        }
+        frc = Ingredient.fetchedResultsController(predicate: predicate)
         
         frc!.delegate = self
         
@@ -163,5 +202,10 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         tableView.reloadData()
         
         shouldRefresh = false
+    }
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        searchText = searchController.searchBar.text
+        refresh()
     }
 }

@@ -11,7 +11,6 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     
     var searchEnabled = false
     var searchController: UISearchController?
-    
     var searchText = ""
     
     required init!(coder aDecoder: NSCoder!) {
@@ -184,7 +183,8 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
                 CoreDataHelper.delete(component)
             }
             CoreDataHelper.delete(recipe)
-            
+            NSNotificationCenter.defaultCenter().postNotificationName("recipe.deleted", object: self)
+
             var error: NSError?
             if CoreDataHelper.save(&error) {
                 self.refresh()
@@ -233,8 +233,9 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         if let arvc = sender.sourceViewController as? AddRecipeViewController {
             if arvc.added {
                 refresh()
-                let indexPath = self.frc!.indexPathForObject(arvc.recipe!)
-                self.tableView.selectRowAtIndexPath(indexPath!, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+                if let indexPath = self.frc!.indexPathForObject(arvc.recipe!) {
+                    self.tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+                }
             }
         }
     }

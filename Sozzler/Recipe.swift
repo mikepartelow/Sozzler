@@ -9,6 +9,11 @@ class Recipe: NSManagedObject {
     @NSManaged var text: String
     @NSManaged var component_count: Int16
     @NSManaged var components: NSMutableSet
+    
+    var sortedComponents: [Component] {
+        let componentArray = components.allObjects as! [Component]
+        return Swift.sorted(componentArray, <)
+    }
 }
 
 // querying
@@ -77,7 +82,7 @@ extension Recipe {
     class func create(recipeDict: NSDictionary) -> Recipe? {
         let name        = recipeDict["name"]        as! String
         let rating      = recipeDict["rating"]      as! Int
-        let text        = recipeDict["text"]       as! String
+        let text        = recipeDict["text"]        as! String
         let components  = recipeDict["components"]  as! [NSDictionary]
         
         let recipe = Recipe.create(name, withRating: Int16(rating), withText: text)
@@ -86,6 +91,7 @@ extension Recipe {
             let quantity        = componentDict["quantity"]     as! String
             let unitName        = componentDict["unit"]         as! String
             let ingredientName  = componentDict["ingredient"]   as! String
+            let index           = componentDict["index"]        as! Int
             
             let unit            = Unit.findOrCreate(unitName)
             let ingredient      = Ingredient.findOrCreate(ingredientName)
@@ -93,7 +99,7 @@ extension Recipe {
             let (quantity_n, quantity_d) = Component.parseQuantity(quantity)
             // FIXME: should probably bounds check quantity_n/d before downcast
             //
-            let component       = Component.create(Int16(quantity_n), quantity_d: Int16(quantity_d), unit: unit, ingredient: ingredient, recipe: recipe)
+            let component       = Component.create(Int16(quantity_n), quantity_d: Int16(quantity_d), unit: unit, ingredient: ingredient, recipe: recipe, index: Int16(index))
         }
         
         return recipe
