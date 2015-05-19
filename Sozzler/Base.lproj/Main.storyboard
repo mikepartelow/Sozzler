@@ -402,7 +402,7 @@
                                     </mask>
                                 </variation>
                             </pickerView>
-                            <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B3x-Sg-GaT" userLabel="fractionPicture">
+                            <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B3x-Sg-GaT" userLabel="fractionPicker">
                                 <rect key="frame" x="88" y="433" width="64" height="162"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="eSL-1o-PEY"/>
