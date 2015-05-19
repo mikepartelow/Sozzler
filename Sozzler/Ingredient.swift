@@ -12,9 +12,10 @@ class Ingredient: NSManagedObject {
         return name.capitalizedString
     }
     
-    class func fetchedResultsController() -> NSFetchedResultsController {
+    class func fetchedResultsController(predicate: NSPredicate?=nil) -> NSFetchedResultsController {
         let app = UIApplication.sharedApplication().delegate as! AppDelegate
         let fetchRequest = NSFetchRequest(entityName: "Ingredient")
+        fetchRequest.predicate = predicate
 
         let sortByName              = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [sortByName]

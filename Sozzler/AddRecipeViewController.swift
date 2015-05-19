@@ -126,6 +126,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         var error: NSError?
         if moc.save(&error) {
             added = true
+            NSNotificationCenter.defaultCenter().postNotificationName("recipe.updated", object: self)
             performSegueWithIdentifier("unwindToRecipes", sender: self)
         } else {
             // FIXME: on error, name edit is cleared out. don't do that.
