@@ -1,11 +1,15 @@
 import UIKit
 
+@IBDesignable
 class RatingView: UIView {
     @IBOutlet weak var image0: UIImageView!
     @IBOutlet weak var image1: UIImageView!
     @IBOutlet weak var image2: UIImageView!
     @IBOutlet weak var image3: UIImageView!
     @IBOutlet weak var image4: UIImageView!
+    
+    @IBOutlet weak var oliveHeight: NSLayoutConstraint!
+    @IBOutlet weak var oliveWidth: NSLayoutConstraint!
     
     @IBOutlet weak var view: UIView!
     
@@ -55,9 +59,9 @@ class RatingView: UIView {
             return
         }
 
-        if let touch = touches.first as? UITouch {
+        for touch in touches as! Set<UITouch> {
             let touchLocation = touch.locationInView(self)
-            
+
             let images = [ image0, image1, image2, image3, image4 ]
 
             var newRating: Int = 0
