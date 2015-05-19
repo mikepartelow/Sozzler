@@ -233,8 +233,9 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         if let arvc = sender.sourceViewController as? AddRecipeViewController {
             if arvc.added {
                 refresh()
-                let indexPath = self.frc!.indexPathForObject(arvc.recipe!)
-                self.tableView.selectRowAtIndexPath(indexPath!, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+                if let indexPath = self.frc!.indexPathForObject(arvc.recipe!) {
+                    self.tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+                }
             }
         }
     }
