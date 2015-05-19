@@ -1,8 +1,5 @@
 import Foundation
-
-import UIKit
 import CoreData
-
 
 class URLRecipeSource {
     let url: NSURL

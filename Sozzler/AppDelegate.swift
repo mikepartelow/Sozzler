@@ -13,6 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let doitAction = UIAlertAction(title: "Do it", style: .Destructive) { (action: UIAlertAction!) -> Void in
             CoreDataHelper.factoryReset()
+
+            CannedUnitSource().read()
             URLRecipeSource(url: url).read()
             
             // FIXME: handle errors

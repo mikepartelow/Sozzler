@@ -43,7 +43,8 @@ class DataViewController: UIViewController, MFMailComposeViewControllerDelegate 
             CoreDataHelper.factoryReset()
             
             (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings.factoryReset()
-
+            
+            CannedUnitSource().read()
             CannedRecipeSource().read()
             NSLog("recipe count: \(Recipe.count())")
             

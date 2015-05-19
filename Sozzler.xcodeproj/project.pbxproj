@@ -29,6 +29,7 @@
 		408BD5B11B0B908500721CE5 /* olive-paperclip-80.png in Resources */ = {isa = PBXBuildFile; fileRef = 408BD5B01B0B908500721CE5 /* olive-paperclip-80.png */; };
 		408BD5B41B0B917600721CE5 /* olive-paperclip-58.png in Resources */ = {isa = PBXBuildFile; fileRef = 408BD5B21B0B917600721CE5 /* olive-paperclip-58.png */; };
 		408BD5B51B0B917600721CE5 /* olive-paperclip-87.png in Resources */ = {isa = PBXBuildFile; fileRef = 408BD5B31B0B917600721CE5 /* olive-paperclip-87.png */; };
+		408BD5B71B0B9C1C00721CE5 /* UnitSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BD5B61B0B9C1C00721CE5 /* UnitSource.swift */; };
 		409480AA1AF838A100543FFB /* EditRecipeNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409480A91AF838A100543FFB /* EditRecipeNavViewController.swift */; };
 		40B643EF1AE8C17300EEBBCA /* RecipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */; };
 		40B643F41AE8C35400EEBBCA /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F01AE8C35300EEBBCA /* Ingredient.swift */; };
@@ -83,6 +84,7 @@
 		408BD5B01B0B908500721CE5 /* olive-paperclip-80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-paperclip-80.png"; sourceTree = "<group>"; };
 		408BD5B21B0B917600721CE5 /* olive-paperclip-58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-paperclip-58.png"; sourceTree = "<group>"; };
 		408BD5B31B0B917600721CE5 /* olive-paperclip-87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-paperclip-87.png"; sourceTree = "<group>"; };
+		408BD5B61B0B9C1C00721CE5 /* UnitSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitSource.swift; sourceTree = "<group>"; };
 		409480A91AF838A100543FFB /* EditRecipeNavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditRecipeNavViewController.swift; sourceTree = "<group>"; };
 		40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTableViewController.swift; sourceTree = "<group>"; };
 		40B643F01AE8C35300EEBBCA /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				400832AD1AE9F53100112198 /* UserSettings.swift */,
 				40F65BB21AE8BAE000D15898 /* ViewController.swift */,
 				409480A91AF838A100543FFB /* EditRecipeNavViewController.swift */,
+				408BD5B61B0B9C1C00721CE5 /* UnitSource.swift */,
 			);
 			path = Sozzler;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				400832B21AEA098800112198 /* AddIngredientToComponentViewController.swift in Sources */,
 				40DC56681AEC669500449B8A /* IngredientTableViewController.swift in Sources */,
 				40F65BB31AE8BAE000D15898 /* ViewController.swift in Sources */,
+				408BD5B71B0B9C1C00721CE5 /* UnitSource.swift in Sources */,
 				400603181AECA1BC00A11957 /* RatingView.swift in Sources */,
 				400832AE1AE9F53100112198 /* UserSettings.swift in Sources */,
 				400603131AEC98CE00A11957 /* RecipeCell.swift in Sources */,
