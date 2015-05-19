@@ -111,6 +111,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         
         let index = tableView.indexPathForSelectedRow()!
         rtvc.ingredient = frc!.objectAtIndexPath(index) as? Ingredient
+        tableView.deselectRowAtIndexPath(index, animated: false)
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
