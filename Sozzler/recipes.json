@@ -408,5 +408,1141 @@
          }
       ], 
       "rating": 3
+   }, 
+   {
+      "text": "Shake with ice, strain into a crushed-ice filled collins glass. Lay back, and put your mind on your money. Saffron is optional.", 
+      "name": "Grape Dogg", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "1 1/2", 
+            "unit": "oz", 
+            "ingredient": "Old Raj Gin 110 Proof"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "grapefruit juice"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "1", 
+            "unit": "oz", 
+            "ingredient": "lemon juice"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "1/2", 
+            "unit": "oz", 
+            "ingredient": "grand marnier"
+         }, 
+         {
+            "index": 4, 
+            "quantity": "1/2", 
+            "unit": "oz", 
+            "ingredient": "ginger syrup"
+         }, 
+         {
+            "index": 5, 
+            "quantity": "5", 
+            "unit": "dash", 
+            "ingredient": "fee brothers aromatic bitters"
+         }, 
+         {
+            "index": 6, 
+            "quantity": "5", 
+            "unit": "", 
+            "ingredient": "crushed juniper berries"
+         }, 
+         {
+            "index": 7, 
+            "quantity": "1", 
+            "unit": "g", 
+            "ingredient": "saffron"
+         }
+      ], 
+      "rating": 4
+   }, 
+   {
+      "text": "Shake without ice to dissolve sugar. Shake with ice, strain into a chilled cocktail glass.", 
+      "name": "Crunchy Hemingway Daiquiri", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "rhum agricole"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "1/2", 
+            "unit": "oz", 
+            "ingredient": "Luxardo Liqueur"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "1", 
+            "unit": "Tbsp", 
+            "ingredient": "turbinado sugar"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "1/2", 
+            "unit": "oz", 
+            "ingredient": "grapefruit juice"
+         }, 
+         {
+            "index": 4, 
+            "quantity": "1/2", 
+            "unit": "oz", 
+            "ingredient": "lime juice"
+         }
+      ], 
+      "rating": 5
+   }, 
+   {
+      "text": "Shake with ice and strain into chilled cocktail glass. Adjust bitters to taste (and modify recipe). Garnish with orange twist. Don't skimp on bitters or sweet vermouth", 
+      "name": "Income Tax Cocktail", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "gin"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "1/4", 
+            "unit": "oz", 
+            "ingredient": "sweet vermouth"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "1/4", 
+            "unit": "oz", 
+            "ingredient": "dry vermouth"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "1", 
+            "unit": "oz", 
+            "ingredient": "orange juice"
+         }, 
+         {
+            "index": 4, 
+            "quantity": "3", 
+            "unit": "dash", 
+            "ingredient": "bitters"
+         }, 
+         {
+            "index": 5, 
+            "quantity": "", 
+            "unit": "", 
+            "ingredient": "orange twist"
+         }
+      ], 
+      "rating": 3
+   }, 
+   {
+      "text": "Shake with ice, strain over ice into a rocks glass. Garnish with apple slice and a maraschino cherry.", 
+      "name": "Jack Rose", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "1 1/2", 
+            "unit": "oz", 
+            "ingredient": "applejack"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "3/4", 
+            "unit": "oz", 
+            "ingredient": "lemon juice"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "3/4", 
+            "unit": "oz", 
+            "ingredient": "simple syrup"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "1/4", 
+            "unit": "oz", 
+            "ingredient": "grenadine"
+         }
+      ], 
+      "rating": 3
+   }, 
+   {
+      "text": "Stir with ice in a mixing glass, strain into a chilled cocktail glass or over ice in a rocks glass.", 
+      "name": "Kentucky Colonel", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "bourbon"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "3/4", 
+            "unit": "oz", 
+            "ingredient": "Benedictine"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "2", 
+            "unit": "dash", 
+            "ingredient": "orange bitters"
+         }
+      ], 
+      "rating": 4
+   }, 
+   {
+      "text": "Shake ingredients without ice to dissolve turbinado sugar. Shake with ice, serve in chilled rocks glass. Garnish artistically.", 
+      "name": "Laid Back", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "1 1/2", 
+            "unit": "oz", 
+            "ingredient": "Old Raj Gin 110 Proof"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "1 1/2", 
+            "unit": "oz", 
+            "ingredient": "grapefruit juice"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "1", 
+            "unit": "oz", 
+            "ingredient": "ginger syrup"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "1/4", 
+            "unit": "oz", 
+            "ingredient": "lime juice"
+         }, 
+         {
+            "index": 4, 
+            "quantity": "1/4", 
+            "unit": "oz", 
+            "ingredient": "Joseph Cartron Pamplemousse Rose"
+         }, 
+         {
+            "index": 5, 
+            "quantity": "1", 
+            "unit": "", 
+            "ingredient": "Tsp turbinado sugar"
+         }, 
+         {
+            "index": 6, 
+            "quantity": "", 
+            "unit": "", 
+            "ingredient": "Fee Brothers aromatic bitters"
+         }
+      ], 
+      "rating": 5
+   }, 
+   {
+      "text": "Fill double old fashioned glass with crushed ice. Dump ice and other ingredients into shaker. Shake vigorously. Dump shaker contents into glass.\n\nGarnish with lime shell and spanked mint leaves.\n\nSmall Hand Foods Orgeat is excellent.", 
+      "name": "Mai Tai", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "1", 
+            "unit": "oz", 
+            "ingredient": "Jamaican Rum"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "1", 
+            "unit": "oz", 
+            "ingredient": "demerara rum"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "3/4", 
+            "unit": "oz", 
+            "ingredient": "lime juice"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "1/2", 
+            "unit": "oz", 
+            "ingredient": "orange cura\u00e7ao"
+         }, 
+         {
+            "index": 4, 
+            "quantity": "1/2", 
+            "unit": "oz", 
+            "ingredient": "orgeat"
+         }, 
+         {
+            "index": 5, 
+            "quantity": "1/4", 
+            "unit": "oz", 
+            "ingredient": "simple syrup"
+         }
+      ], 
+      "rating": 4
+   }, 
+   {
+      "text": "Stir whisky, vermouth and bitters in a mixing glass with ice. Strain into chilled cocktail glass, garnish with a maraschino cherry.", 
+      "name": "Manhattan", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "rye"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "1", 
+            "unit": "oz", 
+            "ingredient": "sweet vermouth"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "2", 
+            "unit": "dash", 
+            "ingredient": "bitters"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "1", 
+            "unit": "", 
+            "ingredient": "maraschino cherry"
+         }
+      ], 
+      "rating": 3
+   }, 
+   {
+      "text": "Chill a martini glass. Cut an orange wedge and set aside some lemon peel for garnish. Shake everything but the seltzer. Gently stir in the seltzer. Strain into chilled glasses, garnish.", 
+      "name": "Rick's Maple Bourbon Esmash", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "bourbon"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "1/2", 
+            "unit": "oz", 
+            "ingredient": "maple syrup"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "1/2", 
+            "unit": "oz", 
+            "ingredient": "orange juice"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "1/4", 
+            "unit": "oz", 
+            "ingredient": "lemon juice"
+         }, 
+         {
+            "index": 4, 
+            "quantity": "4", 
+            "unit": "dash", 
+            "ingredient": "Angostura bitters"
+         }, 
+         {
+            "index": 5, 
+            "quantity": "1/2", 
+            "unit": "", 
+            "ingredient": "orange wheel"
+         }, 
+         {
+            "index": 6, 
+            "quantity": "1 1/2", 
+            "unit": "oz", 
+            "ingredient": "seltzer"
+         }
+      ], 
+      "rating": 5
+   }, 
+   {
+      "text": "Salt the rim of the glass:\nSlot a lime and with the glass upside down, apply lime juice to the rim, not necessarily the entire glass.\nApply the OUTSIDE of the glass to a plate of kosher salt.\nRefrigerate the glass.\n\nShake ingredients with ice, strain into glass.\n\nCan be prepared in a margarita or cocktail glass, or over ice in a rocks glass.", 
+      "name": "Margarita", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "1 1/2", 
+            "unit": "oz", 
+            "ingredient": "tequila"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "1", 
+            "unit": "oz", 
+            "ingredient": "Cointreau"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "3/4", 
+            "unit": "oz", 
+            "ingredient": "lime juice"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "1/4", 
+            "unit": "oz", 
+            "ingredient": "agave syrup"
+         }, 
+         {
+            "index": 4, 
+            "quantity": "", 
+            "unit": "", 
+            "ingredient": "kosher salt"
+         }
+      ], 
+      "rating": 5
+   }, 
+   {
+      "text": "Stir vigorously with ice in a mixing glass. Strain into chilled martini glass. Garnish with a pitted Castelvetrano Olives.", 
+      "name": "Sozzler Martini", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "Greylock Gin"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "1/2", 
+            "unit": "oz", 
+            "ingredient": "Vya Dry Vermouth"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "2", 
+            "unit": "", 
+            "ingredient": "Castelvetrano Olive"
+         }
+      ], 
+      "rating": 5
+   }, 
+   {
+      "text": "Shake with ice, strain over ice in a rocks glass. Garnish with lemon wedge.", 
+      "name": "Meyer Fitzgerald", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "1 1/2", 
+            "unit": "oz", 
+            "ingredient": "gin"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "3/4", 
+            "unit": "oz", 
+            "ingredient": "meyer lemon juice"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "1/2", 
+            "unit": "oz", 
+            "ingredient": "simple syrup"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "5", 
+            "unit": "dash", 
+            "ingredient": "bitters"
+         }
+      ], 
+      "rating": 4
+   }, 
+   {
+      "text": "Shake and strain into chilled cocktail glass. Add the garnishes. Adjust pernod/absinthe and bitters (and modify recipe).", 
+      "name": "Modernista", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "scotch"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "1/2", 
+            "unit": "oz", 
+            "ingredient": "Jamaican rum"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "1/2", 
+            "unit": "oz", 
+            "ingredient": "lemon juice"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "3", 
+            "unit": "dash", 
+            "ingredient": "orange bitters"
+         }, 
+         {
+            "index": 4, 
+            "quantity": "3", 
+            "unit": "dash", 
+            "ingredient": "absinthe"
+         }, 
+         {
+            "index": 5, 
+            "quantity": "1", 
+            "unit": "", 
+            "ingredient": "maraschino cherry"
+         }, 
+         {
+            "index": 6, 
+            "quantity": "", 
+            "unit": "", 
+            "ingredient": "lemon twist"
+         }
+      ], 
+      "rating": 1
+   }, 
+   {
+      "text": "Cut a wheel off the lime for garnish. Cut the lime into 4 wedges. In a rocks glass, muddle the sugar and the lime. Stir well to dissolve sugar.\n\nAdd the mint leaves (about 10), and bruise them gently. Add the rhum, fill to top with crushed ice. Top off with club soda. Attach shaker and shake. \n\nGarnish with a lime wheel and a sprig of slapped mint.\n\nMixing is the key. Experiment with different mixing methods (stir instead of shake, etc).\n\nPint glass works. Adjust rhum volume depending on rhum strength.", 
+      "name": "Martinique Mojito", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "rhum agricole"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "1/2", 
+            "unit": "oz", 
+            "ingredient": "turbinado sugar"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "1/2", 
+            "unit": "", 
+            "ingredient": "lime"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "club soda"
+         }, 
+         {
+            "index": 4, 
+            "quantity": "", 
+            "unit": "", 
+            "ingredient": "mint leaves"
+         }
+      ], 
+      "rating": 5
+   }, 
+   {
+      "text": "Shake with ice, strain into chilled cocktail glass.", 
+      "name": "Monkey Gland", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "2 1/2", 
+            "unit": "oz", 
+            "ingredient": "gin"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "3/4", 
+            "unit": "oz", 
+            "ingredient": "orange juice"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "1/4", 
+            "unit": "oz", 
+            "ingredient": "absinthe"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "1/4", 
+            "unit": "oz", 
+            "ingredient": "grenadine"
+         }
+      ], 
+      "rating": 3
+   }, 
+   {
+      "text": "Shake with ice and strain into a chilled cocktail glass, or over ice in a rocks glass. \n\nLime juice may be omitted.", 
+      "name": "Montara Sunset", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "1 1/2", 
+            "unit": "oz", 
+            "ingredient": "gin"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "3/4", 
+            "unit": "oz", 
+            "ingredient": "Campari"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "1", 
+            "unit": "oz", 
+            "ingredient": "grapefruit juice"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "1/2", 
+            "unit": "oz", 
+            "ingredient": "maple syrup"
+         }, 
+         {
+            "index": 4, 
+            "quantity": "1/4", 
+            "unit": "oz", 
+            "ingredient": "lime juice"
+         }
+      ], 
+      "rating": 4
+   }, 
+   {
+      "text": "Shake and strain into chilled cocktail glass, or serve in an ice filled highball topped with water.", 
+      "name": "Mouresque Cocktail", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "absinthe"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "1", 
+            "unit": "oz", 
+            "ingredient": "orgeat"
+         }
+      ], 
+      "rating": 4
+   }, 
+   {
+      "text": "Stir with ice in a rocks glass. Negroni is a magical drink that is good with either cheap or expensive vermouth.", 
+      "name": "Negroni", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "1", 
+            "unit": "oz", 
+            "ingredient": "gin"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "1", 
+            "unit": "oz", 
+            "ingredient": "sweet vermouth"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "1", 
+            "unit": "oz", 
+            "ingredient": "Campari"
+         }
+      ], 
+      "rating": 4
+   }, 
+   {
+      "text": "In an old fashioned glass, dash the bitters on to the sugar cube. Add the orange slice and optional cherry. Muddle well. \nFill glass with ice cubes, add top quality rye, stir.", 
+      "name": "Old Fashioned", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "rye"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "1", 
+            "unit": "", 
+            "ingredient": "sugar cube"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "5", 
+            "unit": "dash", 
+            "ingredient": "bitters"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "", 
+            "unit": "", 
+            "ingredient": "orange wheel"
+         }, 
+         {
+            "index": 4, 
+            "quantity": "1", 
+            "unit": "", 
+            "ingredient": "maraschino cherry"
+         }
+      ], 
+      "rating": 5
+   }, 
+   {
+      "text": "In a collins glass, mix ingredients. Drop in shell of juiced lime.\nFill the glass with crushed ice and swizzle until the glass frosts over. \n\nGarnish with a large sprig of mint. Serve with a straw.\n\nExperiment with multiple rums, and different sugars or syrups.", 
+      "name": "Queen's Park Swizzle", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "3", 
+            "unit": "oz", 
+            "ingredient": "demerara rum"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "3/4", 
+            "unit": "oz", 
+            "ingredient": "lime juice"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "1/2", 
+            "unit": "oz", 
+            "ingredient": "demerara simple syrup"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "4", 
+            "unit": "dash", 
+            "ingredient": "Angostura bitters"
+         }
+      ], 
+      "rating": 5
+   }, 
+   {
+      "text": "Fill a small rocks glass with ice. In another rocks glass, muddle the sugar cube and the Peychaud's bitters (and optional water). \nDump the ice from the first glass, and coat the inside with absinthe, pouring out the excess. strain the cocktail into the absinthe glass.\ntwist the lemon over the glass, and optionally drop into the drink.", 
+      "name": "Sazerac", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "rye"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "1", 
+            "unit": "oz", 
+            "ingredient": "sugar cube"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "6", 
+            "unit": "dash", 
+            "ingredient": "Peychaud's bitters"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "", 
+            "unit": "", 
+            "ingredient": "lemon twist"
+         }, 
+         {
+            "index": 4, 
+            "quantity": "", 
+            "unit": "", 
+            "ingredient": "absinthe"
+         }, 
+         {
+            "index": 5, 
+            "quantity": "", 
+            "unit": "", 
+            "ingredient": "water"
+         }
+      ], 
+      "rating": 3
+   }, 
+   {
+      "text": "Shake with ice, strain into a highball glass, garnish with orange slice and cherry. Try to get fresh pineapple juice.", 
+      "name": "Singapore Sling", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "1", 
+            "unit": "oz", 
+            "ingredient": "gin"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "1/2", 
+            "unit": "oz", 
+            "ingredient": "Peter Heering Cherry Liqueur"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "1/4", 
+            "unit": "oz", 
+            "ingredient": "Cointreau"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "1/4", 
+            "unit": "oz", 
+            "ingredient": "Benedictine"
+         }, 
+         {
+            "index": 4, 
+            "quantity": "3", 
+            "unit": "oz", 
+            "ingredient": "pineapple juice"
+         }, 
+         {
+            "index": 5, 
+            "quantity": "1/2", 
+            "unit": "oz", 
+            "ingredient": "lime juice"
+         }, 
+         {
+            "index": 6, 
+            "quantity": "1", 
+            "unit": "dash", 
+            "ingredient": "bitters"
+         }, 
+         {
+            "index": 7, 
+            "quantity": "1", 
+            "unit": "", 
+            "ingredient": "orange slice"
+         }, 
+         {
+            "index": 8, 
+            "quantity": "1", 
+            "unit": "", 
+            "ingredient": "maraschino cherry"
+         }
+      ], 
+      "rating": 3
+   }, 
+   {
+      "text": "Set aside part of the lemon peel for garnish.\n\nIn a glass, thoroughly mix the sugar, gin, and lemon juice. Gently muddle 1 sprig of mint. Add ice and stir until glass is frosty. Add highly-carbonated club soda and stir a little more.\n\nGarnish with the remaining sprig of mint and lemon garnish.", 
+      "name": "Southside", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "gin"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "club soda"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "3/4", 
+            "unit": "oz", 
+            "ingredient": "lemon juice"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "1", 
+            "unit": "Tbsp", 
+            "ingredient": "turbinado sugar"
+         }, 
+         {
+            "index": 4, 
+            "quantity": "2", 
+            "unit": "", 
+            "ingredient": "mint sprigs"
+         }
+      ], 
+      "rating": 5
+   }, 
+   {
+      "text": "Shake with ice, strain into ice-filled old fashioned glass.", 
+      "name": "Stiletto", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "1 1/2", 
+            "unit": "oz", 
+            "ingredient": "bourbon"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "1", 
+            "unit": "oz", 
+            "ingredient": "lemon juice"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "1/4", 
+            "unit": "oz", 
+            "ingredient": "amaretto"
+         }
+      ], 
+      "rating": 3
+   }, 
+   {
+      "text": "Shake and strain into chilled cocktail glass.\n\nBracingly citrus, intriguingly musty aroma, balanced and weird.", 
+      "name": "Teresa", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "Campari"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "3/4", 
+            "unit": "oz", 
+            "ingredient": "creme de cassis"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "1", 
+            "unit": "oz", 
+            "ingredient": "lime juice"
+         }
+      ], 
+      "rating": 4
+   }, 
+   {
+      "text": "Pour syrup into rocks glass. Squeeze the lime wedge thoroughly into the syrup, then drop it in. Add the rhum, and an ice cube. Stir and let sit before drinking.\n\nGreat with Batiste. \n\nDon't skimp on the syrup otherwise the lime will easily dominate and throw things out of balance.\n\nDon't pay too much attention to measurements. Just mix it up and let the Trade Winds cool your heels.", 
+      "name": "Ti' punch", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "rhum agricole"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "1/4", 
+            "unit": "oz", 
+            "ingredient": "sugar cane syrup"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "", 
+            "unit": "", 
+            "ingredient": "lime wedge"
+         }
+      ], 
+      "rating": 5
+   }, 
+   {
+      "text": "Build over ice in a rocks glass. Stir.\n\nUse good quality brandy.", 
+      "name": "Vieux Carr\u00e9", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "3/4", 
+            "unit": "oz", 
+            "ingredient": "rye"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "3/4", 
+            "unit": "oz", 
+            "ingredient": "brandy"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "3/4", 
+            "unit": "oz", 
+            "ingredient": "sweet vermouth"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "1/4", 
+            "unit": "oz", 
+            "ingredient": "Benedictine"
+         }, 
+         {
+            "index": 4, 
+            "quantity": "1", 
+            "unit": "dash", 
+            "ingredient": "Peychaud's bitters"
+         }, 
+         {
+            "index": 5, 
+            "quantity": "1", 
+            "unit": "dash", 
+            "ingredient": "Angostura bitters"
+         }
+      ], 
+      "rating": 3
+   }, 
+   {
+      "text": "Shake with ice, strain over ice into an old fashioned glass and garnish with cherry.\n\nThis is a big drink, do not use a small old fashioned glass! A very nice drink to highlight Rendezvous Rye.", 
+      "name": "Ward Eight", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "rye"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "1", 
+            "unit": "oz", 
+            "ingredient": "simple syrup"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "3/4", 
+            "unit": "oz", 
+            "ingredient": "lemon juice"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "1/4", 
+            "unit": "oz", 
+            "ingredient": "grenadine"
+         }, 
+         {
+            "index": 4, 
+            "quantity": "1", 
+            "unit": "", 
+            "ingredient": "maraschino cherry"
+         }
+      ], 
+      "rating": 5
+   }, 
+   {
+      "text": "Shake with ice, strain over ice into an old fashioned glass and garnish with cherry.\n\nThis is a big drink, do not use a small glass!", 
+      "name": "Ward Nine", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "rye"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "3/4", 
+            "unit": "oz", 
+            "ingredient": "Maple Syrup"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "3/4", 
+            "unit": "oz", 
+            "ingredient": "lemon juice"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "1/4", 
+            "unit": "oz", 
+            "ingredient": "grenadine"
+         }, 
+         {
+            "index": 4, 
+            "quantity": "1", 
+            "unit": "", 
+            "ingredient": "maraschino cherry"
+         }
+      ], 
+      "rating": 5
+   }, 
+   {
+      "text": "Shake with ice, strain into chilled sour glass or ice-filled rocks glass. Garnish with cherry and orange wheel.", 
+      "name": "Whiskey Sour", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "whiskey"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "1", 
+            "unit": "oz", 
+            "ingredient": "lemon juice"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "1/2", 
+            "unit": "oz", 
+            "ingredient": "simple syrup"
+         }, 
+         {
+            "index": 3, 
+            "quantity": "1", 
+            "unit": "", 
+            "ingredient": "maraschino cherry"
+         }, 
+         {
+            "index": 4, 
+            "quantity": "1/2", 
+            "unit": "", 
+            "ingredient": "orange wheel"
+         }
+      ], 
+      "rating": 5
+   }, 
+   {
+      "text": "Shake with ice, strain into chilled cocktail glass.", 
+      "name": "White Lady", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "1 1/2", 
+            "unit": "oz", 
+            "ingredient": "gin"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "1", 
+            "unit": "oz", 
+            "ingredient": "Cointreau"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "3/4", 
+            "unit": "oz", 
+            "ingredient": "lemon juice"
+         }
+      ], 
+      "rating": 4
+   }, 
+   {
+      "text": "Build over ice in a rocks glass. Stir.", 
+      "name": "Yakuza Godfather (Oyabun)", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "1 1/2", 
+            "unit": "oz", 
+            "ingredient": "Suntory Yamazaki 12 Year Scotch"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "3/4", 
+            "unit": "oz", 
+            "ingredient": "amaretto"
+         }
+      ], 
+      "rating": 4
    }
 ]
