@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oo7-Sb-6q1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oo7-Sb-6q1">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -260,7 +260,7 @@
                                 </variation>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g3e-4w-VJt" customClass="RatingView" customModule="Sozzler" customModuleProvider="target">
-                                <rect key="frame" x="75" y="63" width="132" height="20"/>
+                                <rect key="frame" x="75" y="66" width="132" height="20"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="kGe-x1-Bxq"/>
@@ -277,7 +277,7 @@
                             <constraint firstItem="Cme-xI-olH" firstAttribute="trailing" secondItem="3GR-CX-vSj" secondAttribute="trailing" id="816-C9-qsa"/>
                             <constraint firstItem="olF-dE-YVU" firstAttribute="leading" secondItem="wuf-he-hcg" secondAttribute="leadingMargin" id="8Z5-3W-MqX"/>
                             <constraint firstItem="eEP-yo-NoJ" firstAttribute="top" secondItem="Cme-xI-olH" secondAttribute="bottom" constant="8" symbolic="YES" id="8hF-13-nK0"/>
-                            <constraint firstItem="g3e-4w-VJt" firstAttribute="centerY" secondItem="yRS-XK-Thg" secondAttribute="centerY" constant="-2" id="HRV-nt-fHg"/>
+                            <constraint firstItem="g3e-4w-VJt" firstAttribute="centerY" secondItem="yRS-XK-Thg" secondAttribute="centerY" constant="1" id="HRV-nt-fHg"/>
                             <constraint firstItem="vEj-9E-ccq" firstAttribute="leading" secondItem="ywy-eo-ixU" secondAttribute="trailing" constant="8" id="KNa-fW-HEL"/>
                             <constraint firstItem="ywy-eo-ixU" firstAttribute="top" secondItem="ThH-QC-Ior" secondAttribute="bottom" constant="8" id="Nd2-Kj-6rP"/>
                             <constraint firstItem="Cme-xI-olH" firstAttribute="leading" secondItem="eEP-yo-NoJ" secondAttribute="trailing" constant="-166" id="O7y-jq-mau"/>
