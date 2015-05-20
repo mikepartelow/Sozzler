@@ -107,6 +107,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "Sozzler"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

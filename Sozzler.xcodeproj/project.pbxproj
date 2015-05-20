@@ -26,6 +26,7 @@
 		4068794A1B0795FB0079D885 /* olive3-pick only-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 406879471B0795FB0079D885 /* olive3-pick only-32.png */; };
 		4068794B1B0795FB0079D885 /* olive3 - pick only.dae in Resources */ = {isa = PBXBuildFile; fileRef = 406879481B0795FB0079D885 /* olive3 - pick only.dae */; };
 		4068794C1B0795FB0079D885 /* olive3.dae in Resources */ = {isa = PBXBuildFile; fileRef = 406879491B0795FB0079D885 /* olive3.dae */; };
+		40895D4B1B0C09280044DB75 /* olive-paperclip-app-store-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 40895D4A1B0C09280044DB75 /* olive-paperclip-app-store-1024.png */; };
 		408BD5B11B0B908500721CE5 /* olive-paperclip-80.png in Resources */ = {isa = PBXBuildFile; fileRef = 408BD5B01B0B908500721CE5 /* olive-paperclip-80.png */; };
 		408BD5B41B0B917600721CE5 /* olive-paperclip-58.png in Resources */ = {isa = PBXBuildFile; fileRef = 408BD5B21B0B917600721CE5 /* olive-paperclip-58.png */; };
 		408BD5B51B0B917600721CE5 /* olive-paperclip-87.png in Resources */ = {isa = PBXBuildFile; fileRef = 408BD5B31B0B917600721CE5 /* olive-paperclip-87.png */; };
@@ -44,7 +45,6 @@
 		40F136E71B04547F00C51EAA /* recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 40F136E61B04547F00C51EAA /* recipes.json */; };
 		40F65BAE1AE8BAE000D15898 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F65BAD1AE8BAE000D15898 /* AppDelegate.swift */; };
 		40F65BB11AE8BAE000D15898 /* Sozzler.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40F65BAF1AE8BAE000D15898 /* Sozzler.xcdatamodeld */; };
-		40F65BB31AE8BAE000D15898 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F65BB21AE8BAE000D15898 /* ViewController.swift */; };
 		40F65BB61AE8BAE000D15898 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40F65BB41AE8BAE000D15898 /* Main.storyboard */; };
 		40F65BB81AE8BAE000D15898 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40F65BB71AE8BAE000D15898 /* Images.xcassets */; };
 		40F65BBB1AE8BAE000D15898 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40F65BB91AE8BAE000D15898 /* LaunchScreen.xib */; };
@@ -81,6 +81,7 @@
 		406879471B0795FB0079D885 /* olive3-pick only-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive3-pick only-32.png"; sourceTree = "<group>"; };
 		406879481B0795FB0079D885 /* olive3 - pick only.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "olive3 - pick only.dae"; sourceTree = "<group>"; };
 		406879491B0795FB0079D885 /* olive3.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = olive3.dae; sourceTree = "<group>"; };
+		40895D4A1B0C09280044DB75 /* olive-paperclip-app-store-1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-paperclip-app-store-1024.png"; sourceTree = "<group>"; };
 		408BD5B01B0B908500721CE5 /* olive-paperclip-80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-paperclip-80.png"; sourceTree = "<group>"; };
 		408BD5B21B0B917600721CE5 /* olive-paperclip-58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-paperclip-58.png"; sourceTree = "<group>"; };
 		408BD5B31B0B917600721CE5 /* olive-paperclip-87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-paperclip-87.png"; sourceTree = "<group>"; };
@@ -101,7 +102,6 @@
 		40F65BAC1AE8BAE000D15898 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40F65BAD1AE8BAE000D15898 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40F65BB01AE8BAE000D15898 /* Sozzler.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Sozzler.xcdatamodel; sourceTree = "<group>"; };
-		40F65BB21AE8BAE000D15898 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		40F65BB51AE8BAE000D15898 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		40F65BB71AE8BAE000D15898 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		40F65BBA1AE8BAE000D15898 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -174,7 +174,6 @@
 				40F65BAB1AE8BAE000D15898 /* Supporting Files */,
 				40B643F11AE8C35300EEBBCA /* Unit.swift */,
 				400832AD1AE9F53100112198 /* UserSettings.swift */,
-				40F65BB21AE8BAE000D15898 /* ViewController.swift */,
 				409480A91AF838A100543FFB /* EditRecipeNavViewController.swift */,
 				408BD5B61B0B9C1C00721CE5 /* UnitSource.swift */,
 			);
@@ -184,6 +183,7 @@
 		40F65BAB1AE8BAE000D15898 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				40895D4A1B0C09280044DB75 /* olive-paperclip-app-store-1024.png */,
 				408BD5B21B0B917600721CE5 /* olive-paperclip-58.png */,
 				408BD5B31B0B917600721CE5 /* olive-paperclip-87.png */,
 				408BD5B01B0B908500721CE5 /* olive-paperclip-80.png */,
@@ -265,7 +265,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0630;
-				ORGANIZATIONNAME = shoehater.com;
+				ORGANIZATIONNAME = mikepartelow.com;
 				TargetAttributes = {
 					40F65BA71AE8BAE000D15898 = {
 						CreatedOnToolsVersion = 6.3;
@@ -310,6 +310,7 @@
 				406879431B0792F40079D885 /* olive-paperclip-180.png in Resources */,
 				40F65BBB1AE8BAE000D15898 /* LaunchScreen.xib in Resources */,
 				408BD5B11B0B908500721CE5 /* olive-paperclip-80.png in Resources */,
+				40895D4B1B0C09280044DB75 /* olive-paperclip-app-store-1024.png in Resources */,
 				406879401B0792B80079D885 /* olive-paperclip-32.png in Resources */,
 				4068794A1B0795FB0079D885 /* olive3-pick only-32.png in Resources */,
 				400603161AECA1A600A11957 /* RatingView.xib in Resources */,
@@ -340,7 +341,6 @@
 				4029C9071AED341300D5F0C9 /* DataViewController.swift in Sources */,
 				400832B21AEA098800112198 /* AddIngredientToComponentViewController.swift in Sources */,
 				40DC56681AEC669500449B8A /* IngredientTableViewController.swift in Sources */,
-				40F65BB31AE8BAE000D15898 /* ViewController.swift in Sources */,
 				408BD5B71B0B9C1C00721CE5 /* UnitSource.swift in Sources */,
 				400603181AECA1BC00A11957 /* RatingView.swift in Sources */,
 				400832AE1AE9F53100112198 /* UserSettings.swift in Sources */,

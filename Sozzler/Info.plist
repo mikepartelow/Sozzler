@@ -17,14 +17,14 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.shoehater.document.sozzler</string>
+				<string>com.mikepartelow.document.sozzler</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.shoehater.$(PRODUCT_NAME:rfc1034identifier)</string>
+	<string>com.mikepartelow.$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -36,7 +36,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>b3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -63,7 +63,7 @@
 			<key>UTTypeDescription</key>
 			<string>Sozzler File</string>
 			<key>UTTypeIdentifier</key>
-			<string>com.shoehater.document.sozzler</string>
+			<string>com.mikepartelow.document.sozzler</string>
 			<key>UTTypeSize320IconFile</key>
 			<string>olive-on</string>
 			<key>UTTypeSize64IconFile</key>
