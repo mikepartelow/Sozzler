@@ -721,7 +721,7 @@
         <scene sceneID="Hv9-0o-c6y">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8oJ-zc-fdf" userLabel="Ingredients Nav" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Ingredients" image="olive-on.png" id="SBo-Yr-S7t"/>
+                    <tabBarItem key="tabBarItem" title="Ingredients" image="olive-paperclip-16.png" id="SBo-Yr-S7t"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="KS5-H5-bEc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -740,5 +740,6 @@
     <resources>
         <image name="martini-16.png" width="16" height="16"/>
         <image name="olive-on.png" width="16" height="16"/>
+        <image name="olive-paperclip-16.png" width="16" height="16"/>
     </resources>
 </document>
