@@ -50,7 +50,7 @@
             "index": 3, 
             "quantity": "1/4", 
             "unit": "oz", 
-            "ingredient": "dark maple syrup"
+            "ingredient": "maple syrup"
          }, 
          {
             "index": 4, 
@@ -100,7 +100,7 @@
             "index": 0, 
             "quantity": "2", 
             "unit": "oz", 
-            "ingredient": "white rum"
+            "ingredient": "light rum"
          }, 
          {
             "index": 1, 
@@ -637,8 +637,8 @@
          {
             "index": 5, 
             "quantity": "1", 
-            "unit": "", 
-            "ingredient": "Tsp turbinado sugar"
+            "unit": "tsp", 
+            "ingredient": "turbinado sugar"
          }, 
          {
             "index": 6, 
@@ -663,7 +663,7 @@
             "index": 1, 
             "quantity": "1", 
             "unit": "oz", 
-            "ingredient": "demerara rum"
+            "ingredient": "dark rum"
          }, 
          {
             "index": 2, 
@@ -724,7 +724,7 @@
       "rating": 3
    }, 
    {
-      "text": "Chill a martini glass. Cut an orange wedge and set aside some lemon peel for garnish. Shake everything but the seltzer. Gently stir in the seltzer. Strain into chilled glasses, garnish.", 
+      "text": "Chill a martini glass. Cut an orange wedge and set aside some lemon peel for garnish. Shake everything but the club soda. Gently stir in the club soda. Strain into chilled glasses, garnish.", 
       "name": "Rick's Maple Bourbon Esmash", 
       "components": [
          {
@@ -767,7 +767,7 @@
             "index": 6, 
             "quantity": "1 1/2", 
             "unit": "oz", 
-            "ingredient": "seltzer"
+            "ingredient": "club soda"
          }
       ], 
       "rating": 5
@@ -1108,7 +1108,7 @@
             "index": 0, 
             "quantity": "3", 
             "unit": "oz", 
-            "ingredient": "demerara rum"
+            "ingredient": "dark rum"
          }, 
          {
             "index": 1, 
