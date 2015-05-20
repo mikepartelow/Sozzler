@@ -71,7 +71,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubz-ng-dA7" customClass="RatingView" customModule="Sozzler" customModuleProvider="target">
-                                                <rect key="frame" x="79" y="11" width="112" height="16"/>
+                                                <rect key="frame" x="79" y="9" width="112" height="16"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="112" id="9d7-mh-dBN"/>
@@ -92,7 +92,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="xjL-To-Zeg" secondAttribute="bottom" constant="20" symbolic="YES" id="2Dq-Sq-aAt"/>
-                                            <constraint firstItem="ubz-ng-dA7" firstAttribute="centerY" secondItem="8VM-dQ-LuZ" secondAttribute="centerY" id="5n9-yE-F0c"/>
+                                            <constraint firstItem="ubz-ng-dA7" firstAttribute="centerY" secondItem="8VM-dQ-LuZ" secondAttribute="centerY" constant="-2" id="5n9-yE-F0c"/>
                                             <constraint firstItem="8VM-dQ-LuZ" firstAttribute="top" secondItem="Vmi-9I-4HI" secondAttribute="top" constant="8" id="6cg-QE-tsg"/>
                                             <constraint firstItem="xjL-To-Zeg" firstAttribute="leading" secondItem="Vmi-9I-4HI" secondAttribute="leading" constant="5" id="9Ps-kk-I2k"/>
                                             <constraint firstItem="ubz-ng-dA7" firstAttribute="top" secondItem="8VM-dQ-LuZ" secondAttribute="top" id="AeL-Bh-Ojo"/>
