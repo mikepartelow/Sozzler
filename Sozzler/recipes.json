@@ -354,7 +354,7 @@
       "rating": 5
    }, 
    {
-      "text": "Pour the gin into a chilled rocks glass with ice. Top with the tonic. Garnish with the lime wedge and bar straws.\n\nRemember to pour the gin before the tonic, otherwise you will have made a Tonic And Gin, which is a different drink entirely.", 
+      "text": "Pour the gin into a chilled rocks glass with ice. Top with the tonic. Garnish with the lime wedge and bar straws.\n\nRemember to pour the gin before the tonic, otherwise you will have made a Tonic And Gin, an inferior drink.", 
       "name": "Gin And Tonic", 
       "components": [
          {
@@ -377,6 +377,31 @@
          }
       ], 
       "rating": 5
+   }, 
+   {
+      "text": "Pour the tonic into a chilled rocks glass with ice. Top with the gin. Garnish with the lime wedge and bar straws.\n\nConsider making a Gin and Tonic next time.", 
+      "name": "Tonic And Gin", 
+      "components": [
+         {
+            "index": 0, 
+            "quantity": "3", 
+            "unit": "oz", 
+            "ingredient": "Tonic"
+         }, 
+         {
+            "index": 1, 
+            "quantity": "2", 
+            "unit": "oz", 
+            "ingredient": "Gin"
+         }, 
+         {
+            "index": 2, 
+            "quantity": "", 
+            "unit": "", 
+            "ingredient": "lime wedge"
+         }
+      ], 
+      "rating": 4
    }, 
    {
       "text": "Shake with ice, strain into an ice filled highball glass. Fill with club soda (1 to 2 ounces, to taste).", 
