@@ -318,6 +318,7 @@
                         <outlet property="recipeName" destination="vEj-9E-ccq" id="vSL-rU-LuP"/>
                         <outlet property="recipeText" destination="olF-dE-YVU" id="gIa-pu-9Eb"/>
                         <segue destination="dtn-kK-1MD" kind="unwind" identifier="unwindToRecipes" unwindAction="unwindToRecipes:" id="Vy0-Jj-sLF"/>
+                        <segue destination="dtn-kK-1MD" kind="unwind" identifier="unwindToRecipe" unwindAction="unwindToRecipe:" id="tlT-bb-Ms1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OpO-yD-K1Y" userLabel="First Responder" sceneMemberID="firstResponder"/>

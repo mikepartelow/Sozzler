@@ -33,4 +33,8 @@ class RecipeViewController: UIViewController {
             addRecipeViewController.recipe = recipe
         }
     }
+    
+    @IBAction func unwindToRecipe(sender: UIStoryboardSegue)
+    {
+    }    
 }

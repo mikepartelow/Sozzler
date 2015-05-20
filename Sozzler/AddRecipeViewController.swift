@@ -1,4 +1,5 @@
 import UIKit
+import CoreData
 
 class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
     let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
@@ -14,6 +15,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var added = false
     var recipe: Recipe?
+    var editingRecipe = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +35,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             recipeName!.text = recipe!.name
             recipeText!.text = recipe!.text
             ratingView!.rating = Int(recipe!.rating)
+            editingRecipe = true
         }
         
         ratingView!.editing = true
@@ -115,7 +118,11 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBAction func onCancel(sender: UIBarButtonItem) {
         moc.rollback()
-        performSegueWithIdentifier("unwindToRecipes", sender: self)
+        if editingRecipe {
+            performSegueWithIdentifier("unwindToRecipe", sender: self)
+        } else {
+            performSegueWithIdentifier("unwindToRecipes", sender: self)
+        }
     }
     
     @IBAction func onDone(sender: UIBarButtonItem) {
