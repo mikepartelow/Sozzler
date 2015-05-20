@@ -629,7 +629,7 @@
         <scene sceneID="L06-cD-tLt">
             <objects>
                 <navigationController title="Data Nav" id="sn0-yJ-DH0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Data" image="olive-on.png" id="dhK-Qi-RbU"/>
+                    <tabBarItem key="tabBarItem" systemItem="more" id="dhK-Qi-RbU"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vqO-29-45F">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -739,7 +739,6 @@
     </scenes>
     <resources>
         <image name="martini-16.png" width="16" height="16"/>
-        <image name="olive-on.png" width="16" height="16"/>
         <image name="olive-paperclip-16.png" width="16" height="16"/>
     </resources>
 </document>
