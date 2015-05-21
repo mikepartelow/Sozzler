@@ -33,7 +33,12 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             recipeText.textColor = UIColor.lightGrayColor()
         } else {
             recipeName!.text = recipe!.name
-            recipeText!.text = recipe!.text
+            if recipe!.text.isEmpty {
+                recipeText!.text = recipeTextPlaceholder
+                recipeText.textColor = UIColor.lightGrayColor()
+            } else {
+                recipeText!.text = recipe!.text
+            }
             ratingView!.rating = Int(recipe!.rating)
             editingRecipe = true
         }
@@ -127,9 +132,14 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBAction func onDone(sender: UIBarButtonItem) {
         recipe!.name = recipeName!.text
-        recipe!.text = recipeText!.text
         recipe!.rating = Int16(ratingView!.rating)
         
+        if recipeText!.text == recipeTextPlaceholder {
+            recipe!.text = ""
+        } else {
+            recipe!.text = recipeText!.text
+        }
+
         var error: NSError?
         if moc.save(&error) {
             added = true
