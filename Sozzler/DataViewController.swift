@@ -25,7 +25,7 @@ class DataViewController: UIViewController, MFMailComposeViewControllerDelegate 
                 let data = string.dataUsingEncoding(NSUTF8StringEncoding)
                 let base64Data = data!.base64EncodedDataWithOptions(.allZeros)
 
-                composer.addAttachmentData(NSData(base64EncodedData: base64Data, options: .allZeros), mimeType: "application/json", fileName: "Sozzler Recipes.sozzler")
+                composer.addAttachmentData(NSData(base64EncodedData: base64Data, options: .allZeros), mimeType: "application/sozzler", fileName: "Sozzler Recipes.sozzler")
                 
                 presentViewController(composer, animated: true, completion: nil)
             }
