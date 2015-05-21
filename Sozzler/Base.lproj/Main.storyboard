@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oo7-Sb-6q1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oo7-Sb-6q1">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -680,20 +680,44 @@
                                     <action selector="onImportCanned:" destination="TPs-VM-CSV" eventType="touchUpInside" id="pLy-rL-Ar8"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1337 Ingredients" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRa-uT-eYf">
+                                <rect key="frame" x="236" y="493" width="129" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1337 Recipes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BlX-QV-54j">
+                                <rect key="frame" x="248" y="522" width="105" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0b01337" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fso-jZ-IOK">
+                                <rect key="frame" x="229" y="464" width="143" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="bKN-Vy-tL8" firstAttribute="top" secondItem="fhA-XC-brp" secondAttribute="bottom" constant="32" id="5L1-oW-pFo"/>
+                            <constraint firstItem="G7M-Jf-ioO" firstAttribute="top" secondItem="BlX-QV-54j" secondAttribute="bottom" constant="8" id="6hG-9c-pxF"/>
                             <constraint firstAttribute="trailing" secondItem="cdj-fu-t3F" secondAttribute="trailing" constant="20" symbolic="YES" id="9da-ja-l2k"/>
                             <constraint firstAttribute="trailing" secondItem="bKN-Vy-tL8" secondAttribute="trailing" constant="20" symbolic="YES" id="Bcc-VZ-PzJ"/>
                             <constraint firstItem="cdj-fu-t3F" firstAttribute="top" secondItem="fhA-XC-brp" secondAttribute="bottom" constant="16" id="Bea-Vh-5TN"/>
                             <constraint firstItem="cdj-fu-t3F" firstAttribute="top" secondItem="bKN-Vy-tL8" secondAttribute="bottom" constant="32" id="PtT-Bj-2fx"/>
                             <constraint firstItem="G7M-Jf-ioO" firstAttribute="top" secondItem="cdj-fu-t3F" secondAttribute="bottom" constant="8" symbolic="YES" id="V0y-I3-hNe"/>
                             <constraint firstAttribute="centerX" secondItem="bKN-Vy-tL8" secondAttribute="centerX" id="WtT-LY-7dU"/>
+                            <constraint firstAttribute="centerX" secondItem="BlX-QV-54j" secondAttribute="centerX" id="Zfe-jT-wUR"/>
+                            <constraint firstAttribute="centerX" secondItem="hRa-uT-eYf" secondAttribute="centerX" id="gMq-yx-bi6"/>
                             <constraint firstItem="cdj-fu-t3F" firstAttribute="top" secondItem="bKN-Vy-tL8" secondAttribute="bottom" constant="80" id="heY-Ht-Rj5"/>
                             <constraint firstItem="bKN-Vy-tL8" firstAttribute="top" secondItem="Pqy-JQ-GHB" secondAttribute="top" constant="16" id="jh0-g9-8sB"/>
+                            <constraint firstItem="hRa-uT-eYf" firstAttribute="top" secondItem="fso-jZ-IOK" secondAttribute="bottom" constant="8" id="k8X-2W-dA0"/>
                             <constraint firstItem="fhA-XC-brp" firstAttribute="top" secondItem="bKN-Vy-tL8" secondAttribute="bottom" constant="16" id="m1k-0X-Q58"/>
                             <constraint firstItem="cdj-fu-t3F" firstAttribute="leading" secondItem="Pqy-JQ-GHB" secondAttribute="leading" constant="20" symbolic="YES" id="rCJ-Lj-OZs"/>
+                            <constraint firstItem="BlX-QV-54j" firstAttribute="top" secondItem="hRa-uT-eYf" secondAttribute="bottom" constant="8" id="uBs-AA-wd5"/>
+                            <constraint firstAttribute="centerX" secondItem="fso-jZ-IOK" secondAttribute="centerX" id="wwk-CP-egm"/>
                             <constraint firstItem="bKN-Vy-tL8" firstAttribute="leading" secondItem="Pqy-JQ-GHB" secondAttribute="leading" constant="16" id="xTo-uh-fDg"/>
                             <constraint firstAttribute="centerX" secondItem="cdj-fu-t3F" secondAttribute="centerX" id="z1k-Ro-3DH"/>
                         </constraints>
@@ -712,6 +736,11 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="Di6-LY-LYh"/>
+                    <connections>
+                        <outlet property="ingredientsLabel" destination="hRa-uT-eYf" id="S7P-XX-YKl"/>
+                        <outlet property="recipesLabel" destination="BlX-QV-54j" id="pEq-Tw-RMq"/>
+                        <outlet property="versionLabel" destination="fso-jZ-IOK" id="7uA-kD-N0C"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="osO-ZM-ixM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

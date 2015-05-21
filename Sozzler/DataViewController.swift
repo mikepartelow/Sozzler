@@ -4,8 +4,20 @@ import AddressBook
 
 class DataViewController: UIViewController, MFMailComposeViewControllerDelegate {
 
+    @IBOutlet weak var versionLabel: UILabel!
+    @IBOutlet weak var ingredientsLabel: UILabel!
+    @IBOutlet weak var recipesLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String {
+            if let build = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String {
+                versionLabel!.text = "Sozzler version \(version).\(build)"
+            }
+        }
+        recipesLabel!.text = "\(Recipe.count()) recipes"
+        ingredientsLabel!.text = "\(Ingredient.count()) ingredients"
     }
 
     @IBAction func onExportRecipes(sender: UIButton) {
