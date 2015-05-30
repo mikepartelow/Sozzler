@@ -4,8 +4,20 @@ import AddressBook
 
 class DataViewController: UIViewController, MFMailComposeViewControllerDelegate {
 
+    @IBOutlet weak var versionLabel: UILabel!
+    @IBOutlet weak var ingredientsLabel: UILabel!
+    @IBOutlet weak var recipesLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String {
+            if let build = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String {
+                versionLabel!.text = "Sozzler version \(version).\(build)"
+            }
+        }
+        recipesLabel!.text = "\(Recipe.count()) recipes"
+        ingredientsLabel!.text = "\(Ingredient.count()) ingredients"
     }
 
     @IBAction func onExportRecipes(sender: UIButton) {
@@ -25,7 +37,7 @@ class DataViewController: UIViewController, MFMailComposeViewControllerDelegate 
                 let data = string.dataUsingEncoding(NSUTF8StringEncoding)
                 let base64Data = data!.base64EncodedDataWithOptions(.allZeros)
 
-                composer.addAttachmentData(NSData(base64EncodedData: base64Data, options: .allZeros), mimeType: "application/json", fileName: "Sozzler Recipes.sozzler")
+                composer.addAttachmentData(NSData(base64EncodedData: base64Data, options: .allZeros), mimeType: "application/sozzler", fileName: "Sozzler Recipes.sozzler")
                 
                 presentViewController(composer, animated: true, completion: nil)
             }

@@ -8,7 +8,11 @@
 	<array>
 		<dict>
 			<key>CFBundleTypeIconFiles</key>
-			<array/>
+			<array>
+				<string>olive-paperclip-120</string>
+				<string>olive-paperclip-app-store-1024</string>
+				<string>Sozzler0-180</string>
+			</array>
 			<key>CFBundleTypeName</key>
 			<string>Sozzler File</string>
 			<key>CFBundleTypeRole</key>
@@ -36,7 +40,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>00006</string>
+	<string>00007</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -65,15 +69,15 @@
 			<key>UTTypeIdentifier</key>
 			<string>com.mikepartelow.document.sozzler</string>
 			<key>UTTypeSize320IconFile</key>
-			<string>olive-on</string>
+			<string>Sozzler0-120</string>
 			<key>UTTypeSize64IconFile</key>
-			<string>olive-off</string>
+			<string>Sozzler0-58</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
-				<array>
-					<string>sozzler</string>
-				</array>
+				<string>sozzler</string>
+				<key>public.mime-type</key>
+				<string>application/sozzler</string>
 			</dict>
 		</dict>
 	</array>

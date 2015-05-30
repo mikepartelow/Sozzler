@@ -52,6 +52,10 @@ class Ingredient: NSManagedObject {
 // saving and validation
 //
 extension Ingredient {
+    class func count() -> Int {
+        return CoreDataHelper.count("Ingredient", predicate: nil)
+    }
+    
     override func willSave() {
         if !deleted {
             var recipeCounts: [Recipe:Int] = [:]
