@@ -1,16 +1,19 @@
 import CoreData
-import UIKit
 
 @objc(Unit)
 class Unit: NSManagedObject {
 
     @NSManaged var name: String
+    @NSManaged var recipe_count: Int16
+    @NSManaged var index: Int16
+    @NSManaged var components: NSSet
 
     class func fetchedResultsController() -> NSFetchedResultsController {
         let fetchRequest = NSFetchRequest(entityName: "Unit")
-        let sortByName = NSSortDescriptor(key: "name", ascending: true)
+
+        let sortByIndex = NSSortDescriptor(key: "index", ascending: true)
         
-        fetchRequest.sortDescriptors = [sortByName]
+        fetchRequest.sortDescriptors = [sortByIndex]
         
         return CoreDataHelper.fetchedResultsController(fetchRequest)
     }
@@ -20,11 +23,13 @@ class Unit: NSManagedObject {
         return CoreDataHelper.find("Unit", predicate: predicate) as! Unit?
     }
     
-    class func create(name: String) -> Unit {
+    class func create(name: String, index: Int = Unit.count()) -> Unit {
         return CoreDataHelper.create("Unit", initializer: {
             (entity, context) -> NSManagedObject in
                 let unit = Unit(entity: entity, insertIntoManagedObjectContext: context)
                 unit.name = name
+                unit.index = Int16(index)
+                unit.recipe_count = 0
                 return unit
             }
         ) as! Unit
@@ -37,4 +42,26 @@ class Unit: NSManagedObject {
             return Unit.create(name)
         }
     }
+    
+    class func count() -> Int {
+        return CoreDataHelper.count("Unit", predicate: nil)
+    }
+
+    override func willSave() {
+        if !deleted {
+            var recipeCounts: [Recipe:Int] = [:]
+            
+            for component in components.allObjects as! [Component] {
+                if recipeCounts[component.recipe] == nil {
+                    recipeCounts[component.recipe] = 1
+                } else {
+                    recipeCounts[component.recipe]! += 1
+                }
+            }
+            
+            let count = recipeCounts.values.array.reduce(0, combine: +)
+            setPrimitiveValue(count, forKey: "recipe_count")
+        }
+    }
+    
 }

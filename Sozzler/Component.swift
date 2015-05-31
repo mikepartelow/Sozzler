@@ -7,11 +7,6 @@ func <(lhs: Component, rhs: Component) -> Bool {
 
 func ==(lhs: Component, rhs: Component) -> Bool {
     return lhs.index == rhs.index
-    
-//    return lhs.ingredient == rhs.ingredient &&
-//        lhs.unit == rhs.unit &&
-//        lhs.quantity_n == rhs.quantity_n &&
-//        lhs.quantity_d == rhs.quantity_d
 }
 
 @objc(Component)

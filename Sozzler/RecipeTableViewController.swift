@@ -17,6 +17,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         super.init(coder: aDecoder)
         
         if Recipe.count() == 0 {
+            CannedUnitSource().read()
             CannedRecipeSource().read()
             CoreDataHelper.save(nil)
         }
@@ -162,7 +163,6 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             return frc!.sectionForSectionIndexTitle(title, atIndex: index)
         }
     }
-
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
@@ -179,7 +179,9 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
                 // FIXME: duplicated effort! will be recalculated in willSave() but if we don't change the Ingredient, willSave() *wont* be called..
                 //
                 component.ingredient.recipe_count -= 1
-                assert(component.ingredient.recipe_count >= 0, "recipe count went negative")
+                component.unit.recipe_count -= 1
+                assert(component.ingredient.recipe_count >= 0, "ingredient recipe count went negative")
+                assert(component.unit.recipe_count >= 0, "unit recipe count went negative")
                 CoreDataHelper.delete(component)
             }
             CoreDataHelper.delete(recipe)

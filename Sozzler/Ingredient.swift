@@ -56,6 +56,7 @@ extension Ingredient {
         return CoreDataHelper.count("Ingredient", predicate: nil)
     }
     
+    // FIXME: DRY: copypasta Unit
     override func willSave() {
         if !deleted {
             var recipeCounts: [Recipe:Int] = [:]
@@ -69,7 +70,6 @@ extension Ingredient {
             }
             
             let count = recipeCounts.values.array.reduce(0, combine: +)
-            setPrimitiveValue(Ingredient.fancyName(name), forKey: "name")
             setPrimitiveValue(count, forKey: "recipe_count")
         }
     }

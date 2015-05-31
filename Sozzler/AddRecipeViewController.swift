@@ -181,7 +181,11 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
         NSLog("\(fromIndexPath.row) => \(toIndexPath.row)")
-        
+
+        if fromIndexPath == toIndexPath {
+            return
+        }
+    
         var sortedComponents = recipe!.sortedComponents
         
         if toIndexPath.row < fromIndexPath.row {
