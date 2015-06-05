@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if errors {
                 CoreDataHelper.rollback()
-                var alert = UIAlertController(title: "", message: "Couldn't read Sozzler file, canceling import.", preferredStyle: .Alert)
+                var alert = UIAlertController(title: "", message: "Errors in Sozzler file, canceling import.", preferredStyle: .Alert)
                 let cancelAction = UIAlertAction(title: "OK", style: .Default) { (action: UIAlertAction!) -> Void in }
                 alert.addAction(cancelAction)
                 self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
