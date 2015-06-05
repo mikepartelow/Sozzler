@@ -80,10 +80,10 @@ extension Recipe {
     }
     
     class func create(recipeDict: NSDictionary) -> Recipe? {
-        let name        = recipeDict["name"]        as! String
-        let rating      = recipeDict["rating"]      as! Int
-        let text        = recipeDict["text"]        as! String
-        let components  = recipeDict["components"]  as! [NSDictionary]
+        let name           = (recipeDict["name"] as? String) ?? ""
+        let rating         = (recipeDict["rating"] as? Int) ?? 0
+        let text           = (recipeDict["text"] as? String) ?? ""
+        let components     = (recipeDict["components"] as? [NSDictionary]) ?? [NSDictionary]()
         
         let recipe = Recipe.create(name, withRating: Int16(rating), withText: text)
         

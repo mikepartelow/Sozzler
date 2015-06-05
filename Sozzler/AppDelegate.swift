@@ -12,19 +12,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var alert = UIAlertController(title: "", message: "Replace all existing recipes?", preferredStyle: .Alert)
         
         let doitAction = UIAlertAction(title: "Do it", style: .Destructive) { (action: UIAlertAction!) -> Void in
-            CoreDataHelper.factoryReset()
+            CoreDataHelper.factoryReset(save: false)
 
+            var errors = true
+            
             CannedUnitSource().read()
-            URLRecipeSource(url: url).read()
-            
-            // FIXME: handle errors
-            var error: NSError?
-            CoreDataHelper.save(&error)
-            
-            if let tabs = self.window?.rootViewController as? UITabBarController {
-                tabs.selectedIndex = 0
+            if URLRecipeSource(url: url).read() != nil {
+                if CoreDataHelper.save(nil) {
+                    if let tabs = self.window?.rootViewController as? UITabBarController {
+                        tabs.selectedIndex = 0
+                    }
+                    NSNotificationCenter.defaultCenter().postNotificationName("data.imported", object: self)
+                    errors = false
+                }
             }
-            NSNotificationCenter.defaultCenter().postNotificationName("data.imported", object: self)
+            
+            if errors {
+                CoreDataHelper.rollback()
+                var alert = UIAlertController(title: "", message: "Couldn't read Sozzler file, canceling import.", preferredStyle: .Alert)
+                let cancelAction = UIAlertAction(title: "OK", style: .Default) { (action: UIAlertAction!) -> Void in }
+                alert.addAction(cancelAction)
+                self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+            }
         }
         
         let cancelAction = UIAlertAction(title: "Forget it", style: .Default) { (action: UIAlertAction!) -> Void in }

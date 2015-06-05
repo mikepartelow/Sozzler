@@ -72,6 +72,11 @@ class CoreDataHelper {
         return moc.save(error)
     }
     
+    class func rollback() {
+        let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+        moc.rollback()
+    }
+    
     class func delete(obj: NSManagedObject) {
         let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
         moc.deleteObject(obj)
@@ -83,7 +88,7 @@ class CoreDataHelper {
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: sectionNameKeyPath, cacheName: nil)
     }
     
-    class func factoryReset() {
+    class func factoryReset(save: Bool=true) {
         let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
 
         map(CoreDataHelper.all("Component"), { moc.deleteObject($0) })
@@ -91,11 +96,13 @@ class CoreDataHelper {
         map(CoreDataHelper.all("Ingredient"), { moc.deleteObject($0) })
         map(CoreDataHelper.all("Recipe"), { moc.deleteObject($0) })
 
-        // FIXME: handle errors
-        var error: NSError?
-        CoreDataHelper.save(&error)
-        NSLog("\(error)")
-        NSLog("recipe count: \(Recipe.count())")
-        assert(error == nil)
+        if save {
+            // FIXME: handle errors
+            var error: NSError?
+            CoreDataHelper.save(&error)
+            NSLog("\(error)")
+            NSLog("recipe count: \(Recipe.count())")
+            assert(error == nil)
+        }
     }
 }

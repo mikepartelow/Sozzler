@@ -8,13 +8,13 @@ class URLRecipeSource {
         self.url = url
     }
     
-    func read() -> [Recipe] {
+    func read() -> [Recipe]? {
         let recipesJson = NSData(contentsOfURL: url, options: NSDataReadingOptions.DataReadingMappedIfSafe, error: nil)
-        let recipeDicts = NSJSONSerialization.JSONObjectWithData(recipesJson!, options: nil, error: nil) as! [NSDictionary]
-        
-        // FIXME: error reporting not just filtering
-        //
-        return filter(map(recipeDicts, { Recipe.create($0) }), { $0 != nil }).map { $0! }
+        if let recipeDicts = NSJSONSerialization.JSONObjectWithData(recipesJson!, options: nil, error: nil) as? [NSDictionary] {
+            return filter(map(recipeDicts, { Recipe.create($0) }), { $0 != nil }).map { $0! }
+        } else {
+            return nil
+        }
     }
 }
 
