@@ -115,7 +115,6 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         if segue.identifier == "recipeDetails" {
             let rvc = navController.topViewController! as! RecipeViewController
             let index = tableView.indexPathForSelectedRow()!
-            NSLog("index: \(index.row) \(index.section))")
 
             rvc.recipe = frc!.objectAtIndexPath(index) as? Recipe
             

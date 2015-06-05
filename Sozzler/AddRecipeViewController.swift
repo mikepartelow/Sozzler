@@ -79,7 +79,6 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
     func resizeComponentsTable() {
-        NSLog("\(componentTable.contentSize.height)")
         let height = componentTable.contentSize.height
 
         componentTableHeight.constant = min(height, 6*(height / CGFloat(recipe!.components.count)))

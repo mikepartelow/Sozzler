@@ -25,35 +25,35 @@
             <rect key="frame" x="0.0" y="0.0" width="186" height="30"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="olive-white-b.png" translatesAutoresizingMaskIntoConstraints="NO" id="FWM-ju-2yY">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="asset-olive-black" translatesAutoresizingMaskIntoConstraints="NO" id="FWM-ju-2yY">
                     <rect key="frame" x="2" y="0.0" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="FWM-ju-2yY" secondAttribute="height" multiplier="1:1" id="UVQ-Et-5w7"/>
                         <constraint firstAttribute="height" priority="999" constant="30" id="cBi-MJ-p5E"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="olive-white-b.png" translatesAutoresizingMaskIntoConstraints="NO" id="Syn-1A-XHw">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="asset-olive-black" translatesAutoresizingMaskIntoConstraints="NO" id="Syn-1A-XHw">
                     <rect key="frame" x="40" y="0.0" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Syn-1A-XHw" secondAttribute="height" multiplier="1:1" id="ASz-AU-NZo"/>
                         <constraint firstAttribute="height" constant="30" id="eel-WT-FBK"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="olive-white-b.png" translatesAutoresizingMaskIntoConstraints="NO" id="9Iy-nU-Dtp">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="asset-olive-black" translatesAutoresizingMaskIntoConstraints="NO" id="9Iy-nU-Dtp">
                     <rect key="frame" x="78" y="0.0" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="9Iy-nU-Dtp" secondAttribute="height" multiplier="1:1" id="bFz-g2-3xk"/>
                         <constraint firstAttribute="height" constant="30" id="hWm-hG-zzA"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="olive-white-b.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ6-Cw-oDz">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="asset-olive-black" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ6-Cw-oDz">
                     <rect key="frame" x="116" y="0.0" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="ZJ6-Cw-oDz" secondAttribute="height" multiplier="1:1" id="XPj-Ft-R0m"/>
                         <constraint firstAttribute="height" constant="30" id="ZXW-mB-QYx"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="olive-white-b.png" translatesAutoresizingMaskIntoConstraints="NO" id="ude-jl-3JV">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="asset-olive-black" translatesAutoresizingMaskIntoConstraints="NO" id="ude-jl-3JV">
                     <rect key="frame" x="154" y="0.0" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="RaQ-KA-GqE"/>
@@ -92,6 +92,6 @@
         </view>
     </objects>
     <resources>
-        <image name="olive-white-b.png" width="75" height="75"/>
+        <image name="asset-olive-black" width="75" height="75"/>
     </resources>
 </document>

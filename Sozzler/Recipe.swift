@@ -55,7 +55,6 @@ extension Recipe {
         let searchName = Recipe.fancyName(name)
         let predicate = NSPredicate(format: "name == %@", searchName)
         let count = CoreDataHelper.count("Recipe", predicate: predicate)
-        NSLog("counted: [\(searchName)] = \(count)")
         return count
     }
 }
@@ -72,7 +71,6 @@ extension Recipe {
             recipe.rating = rating
             recipe.text = text
             recipe.component_count = 0
-            NSLog("create: count: \(Recipe.countByName(recipe.name))")
             return recipe
         })
         
