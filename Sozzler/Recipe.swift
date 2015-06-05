@@ -139,10 +139,6 @@ extension Recipe {
         }
     }
     
-    // FIXME: additional validations
-    //
-    //        0 < rating <= 5
-    
     func validate(error: NSErrorPointer) -> Bool {
         var errorMessage = ""
 

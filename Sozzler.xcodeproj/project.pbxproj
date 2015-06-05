@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4006030F1AEC964600A11957 /* olive-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 4006030D1AEC964600A11957 /* olive-off.png */; };
-		400603101AEC964600A11957 /* olive-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 4006030E1AEC964600A11957 /* olive-on.png */; };
 		400603131AEC98CE00A11957 /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400603111AEC98CE00A11957 /* RecipeCell.swift */; };
 		400603141AEC98CE00A11957 /* RecipeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 400603121AEC98CE00A11957 /* RecipeCell.xib */; };
 		400603161AECA1A600A11957 /* RatingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 400603151AECA1A600A11957 /* RatingView.xib */; };
@@ -18,23 +16,9 @@
 		400BF0D71AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400BF0D61AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift */; };
 		4029C9071AED341300D5F0C9 /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029C9061AED341300D5F0C9 /* DataViewController.swift */; };
 		4029C9091AED3AB300D5F0C9 /* RecipeSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029C9081AED3AB300D5F0C9 /* RecipeSource.swift */; };
-		4068793E1B0792B80079D885 /* olive-paperclip-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 4068793B1B0792B80079D885 /* olive-paperclip-16.png */; };
-		4068793F1B0792B80079D885 /* olive-paperclip-20.png in Resources */ = {isa = PBXBuildFile; fileRef = 4068793C1B0792B80079D885 /* olive-paperclip-20.png */; };
-		406879401B0792B80079D885 /* olive-paperclip-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 4068793D1B0792B80079D885 /* olive-paperclip-32.png */; };
-		406879431B0792F40079D885 /* olive-paperclip-180.png in Resources */ = {isa = PBXBuildFile; fileRef = 406879411B0792F40079D885 /* olive-paperclip-180.png */; };
-		406879441B0792F40079D885 /* olive-paperclip-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 406879421B0792F40079D885 /* olive-paperclip-120.png */; };
-		4068794A1B0795FB0079D885 /* olive3-pick only-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 406879471B0795FB0079D885 /* olive3-pick only-32.png */; };
-		4068794B1B0795FB0079D885 /* olive3 - pick only.dae in Resources */ = {isa = PBXBuildFile; fileRef = 406879481B0795FB0079D885 /* olive3 - pick only.dae */; };
-		4068794C1B0795FB0079D885 /* olive3.dae in Resources */ = {isa = PBXBuildFile; fileRef = 406879491B0795FB0079D885 /* olive3.dae */; };
-		40895D4B1B0C09280044DB75 /* olive-paperclip-app-store-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 40895D4A1B0C09280044DB75 /* olive-paperclip-app-store-1024.png */; };
-		408BD5B11B0B908500721CE5 /* olive-paperclip-80.png in Resources */ = {isa = PBXBuildFile; fileRef = 408BD5B01B0B908500721CE5 /* olive-paperclip-80.png */; };
-		408BD5B41B0B917600721CE5 /* olive-paperclip-58.png in Resources */ = {isa = PBXBuildFile; fileRef = 408BD5B21B0B917600721CE5 /* olive-paperclip-58.png */; };
-		408BD5B51B0B917600721CE5 /* olive-paperclip-87.png in Resources */ = {isa = PBXBuildFile; fileRef = 408BD5B31B0B917600721CE5 /* olive-paperclip-87.png */; };
 		408BD5B71B0B9C1C00721CE5 /* UnitSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BD5B61B0B9C1C00721CE5 /* UnitSource.swift */; };
 		408E28261B1970C60048FBB1 /* UnitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408E28251B1970C60048FBB1 /* UnitTableViewController.swift */; };
 		409480AA1AF838A100543FFB /* EditRecipeNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409480A91AF838A100543FFB /* EditRecipeNavViewController.swift */; };
-		4099FB881B0D52C500DA54B1 /* martini-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 4099FB871B0D52C500DA54B1 /* martini-32.png */; };
-		4099FB8A1B0D534200DA54B1 /* martini-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 4099FB891B0D534200DA54B1 /* martini-16.png */; };
 		40B643EF1AE8C17300EEBBCA /* RecipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */; };
 		40B643F41AE8C35400EEBBCA /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F01AE8C35300EEBBCA /* Ingredient.swift */; };
 		40B643F51AE8C35400EEBBCA /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F11AE8C35300EEBBCA /* Unit.swift */; };
@@ -45,12 +29,6 @@
 		40C99BEA1AE9455C00F197C9 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C99BE91AE9455C00F197C9 /* AddRecipeViewController.swift */; };
 		40DC56681AEC669500449B8A /* IngredientTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DC56671AEC669500449B8A /* IngredientTableViewController.swift */; };
 		40DC566A1AEC730E00449B8A /* RecipeTableNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DC56691AEC730E00449B8A /* RecipeTableNavViewController.swift */; };
-		40E9C22B1B0E2F1F00E0F481 /* Sozzler0-58.png in Resources */ = {isa = PBXBuildFile; fileRef = 40E9C2251B0E2F1F00E0F481 /* Sozzler0-58.png */; };
-		40E9C22C1B0E2F1F00E0F481 /* Sozzler0-80.png in Resources */ = {isa = PBXBuildFile; fileRef = 40E9C2261B0E2F1F00E0F481 /* Sozzler0-80.png */; };
-		40E9C22D1B0E2F1F00E0F481 /* Sozzler0-87.png in Resources */ = {isa = PBXBuildFile; fileRef = 40E9C2271B0E2F1F00E0F481 /* Sozzler0-87.png */; };
-		40E9C22E1B0E2F1F00E0F481 /* Sozzler0-120-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 40E9C2281B0E2F1F00E0F481 /* Sozzler0-120-1.png */; };
-		40E9C22F1B0E2F1F00E0F481 /* Sozzler0-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 40E9C2291B0E2F1F00E0F481 /* Sozzler0-120.png */; };
-		40E9C2301B0E2F1F00E0F481 /* Sozzler0-180.png in Resources */ = {isa = PBXBuildFile; fileRef = 40E9C22A1B0E2F1F00E0F481 /* Sozzler0-180.png */; };
 		40F136E71B04547F00C51EAA /* recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 40F136E61B04547F00C51EAA /* recipes.json */; };
 		40F65BAE1AE8BAE000D15898 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F65BAD1AE8BAE000D15898 /* AppDelegate.swift */; };
 		40F65BB11AE8BAE000D15898 /* Sozzler.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40F65BAF1AE8BAE000D15898 /* Sozzler.xcdatamodeld */; };
@@ -71,8 +49,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4006030D1AEC964600A11957 /* olive-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-off.png"; sourceTree = "<group>"; };
-		4006030E1AEC964600A11957 /* olive-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-on.png"; sourceTree = "<group>"; };
 		400603111AEC98CE00A11957 /* RecipeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
 		400603121AEC98CE00A11957 /* RecipeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecipeCell.xib; sourceTree = "<group>"; };
 		400603151AECA1A600A11957 /* RatingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RatingView.xib; path = ../RatingView.xib; sourceTree = "<group>"; };
@@ -82,23 +58,9 @@
 		400BF0D61AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuantityToComponentViewController.swift; sourceTree = "<group>"; };
 		4029C9061AED341300D5F0C9 /* DataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		4029C9081AED3AB300D5F0C9 /* RecipeSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeSource.swift; sourceTree = "<group>"; };
-		4068793B1B0792B80079D885 /* olive-paperclip-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-paperclip-16.png"; sourceTree = "<group>"; };
-		4068793C1B0792B80079D885 /* olive-paperclip-20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-paperclip-20.png"; sourceTree = "<group>"; };
-		4068793D1B0792B80079D885 /* olive-paperclip-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-paperclip-32.png"; sourceTree = "<group>"; };
-		406879411B0792F40079D885 /* olive-paperclip-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-paperclip-180.png"; sourceTree = "<group>"; };
-		406879421B0792F40079D885 /* olive-paperclip-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-paperclip-120.png"; sourceTree = "<group>"; };
-		406879471B0795FB0079D885 /* olive3-pick only-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive3-pick only-32.png"; sourceTree = "<group>"; };
-		406879481B0795FB0079D885 /* olive3 - pick only.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "olive3 - pick only.dae"; sourceTree = "<group>"; };
-		406879491B0795FB0079D885 /* olive3.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = olive3.dae; sourceTree = "<group>"; };
-		40895D4A1B0C09280044DB75 /* olive-paperclip-app-store-1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-paperclip-app-store-1024.png"; sourceTree = "<group>"; };
-		408BD5B01B0B908500721CE5 /* olive-paperclip-80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-paperclip-80.png"; sourceTree = "<group>"; };
-		408BD5B21B0B917600721CE5 /* olive-paperclip-58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-paperclip-58.png"; sourceTree = "<group>"; };
-		408BD5B31B0B917600721CE5 /* olive-paperclip-87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-paperclip-87.png"; sourceTree = "<group>"; };
 		408BD5B61B0B9C1C00721CE5 /* UnitSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitSource.swift; sourceTree = "<group>"; };
 		408E28251B1970C60048FBB1 /* UnitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTableViewController.swift; sourceTree = "<group>"; };
 		409480A91AF838A100543FFB /* EditRecipeNavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditRecipeNavViewController.swift; sourceTree = "<group>"; };
-		4099FB871B0D52C500DA54B1 /* martini-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "martini-32.png"; sourceTree = "<group>"; };
-		4099FB891B0D534200DA54B1 /* martini-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "martini-16.png"; sourceTree = "<group>"; };
 		40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTableViewController.swift; sourceTree = "<group>"; };
 		40B643F01AE8C35300EEBBCA /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		40B643F11AE8C35300EEBBCA /* Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
@@ -109,12 +71,6 @@
 		40C99BE91AE9455C00F197C9 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
 		40DC56671AEC669500449B8A /* IngredientTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientTableViewController.swift; sourceTree = "<group>"; };
 		40DC56691AEC730E00449B8A /* RecipeTableNavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTableNavViewController.swift; sourceTree = "<group>"; };
-		40E9C2251B0E2F1F00E0F481 /* Sozzler0-58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Sozzler0-58.png"; path = "Images.xcassets/AppIcon.appiconset/Sozzler0-58.png"; sourceTree = "<group>"; };
-		40E9C2261B0E2F1F00E0F481 /* Sozzler0-80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Sozzler0-80.png"; path = "Images.xcassets/AppIcon.appiconset/Sozzler0-80.png"; sourceTree = "<group>"; };
-		40E9C2271B0E2F1F00E0F481 /* Sozzler0-87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Sozzler0-87.png"; path = "Images.xcassets/AppIcon.appiconset/Sozzler0-87.png"; sourceTree = "<group>"; };
-		40E9C2281B0E2F1F00E0F481 /* Sozzler0-120-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Sozzler0-120-1.png"; path = "Images.xcassets/AppIcon.appiconset/Sozzler0-120-1.png"; sourceTree = "<group>"; };
-		40E9C2291B0E2F1F00E0F481 /* Sozzler0-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Sozzler0-120.png"; path = "Images.xcassets/AppIcon.appiconset/Sozzler0-120.png"; sourceTree = "<group>"; };
-		40E9C22A1B0E2F1F00E0F481 /* Sozzler0-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Sozzler0-180.png"; path = "Images.xcassets/AppIcon.appiconset/Sozzler0-180.png"; sourceTree = "<group>"; };
 		40F136E61B04547F00C51EAA /* recipes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recipes.json; sourceTree = "<group>"; };
 		40F65BA81AE8BAE000D15898 /* Sozzler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sozzler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40F65BAC1AE8BAE000D15898 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -202,28 +158,6 @@
 		40F65BAB1AE8BAE000D15898 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				40E9C2251B0E2F1F00E0F481 /* Sozzler0-58.png */,
-				40E9C2261B0E2F1F00E0F481 /* Sozzler0-80.png */,
-				40E9C2271B0E2F1F00E0F481 /* Sozzler0-87.png */,
-				40E9C2281B0E2F1F00E0F481 /* Sozzler0-120-1.png */,
-				40E9C2291B0E2F1F00E0F481 /* Sozzler0-120.png */,
-				40E9C22A1B0E2F1F00E0F481 /* Sozzler0-180.png */,
-				40895D4A1B0C09280044DB75 /* olive-paperclip-app-store-1024.png */,
-				408BD5B21B0B917600721CE5 /* olive-paperclip-58.png */,
-				408BD5B31B0B917600721CE5 /* olive-paperclip-87.png */,
-				408BD5B01B0B908500721CE5 /* olive-paperclip-80.png */,
-				406879471B0795FB0079D885 /* olive3-pick only-32.png */,
-				406879481B0795FB0079D885 /* olive3 - pick only.dae */,
-				4099FB891B0D534200DA54B1 /* martini-16.png */,
-				406879491B0795FB0079D885 /* olive3.dae */,
-				4099FB871B0D52C500DA54B1 /* martini-32.png */,
-				406879411B0792F40079D885 /* olive-paperclip-180.png */,
-				406879421B0792F40079D885 /* olive-paperclip-120.png */,
-				4068793B1B0792B80079D885 /* olive-paperclip-16.png */,
-				4068793C1B0792B80079D885 /* olive-paperclip-20.png */,
-				4068793D1B0792B80079D885 /* olive-paperclip-32.png */,
-				4006030D1AEC964600A11957 /* olive-off.png */,
-				4006030E1AEC964600A11957 /* olive-on.png */,
 				40F65BAC1AE8BAE000D15898 /* Info.plist */,
 				40F136E61B04547F00C51EAA /* recipes.json */,
 			);
@@ -328,33 +262,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40E9C22B1B0E2F1F00E0F481 /* Sozzler0-58.png in Resources */,
-				4068793F1B0792B80079D885 /* olive-paperclip-20.png in Resources */,
-				40E9C2301B0E2F1F00E0F481 /* Sozzler0-180.png in Resources */,
 				40F65BB61AE8BAE000D15898 /* Main.storyboard in Resources */,
 				400603141AEC98CE00A11957 /* RecipeCell.xib in Resources */,
-				4099FB8A1B0D534200DA54B1 /* martini-16.png in Resources */,
-				406879441B0792F40079D885 /* olive-paperclip-120.png in Resources */,
-				4068794C1B0795FB0079D885 /* olive3.dae in Resources */,
-				400603101AEC964600A11957 /* olive-on.png in Resources */,
-				40E9C22C1B0E2F1F00E0F481 /* Sozzler0-80.png in Resources */,
-				406879431B0792F40079D885 /* olive-paperclip-180.png in Resources */,
 				40F65BBB1AE8BAE000D15898 /* LaunchScreen.xib in Resources */,
-				40E9C22D1B0E2F1F00E0F481 /* Sozzler0-87.png in Resources */,
-				408BD5B11B0B908500721CE5 /* olive-paperclip-80.png in Resources */,
-				4099FB881B0D52C500DA54B1 /* martini-32.png in Resources */,
-				40895D4B1B0C09280044DB75 /* olive-paperclip-app-store-1024.png in Resources */,
-				406879401B0792B80079D885 /* olive-paperclip-32.png in Resources */,
-				4068794A1B0795FB0079D885 /* olive3-pick only-32.png in Resources */,
 				400603161AECA1A600A11957 /* RatingView.xib in Resources */,
-				4068794B1B0795FB0079D885 /* olive3 - pick only.dae in Resources */,
 				40F65BB81AE8BAE000D15898 /* Images.xcassets in Resources */,
-				4068793E1B0792B80079D885 /* olive-paperclip-16.png in Resources */,
-				408BD5B41B0B917600721CE5 /* olive-paperclip-58.png in Resources */,
-				40E9C22E1B0E2F1F00E0F481 /* Sozzler0-120-1.png in Resources */,
-				4006030F1AEC964600A11957 /* olive-off.png in Resources */,
-				408BD5B51B0B917600721CE5 /* olive-paperclip-87.png in Resources */,
-				40E9C22F1B0E2F1F00E0F481 /* Sozzler0-120.png in Resources */,
 				40F136E71B04547F00C51EAA /* recipes.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

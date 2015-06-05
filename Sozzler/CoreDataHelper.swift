@@ -95,6 +95,7 @@ class CoreDataHelper {
         var error: NSError?
         CoreDataHelper.save(&error)
         NSLog("\(error)")
-        NSLog("recipe count: \(Recipe.count())")        
+        NSLog("recipe count: \(Recipe.count())")
+        assert(error == nil)
     }
 }

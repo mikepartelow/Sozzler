@@ -3,6 +3,7 @@ import MessageUI
 import AddressBook
 
 class DataViewController: UIViewController, MFMailComposeViewControllerDelegate {
+    let userSettings = (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings
 
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var ingredientsLabel: UILabel!
@@ -64,9 +65,15 @@ class DataViewController: UIViewController, MFMailComposeViewControllerDelegate 
             var error: NSError?
             CoreDataHelper.save(&error)
             NSLog("\(error)")
+            assert(error == nil)
             
             NSNotificationCenter.defaultCenter().postNotificationName("data.reset", object: self)
+
             self.tabBarController!.selectedIndex = 0
+            
+            let viewControllers = self.tabBarController!.viewControllers as! [UINavigationController]
+            let nav = viewControllers[0]
+            nav.popToRootViewControllerAnimated(false)
         }
         
         let cancelAction = UIAlertAction(title: "Forget it", style: .Default) { (action: UIAlertAction!) -> Void in }
@@ -80,5 +87,20 @@ class DataViewController: UIViewController, MFMailComposeViewControllerDelegate 
     @IBAction func unwindToData(sender: UIStoryboardSegue) {
     }
     
-
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
+        if event.subtype == UIEventSubtype.MotionShake {
+            if userSettings.oliveAsset == "asset-olive-green" {
+                userSettings.oliveAsset = "asset-olive-green-outline"
+            } else if userSettings.oliveAsset == "asset-olive-green-outline" {
+                userSettings.oliveAsset = "asset-olive-black"
+            } else {
+                userSettings.oliveAsset = "asset-olive-green"
+            }
+            NSNotificationCenter.defaultCenter().postNotificationName("asset.reset", object: self)
+        }
+    }
 }

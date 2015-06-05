@@ -30,8 +30,22 @@ class UserSettings {
         }
     }
     
+    private var _oliveAsset: String
+    var oliveAsset: String {
+        get {
+            return _oliveAsset
+        }
+        
+        set(newOliveAsset) {
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setValue(newOliveAsset, forKeyPath: "oliveAsset")
+            _oliveAsset = newOliveAsset
+        }
+    }
+    
     func factoryReset() {
         _recipeSortOrder = .Name
+        _oliveAsset = "asset-olive-green-outline"
     }
 
     init() {
@@ -42,6 +56,12 @@ class UserSettings {
             _recipeSortOrder = recipeSortOrder
         } else {
             _recipeSortOrder = .Name
-        }        
+        }
+        
+        if let oliveAsset = defaults.stringForKey("oliveAsset") {
+            _oliveAsset = oliveAsset
+        } else {
+            _oliveAsset = "asset-olive-green-outline"
+        }
     }
 }

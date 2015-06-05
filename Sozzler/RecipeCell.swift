@@ -13,9 +13,8 @@ class RecipeCell: UITableViewCell {
         ingredients!.text = ", ".join(sortedIngredientNames)
         
         ratingView!.rating = Int(recipe.rating)
-
-        ratingView!.oliveHeight.constant = CGFloat(16)
-        ratingView!.oliveWidth.constant = CGFloat(16)
+        
+        ratingView!.oliveHeight = 16
         ratingView!.setNeedsLayout()
         ratingView!.layoutIfNeeded()
     }

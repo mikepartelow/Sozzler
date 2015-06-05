@@ -18,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             URLRecipeSource(url: url).read()
             
             // FIXME: handle errors
-            CoreDataHelper.save(nil)
+            var error: NSError?
+            CoreDataHelper.save(&error)
             
             if let tabs = self.window?.rootViewController as? UITabBarController {
                 tabs.selectedIndex = 0

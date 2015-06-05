@@ -26,12 +26,14 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         componentTable!.delegate = self
         
         recipeText.delegate = self
-        
+
         if recipe == nil {
             recipe = Recipe.create("", withRating: 0, withText: "")
             recipeText.text = recipeTextPlaceholder
             recipeText.textColor = UIColor.lightGrayColor()
         } else {
+            navigationItem.title = "Edit Recipe"
+
             recipeName!.text = recipe!.name
             if recipe!.text.isEmpty {
                 recipeText!.text = recipeTextPlaceholder
@@ -39,11 +41,12 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             } else {
                 recipeText!.text = recipe!.text
             }
-            ratingView!.rating = Int(recipe!.rating)
+            
             editingRecipe = true
         }
         
-        ratingView!.editing = true
+        ratingView!.editing = true // this must come before we set the rating value
+        ratingView!.rating = Int(recipe!.rating)
         
         resizeComponentsTable()
         componentTable!.editing = true

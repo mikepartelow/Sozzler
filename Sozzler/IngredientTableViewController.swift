@@ -115,6 +115,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
             
                 var error: NSError?
                 if CoreDataHelper.save(&error) {
+                    assert(error == nil)
                     self.refresh()
                 } else {
                     // FIXME:

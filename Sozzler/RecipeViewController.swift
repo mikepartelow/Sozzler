@@ -3,6 +3,7 @@ import UIKit
 class RecipeViewController: UIViewController {
     var recipe: Recipe?
     
+    @IBOutlet weak var recipeName: UILabel!
     @IBOutlet weak var recipeTextView: UITextView!
     
     @IBOutlet weak var recipeTextViewHeight: NSLayoutConstraint!
@@ -10,7 +11,9 @@ class RecipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = recipe!.name
+//        navigationItem.title = recipe!.name
+        
+        recipeName!.text = recipe!.name
         
         let sortedComponents = recipe!.sortedComponents
         let componentText = "\n".join(map(sortedComponents, { $0.string }))

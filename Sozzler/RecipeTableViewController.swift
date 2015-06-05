@@ -8,6 +8,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     var ingredient: Ingredient?
     
     var shouldRefresh = true
+    var shouldScroll = true
     
     var searchEnabled = false
     var searchController: UISearchController?
@@ -50,12 +51,19 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "data.reset", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "asset.reset", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataImported", name: "data.imported", object: nil)
+    }
 
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver("data.reset")
+        NSNotificationCenter.defaultCenter().removeObserver("asset.reset")
+        NSNotificationCenter.defaultCenter().removeObserver("data.imported")
     }
     
     func dataReset() {
         shouldRefresh = true
+        shouldScroll = true
     }
     
     func dataImported() {
@@ -79,15 +87,15 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         let sortByRating = UIAlertAction(title: "Sort by Rating", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
             self.userSettings.recipeSortOrder = .Rating
+            self.shouldScroll = true
             self.refresh()
-            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
         })
 
         let sortByName = UIAlertAction(title: "Sort by Name", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
             self.userSettings.recipeSortOrder = .Name
+            self.shouldScroll = true
             self.refresh()
-            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
         })
 
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
@@ -189,6 +197,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
 
             var error: NSError?
             if CoreDataHelper.save(&error) {
+                assert(error == nil)                
                 self.refresh()
             } else {
                 // FIXME:
@@ -226,8 +235,12 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
 
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()
-        
+
         shouldRefresh = false
+        if shouldScroll {
+            shouldScroll = false
+            tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+        }
     }
     
     @IBAction func unwindToRecipes(sender: UIStoryboardSegue)

@@ -2,14 +2,32 @@ import UIKit
 
 @IBDesignable
 class RatingView: UIView {
+    let userSettings = (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings
+
     @IBOutlet weak var image0: UIImageView!
     @IBOutlet weak var image1: UIImageView!
     @IBOutlet weak var image2: UIImageView!
     @IBOutlet weak var image3: UIImageView!
     @IBOutlet weak var image4: UIImageView!
     
-    @IBOutlet weak var oliveHeight: NSLayoutConstraint!
-    @IBOutlet weak var oliveWidth: NSLayoutConstraint!
+    @IBOutlet weak var oliveHeight0: NSLayoutConstraint!
+    @IBOutlet weak var oliveHeight1: NSLayoutConstraint!
+    @IBOutlet weak var oliveHeight2: NSLayoutConstraint!
+    @IBOutlet weak var oliveHeight3: NSLayoutConstraint!
+    @IBOutlet weak var oliveHeight4: NSLayoutConstraint!
+    
+    var oliveHeight = 30 {
+        didSet {
+            oliveHeight0.constant = CGFloat(oliveHeight)
+            oliveHeight1.constant = CGFloat(oliveHeight)
+            oliveHeight2.constant = CGFloat(oliveHeight)
+            oliveHeight3.constant = CGFloat(oliveHeight)
+            oliveHeight4.constant = CGFloat(oliveHeight)
+            
+            self.needsUpdateConstraints()
+            self.layoutIfNeeded()            
+        }
+    }
     
     @IBOutlet weak var view: UIView!
     
@@ -20,11 +38,15 @@ class RatingView: UIView {
             let images = [ image0, image1, image2, image3, image4 ]
             
             for i in 0..<rating {
-                images[i].image = UIImage(named: "olive-paperclip-32.png")
+                images[i].image = UIImage(named: userSettings.oliveAsset)
             }
             
             for j in rating..<5 {
-                images[j].image = UIImage(named: "olive3-pick only-32.png")
+                images[j].image = UIImage(named: "asset-olive-white")
+                // removing the unused images and resizing the frame might be better than this
+                //
+                images[j].image = images[j].image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+                images[j].tintColor = UIColor.lightGrayColor()
             }
         }
     }
@@ -33,7 +55,7 @@ class RatingView: UIView {
         super.init(coder: aDecoder)
         xibSetup()
     }
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         xibSetup()
@@ -43,6 +65,11 @@ class RatingView: UIView {
         view = loadViewFromNib()
         view.frame = bounds
         view.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
+        
+        // for reference, not for looks!
+//        view.layer.borderColor = UIColor.blackColor().CGColor
+//        view.layer.borderWidth = CGFloat(1)
+
         addSubview(view)
     }
     
@@ -51,6 +78,7 @@ class RatingView: UIView {
         let nib = UINib(nibName: "RatingView", bundle: bundle)
         
         let view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+
         return view
     }
  

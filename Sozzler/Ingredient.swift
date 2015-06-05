@@ -7,10 +7,6 @@ class Ingredient: NSManagedObject {
     @NSManaged var name: String
     @NSManaged var recipe_count: Int16
     @NSManaged var components: NSSet
-
-    class func fancyName(name: String) -> String {
-        return name.capitalizedString
-    }
     
     class func fetchedResultsController(predicate: NSPredicate?=nil) -> NSFetchedResultsController {
         let app = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -27,7 +23,7 @@ class Ingredient: NSManagedObject {
         return CoreDataHelper.create("Ingredient", initializer: {
             (entity, context) -> NSManagedObject in
                 let ingredient = Ingredient(entity: entity, insertIntoManagedObjectContext: context)
-                ingredient.name = Ingredient.fancyName(name)
+                ingredient.name = Recipe.fancyName(name)
                 ingredient.recipe_count = 0
                 return ingredient
             }
@@ -35,12 +31,12 @@ class Ingredient: NSManagedObject {
     }
     
     class func find(name: String) -> Ingredient? {
-        let predicate = NSPredicate(format: "name ==[c] %@", Ingredient.fancyName(name))
+        let predicate = NSPredicate(format: "name ==[c] %@", Recipe.fancyName(name))
         return CoreDataHelper.find("Ingredient", predicate: predicate) as! Ingredient?
     }
     
     class func findOrCreate(name: String) -> Ingredient {
-        let fancyName = Ingredient.fancyName(name)
+        let fancyName = Recipe.fancyName(name)
         if let ingredient = Ingredient.find(fancyName) {
             return ingredient
         } else {
@@ -61,6 +57,8 @@ extension Ingredient {
         if !deleted {
             var recipeCounts: [Recipe:Int] = [:]
             
+            setPrimitiveValue(Recipe.fancyName(name), forKey: "name")
+
             for component in components.allObjects as! [Component] {
                 if recipeCounts[component.recipe] == nil {
                    recipeCounts[component.recipe] = 1

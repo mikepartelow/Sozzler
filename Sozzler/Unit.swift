@@ -7,7 +7,11 @@ class Unit: NSManagedObject {
     @NSManaged var recipe_count: Int16
     @NSManaged var index: Int16
     @NSManaged var components: NSSet
-
+    
+    class func fancyName(name: String) -> String {
+        return name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    }
+    
     class func fetchedResultsController() -> NSFetchedResultsController {
         let fetchRequest = NSFetchRequest(entityName: "Unit")
 
@@ -19,7 +23,7 @@ class Unit: NSManagedObject {
     }
 
     class func find(name: String) -> Unit? {
-        let predicate = NSPredicate(format: "name == %@", name)
+        let predicate = NSPredicate(format: "name == %@", Unit.fancyName(name))
         return CoreDataHelper.find("Unit", predicate: predicate) as! Unit?
     }
     
@@ -27,7 +31,7 @@ class Unit: NSManagedObject {
         return CoreDataHelper.create("Unit", initializer: {
             (entity, context) -> NSManagedObject in
                 let unit = Unit(entity: entity, insertIntoManagedObjectContext: context)
-                unit.name = name
+                unit.name = Unit.fancyName(name)
                 unit.index = Int16(index)
                 unit.recipe_count = 0
                 return unit
@@ -36,10 +40,12 @@ class Unit: NSManagedObject {
     }
     
     class func findOrCreate(name: String) -> Unit {
-        if let unit = Unit.find(name) {
+        let fancyName = Unit.fancyName(name)
+
+        if let unit = Unit.find(fancyName) {
             return unit
         } else {
-            return Unit.create(name)
+            return Unit.create(fancyName)
         }
     }
     
@@ -51,6 +57,8 @@ class Unit: NSManagedObject {
         if !deleted {
             var recipeCounts: [Recipe:Int] = [:]
             
+            setPrimitiveValue(Unit.fancyName(name), forKey: "name")
+
             for component in components.allObjects as! [Component] {
                 if recipeCounts[component.recipe] == nil {
                     recipeCounts[component.recipe] = 1

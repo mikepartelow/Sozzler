@@ -59,6 +59,7 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
                 
                 var error: NSError?
                 if CoreDataHelper.save(&error) {
+                    assert(error == nil)
                     self.refresh()
                     let indexPath = self.frc!.indexPathForObject(unit)
                     self.tableView.selectRowAtIndexPath(indexPath!, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
@@ -107,6 +108,7 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
                 
                 var error: NSError?
                 if CoreDataHelper.save(&error) {
+                    assert(error == nil)
                     self.refresh()
                 } else {
                     // FIXME:
@@ -200,6 +202,7 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
 
         var error: NSError?
         if moc.save(&error) {
+            assert(error == nil)
             refresh()
         } else {
             // FIXME: DO SOMETHING
