@@ -17,8 +17,12 @@ class DataViewController: UIViewController, MFMailComposeViewControllerDelegate 
                 versionLabel!.text = "Sozzler version \(version).\(build)"
             }
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
         recipesLabel!.text = "\(Recipe.count()) recipes"
         ingredientsLabel!.text = "\(Ingredient.count()) ingredients"
+
     }
 
     @IBAction func onExportRecipes(sender: UIButton) {
