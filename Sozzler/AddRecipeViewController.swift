@@ -59,6 +59,11 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidAppear(animated)
         resizeComponentsTable()
     }
+
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        recipeName!.resignFirstResponder()
+        resizeComponentsTable()
+    }
     
     func textViewDidBeginEditing(textView: UITextView) {
         if textView == recipeText {
@@ -80,8 +85,16 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
 
     func resizeComponentsTable() {
         let height = componentTable.contentSize.height
-
-        componentTableHeight.constant = min(height, 6*(height / CGFloat(recipe!.components.count)))
+        let o = UIApplication.sharedApplication().statusBarOrientation
+        let rowsToShow: Int
+        
+        if o == UIInterfaceOrientation.Portrait || o == UIInterfaceOrientation.PortraitUpsideDown {
+            rowsToShow = 6
+        } else {
+            rowsToShow = 3
+        }
+        
+        componentTableHeight.constant = min(height, CGFloat(rowsToShow)*(height / CGFloat(recipe!.components.count)))
         componentTable.setNeedsUpdateConstraints()
     }
 
