@@ -12,6 +12,7 @@
 				<string>olive-paperclip-120</string>
 				<string>olive-paperclip-app-store-1024</string>
 				<string>Sozzler0-180</string>
+				<string>olive-green-outline</string>
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>Sozzler File</string>
@@ -69,9 +70,9 @@
 			<key>UTTypeIdentifier</key>
 			<string>com.mikepartelow.document.sozzler</string>
 			<key>UTTypeSize320IconFile</key>
-			<string>Sozzler0-120</string>
+			<string></string>
 			<key>UTTypeSize64IconFile</key>
-			<string>Sozzler0-58</string>
+			<string></string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
