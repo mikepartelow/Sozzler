@@ -1,14 +1,29 @@
 import UIKit
 import CoreData
 
-class AddIngredientToComponentViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class AddIngredientToComponentViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     var frc: NSFetchedResultsController?
     var ingredient: Ingredient?
     
+    var searchController: UISearchController?
+    var searchText = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
+        
+        definesPresentationContext = true
         refresh()
+        
+        searchController = UISearchController(searchResultsController: nil)
+        searchController!.searchResultsUpdater = self
+        searchController!.searchBar.delegate = self
+        searchController!.dimsBackgroundDuringPresentation = false
+        
+        tableView.tableHeaderView = searchController!.searchBar
+        searchController!.searchBar.sizeToFit()
+        
+        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -33,11 +48,21 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
     }
 
     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
-        return frc!.sectionIndexTitles
+        if searchText != "" {
+            return []
+        } else {
+            return [ UITableViewIndexSearch ] + frc!.sectionIndexTitles
+        }
     }
     
     override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
-        return frc!.sectionForSectionIndexTitle(title, atIndex: index)
+        if index > 0 {
+            return frc!.sectionForSectionIndexTitle(title, atIndex: index - 1)
+        } else {
+            let searchBarFrame = searchController!.searchBar.frame
+            tableView.scrollRectToVisible(searchBarFrame, animated: false)
+            return NSNotFound
+        }
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -52,7 +77,15 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
     
     // FIXME: DRY
     func refresh() {
-        frc = Ingredient.fetchedResultsController()
+        let predicate: NSPredicate?
+
+        if searchText != "" {
+            predicate = NSPredicate(format: "name contains[c] %@", searchText)
+        } else {
+            predicate = nil
+        }
+
+        frc = Ingredient.fetchedResultsController(predicate: predicate)
         
         frc!.delegate = self
         
@@ -112,6 +145,10 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
         presentViewController(alert, animated: true, completion: nil)
     }
 
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        searchText = searchController.searchBar.text
+        refresh()
+    }
     
     @IBAction func unwindToAddIngredientToComponent(sender: UIStoryboardSegue)
     {
