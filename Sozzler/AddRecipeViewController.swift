@@ -1,9 +1,10 @@
 import UIKit
 import CoreData
 
-class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
+class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UIGestureRecognizerDelegate {
     let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var recipeName: UITextField!
     @IBOutlet weak var componentTable: UITableView!
     @IBOutlet weak var componentTableHeight: NSLayoutConstraint!
@@ -11,7 +12,11 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var ratingView: RatingView!
     @IBOutlet weak var recipeText: UITextView!
     
+    @IBOutlet weak var contentView: UIView!
+    
     let recipeTextPlaceholder = "Stir with ice, strain into chilled rocks glass."
+    
+    var keyboardHeight: CGFloat = 0
     
     var added = false
     var recipe: Recipe?
@@ -53,8 +58,49 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let scrollPoint = CGPointMake(0, recipeText.frame.origin.y)
         recipeText.setContentOffset(scrollPoint, animated: false)
+
+        // ridiculous hack to avoid "scrolling uitextfield" rotation bug
+        //
+        recipeName!.layer.borderColor = UIColor.whiteColor().CGColor
+        recipeName!.layer.borderWidth = 1.0
+
+//        recipeText.layer.borderColor = UIColor.blackColor().CGColor
+//        recipeText.layer.borderWidth = 1.0
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        
+        let pan = UIPanGestureRecognizer(target: self, action: "dismissKeyboard")
+        pan.cancelsTouchesInView = false
+        pan.delegate = self
+        scrollView.addGestureRecognizer(pan)
+        
+        let tap = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        tap.cancelsTouchesInView = false
+        scrollView.addGestureRecognizer(tap)
+        
+        recipeName.addTarget(self, action: "dismissKeyboard", forControlEvents: UIControlEvents.EditingDidEndOnExit)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(UIKeyboardWillShowNotification)
     }
 
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return !recipeName.isFirstResponder() && !recipeText.isFirstResponder()
+    }
+
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+
+    func keyboardWillShow(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            if let kh = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue().size.height {
+                keyboardHeight = kh
+            }
+        }
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         resizeComponentsTable()
@@ -63,6 +109,8 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
         recipeName!.resignFirstResponder()
         resizeComponentsTable()
+        recipeName!.becomeFirstResponder()
+        recipeName!.selectedTextRange = recipeName!.textRangeFromPosition(recipeName!.endOfDocument, toPosition: recipeName!.endOfDocument)
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
@@ -71,6 +119,16 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
                 recipeText!.text = ""
                 recipeText!.textColor = UIColor.blackColor()
             }
+            
+            let magicNumber: CGFloat
+            let o = UIApplication.sharedApplication().statusBarOrientation
+            if o == UIInterfaceOrientation.Portrait || o == UIInterfaceOrientation.PortraitUpsideDown {
+                magicNumber = 80
+            } else {
+                magicNumber = -10
+            }
+            let bottomOffset = CGPointMake(0, contentView.bounds.height - keyboardHeight - magicNumber)
+            scrollView.setContentOffset(bottomOffset, animated: true)
         }
     }
 
@@ -80,21 +138,14 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
                 recipeText!.text = recipeTextPlaceholder
                 recipeText!.textColor = UIColor.lightGrayColor()
             }
+            
+            recipeText.scrollRectToVisible(CGRect(x: 0, y: 0, width: 0, height: 0), animated: true)
+            scrollView.setContentOffset(CGPointMake(0, 0), animated: true)
         }
     }
 
     func resizeComponentsTable() {
-        let height = componentTable.contentSize.height
-        let o = UIApplication.sharedApplication().statusBarOrientation
-        let rowsToShow: Int
-        
-        if o == UIInterfaceOrientation.Portrait || o == UIInterfaceOrientation.PortraitUpsideDown {
-            rowsToShow = 6
-        } else {
-            rowsToShow = 3
-        }
-        
-        componentTableHeight.constant = min(height, CGFloat(rowsToShow)*(height / CGFloat(recipe!.components.count)))
+        componentTableHeight.constant = componentTable.contentSize.height
         componentTable.setNeedsUpdateConstraints()
     }
 
@@ -159,7 +210,11 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         if moc.save(&error) {
             added = true
             NSNotificationCenter.defaultCenter().postNotificationName("recipe.updated", object: self)
-            performSegueWithIdentifier("unwindToRecipes", sender: self)
+            if editingRecipe {
+                performSegueWithIdentifier("unwindToRecipe", sender: self)
+            } else {
+                performSegueWithIdentifier("unwindToRecipes", sender: self)
+            }
         } else {
             // FIXME: on error, name edit is cleared out. don't do that.
             
