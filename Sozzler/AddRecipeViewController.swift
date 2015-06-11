@@ -9,6 +9,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var componentTable: UITableView!
     @IBOutlet weak var componentTableHeight: NSLayoutConstraint!
 
+    @IBOutlet weak var recipeTextHeight: NSLayoutConstraint!
     @IBOutlet weak var ratingView: RatingView!
     @IBOutlet weak var recipeText: UITextView!
     
@@ -107,10 +108,10 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-        recipeName!.resignFirstResponder()
+//        recipeName!.resignFirstResponder()
         resizeComponentsTable()
-        recipeName!.becomeFirstResponder()
-        recipeName!.selectedTextRange = recipeName!.textRangeFromPosition(recipeName!.endOfDocument, toPosition: recipeName!.endOfDocument)
+//        recipeName!.becomeFirstResponder()
+//        recipeName!.selectedTextRange = recipeName!.textRangeFromPosition(recipeName!.endOfDocument, toPosition: recipeName!.endOfDocument)
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
@@ -127,8 +128,10 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             } else {
                 magicNumber = -10
             }
-            let bottomOffset = CGPointMake(0, contentView.bounds.height - keyboardHeight - magicNumber)
-            scrollView.setContentOffset(bottomOffset, animated: true)
+            
+            let y = recipeText.frame.origin.y + recipeText.frame.height
+            let contentOffset = CGPointMake(0, y - keyboardHeight - magicNumber)
+            scrollView.setContentOffset(contentOffset, animated: true)
         }
     }
 
@@ -143,7 +146,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             scrollView.setContentOffset(CGPointMake(0, 0), animated: true)
         }
     }
-
+    
     func resizeComponentsTable() {
         componentTableHeight.constant = componentTable.contentSize.height
         componentTable.setNeedsUpdateConstraints()

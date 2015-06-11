@@ -13,6 +13,7 @@ class RecipeViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         recipeName!.text = recipe!.name
         
         let sortedComponents = recipe!.sortedComponents
@@ -20,12 +21,8 @@ class RecipeViewController: UIViewController {
         recipeTextView!.text = "\(componentText)\n\n\(recipe!.text)"
         ratingView!.rating = Int(recipe!.rating)
         
-        let fit = recipeTextView.sizeThatFits(recipeTextView.contentSize)
-        recipeTextViewHeight.constant = fit.height + 84 // FIXME: magic number
-        
-        recipeTextView.setNeedsUpdateConstraints()
-
-        //http://stackoverflow.com/questions/27652334/uitextview-inside-uiscrollview-with-autolayout
+        let fit = recipeTextView.sizeThatFits(recipeTextView.contentSize).height
+        recipeTextViewHeight.constant = fit
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
