@@ -10,9 +10,9 @@ class RecipeViewController: UIViewController {
     @IBOutlet weak var ratingView: RatingView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        navigationItem.title = recipe!.name
-        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
         recipeName!.text = recipe!.name
         
         let sortedComponents = recipe!.sortedComponents
