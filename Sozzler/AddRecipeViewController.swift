@@ -219,10 +219,14 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
                 performSegueWithIdentifier("unwindToRecipes", sender: self)
             }
         } else {
-            // FIXME: on error, name edit is cleared out. don't do that.
-            
             NSLog("\(error)")
             let errorMessage = error!.userInfo![NSLocalizedDescriptionKey] as! String
+            let errorCode = Recipe.ValidationErrorCode(rawValue: error!.code)
+            
+            if errorCode == Recipe.ValidationErrorCode.Name {
+                recipeName.becomeFirstResponder()
+            }
+            
             var alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .Alert)
             let cancelAction = UIAlertAction(title: "Oops", style: .Default) { (action: UIAlertAction!) -> Void in }
             alert.addAction(cancelAction)

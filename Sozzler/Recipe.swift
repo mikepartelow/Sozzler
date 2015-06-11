@@ -4,6 +4,12 @@ import CoreData
 @objc(Recipe)
 class Recipe: NSManagedObject {
 
+    enum ValidationErrorCode: Int {
+        case None = 0
+        case Name
+        case Ingredients
+    }
+
     @NSManaged var name: String
     @NSManaged var rating: Int16
     @NSManaged var text: String
@@ -139,7 +145,7 @@ extension Recipe {
     
     func validate(error: NSErrorPointer) -> Bool {
         var errorMessage = ""
-
+        var errorCode = ValidationErrorCode.None
         // have to do this to get accurate name uniqueness count.
         // if we don't, we may be searching for "XX" while this recipe is named " XX" -- so no dup!
         //
@@ -147,17 +153,20 @@ extension Recipe {
 
         if components.count < 1 {
             errorMessage = "Please add at least one ingredient."
+            errorCode = .Ingredients
         } else if name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).isEmpty {
             errorMessage = "Please add a name for your recipe."
+            errorCode = .Name
         } else if Recipe.countByName(name) > 1 {
             errorMessage = "Sorry, that name is already taken."
+            errorCode = .Name
         } else {
             return true
         }
         
         if !errorMessage.isEmpty {
             if error != nil {
-                error.memory = NSError(domain: "CoreData", code: 1, userInfo: [NSLocalizedDescriptionKey: errorMessage])
+                error.memory = NSError(domain: "CoreData", code: errorCode.rawValue, userInfo: [NSLocalizedDescriptionKey: errorMessage])
             }
         }
         
