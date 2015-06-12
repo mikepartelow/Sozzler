@@ -152,9 +152,11 @@
                         <outlet property="recipeName" destination="o76-Kl-aPF" id="b2G-ai-QqK"/>
                         <outlet property="recipeTextView" destination="xjL-To-Zeg" id="Cbk-MA-o85"/>
                         <outlet property="recipeTextViewHeight" destination="2PB-ib-8eA" id="UlI-zy-dvP"/>
+                        <segue destination="QCR-WO-5ra" kind="unwind" identifier="unwindToRecipes" unwindAction="unwindToRecipes:" id="koR-UR-TRI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="goy-yi-713" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="QCR-WO-5ra" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3471" y="496"/>
         </scene>

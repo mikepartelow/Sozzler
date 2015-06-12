@@ -10,8 +10,18 @@ class RecipeViewController: UIViewController {
     @IBOutlet weak var ratingView: RatingView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "data.reset", object: nil)
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver("data.reset")
+    }
+    
+    func dataReset() {
+        performSegueWithIdentifier("unwindToRecipes", sender: nil)
+    }
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         recipeName!.text = recipe!.name
