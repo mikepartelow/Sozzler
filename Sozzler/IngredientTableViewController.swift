@@ -37,6 +37,12 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "recipe.updated", object: nil)
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver("data.reset")
+        NSNotificationCenter.defaultCenter().removeObserver("recipe.deleted")
+        NSNotificationCenter.defaultCenter().removeObserver("recipe.updated")
+    }
+
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 56;
     }

@@ -155,7 +155,7 @@
       "rating": 4
    }, 
    {
-      "text": "Shake with ice, strain into chilled cocktail glass and garnish with flamed orange peel.\n\nGreat with Yamazaki Scotch, Dolin vermouth. Try a more assertive Scotch to toss it just a little out of balance.\n\n.\n\nCan be a temperamental cocktail.\n\nPairs well with dark chocolate.", 
+      "text": "Shake with ice, strain into chilled cocktail glass. Garnish with flamed orange peel.\n\nGreat with Yamazaki Scotch, Dolin vermouth. Try a more assertive Scotch to toss it just a little out of balance.\n\nPairs well with dark chocolate.", 
       "name": "Blood And Sand", 
       "components": [
          {
@@ -324,12 +324,18 @@
             "quantity": "5", 
             "unit": "dash", 
             "ingredient": "bitters"
+         },
+         {
+             "index": 4,
+             "quantity": "",
+             "unit": "",
+             "ingredient": "lemon wedge"
          }
       ], 
       "rating": 5
    }, 
    {
-      "text": "Shake with ice, strain into a chilled rocks glass. Garnish with lime wedge or peel.", 
+      "text": "Shake with ice, strain into a chilled rocks glass. Garnish with lime wedge.",
       "name": "French Gimlet", 
       "components": [
          {
@@ -349,6 +355,12 @@
             "quantity": "1/2", 
             "unit": "oz", 
             "ingredient": "lime juice"
+         },
+         {
+             "index": 3,
+             "quantity": "1",
+             "unit": "",
+             "ingredient": "lime wedge"
          }
       ], 
       "rating": 5
@@ -435,7 +447,7 @@
       "rating": 3
    }, 
    {
-      "text": "Shake with ice, strain into a crushed-ice filled collins glass. Lay back, and put your mind on your money. Saffron is optional.", 
+      "text": "Shake with ice, strain into a crushed-ice filled collins glass. Saffron is optional.",
       "name": "Grape Dogg", 
       "components": [
          {
@@ -490,7 +502,7 @@
       "rating": 4
    }, 
    {
-      "text": "Shake without ice to dissolve sugar. Shake with ice, strain into a chilled cocktail glass.", 
+      "text": "Shake without ice to dissolve sugar. Shake with ice, strain into a chilled goblet. Garnish with lime wheel.",
       "name": "Crunchy Hemingway Daiquiri", 
       "components": [
          {
@@ -522,12 +534,19 @@
             "quantity": "1/2", 
             "unit": "oz", 
             "ingredient": "lime juice"
+         },
+         {
+             "index": 5,
+             "quantity": "",
+             "unit": "",
+             "ingredient": "lime wheel"
          }
+                     
       ], 
       "rating": 5
    }, 
    {
-      "text": "Shake with ice and strain into chilled cocktail glass. Adjust bitters to taste (and modify recipe). Garnish with orange twist. Don't skimp on bitters or sweet vermouth", 
+      "text": "Shake with ice and strain into chilled cocktail glass. Garnish with orange twist. Don't skimp on bitters or sweet vermouth.",
       "name": "Income Tax Cocktail", 
       "components": [
          {
@@ -570,7 +589,7 @@
       "rating": 3
    }, 
    {
-      "text": "Shake with ice, strain over ice into a rocks glass. Garnish with apple slice and a maraschino cherry.", 
+      "text": "Shake with ice, strain over ice into a rocks glass. Garnish with apple slice and maraschino cherry.",
       "name": "Jack Rose", 
       "components": [
          {
@@ -596,6 +615,18 @@
             "quantity": "1/4", 
             "unit": "oz", 
             "ingredient": "grenadine"
+         },
+         {
+             "index": 5,
+             "quantity": "",
+             "unit": "",
+             "ingredient": "apple slice"
+         },
+         {
+             "index": 6,
+             "quantity": "",
+             "unit": "",
+             "ingredient": "maraschino cherry"
          }
       ], 
       "rating": 3
@@ -626,7 +657,7 @@
       "rating": 4
    }, 
    {
-      "text": "Shake ingredients without ice to dissolve turbinado sugar. Shake with ice, serve in chilled rocks glass. Garnish artistically.", 
+      "text": "Shake ingredients without ice to dissolve turbinado sugar. Shake with ice, serve in chilled rocks glass. Garnish artistically. Put your mind on your money.",
       "name": "Laid Back", 
       "components": [
          {
@@ -713,12 +744,24 @@
             "quantity": "1/4", 
             "unit": "oz", 
             "ingredient": "simple syrup"
+         },
+         {
+             "index": 6,
+             "quantity": "",
+             "unit": "",
+             "ingredient": "lime shell"
+         },
+         {
+             "index": 7,
+             "quantity": "",
+             "unit": "",
+             "ingredient": "fresh mint"
          }
       ], 
       "rating": 4
    }, 
    {
-      "text": "Stir whisky, vermouth and bitters in a mixing glass with ice. Strain into chilled cocktail glass, garnish with a maraschino cherry.", 
+      "text": "Stir whisky, vermouth and bitters in a mixing glass with ice. Strain into chilled cocktail glass, garnish with maraschino cherry.",
       "name": "Manhattan", 
       "components": [
          {
@@ -741,7 +784,7 @@
          }, 
          {
             "index": 3, 
-            "quantity": "1", 
+            "quantity": "",
             "unit": "", 
             "ingredient": "maraschino cherry"
          }
@@ -749,7 +792,7 @@
       "rating": 3
    }, 
    {
-      "text": "Chill a martini glass. Cut an orange wedge and set aside some lemon peel for garnish. Shake everything but the club soda. Gently stir in the club soda. Strain into chilled glasses, garnish.", 
+      "text": "Chill a martini glass. Cut an orange wedge and set aside some lemon peel for garnish. Shake everything but the club soda. Gently stir in the club soda. Strain into chilled glasses, garnish with orange wheel.",
       "name": "Rick's Maple Bourbon Esmash", 
       "components": [
          {
@@ -835,7 +878,7 @@
       "rating": 5
    }, 
    {
-      "text": "Stir vigorously with ice in a mixing glass. Strain into chilled martini glass. Garnish with a pitted Castelvetrano Olives.", 
+      "text": "Stir vigorously with ice in a mixing glass. Strain into chilled martini glass. Garnish with pitted Castelvetrano Olives.",
       "name": "Sozzler Martini", 
       "components": [
          {
@@ -886,12 +929,18 @@
             "quantity": "5", 
             "unit": "dash", 
             "ingredient": "bitters"
+         },
+         {
+             "index": 4,
+             "quantity": "",
+             "unit": "",
+             "ingredient": "lemon wedge"
          }
       ], 
       "rating": 4
    }, 
    {
-      "text": "Shake and strain into chilled cocktail glass. Add the garnishes. Adjust pernod/absinthe and bitters (and modify recipe).", 
+      "text": "Shake and strain into chilled cocktail glass. Garnish with maraschino cherry and lemon twist.",
       "name": "Modernista", 
       "components": [
          {
@@ -926,7 +975,7 @@
          }, 
          {
             "index": 5, 
-            "quantity": "1", 
+            "quantity": "",
             "unit": "", 
             "ingredient": "maraschino cherry"
          }, 
@@ -940,7 +989,7 @@
       "rating": 1
    }, 
    {
-      "text": "Cut a wheel off the lime for garnish. Cut the lime into 4 wedges. In a rocks glass, muddle the sugar and the lime. Stir well to dissolve sugar.\n\nAdd the mint leaves (about 10), and bruise them gently. Add the rhum, fill to top with crushed ice. Top off with club soda. Attach shaker and shake. \n\nGarnish with a lime wheel and a sprig of slapped mint.\n\nMixing is the key. Experiment with different mixing methods (stir instead of shake, etc).\n\nPint glass works. Adjust rhum volume depending on rhum strength.", 
+      "text": "Cut a wheel off the lime for garnish. Cut the lime into 4 wedges. In a rocks glass, muddle the sugar and the lime. Stir well to dissolve sugar.\n\nAdd the mint leaves (about 10), and bruise them gently. Add the rhum, fill to top with crushed ice. Top off with club soda. Attach shaker and shake. \n\nGarnish with a lime wheel and a sprig of slapped mint.\n\nMixing is the key. Experiment with different mixing methods (stir instead of shake, etc).\n\nPint glass works.",
       "name": "Martinique Mojito", 
       "components": [
          {
@@ -1089,7 +1138,7 @@
       "rating": 4
    }, 
    {
-      "text": "In an old fashioned glass, dash the bitters on to the sugar cube. Add the orange slice and optional cherry. Muddle well. \nFill glass with ice cubes, add top quality rye, stir.", 
+      "text": "In an old fashioned glass, dash the bitters on to the sugar cube. Add the orange wheel and optional cherry. Muddle well.\n\nFill glass with ice cubes, add top quality rye, stir.",
       "name": "Old Fashioned", 
       "components": [
          {
@@ -1118,7 +1167,7 @@
          }, 
          {
             "index": 4, 
-            "quantity": "1", 
+            "quantity": "",
             "unit": "", 
             "ingredient": "maraschino cherry"
          }
@@ -1126,7 +1175,7 @@
       "rating": 5
    }, 
    {
-      "text": "In a collins glass, mix ingredients. Drop in shell of juiced lime.\nFill the glass with crushed ice and swizzle until the glass frosts over. \n\nGarnish with a large sprig of mint. Serve with a straw.\n\nExperiment with multiple rums, and different sugars or syrups.", 
+      "text": "In a collins glass, mix ingredients. Drop in shell of juiced lime. Fill the glass with crushed ice and swizzle until the glass frosts over.\n\nGarnish with a large sprig of spanked mint. Serve with a straw.\n\nExperiment with multiple rums, and different sugars or syrups.",
       "name": "Queen's Park Swizzle", 
       "components": [
          {
@@ -1152,12 +1201,24 @@
             "quantity": "4", 
             "unit": "dash", 
             "ingredient": "Angostura bitters"
+         },
+         {
+             "index": 4,
+             "quantity": "",
+             "unit": "",
+             "ingredient": "fresh mint"
+         },
+         {
+             "index": 4,
+             "quantity": "",
+             "unit": "",
+             "ingredient": "lime shell"
          }
-      ], 
+      ],
       "rating": 5
    }, 
    {
-      "text": "Fill a small rocks glass with ice. In another rocks glass, muddle the sugar cube and the Peychaud's bitters (and optional water). \nDump the ice from the first glass, and coat the inside with absinthe, pouring out the excess. strain the cocktail into the absinthe glass.\ntwist the lemon over the glass, and optionally drop into the drink.", 
+      "text": "Fill a small rocks glass with ice. In another rocks glass, muddle the sugar cube and the Peychaud's bitters (and optional water).\n\nDump the ice from the first glass, and coat the inside with absinthe, pouring out the excess. Strain the cocktail into the absinthe glass.\n\nTwist the lemon over the glass, and optionally drop into the drink.",
       "name": "Sazerac", 
       "components": [
          {
@@ -1247,13 +1308,13 @@
          }, 
          {
             "index": 7, 
-            "quantity": "1", 
+            "quantity": "",
             "unit": "", 
             "ingredient": "orange slice"
          }, 
          {
             "index": 8, 
-            "quantity": "1", 
+            "quantity": "",
             "unit": "", 
             "ingredient": "maraschino cherry"
          }
@@ -1261,7 +1322,7 @@
       "rating": 3
    }, 
    {
-      "text": "Set aside part of the lemon peel for garnish.\n\nIn a glass, thoroughly mix the sugar, gin, and lemon juice. Gently muddle 1 sprig of mint. Add ice and stir until glass is frosty. Add highly-carbonated club soda and stir a little more.\n\nGarnish with the remaining sprig of mint and lemon garnish.", 
+      "text": "In a glass, thoroughly mix the sugar, gin, and lemon juice. Gently muddle 1 sprig of mint. Add ice and stir until glass is frosty. Add highly-carbonated club soda and stir a little more.\n\nGarnish with mint and lemon peel.",
       "name": "Southside", 
       "components": [
          {
@@ -1290,9 +1351,15 @@
          }, 
          {
             "index": 4, 
-            "quantity": "2", 
+            "quantity": "",
             "unit": "", 
-            "ingredient": "mint sprigs"
+            "ingredient": "fresh mint"
+         },
+         {
+             "index": 4,
+             "quantity": "",
+             "unit": "",
+             "ingredient": "lemon peel"
          }
       ], 
       "rating": 5
@@ -1348,7 +1415,7 @@
       "rating": 4
    }, 
    {
-      "text": "Pour syrup into rocks glass. Squeeze the lime wedge thoroughly into the syrup, then drop it in. Add the rhum, and an ice cube. Stir and let sit before drinking.\n\nGreat with Batiste. \n\nDon't skimp on the syrup otherwise the lime will easily dominate and throw things out of balance.\n\nDon't pay too much attention to measurements. Just mix it up and let the Trade Winds cool your heels.", 
+      "text": "Pour syrup into rocks glass. Squeeze the lime wedge thoroughly into the syrup, then drop it in. Add the rhum. Stir and let sit before drinking.\n\nDon't pay too much attention to measurements. Just mix it up and let the Trade Winds cool your heels.", 
       "name": "Ti' punch", 
       "components": [
          {
@@ -1445,7 +1512,7 @@
          }, 
          {
             "index": 4, 
-            "quantity": "1", 
+            "quantity": "",
             "unit": "", 
             "ingredient": "maraschino cherry"
          }
@@ -1482,7 +1549,7 @@
          }, 
          {
             "index": 4, 
-            "quantity": "1", 
+            "quantity": "",
             "unit": "", 
             "ingredient": "maraschino cherry"
          }
@@ -1513,7 +1580,7 @@
          }, 
          {
             "index": 3, 
-            "quantity": "1", 
+            "quantity": "",
             "unit": "", 
             "ingredient": "maraschino cherry"
          }, 
