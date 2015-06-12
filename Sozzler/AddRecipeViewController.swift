@@ -227,8 +227,8 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
                 recipeName.becomeFirstResponder()
             }
             
-            var alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .Alert)
-            let cancelAction = UIAlertAction(title: "Oops", style: .Default) { (action: UIAlertAction!) -> Void in }
+            var alert = UIAlertController(title: errorMessage, message: nil, preferredStyle: .Alert)
+            let cancelAction = UIAlertAction(title: "OK", style: .Default) { (action: UIAlertAction!) -> Void in }
             alert.addAction(cancelAction)
             presentViewController(alert, animated: true, completion: nil)
         }
