@@ -76,8 +76,8 @@ class DataViewController: UIViewController, MFMailComposeViewControllerDelegate 
             self.tabBarController!.selectedIndex = 0
             
             let viewControllers = self.tabBarController!.viewControllers as! [UINavigationController]
-            let nav = viewControllers[0]
-            nav.popToRootViewControllerAnimated(false)
+            viewControllers[0].popToRootViewControllerAnimated(false)
+            viewControllers[1].popToRootViewControllerAnimated(false)
         }
         
         let cancelAction = UIAlertAction(title: "Forget it", style: .Default) { (action: UIAlertAction!) -> Void in }

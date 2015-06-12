@@ -19,10 +19,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             CannedUnitSource().read()
             if URLRecipeSource(url: url).read() != nil {
                 if CoreDataHelper.save(nil) {
+                    NSNotificationCenter.defaultCenter().postNotificationName("data.reset", object: self)
+
                     if let tabs = self.window?.rootViewController as? UITabBarController {
                         tabs.selectedIndex = 0
                     }
-                    NSNotificationCenter.defaultCenter().postNotificationName("data.imported", object: self)
+
+                    if let tabBarController = self.window?.rootViewController as? UITabBarController {
+                        let viewControllers = tabBarController.viewControllers as! [UINavigationController]
+                        viewControllers[0].popToRootViewControllerAnimated(false)
+                        viewControllers[1].popToRootViewControllerAnimated(false)
+                    }
+
                     errors = false
                 }
             }

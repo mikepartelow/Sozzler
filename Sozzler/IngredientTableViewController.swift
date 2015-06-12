@@ -49,6 +49,8 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
 
     func dataReset() {
         shouldRefresh = true
+        searchText = ""
+        searchController?.active = false
     }
 
     override func viewWillAppear(animated: Bool) {
