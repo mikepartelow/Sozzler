@@ -351,7 +351,7 @@
                                 <action selector="onCancel:" destination="vvM-8B-AZE" id="2bu-hK-3SR"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="R7r-nr-VoU">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="R7r-nr-VoU">
                             <connections>
                                 <action selector="onDone:" destination="vvM-8B-AZE" id="hkE-SC-3be"/>
                             </connections>
