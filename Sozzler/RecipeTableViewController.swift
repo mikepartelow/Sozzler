@@ -53,19 +53,25 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "data.reset", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "asset.reset", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataImported", name: "data.imported", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "recipeUpdated", name: "recipe.updated", object: nil)
     }
 
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver("data.reset")
         NSNotificationCenter.defaultCenter().removeObserver("asset.reset")
         NSNotificationCenter.defaultCenter().removeObserver("data.imported")
+        NSNotificationCenter.defaultCenter().removeObserver("recipe.updated")
     }
     
     func dataReset() {
         shouldRefresh = true
         shouldScroll = true
     }
-    
+
+    func recipeUpdated() {
+        refresh()
+    }
+
     func dataImported() {
         refresh()
     }
