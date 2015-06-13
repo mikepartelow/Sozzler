@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oo7-Sb-6q1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oo7-Sb-6q1">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -234,7 +234,6 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="88" id="95H-Z3-VWq"/>
-                                                    <constraint firstAttribute="width" id="9Qm-NV-iEz"/>
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="componentCell" id="4fq-3K-Sdg">
@@ -244,32 +243,21 @@
                                                         </tableViewCellContentView>
                                                     </tableViewCell>
                                                 </prototypes>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="9Qm-NV-iEz"/>
-                                                    </mask>
-                                                </variation>
                                             </tableView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eEP-yo-NoJ">
-                                                <rect key="frame" x="243" y="205" width="114" height="30"/>
+                                                <rect key="frame" x="245" y="205" width="110" height="30"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="114" id="0tv-jc-kMH"/>
                                                     <constraint firstAttribute="height" constant="30" id="I99-X3-cKS"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                 <state key="normal" title="Add Ingredient">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="0tv-jc-kMH"/>
-                                                    </mask>
-                                                </variation>
                                                 <connections>
                                                     <segue destination="QrR-so-p0U" kind="presentation" id="eun-bz-Ka2"/>
                                                 </connections>
                                             </button>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="300" verticalCompressionResistancePriority="800" text="sfffsdafs" translatesAutoresizingMaskIntoConstraints="NO" id="olF-dE-YVU">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="300" verticalCompressionResistancePriority="800" scrollEnabled="NO" text="sfffsdafs" translatesAutoresizingMaskIntoConstraints="NO" id="olF-dE-YVU">
                                                 <rect key="frame" x="8" y="243" width="584" height="176"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -292,7 +280,6 @@
                                             <constraint firstItem="vEj-9E-ccq" firstAttribute="top" secondItem="wVX-g9-pIU" secondAttribute="top" constant="8" id="XGo-YL-qsm"/>
                                             <constraint firstAttribute="trailing" secondItem="3GR-CX-vSj" secondAttribute="trailing" constant="8" id="XMe-8B-XNr"/>
                                             <constraint firstItem="vEj-9E-ccq" firstAttribute="leading" secondItem="wVX-g9-pIU" secondAttribute="leading" constant="8" id="b6J-mp-rA8"/>
-                                            <constraint firstItem="g3e-4w-VJt" firstAttribute="top" secondItem="Cme-xI-olH" secondAttribute="bottom" constant="-33" id="daY-4O-8ah"/>
                                             <constraint firstAttribute="bottom" secondItem="olF-dE-YVU" secondAttribute="bottom" constant="8" id="fXy-Dj-O1b"/>
                                             <constraint firstItem="olF-dE-YVU" firstAttribute="leading" secondItem="wVX-g9-pIU" secondAttribute="leading" constant="8" id="hwr-q4-Znc"/>
                                             <constraint firstAttribute="trailing" secondItem="olF-dE-YVU" secondAttribute="trailing" constant="8" id="pyn-Gd-v6d"/>
@@ -300,30 +287,26 @@
                                             <constraint firstItem="3GR-CX-vSj" firstAttribute="top" secondItem="vEj-9E-ccq" secondAttribute="bottom" constant="8" id="yLf-bq-2ni"/>
                                             <constraint firstAttribute="centerX" secondItem="g3e-4w-VJt" secondAttribute="centerX" id="yxe-fB-msJ"/>
                                         </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="daY-4O-8ah"/>
-                                            </mask>
-                                        </variation>
                                     </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="wVX-g9-pIU" firstAttribute="leading" secondItem="i5L-6A-6A1" secondAttribute="leading" id="36P-9G-MzG"/>
                                     <constraint firstItem="wVX-g9-pIU" firstAttribute="width" secondItem="i5L-6A-6A1" secondAttribute="width" id="7lp-ZV-8cY"/>
-                                    <constraint firstItem="wVX-g9-pIU" firstAttribute="top" secondItem="i5L-6A-6A1" secondAttribute="top" id="CFX-7w-w6x"/>
                                     <constraint firstAttribute="trailing" secondItem="wVX-g9-pIU" secondAttribute="trailing" id="HRi-Ja-VPA"/>
-                                    <constraint firstItem="wVX-g9-pIU" firstAttribute="leading" secondItem="i5L-6A-6A1" secondAttribute="leading" id="Qdu-oG-hTo"/>
-                                    <constraint firstAttribute="trailing" secondItem="wVX-g9-pIU" secondAttribute="trailing" id="cjc-qu-6qx"/>
-                                    <constraint firstAttribute="bottom" secondItem="wVX-g9-pIU" secondAttribute="bottom" id="dGS-w4-9fU"/>
+                                    <constraint firstAttribute="trailing" secondItem="wVX-g9-pIU" secondAttribute="trailing" id="PhW-tN-dV4"/>
+                                    <constraint firstItem="wVX-g9-pIU" firstAttribute="top" secondItem="i5L-6A-6A1" secondAttribute="top" id="Q62-Sh-G2n"/>
+                                    <constraint firstAttribute="bottom" secondItem="wVX-g9-pIU" secondAttribute="bottom" id="e0V-JX-S0q"/>
                                     <constraint firstItem="wVX-g9-pIU" firstAttribute="leading" secondItem="i5L-6A-6A1" secondAttribute="leading" id="e9k-Kg-Q9V"/>
                                     <constraint firstAttribute="bottom" secondItem="wVX-g9-pIU" secondAttribute="bottom" id="nDa-tS-13t"/>
                                     <constraint firstItem="wVX-g9-pIU" firstAttribute="top" secondItem="i5L-6A-6A1" secondAttribute="top" id="tYn-Ax-oLC"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="CFX-7w-w6x"/>
-                                        <exclude reference="Qdu-oG-hTo"/>
-                                        <exclude reference="cjc-qu-6qx"/>
-                                        <exclude reference="dGS-w4-9fU"/>
+                                        <exclude reference="7lp-ZV-8cY"/>
+                                        <exclude reference="HRi-Ja-VPA"/>
+                                        <exclude reference="e9k-Kg-Q9V"/>
+                                        <exclude reference="nDa-tS-13t"/>
+                                        <exclude reference="tYn-Ax-oLC"/>
                                     </mask>
                                 </variation>
                             </scrollView>
@@ -333,19 +316,10 @@
                             <constraint firstAttribute="trailing" secondItem="i5L-6A-6A1" secondAttribute="trailing" id="0W0-xj-nss"/>
                             <constraint firstAttribute="width" secondItem="i5L-6A-6A1" secondAttribute="width" id="1bA-zZ-hrq"/>
                             <constraint firstItem="i5L-6A-6A1" firstAttribute="top" secondItem="ThH-QC-Ior" secondAttribute="bottom" id="4SS-SW-zvh"/>
-                            <constraint firstAttribute="height" secondItem="i5L-6A-6A1" secondAttribute="height" id="I5X-kw-Nhk"/>
-                            <constraint firstItem="i5L-6A-6A1" firstAttribute="top" secondItem="ThH-QC-Ior" secondAttribute="bottom" constant="-80" id="Jt1-TI-yGx"/>
                             <constraint firstItem="i5L-6A-6A1" firstAttribute="leading" secondItem="wuf-he-hcg" secondAttribute="leading" id="e04-2p-Cdr"/>
-                            <constraint firstAttribute="height" secondItem="i5L-6A-6A1" secondAttribute="height" id="o5j-3c-JX5"/>
+                            <constraint firstItem="wVX-g9-pIU" firstAttribute="width" secondItem="wuf-he-hcg" secondAttribute="width" id="osw-ct-yB5"/>
                             <constraint firstItem="wd7-gC-8gE" firstAttribute="top" secondItem="i5L-6A-6A1" secondAttribute="bottom" id="wZr-MK-YC5"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="I5X-kw-Nhk"/>
-                                <exclude reference="Jt1-TI-yGx"/>
-                                <exclude reference="o5j-3c-JX5"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Add Recipe" id="U9u-Qd-UH8">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="2JF-Hs-1uJ">

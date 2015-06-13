@@ -17,7 +17,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     
     let recipeTextPlaceholder = "Stir with ice, strain into chilled rocks glass."
     
-    var keyboardHeight: CGFloat = 0
+    var keyboardRect = CGRect()
     
     var added = false
     var recipe: Recipe?
@@ -56,6 +56,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         
         resizeComponentsTable()
         componentTable!.editing = true
+        resizeRecipeText()
         
         let scrollPoint = CGPointMake(0, recipeText.frame.origin.y)
         recipeText.setContentOffset(scrollPoint, animated: false)
@@ -96,8 +97,8 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
 
     func keyboardWillShow(notification: NSNotification) {
         if let userInfo = notification.userInfo {
-            if let kh = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue().size.height {
-                keyboardHeight = kh
+            if let r = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue() {
+                keyboardRect = r
             }
         }
     }
@@ -108,10 +109,8 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-//        recipeName!.resignFirstResponder()
         resizeComponentsTable()
-//        recipeName!.becomeFirstResponder()
-//        recipeName!.selectedTextRange = recipeName!.textRangeFromPosition(recipeName!.endOfDocument, toPosition: recipeName!.endOfDocument)
+        recipeText.resignFirstResponder()
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
@@ -121,17 +120,25 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
                 recipeText!.textColor = UIColor.blackColor()
             }
             
-            let magicNumber: CGFloat
-            let o = UIApplication.sharedApplication().statusBarOrientation
-            if o == UIInterfaceOrientation.Portrait || o == UIInterfaceOrientation.PortraitUpsideDown {
-                magicNumber = 80
-            } else {
-                magicNumber = -10
-            }
+            scrollView.setContentOffset(CGPointMake(0, 0), animated: false)
             
-            let y = recipeText.frame.origin.y + recipeText.frame.height
-            let contentOffset = CGPointMake(0, y - keyboardHeight - magicNumber)
-            scrollView.setContentOffset(contentOffset, animated: true)
+            let contentInsets = UIEdgeInsetsMake(0, 0, keyboardRect.height, 0)
+            scrollView.contentInset = contentInsets
+            scrollView.scrollIndicatorInsets = contentInsets
+            
+            let h = view.frame.height - keyboardRect.height
+            let nbh = navigationController!.navigationBar.frame.size.height
+            let sbh = UIApplication.sharedApplication().statusBarFrame.size.height
+            
+            NSLog("h = \(h) :: nbh = \(nbh) :: sbh = \(sbh)")
+
+            let newHeight = h - 8 - nbh - 8 - sbh
+
+            let y = recipeText.frame.origin.y - 8
+
+            scrollView.setContentOffset(CGPointMake(0, y), animated: true)
+            recipeTextHeight.constant = newHeight
+            recipeText.scrollEnabled = true
         }
     }
 
@@ -141,15 +148,32 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
                 recipeText!.text = recipeTextPlaceholder
                 recipeText!.textColor = UIColor.lightGrayColor()
             }
+
+            resizeRecipeText()
+
+            let contentInsets = UIEdgeInsetsMake(0, 0, 0, 0)
+            scrollView.contentInset = contentInsets
+            scrollView.scrollIndicatorInsets = contentInsets
             
             recipeText.scrollRectToVisible(CGRect(x: 0, y: 0, width: 0, height: 0), animated: true)
-            scrollView.setContentOffset(CGPointMake(0, 0), animated: true)
+            recipeText.scrollEnabled = false
+            
+            // FIXME: it would be nice if this worked but if the recipe text is short it pulls the screen down
+            //
+//            scrollView.setContentOffset(CGPointMake(0, recipeName.frame.origin.y), animated: true)
+            
         }
     }
     
     func resizeComponentsTable() {
         componentTableHeight.constant = componentTable.contentSize.height
         componentTable.setNeedsUpdateConstraints()
+    }
+    
+    func resizeRecipeText() {
+        let fit = max(176, recipeText.sizeThatFits(recipeText.contentSize).height)
+        NSLog("fit = \(fit)")
+        recipeTextHeight.constant = fit
     }
 
     
@@ -225,6 +249,8 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             
             if errorCode == Recipe.ValidationErrorCode.Name {
                 recipeName.becomeFirstResponder()
+            } else {
+                recipeText.resignFirstResponder()
             }
             
             var alert = UIAlertController(title: errorMessage, message: nil, preferredStyle: .Alert)
