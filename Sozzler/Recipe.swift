@@ -101,14 +101,11 @@ extension Recipe {
             let ingredient      = Ingredient.findOrCreate(ingredientName)
             
             let (quantity_n, quantity_d) = Component.parseQuantity(quantity)
-            // FIXME: should probably bounds check quantity_n/d before downcast
-            //
             let component       = Component.create(Int16(quantity_n), quantity_d: Int16(quantity_d), unit: unit, ingredient: ingredient, recipe: recipe, index: Int16(index))
         }
         
         return recipe
     }
-
 }
 
 extension NSMutableDictionary {

@@ -272,19 +272,13 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             
             if userSettings.recipeSortOrder == .Name {
                 let randomSection = Int(arc4random_uniform(UInt32(Recipe.count())))
-                
-                // FIXME: what if no recipes at all?
                 indexPath = NSIndexPath(forRow: 0, inSection: randomSection)
             } else if userSettings.recipeSortOrder == .Rating {
                 let fiveStarSection = 0
                 let limit = frc!.sections![fiveStarSection].numberOfObjects!
                 let randomRow = Int(arc4random_uniform(UInt32(limit)))
-                
-                // FIXME: what if there aren't any five star recipes?
-                // FIXME: what if no recipes at all?
                 indexPath = NSIndexPath(forRow: randomRow, inSection: fiveStarSection)
             } else {
-                // FIXME: what if no recipes at all?
                 indexPath = NSIndexPath(forRow: 0, inSection: 0)
             }
             

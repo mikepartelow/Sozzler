@@ -162,7 +162,6 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         return CGFloat(52)
     }
     
-    // FIXME: DRY
     func refresh() {
         let predicate: NSPredicate?
         frc = Unit.fetchedResultsController()

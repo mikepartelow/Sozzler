@@ -189,7 +189,6 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         return CGFloat(52)
     }
     
-    // FIXME: DRY
     func refresh() {
         let predicate: NSPredicate?
         if searchText != "" {

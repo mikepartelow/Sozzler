@@ -65,8 +65,6 @@ class Component: NSManagedObject, Comparable {
 }
 
 extension Component {
-    // FIXME: this needs to handle unparseable strings. try MANY cases.
-    //
     class func parseQuantity(quantity: String) -> (quantity_n: Int, quantity_d: Int) {
         var quantity_n = 0
         var quantity_d = 1

@@ -9,9 +9,6 @@ class EditRecipeNavViewController: UINavigationController {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = mainStoryboard.instantiateViewControllerWithIdentifier("AddRecipe") as! AddRecipeViewController
         
-//        viewController.navigationItem.leftBarButtonItem = nil
-//        viewController.navigationItem.rightBarButtonItem = nil
-        
         pushViewController(viewController, animated: false)
     }
 }

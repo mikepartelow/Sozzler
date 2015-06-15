@@ -75,7 +75,6 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
         }
     }
     
-    // FIXME: DRY
     func refresh() {
         let predicate: NSPredicate?
 

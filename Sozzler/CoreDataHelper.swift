@@ -57,9 +57,6 @@ class CoreDataHelper {
             let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
 
             var obj: NSManagedObject?
-            
-            // FIXME: figure out how to pass a correctly typed object so we don't have to pass the moc
-            //        this is where we should insert into moc, not in each NSMO ctor
             if let entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: moc) {
                 obj = initializer(entity: entity, context: moc)
             }

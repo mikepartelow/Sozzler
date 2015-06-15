@@ -157,11 +157,6 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             
             recipeText.scrollRectToVisible(CGRect(x: 0, y: 0, width: 0, height: 0), animated: true)
             recipeText.scrollEnabled = false
-            
-            // FIXME: it would be nice if this worked but if the recipe text is short it pulls the screen down
-            //
-//            scrollView.setContentOffset(CGPointMake(0, recipeName.frame.origin.y), animated: true)
-            
         }
     }
     
@@ -265,7 +260,6 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         if let vc = sender.sourceViewController as? AddIngredientToComponentViewController {
         } else if let vc = sender.sourceViewController as? AddQuantityToComponentViewController {
             if let unit = vc.unit {
-                // FIXME: should Component.create take [Int,Int] to put this logic in Component?
                 let quantity_d = Int16(vc.quantity_f![1])
                 let quantity_n = Int16((vc.quantity_f![1] * vc.quantity_i!) + vc.quantity_f![0])
                 
