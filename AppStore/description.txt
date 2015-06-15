@@ -2,11 +2,11 @@ Sozzler puts your favorite cocktails right where you need them: in your pocket. 
 
 Sozzler comes loaded with 42 great recipes, and makes it simple to rank your favorite recipes, modify recipes, add new recipes, and delete recipes you don't like.
 
-Features:
- * Add, update, and delete your recipes
- * Rate your recipes to keep track of your favorites
- * Browse your recipes by name, rating, or ingredient
- * Search your recipes by name or ingredient
- * Import and export your recipes with email
- * Can't decide which cocktail to make? Shake the recipe list and let Sozzler pick one of your favorites for you
- * Customize the ingredients and units of measure used to build your recipes
+Features include:
+ • Add, update, and delete your recipes
+ • Rate your recipes to keep track of your favorites
+ • Browse your recipes by name, rating, or ingredient
+ • Search your recipes by name or ingredient
+ • Import and export your recipes with email
+ • Can't decide which cocktail to make? Shake the recipe list and let Sozzler pick one of your favorites for you
+ • Customize the ingredients and units of measure used to build your recipes
