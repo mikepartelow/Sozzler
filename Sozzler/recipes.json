@@ -132,8 +132,8 @@
         "index" : 1
       }
     ],
-    "name" : "Gin And Tonic",
-    "text" : "Pour the gin into a chilled rocks glass with ice. Top with the tonic. Garnish with the lime wedge and bar straws.\n\nRemember to pour the gin before the tonic, otherwise you will have made a Tonic And Gin, an inferior drink."
+    "name" : "Gin and Tonic",
+    "text" : "Pour the gin into a chilled rocks glass with ice. Top with the tonic. Garnish with the lime wedge and bar straws.\n\nRemember to pour the gin before the tonic, otherwise you will have made a Tonic and Gin, an inferior drink."
   },
   {
     "rating" : 5,
@@ -342,7 +342,7 @@
         "index" : 0
       }
     ],
-    "name" : "Tonic And Gin",
+    "name" : "Tonic and Gin",
     "text" : "Pour the tonic into a chilled rocks glass with ice. Top with the gin. Garnish with the lime wedge and bar straws.\n\nConsider making a Gin and Tonic next time."
   },
   {
@@ -756,8 +756,8 @@
         "index" : 2
       }
     ],
-    "name" : "Grape Dogg",
-    "text" : "Shake with ice, strain into a crushed-ice filled collins glass. Saffron is optional."
+    "name" : "619 Snow Cone",
+    "text" : "Shake with ice, strain into a crushed-ice filled collins glass."
   },
   {
     "rating" : 5,
@@ -1424,7 +1424,7 @@
         "index" : 4
       }
     ],
-    "name" : "Blood And Sand",
+    "name" : "Blood and Sand",
     "text" : "Shake with ice, strain into chilled cocktail glass. Garnish with flamed orange peel.\n\nGreat with Yamazaki Scotch, Dolin vermouth. Try a more assertive Scotch to toss it just a little out of balance.\n\nPairs well with dark chocolate."
   }
 ]
