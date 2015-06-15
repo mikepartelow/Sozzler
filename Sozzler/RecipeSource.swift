@@ -10,11 +10,15 @@ class URLRecipeSource {
     
     func read() -> [Recipe]? {
         let recipesJson = NSData(contentsOfURL: url, options: NSDataReadingOptions.DataReadingMappedIfSafe, error: nil)
+        var recipes: [Recipe]?
         if let recipeDicts = NSJSONSerialization.JSONObjectWithData(recipesJson!, options: nil, error: nil) as? [NSDictionary] {
-            return filter(map(recipeDicts, { Recipe.create($0) }), { $0 != nil }).map { $0! }
-        } else {
-            return nil
+            let recipeArray = filter(map(recipeDicts, { Recipe.create($0) }), { $0 != nil }).map { $0! }
+            if recipeArray.count > 0 {
+                recipes = recipeArray
+            }
         }
+        
+        return recipes
     }
 }
 
