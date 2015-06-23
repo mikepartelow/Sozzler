@@ -16,6 +16,17 @@
 		400BF0D71AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400BF0D61AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift */; };
 		4029C9071AED341300D5F0C9 /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029C9061AED341300D5F0C9 /* DataViewController.swift */; };
 		4029C9091AED3AB300D5F0C9 /* RecipeSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029C9081AED3AB300D5F0C9 /* RecipeSource.swift */; };
+		405E3B2D1B2FD60B00577DF8 /* RecipeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405E3B2C1B2FD60B00577DF8 /* RecipeTests.swift */; };
+		405E3B2F1B2FD8A900577DF8 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F31AE8C35300EEBBCA /* Component.swift */; };
+		405E3B301B2FD8A900577DF8 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F21AE8C35300EEBBCA /* Recipe.swift */; };
+		405E3B311B2FD8BC00577DF8 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F01AE8C35300EEBBCA /* Ingredient.swift */; };
+		405E3B321B2FD8BC00577DF8 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F11AE8C35300EEBBCA /* Unit.swift */; };
+		405E3B331B2FD8CD00577DF8 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F81AE8C48200EEBBCA /* CoreDataHelper.swift */; };
+		405E3B341B2FD8D700577DF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F65BAD1AE8BAE000D15898 /* AppDelegate.swift */; };
+		405E3B351B2FD90000577DF8 /* RecipeSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029C9081AED3AB300D5F0C9 /* RecipeSource.swift */; };
+		405E3B361B2FD90000577DF8 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400832AD1AE9F53100112198 /* UserSettings.swift */; };
+		405E3B371B2FD96300577DF8 /* UnitSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BD5B61B0B9C1C00721CE5 /* UnitSource.swift */; };
+		405E3B3A1B2FDC5300577DF8 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 405E3B391B2FDC5300577DF8 /* CloudKit.framework */; };
 		408BD5B71B0B9C1C00721CE5 /* UnitSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BD5B61B0B9C1C00721CE5 /* UnitSource.swift */; };
 		408E28261B1970C60048FBB1 /* UnitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408E28251B1970C60048FBB1 /* UnitTableViewController.swift */; };
 		409480AA1AF838A100543FFB /* EditRecipeNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409480A91AF838A100543FFB /* EditRecipeNavViewController.swift */; };
@@ -59,6 +70,9 @@
 		400BF0D61AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuantityToComponentViewController.swift; sourceTree = "<group>"; };
 		4029C9061AED341300D5F0C9 /* DataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		4029C9081AED3AB300D5F0C9 /* RecipeSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeSource.swift; sourceTree = "<group>"; };
+		405E3B2C1B2FD60B00577DF8 /* RecipeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTests.swift; sourceTree = "<group>"; };
+		405E3B381B2FDC3E00577DF8 /* Sozzler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Sozzler.entitlements; sourceTree = "<group>"; };
+		405E3B391B2FDC5300577DF8 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		408BD5B61B0B9C1C00721CE5 /* UnitSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitSource.swift; sourceTree = "<group>"; };
 		408E28251B1970C60048FBB1 /* UnitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTableViewController.swift; sourceTree = "<group>"; };
 		409480A91AF838A100543FFB /* EditRecipeNavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditRecipeNavViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				405E3B3A1B2FDC5300577DF8 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +122,7 @@
 		40F65B9F1AE8BAE000D15898 = {
 			isa = PBXGroup;
 			children = (
+				405E3B391B2FDC5300577DF8 /* CloudKit.framework */,
 				40F65BAA1AE8BAE000D15898 /* Sozzler */,
 				40F65BC31AE8BAE100D15898 /* SozzlerTests */,
 				40F65BA91AE8BAE000D15898 /* Products */,
@@ -125,6 +141,7 @@
 		40F65BAA1AE8BAE000D15898 /* Sozzler */ = {
 			isa = PBXGroup;
 			children = (
+				405E3B381B2FDC3E00577DF8 /* Sozzler.entitlements */,
 				400832B11AEA098800112198 /* AddIngredientToComponentViewController.swift */,
 				400BF0D61AEB4AC100D74AB7 /* AddQuantityToComponentViewController.swift */,
 				40C99BE91AE9455C00F197C9 /* AddRecipeViewController.swift */,
@@ -132,6 +149,7 @@
 				40B643F31AE8C35300EEBBCA /* Component.swift */,
 				40B643F81AE8C48200EEBBCA /* CoreDataHelper.swift */,
 				4029C9061AED341300D5F0C9 /* DataViewController.swift */,
+				409480A91AF838A100543FFB /* EditRecipeNavViewController.swift */,
 				40F65BB71AE8BAE000D15898 /* Images.xcassets */,
 				40B643F01AE8C35300EEBBCA /* Ingredient.swift */,
 				40DC56671AEC669500449B8A /* IngredientTableViewController.swift */,
@@ -149,10 +167,9 @@
 				40F65BAF1AE8BAE000D15898 /* Sozzler.xcdatamodeld */,
 				40F65BAB1AE8BAE000D15898 /* Supporting Files */,
 				40B643F11AE8C35300EEBBCA /* Unit.swift */,
-				400832AD1AE9F53100112198 /* UserSettings.swift */,
-				409480A91AF838A100543FFB /* EditRecipeNavViewController.swift */,
 				408BD5B61B0B9C1C00721CE5 /* UnitSource.swift */,
 				408E28251B1970C60048FBB1 /* UnitTableViewController.swift */,
+				400832AD1AE9F53100112198 /* UserSettings.swift */,
 			);
 			path = Sozzler;
 			sourceTree = "<group>";
@@ -172,6 +189,7 @@
 			children = (
 				40F65BC61AE8BAE100D15898 /* SozzlerTests.swift */,
 				40F65BC41AE8BAE100D15898 /* Supporting Files */,
+				405E3B2C1B2FD60B00577DF8 /* RecipeTests.swift */,
 			);
 			path = SozzlerTests;
 			sourceTree = "<group>";
@@ -234,6 +252,11 @@
 					40F65BA71AE8BAE000D15898 = {
 						CreatedOnToolsVersion = 6.3;
 						DevelopmentTeam = ZY6MQPKQ94;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					40F65BBF1AE8BAE100D15898 = {
 						CreatedOnToolsVersion = 6.3;
@@ -318,7 +341,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				405E3B351B2FD90000577DF8 /* RecipeSource.swift in Sources */,
+				405E3B341B2FD8D700577DF8 /* AppDelegate.swift in Sources */,
 				40F65BC71AE8BAE100D15898 /* SozzlerTests.swift in Sources */,
+				405E3B361B2FD90000577DF8 /* UserSettings.swift in Sources */,
+				405E3B371B2FD96300577DF8 /* UnitSource.swift in Sources */,
+				405E3B2F1B2FD8A900577DF8 /* Component.swift in Sources */,
+				405E3B311B2FD8BC00577DF8 /* Ingredient.swift in Sources */,
+				405E3B331B2FD8CD00577DF8 /* CoreDataHelper.swift in Sources */,
+				405E3B321B2FD8BC00577DF8 /* Unit.swift in Sources */,
+				405E3B2D1B2FD60B00577DF8 /* RecipeTests.swift in Sources */,
+				405E3B301B2FD8A900577DF8 /* Recipe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +470,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sozzler/Sozzler.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Sozzler/Info.plist;
@@ -450,6 +484,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sozzler/Sozzler.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Sozzler/Info.plist;
