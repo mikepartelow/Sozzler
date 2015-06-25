@@ -4,6 +4,8 @@ import CoreData
 class RecipeTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     let userSettings = (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings
     
+    var exporter: RecipeExporter?
+    
     var frc: NSFetchedResultsController?
     var ingredient: Ingredient?
     
@@ -182,9 +184,9 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-        let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
-            let recipe = self.frc!.objectAtIndexPath(indexPath) as! Recipe
+        let recipe = self.frc!.objectAtIndexPath(indexPath) as! Recipe
 
+        let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
             for component in recipe.components.allObjects as! [Component] {
                 // FIXME: duplicated effort! will be recalculated in willSave() but if we don't change the Ingredient, willSave() *wont* be called..
                 //
@@ -210,7 +212,14 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             tableView.editing = false
         }
         
-        return [ deleteAction ]
+        let exportAction = UITableViewRowAction(style: .Normal, title: "Export") { (action, indexPath) -> Void in
+            self.exporter = RecipeExporter(viewController: self)
+            self.exporter!.export([recipe])
+            
+            tableView.editing = false
+        }
+        
+        return [ deleteAction, exportAction ]
     }
 
     func refresh() {

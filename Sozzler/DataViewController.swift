@@ -2,19 +2,21 @@ import UIKit
 import MessageUI
 import AddressBook
 
-class DataViewController: UIViewController, MFMailComposeViewControllerDelegate {
+class DataViewController: UIViewController {
     let userSettings = (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings
 
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var ingredientsLabel: UILabel!
     @IBOutlet weak var recipesLabel: UILabel!
     
+    var exporter: RecipeExporter? // can't be local or it gets GC'd too soon => crash
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String {
             if let build = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String {
-                versionLabel!.text = "Sozzler version \(version)" //.\(build)"
+                versionLabel!.text = "Sozzler version \(version).\(build)"
             }
         }
     }
@@ -22,35 +24,11 @@ class DataViewController: UIViewController, MFMailComposeViewControllerDelegate 
     override func viewWillAppear(animated: Bool) {
         recipesLabel!.text = "\(Recipe.count()) recipes"
         ingredientsLabel!.text = "\(Ingredient.count()) ingredients"
-
     }
 
     @IBAction func onExportRecipes(sender: UIButton) {
-        var composer = MFMailComposeViewController()
-        
-        composer.mailComposeDelegate = self
-        composer.setSubject("Sozzler Recipes")
-        composer.setMessageBody("My Sozzler Recipes", isHTML: true)
-        
-        let recipeDicts = map(Recipe.all(), { NSMutableDictionary(recipe: $0 as Recipe) })
-        let options = NSJSONWritingOptions.PrettyPrinted
-        
-        if let data = NSJSONSerialization.dataWithJSONObject(recipeDicts, options: options, error: nil) {
-            if let string = NSString(data: data, encoding: NSUTF8StringEncoding) {
-                NSLog("\(string)")
-
-                let data = string.dataUsingEncoding(NSUTF8StringEncoding)
-                let base64Data = data!.base64EncodedDataWithOptions(.allZeros)
-
-                composer.addAttachmentData(NSData(base64EncodedData: base64Data, options: .allZeros), mimeType: "application/sozzler", fileName: "Sozzler Recipes.sozzler")
-                
-                presentViewController(composer, animated: true, completion: nil)
-            }
-        }
-    }
-
-    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
-        dismissViewControllerAnimated(true, completion: nil)
+        exporter = RecipeExporter(viewController: self)
+        exporter!.export(Recipe.all())
     }
    
     @IBAction func onImportCanned(sender: UIButton) {
