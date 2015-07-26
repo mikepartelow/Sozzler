@@ -1,16 +1,19 @@
 import Foundation
 import CoreData
 
-func <(lhs: Component, rhs: Component) -> Bool {
-    return lhs.index < rhs.index
+func !=(lhs: Component, rhs: Component) -> Bool {
+    return !(lhs == rhs)
 }
 
 func ==(lhs: Component, rhs: Component) -> Bool {
-    return lhs.index == rhs.index
+    return lhs.unit.name == rhs.unit.name &&
+            lhs.ingredient.name == rhs.ingredient.name &&
+            lhs.quantity_n == rhs.quantity_n &&
+            lhs.quantity_d == rhs.quantity_d
 }
 
 @objc(Component)
-class Component: NSManagedObject, Comparable {
+class Component: NSManagedObject {
 
     @NSManaged var index: Int16
     @NSManaged var quantity_d: Int16

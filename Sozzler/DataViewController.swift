@@ -1,6 +1,4 @@
 import UIKit
-import MessageUI
-import AddressBook
 
 class DataViewController: UIViewController {
     let userSettings = (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings
@@ -64,8 +62,8 @@ class DataViewController: UIViewController {
         alert.addAction(cancelAction)
         
         presentViewController(alert, animated: true, completion: nil)
-    }
-    
+    }    
+        
     @IBAction func unwindToData(sender: UIStoryboardSegue) {
     }
     

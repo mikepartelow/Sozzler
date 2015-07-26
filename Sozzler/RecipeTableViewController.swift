@@ -8,6 +8,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     
     var frc: NSFetchedResultsController?
     var ingredient: Ingredient?
+    var recipeNameFilter: [String]?
     
     var shouldRefresh = true
     var shouldScroll = true
@@ -49,7 +50,9 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             tableView.tableHeaderView = searchController!.searchBar
             searchController!.searchBar.sizeToFit()
 
-            tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+            if frc?.sections?.count > 0 {
+                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+            }
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "data.reset", object: nil)
@@ -187,22 +190,14 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         let recipe = self.frc!.objectAtIndexPath(indexPath) as! Recipe
 
         let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
-            for component in recipe.components.allObjects as! [Component] {
-                // FIXME: duplicated effort! will be recalculated in willSave() but if we don't change the Ingredient, willSave() *wont* be called..
-                //
-                component.ingredient.recipe_count -= 1
-                component.unit.recipe_count -= 1
-                assert(component.ingredient.recipe_count >= 0, "ingredient recipe count went negative")
-                assert(component.unit.recipe_count >= 0, "unit recipe count went negative")
-                CoreDataHelper.delete(component)
-            }
             CoreDataHelper.delete(recipe)
-            NSNotificationCenter.defaultCenter().postNotificationName("recipe.deleted", object: self)
 
             var error: NSError?
             if CoreDataHelper.save(&error) {
                 assert(error == nil)                
                 self.refresh()
+                NSNotificationCenter.defaultCenter().postNotificationName("recipe.deleted", object: self)
+                NSNotificationCenter.defaultCenter().postNotificationName("data.reset", object: self)
             } else {
                 // FIXME:
                 // alert: could not blah blah
@@ -230,10 +225,13 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         } else {
             if searchText != "" {
                 predicate = NSPredicate(format: "(name contains[c] %@) OR (components.ingredient.name contains[c] %@)", searchText, searchText)
+            } else if recipeNameFilter != nil {
+                predicate = NSPredicate(format: "name IN %@", recipeNameFilter!)
+                navigationItem.title = "Recipes Imported" // FIXME: breaks generalization
             } else {
                 predicate = nil
+                navigationItem.title = "Recipes by \(userSettings.recipeSortOrderName)"
             }
-            navigationItem.title = "Recipes by \(userSettings.recipeSortOrderName)"
         }
         
         frc = Recipe.fetchedResultsController(predicate: predicate)
@@ -250,7 +248,9 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         shouldRefresh = false
         if shouldScroll {
             shouldScroll = false
-            tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+            if frc?.sections?.count > 0 {
+                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+            }
         }
     }
     

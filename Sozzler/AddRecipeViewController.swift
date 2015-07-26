@@ -130,8 +130,6 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             let nbh = navigationController!.navigationBar.frame.size.height
             let sbh = UIApplication.sharedApplication().statusBarFrame.size.height
             
-            NSLog("h = \(h) :: nbh = \(nbh) :: sbh = \(sbh)")
-
             let newHeight = h - 8 - nbh - 8 - sbh
 
             let y = recipeText.frame.origin.y - 8
@@ -167,7 +165,6 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func resizeRecipeText() {
         let fit = max(176, recipeText.sizeThatFits(recipeText.contentSize).height)
-        NSLog("fit = \(fit)")
         recipeTextHeight.constant = fit
     }
 
@@ -277,8 +274,6 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-        NSLog("\(fromIndexPath.row) => \(toIndexPath.row)")
-
         if fromIndexPath == toIndexPath {
             return
         }

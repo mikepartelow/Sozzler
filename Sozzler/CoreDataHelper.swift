@@ -39,10 +39,11 @@ class CoreDataHelper {
         return obj
     }
     
-    class func all(entityName: String) -> [NSManagedObject] {
+    class func all(entityName: String, predicate: NSPredicate? = nil) -> [NSManagedObject] {
         let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
         
         let fetchRequest = NSFetchRequest(entityName: entityName)
+        fetchRequest.predicate = predicate
         
         // FIXME: error handling
         if let results = moc.executeFetchRequest(fetchRequest, error: nil) {
@@ -77,6 +78,19 @@ class CoreDataHelper {
     class func delete(obj: NSManagedObject) {
         let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
         moc.deleteObject(obj)
+    }
+    
+    class func delete(recipe: Recipe) {
+        for component in recipe.components.allObjects as! [Component] {
+            // FIXME: duplicated effort! will be recalculated in willSave() but if we don't change the Ingredient, willSave() *wont* be called..
+            //
+            component.ingredient.recipe_count -= 1
+            component.unit.recipe_count -= 1
+            assert(component.ingredient.recipe_count >= 0, "ingredient recipe count went negative")
+            assert(component.unit.recipe_count >= 0, "unit recipe count went negative")
+            CoreDataHelper.delete(component)
+        }
+        CoreDataHelper.delete(recipe as NSManagedObject)
     }
     
     class func fetchedResultsController(fetchRequest: NSFetchRequest, sectionNameKeyPath: String? = nil) -> NSFetchedResultsController {

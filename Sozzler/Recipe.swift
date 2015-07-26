@@ -1,6 +1,24 @@
 import UIKit
 import CoreData
 
+func ==(lhs: Recipe, rhs: Recipe) -> Bool {
+    if lhs.name == rhs.name && lhs.rating == rhs.rating && lhs.text == rhs.text && lhs.components.count == rhs.components.count {
+        let lhsSortedComponents = lhs.sortedComponents
+        let rhsSortedComponents = rhs.sortedComponents
+        
+        for i in 0..<Int(lhs.components.count) {
+            if lhsSortedComponents[i] != rhsSortedComponents[i] {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
+    return false
+}
+
+
 @objc(Recipe)
 class Recipe: NSManagedObject {
 
@@ -18,7 +36,9 @@ class Recipe: NSManagedObject {
     
     var sortedComponents: [Component] {
         let componentArray = components.allObjects as! [Component]
-        return Swift.sorted(componentArray, <)
+        return Swift.sorted(componentArray, { (lhs, rhs) -> Bool in
+            lhs.index < rhs.index
+        })
     }
 }
 
@@ -53,6 +73,25 @@ extension Recipe {
         return CoreDataHelper.all("Recipe") as! [Recipe]
     }
     
+    class func find(name: String) -> Recipe? {
+        let predicate = NSPredicate(format: "name ==[c] %@", Recipe.fancyName(name))
+        return CoreDataHelper.find("Recipe", predicate: predicate) as! Recipe?
+    }
+    
+    class func findDuplicate(recipe: Recipe) -> Recipe? {
+        let predicate = NSPredicate(format: "name ==[c] %@", Recipe.fancyName(recipe.name))
+        let recipes = CoreDataHelper.all("Recipe", predicate: predicate) as! [Recipe]
+        
+        assert(recipes.count <= 2)
+        for foundRecipe in recipes {
+            if foundRecipe.objectID != recipe.objectID {
+                return foundRecipe
+            }
+        }
+        
+        return nil
+    }
+
     class func count() -> Int {
         return CoreDataHelper.count("Recipe", predicate: nil)
     }

@@ -8,49 +8,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var userSettings = UserSettings()
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        let tabBarController = window!.rootViewController! as! UITabBarController
+        let navController0 = (tabBarController.viewControllers as! [UINavigationController])[0]
 
-        var alert = UIAlertController(title: "", message: "Replace all existing recipes?", preferredStyle: .Alert)
+        var viewController = navController0.topViewController!
         
-        let doitAction = UIAlertAction(title: "Do it", style: .Destructive) { (action: UIAlertAction!) -> Void in
-            CoreDataHelper.factoryReset(save: false)
-
-            var errors = true
+        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        
+        let addToExisting = UIAlertAction(title: "Add to Existing Recipes", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            RecipeImporter(viewController: viewController).importRecipes(url)
+        })
+        
+        let replaceAll = UIAlertAction(title: "Replace All Recipes", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
             
-            CannedUnitSource().read()
-            if URLRecipeSource(url: url).read() != nil {
-                if CoreDataHelper.save(nil) {
-                    NSNotificationCenter.defaultCenter().postNotificationName("data.reset", object: self)
-
-                    if let tabs = self.window?.rootViewController as? UITabBarController {
-                        tabs.selectedIndex = 0
-                    }
-
-                    if let tabBarController = self.window?.rootViewController as? UITabBarController {
-                        let viewControllers = tabBarController.viewControllers as! [UINavigationController]
-                        viewControllers[0].popToRootViewControllerAnimated(false)
-                        viewControllers[1].popToRootViewControllerAnimated(false)
-                    }
-
-                    errors = false
-                }
+            var alertAreYouSure = UIAlertController(title: "", message: "Delete All Existing Recipes and Import New Recipes?", preferredStyle: .Alert)
+            
+            let doitAction = UIAlertAction(title: "Do it", style: .Destructive) { (action: UIAlertAction!) -> Void in
+                CoreDataHelper.factoryReset(save: false)
+                CannedUnitSource().read()
+                RecipeImporter(viewController: viewController).importRecipes(url)
             }
             
-            if errors {
-                CoreDataHelper.rollback()
-                var alert = UIAlertController(title: "", message: "Errors in Sozzler file, canceling import.", preferredStyle: .Alert)
-                let cancelAction = UIAlertAction(title: "OK", style: .Default) { (action: UIAlertAction!) -> Void in }
-                alert.addAction(cancelAction)
-                self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
-            }
-        }
+            let cancelAction = UIAlertAction(title: "Forget it", style: .Default) { (action: UIAlertAction!) -> Void in }
+            
+            alertAreYouSure.addAction(doitAction)
+            alertAreYouSure.addAction(cancelAction)
+            
+            viewController.presentViewController(alertAreYouSure, animated: true, completion: nil)
+        })
         
-        let cancelAction = UIAlertAction(title: "Forget it", style: .Default) { (action: UIAlertAction!) -> Void in }
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+        })
         
-        alert.addAction(doitAction)
-        alert.addAction(cancelAction)
+        sheet.addAction(addToExisting)
+        sheet.addAction(replaceAll)
+        sheet.addAction(cancel)
         
-        window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
-        
+        viewController.presentViewController(sheet, animated: true, completion: nil)
+
         return true
     }
     
