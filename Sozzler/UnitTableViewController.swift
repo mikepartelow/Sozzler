@@ -50,47 +50,7 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         alert.addAction(action)
         presentViewController(alert, animated: true, completion: nil)
     }
-    
-    @IBAction func onAdd(sender: UIBarButtonItem) {
-        var alert = UIAlertController(title: "Add Unit", message: "", preferredStyle: .Alert)
         
-        let addAction = UIAlertAction(title: "Add", style: .Default) { (action: UIAlertAction!) -> Void in
-            let textField = alert.textFields![0] as! UITextField
-            let unitName = textField.text
-            
-            if let unit = Unit.find(unitName) {
-                self.errorAlert("Unit already exists.", button: "Oops")
-            } else {
-                let unit = Unit.create(unitName)
-                
-                var error: NSError?
-                if CoreDataHelper.save(&error) {
-                    assert(error == nil)
-                    self.refresh()
-                    let indexPath = self.frc!.indexPathForObject(unit)
-                    self.tableView.selectRowAtIndexPath(indexPath!, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
-                } else {
-                    // FIXME:
-                    // alert: could not blah blah
-                    NSLog("Save Failed!: \(error)")
-                }
-            }
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in
-        }
-        
-        alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
-            textField.placeholder = "Peck"
-            textField.autocapitalizationType = UITextAutocapitalizationType.Words
-        }
-        
-        alert.addAction(addAction)
-        alert.addAction(cancelAction)
-        
-        presentViewController(alert, animated: true, completion: nil)
-    }
-    
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
@@ -132,6 +92,24 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         return [ deleteAction ]
     }
     
+    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        let unit = frc!.objectAtIndexPath(indexPath) as! Unit
+        return unit.name != ""
+
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "editUnit" {
+            let navController = segue.destinationViewController as! UINavigationController
+            let euvc = navController.topViewController! as! EditUnitViewController
+            let index = tableView.indexPathForSelectedRow()!
+            
+            euvc.unit = frc!.objectAtIndexPath(index) as? Unit
+            
+            tableView.deselectRowAtIndexPath(index, animated: false)
+        }
+    }
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return frc!.sections!.count
     }
@@ -144,8 +122,7 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         let cell = tableView.dequeueReusableCellWithIdentifier("UnitCell", forIndexPath: indexPath) as! UITableViewCell
         let unit = frc!.objectAtIndexPath(indexPath) as! Unit
         
-        NSLog("\(unit.index) : \(unit.name)")
-        cell.textLabel!.text = unit.name
+        cell.textLabel!.text = unit.plural_name != unit.name ? "\(unit.name) / \(unit.plural_name)" : unit.name
         
         return cell
     }
@@ -213,5 +190,15 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
             // FIXME: DO SOMETHING
         }
 
+    }
+    
+    @IBAction func unwindToUnitTable(sender: UIStoryboardSegue) {
+        if let euvc = sender.sourceViewController as? EditUnitViewController {
+            if euvc.added {
+                self.refresh()
+                let indexPath = self.frc!.indexPathForObject(euvc.unit!)
+                self.tableView.selectRowAtIndexPath(indexPath!, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+            }
+        }
     }
 }

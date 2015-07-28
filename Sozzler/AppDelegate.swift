@@ -96,13 +96,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
 
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
-        // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
-        // Create the coordinator and store
         var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("Sozzler.sqlite")
         var error: NSError? = nil
+        var migrationNeeded = false
+        
+        if let sourceMetadata = NSPersistentStoreCoordinator.metadataForPersistentStoreOfType(NSSQLiteStoreType, URL: url, error: &error) {
+            let destinationModel = coordinator!.managedObjectModel
+            let compatible = destinationModel.isConfiguration(nil, compatibleWithStoreMetadata: sourceMetadata)
+            
+            migrationNeeded = !compatible
+        }
+        
         var failureReason = "There was an error creating or loading the application's saved data."
-        if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
+        let options = [
+            NSMigratePersistentStoresAutomaticallyOption: true,
+            NSInferMappingModelAutomaticallyOption: true
+        ]
+        if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: options, error: &error) == nil {
             coordinator = nil
             // Report any error we got.
             var dict = [String: AnyObject]()
@@ -114,6 +125,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(error), \(error!.userInfo)")
             abort()
+        }
+        
+        if migrationNeeded {
+            for unit in Unit.all() {
+                if unit.plural_name == "%%DEFAULT PLURAL NAME%%" {
+                    unit.plural_name = CannedUnitSource.unitPluralizations[unit.name] ?? unit.name
+                }
+            }
+            // FIXME: handle error
+            CoreDataHelper.save(nil)
         }
         
         return coordinator

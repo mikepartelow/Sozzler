@@ -568,7 +568,7 @@
         <scene sceneID="dJq-yY-RN6">
             <objects>
                 <tableViewController title="Units" id="k7Q-Tc-XS2" customClass="UnitTableViewController" customModule="Sozzler" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0An-OF-L0D">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0An-OF-L0D">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -586,6 +586,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="nLC-9z-8Ge" kind="presentation" identifier="editUnit" id="1HA-pM-zb4"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -602,6 +605,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="AkZ-iP-d3O">
                             <connections>
                                 <action selector="onAdd:" destination="k7Q-Tc-XS2" id="Ea4-7L-6MH"/>
+                                <segue destination="3KX-ta-oFy" kind="presentation" identifier="addUnit" id="J1U-ef-sVN"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -610,6 +614,81 @@
                 <exit id="7ni-jc-LHN" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2663" y="2814"/>
+        </scene>
+        <!--Edit Unit View Controller-->
+        <scene sceneID="vf8-Y9-fAU">
+            <objects>
+                <viewController storyboardIdentifier="EditUnitViewController" id="BV5-92-tPH" customClass="EditUnitViewController" customModule="Sozzler" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7Rc-BZ-hfF"/>
+                        <viewControllerLayoutGuide type="bottom" id="b6s-V6-4Kf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5vX-FJ-QS8">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Peck" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="shB-Wq-rNO">
+                                <rect key="frame" x="24" y="72" width="552" height="20"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Pecks" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uQx-MO-4uJ">
+                                <rect key="frame" x="24" y="109" width="552" height="20"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7xx-9W-DOg" userLabel="Divider">
+                                <rect key="frame" x="24" y="100" width="552" height="1"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="1Id-yS-vZ2"/>
+                                    <constraint firstAttribute="height" constant="1" id="72S-2j-UZU"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="1Id-yS-vZ2"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="shB-Wq-rNO" secondAttribute="centerX" id="8Eq-mU-92b"/>
+                            <constraint firstItem="uQx-MO-4uJ" firstAttribute="top" secondItem="7xx-9W-DOg" secondAttribute="bottom" constant="8" id="8oI-BY-Gxg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="shB-Wq-rNO" secondAttribute="trailing" constant="8" id="ICi-Ub-Xc0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="uQx-MO-4uJ" secondAttribute="trailing" constant="8" id="JNN-CL-t2V"/>
+                            <constraint firstAttribute="centerX" secondItem="7xx-9W-DOg" secondAttribute="centerX" id="Jjl-4u-uPr"/>
+                            <constraint firstItem="7xx-9W-DOg" firstAttribute="top" secondItem="shB-Wq-rNO" secondAttribute="bottom" constant="8" id="KP1-gf-gQ8"/>
+                            <constraint firstItem="7xx-9W-DOg" firstAttribute="leading" secondItem="5vX-FJ-QS8" secondAttribute="leadingMargin" constant="8" id="Qty-GG-2yh"/>
+                            <constraint firstAttribute="centerX" secondItem="uQx-MO-4uJ" secondAttribute="centerX" id="UMl-lq-dMP"/>
+                            <constraint firstItem="uQx-MO-4uJ" firstAttribute="leading" secondItem="5vX-FJ-QS8" secondAttribute="leadingMargin" constant="8" id="YlV-OZ-hv8"/>
+                            <constraint firstItem="shB-Wq-rNO" firstAttribute="top" secondItem="7Rc-BZ-hfF" secondAttribute="bottom" constant="8" id="iH8-JC-L5U"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7xx-9W-DOg" secondAttribute="trailing" constant="8" id="o7D-fZ-rI5"/>
+                            <constraint firstItem="shB-Wq-rNO" firstAttribute="leading" secondItem="5vX-FJ-QS8" secondAttribute="leadingMargin" constant="8" id="oYL-Kc-3bg"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="qIZ-ch-eSV">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="1FY-gz-fpF">
+                            <connections>
+                                <segue destination="cSZ-vt-lqi" kind="unwind" unwindAction="unwindToUnitTable:" id="7Lb-Tg-acj"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="1vB-FR-0hT">
+                            <connections>
+                                <action selector="onSave:" destination="BV5-92-tPH" id="S1c-yr-smW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="unitNamePlural" destination="uQx-MO-4uJ" id="2mN-s9-zYb"/>
+                        <outlet property="unitNameSingular" destination="shB-Wq-rNO" id="Zlw-LF-MaV"/>
+                        <segue destination="cSZ-vt-lqi" kind="unwind" identifier="unwindToUnitTable" unwindAction="unwindToUnitTable:" id="BUk-cd-G3G"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E03-7Z-dMk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="cSZ-vt-lqi" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="4205" y="2814"/>
         </scene>
         <!--Add Ingredient To Component Nav-->
         <scene sceneID="5Pe-8W-CYh">
@@ -853,6 +932,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ja-8n-FCE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="393" y="1990"/>
+        </scene>
+        <!--Edit Unit Navigation Controller-->
+        <scene sceneID="ybZ-EI-bAW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3KX-ta-oFy" customClass="EditUnitNavigationController" customModule="Sozzler" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ftq-53-ulh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QMq-zW-8pT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3461" y="2814"/>
+        </scene>
+        <!--Edit Unit Navigation Controller-->
+        <scene sceneID="I6S-Ga-via">
+            <objects>
+                <navigationController id="nLC-9z-8Ge" customClass="EditUnitNavigationController" customModule="Sozzler" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iTA-n9-LI1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="50w-u2-KRV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2663" y="3680"/>
         </scene>
     </scenes>
     <resources>

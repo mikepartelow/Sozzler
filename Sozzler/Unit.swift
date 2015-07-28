@@ -4,12 +4,18 @@ import CoreData
 class Unit: NSManagedObject {
 
     @NSManaged var name: String
+    @NSManaged var plural_name: String
+
     @NSManaged var recipe_count: Int16
     @NSManaged var index: Int16
     @NSManaged var components: NSSet
     
     class func fancyName(name: String) -> String {
         return name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    }
+    
+    class func all() -> [Unit] {
+        return CoreDataHelper.all("Unit", predicate: nil) as! [Unit]
     }
     
     class func fetchedResultsController() -> NSFetchedResultsController {
@@ -27,11 +33,13 @@ class Unit: NSManagedObject {
         return CoreDataHelper.find("Unit", predicate: predicate) as! Unit?
     }
     
-    class func create(name: String, index: Int = Unit.count()) -> Unit {
+    class func create(name: String, plural_name: String, index: Int = Unit.count()) -> Unit {
         return CoreDataHelper.create("Unit", initializer: {
             (entity, context) -> NSManagedObject in
                 let unit = Unit(entity: entity, insertIntoManagedObjectContext: context)
+
                 unit.name = Unit.fancyName(name)
+                unit.plural_name = Unit.fancyName(plural_name)
                 unit.index = Int16(index)
                 unit.recipe_count = 0
                 return unit
@@ -39,13 +47,13 @@ class Unit: NSManagedObject {
         ) as! Unit
     }
     
-    class func findOrCreate(name: String) -> Unit {
+    class func findOrCreate(name: String, plural_name: String) -> Unit {
         let fancyName = Unit.fancyName(name)
 
         if let unit = Unit.find(fancyName) {
             return unit
         } else {
-            return Unit.create(fancyName)
+            return Unit.create(fancyName, plural_name: plural_name)
         }
     }
     
@@ -58,6 +66,10 @@ class Unit: NSManagedObject {
             var recipeCounts: [Recipe:Int] = [:]
             
             setPrimitiveValue(Unit.fancyName(name), forKey: "name")
+            
+            if plural_name.isEmpty {
+                setPrimitiveValue(name, forKey: "plural_name")
+            }
 
             for component in components.allObjects as! [Component] {
                 if recipeCounts[component.recipe] == nil {
@@ -70,6 +82,5 @@ class Unit: NSManagedObject {
             let count = recipeCounts.values.array.reduce(0, combine: +)
             setPrimitiveValue(count, forKey: "recipe_count")
         }
-    }
-    
+    }    
 }

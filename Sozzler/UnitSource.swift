@@ -2,10 +2,15 @@ import Foundation
 import CoreData
 
 class CannedUnitSource {
+    let unitNames = [ "", "Tbsp", "tsp", "oz", "g", "dash", "ml" ]
+    static let unitPluralizations = [
+        "dash"      : "dashes"
+    ]
+    
     func read() -> [Unit] {
-        let unitNames = [ "", "Tbsp", "tsp", "oz", "g", "dash", "ml" ]
         return map(enumerate(unitNames), { (index, name) in
-            Unit.create(name, index: index)
+            let pluralName = CannedUnitSource.unitPluralizations[name] ?? name
+            return Unit.create(name, plural_name: pluralName, index: index)
         })
     }
 }

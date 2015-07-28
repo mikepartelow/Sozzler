@@ -133,10 +133,11 @@ extension Recipe {
         for componentDict in components {
             let quantity        = componentDict["quantity"]     as! String
             let unitName        = componentDict["unit"]         as! String
+            let unitPluralName  = (componentDict["unit_plural"]  as? String) ?? unitName
             let ingredientName  = componentDict["ingredient"]   as! String
             let index           = componentDict["index"]        as! Int
             
-            let unit            = Unit.findOrCreate(unitName)
+            let unit            = Unit.findOrCreate(unitName, plural_name: unitName)
             let ingredient      = Ingredient.findOrCreate(ingredientName)
             
             let (quantity_n, quantity_d) = Component.parseQuantity(quantity)

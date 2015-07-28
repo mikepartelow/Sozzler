@@ -46,7 +46,9 @@ class Component: NSManagedObject {
             }
         }
         
-        return "\(quantity) \(unit.name) \(ingredient.name)".stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        let unit_name = (quantity_n / quantity_d) > 1 ? unit.plural_name : unit.name
+        
+        return "\(quantity) \(unit_name) \(ingredient.name)".stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).stringByReplacingOccurrencesOfString("  ", withString: " ")
 
     }
         
@@ -105,5 +107,9 @@ extension NSMutableDictionary {
         setValue(component.unit.name, forKey: "unit")
         setValue(component.ingredient.name, forKey: "ingredient")
         setValue(Int(component.index), forKey: "index")
+        
+        if component.unit.plural_name != component.unit.name {
+            setValue(component.unit.plural_name, forKey: "unit_plural")
+        }
     }
 }

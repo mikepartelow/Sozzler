@@ -44,6 +44,9 @@
 		408BD5B71B0B9C1C00721CE5 /* UnitSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BD5B61B0B9C1C00721CE5 /* UnitSource.swift */; };
 		408E28261B1970C60048FBB1 /* UnitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408E28251B1970C60048FBB1 /* UnitTableViewController.swift */; };
 		409480AA1AF838A100543FFB /* EditRecipeNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409480A91AF838A100543FFB /* EditRecipeNavViewController.swift */; };
+		4096D8AB1B6467DF00DB709D /* EditUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4096D8AA1B6467DF00DB709D /* EditUnitViewController.swift */; };
+		4096D8AC1B6467DF00DB709D /* EditUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4096D8AA1B6467DF00DB709D /* EditUnitViewController.swift */; };
+		4096D8AF1B65EA9000DB709D /* EditUnitNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4096D8AE1B65EA9000DB709D /* EditUnitNavigationController.swift */; };
 		40B643EF1AE8C17300EEBBCA /* RecipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */; };
 		40B643F41AE8C35400EEBBCA /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F01AE8C35300EEBBCA /* Ingredient.swift */; };
 		40B643F51AE8C35400EEBBCA /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B643F11AE8C35300EEBBCA /* Unit.swift */; };
@@ -86,11 +89,13 @@
 		4029C9081AED3AB300D5F0C9 /* RecipeSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeSource.swift; sourceTree = "<group>"; };
 		40364A981B3CB24E00ACEDBF /* RecipeExporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeExporter.swift; sourceTree = "<group>"; };
 		405E3B2C1B2FD60B00577DF8 /* RecipeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTests.swift; sourceTree = "<group>"; };
-		405E3B381B2FDC3E00577DF8 /* Sozzler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Sozzler.entitlements; sourceTree = "<group>"; };
 		407BE6D91B59BF7D0049BCD6 /* RecipeImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeImporter.swift; sourceTree = "<group>"; };
 		408BD5B61B0B9C1C00721CE5 /* UnitSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitSource.swift; sourceTree = "<group>"; };
 		408E28251B1970C60048FBB1 /* UnitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTableViewController.swift; sourceTree = "<group>"; };
 		409480A91AF838A100543FFB /* EditRecipeNavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditRecipeNavViewController.swift; sourceTree = "<group>"; };
+		4096D8AA1B6467DF00DB709D /* EditUnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditUnitViewController.swift; path = Sozzler/EditUnitViewController.swift; sourceTree = "<group>"; };
+		4096D8AD1B65437700DB709D /* Sozzler 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Sozzler 2.xcdatamodel"; sourceTree = "<group>"; };
+		4096D8AE1B65EA9000DB709D /* EditUnitNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUnitNavigationController.swift; sourceTree = "<group>"; };
 		40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTableViewController.swift; sourceTree = "<group>"; };
 		40B643F01AE8C35300EEBBCA /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		40B643F11AE8C35300EEBBCA /* Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
@@ -136,6 +141,7 @@
 		40F65B9F1AE8BAE000D15898 = {
 			isa = PBXGroup;
 			children = (
+				4096D8AA1B6467DF00DB709D /* EditUnitViewController.swift */,
 				40F65BAA1AE8BAE000D15898 /* Sozzler */,
 				40F65BC31AE8BAE100D15898 /* SozzlerTests */,
 				40F65BA91AE8BAE000D15898 /* Products */,
@@ -178,13 +184,13 @@
 				40DC56691AEC730E00449B8A /* RecipeTableNavViewController.swift */,
 				40B643EE1AE8C17300EEBBCA /* RecipeTableViewController.swift */,
 				40C99BE71AE92C6500F197C9 /* RecipeViewController.swift */,
-				405E3B381B2FDC3E00577DF8 /* Sozzler.entitlements */,
 				40F65BAF1AE8BAE000D15898 /* Sozzler.xcdatamodeld */,
 				40F65BAB1AE8BAE000D15898 /* Supporting Files */,
 				40B643F11AE8C35300EEBBCA /* Unit.swift */,
 				408BD5B61B0B9C1C00721CE5 /* UnitSource.swift */,
 				408E28251B1970C60048FBB1 /* UnitTableViewController.swift */,
 				400832AD1AE9F53100112198 /* UserSettings.swift */,
+				4096D8AE1B65EA9000DB709D /* EditUnitNavigationController.swift */,
 			);
 			path = Sozzler;
 			sourceTree = "<group>";
@@ -334,6 +340,8 @@
 				408BD5B71B0B9C1C00721CE5 /* UnitSource.swift in Sources */,
 				400603181AECA1BC00A11957 /* RatingView.swift in Sources */,
 				400832AE1AE9F53100112198 /* UserSettings.swift in Sources */,
+				4096D8AF1B65EA9000DB709D /* EditUnitNavigationController.swift in Sources */,
+				4096D8AB1B6467DF00DB709D /* EditUnitViewController.swift in Sources */,
 				400603131AEC98CE00A11957 /* RecipeCell.swift in Sources */,
 				40B643EF1AE8C17300EEBBCA /* RecipeTableViewController.swift in Sources */,
 				40DC566A1AEC730E00449B8A /* RecipeTableNavViewController.swift in Sources */,
@@ -365,6 +373,7 @@
 				4007C82D1B64601300C9E940 /* IngredientTableViewController.swift in Sources */,
 				40F65BC71AE8BAE100D15898 /* SozzlerTests.swift in Sources */,
 				405E3B361B2FD90000577DF8 /* UserSettings.swift in Sources */,
+				4096D8AC1B6467DF00DB709D /* EditUnitViewController.swift in Sources */,
 				405E3B371B2FD96300577DF8 /* UnitSource.swift in Sources */,
 				4007C8241B645F6C00C9E940 /* RecipeImporter.swift in Sources */,
 				4007C8251B645F7D00C9E940 /* RecipeTableViewController.swift in Sources */,
@@ -592,9 +601,10 @@
 		40F65BAF1AE8BAE000D15898 /* Sozzler.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				4096D8AD1B65437700DB709D /* Sozzler 2.xcdatamodel */,
 				40F65BB01AE8BAE000D15898 /* Sozzler.xcdatamodel */,
 			);
-			currentVersion = 40F65BB01AE8BAE000D15898 /* Sozzler.xcdatamodel */;
+			currentVersion = 4096D8AD1B65437700DB709D /* Sozzler 2.xcdatamodel */;
 			path = Sozzler.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
