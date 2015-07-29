@@ -26,6 +26,10 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
         tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
     }
     
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 76;
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         ingredient = (frc!.objectAtIndexPath(indexPath) as! Ingredient)
     }
