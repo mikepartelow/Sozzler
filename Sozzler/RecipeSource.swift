@@ -2,16 +2,10 @@ import Foundation
 import CoreData
 
 
-class URLRecipeSource {
-    let url: NSURL
-    
-    init(url: NSURL) {
-        self.url = url
-    }
-    
-    func read() -> [Recipe]? {
-        let recipesJson = NSData(contentsOfURL: url, options: NSDataReadingOptions.DataReadingMappedIfSafe, error: nil)
+class JsonRecipeParser {
+    func parse(recipesJson: NSData?) -> [Recipe]? {
         var recipes = [Recipe]()
+        
         if let recipeDicts = NSJSONSerialization.JSONObjectWithData(recipesJson!, options: nil, error: nil) as? [NSDictionary] {
             recipeLoop: for recipeDict in recipeDicts {
                 if let newRecipe = Recipe.create(recipeDict) {
@@ -28,7 +22,7 @@ class URLRecipeSource {
                                     NSLog("Deleting exact duplicate new recipe (2)")
                                     CoreDataHelper.delete(newRecipe)
                                     continue recipeLoop
-
+                                    
                                 }
                             } while (Recipe.findDuplicate(newRecipe) != nil)
                         }
@@ -44,11 +38,45 @@ class URLRecipeSource {
     }
 }
 
+class URLRecipeSource {
+    let url: NSURL
+    
+    init(url: NSURL) {
+        self.url = url
+    }
+    
+    func read() -> [Recipe]? {
+        let parser = JsonRecipeParser()
+        return parser.parse(NSData(contentsOfURL: url, options: NSDataReadingOptions.DataReadingMappedIfSafe, error: nil))
+    }
+}
+
 class CannedRecipeSource: URLRecipeSource {
     init() {
         let path = NSBundle.mainBundle().pathForResource("recipes", ofType: "json")!
         let recipesUrl = NSURL(fileURLWithPath: path)!
 
         super.init(url: recipesUrl)
+    }
+}
+
+class WebRecipeSource: NSObject, NSURLConnectionDelegate {
+    var recipesJsonData = NSMutableData()
+    var completion: (([Recipe]?) -> Void)?
+    
+    func fetch(url: NSURL, completion: (([Recipe]?) -> Void)) {
+        self.completion = completion
+        
+        let request = NSURLRequest(URL: url)
+        NSURLConnection(request: request, delegate: self, startImmediately: true)
+    }
+    
+    func connection(connection: NSURLConnection!, didReceiveData data: NSData!) {
+        recipesJsonData.appendData(data)
+    }
+    
+    func connectionDidFinishLoading(connection: NSURLConnection!) {
+        let parser = JsonRecipeParser()
+        completion!(parser.parse(recipesJsonData))
     }
 }

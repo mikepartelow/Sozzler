@@ -2,7 +2,9 @@ import UIKit
 
 class DataViewController: UIViewController {
     let userSettings = (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings
-
+    
+    let DEFAULT_IMPORT_URL = "https://raw.githubusercontent.com/mikepartelow/sozzler-recipes/master/SozzlerApp/1.1.sozzler"
+    
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var ingredientsLabel: UILabel!
     @IBOutlet weak var recipesLabel: UILabel!
@@ -29,6 +31,30 @@ class DataViewController: UIViewController {
         exporter!.export(Recipe.all())
     }
    
+    @IBAction func onImport(sender: UIButton) {
+        var alert = UIAlertController(title: "Import Recipes", message: "", preferredStyle: .Alert)
+        
+        let importRecipes = UIAlertAction(title: "Import", style: .Default) { (action: UIAlertAction!) -> Void in
+            let textField = alert.textFields![0] as! UITextField
+            let url = textField.text
+            
+            RecipeImporter(viewController: self).importRecipes(NSURL(string: url)!)
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in
+        }
+        
+        alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
+            textField.placeholder   = self.DEFAULT_IMPORT_URL
+            textField.text          = self.DEFAULT_IMPORT_URL
+        }
+        
+        alert.addAction(importRecipes)
+        alert.addAction(cancelAction)
+        
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func onImportCanned(sender: UIButton) {
         var alert = UIAlertController(title: "", message: "Restore default recipes and settings?", preferredStyle: .Alert)
         

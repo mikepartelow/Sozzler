@@ -13,42 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         var viewController = navController0.topViewController!
         
-        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        RecipeImporter(viewController: viewController).importRecipes(url)
         
-        let addToExisting = UIAlertAction(title: "Add to Existing Recipes", style: .Default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            RecipeImporter(viewController: viewController).importRecipes(url)
-        })
-        
-        let replaceAll = UIAlertAction(title: "Replace All Recipes", style: .Default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            
-            var alertAreYouSure = UIAlertController(title: "", message: "Delete All Existing Recipes and Import New Recipes?", preferredStyle: .Alert)
-            
-            let doitAction = UIAlertAction(title: "Do it", style: .Destructive) { (action: UIAlertAction!) -> Void in
-                CoreDataHelper.factoryReset(save: false)
-                CannedUnitSource().read()
-                RecipeImporter(viewController: viewController).importRecipes(url)
-            }
-            
-            let cancelAction = UIAlertAction(title: "Forget it", style: .Default) { (action: UIAlertAction!) -> Void in }
-            
-            alertAreYouSure.addAction(doitAction)
-            alertAreYouSure.addAction(cancelAction)
-            
-            viewController.presentViewController(alertAreYouSure, animated: true, completion: nil)
-        })
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
-            (alert: UIAlertAction!) -> Void in
-        })
-        
-        sheet.addAction(addToExisting)
-        sheet.addAction(replaceAll)
-        sheet.addAction(cancel)
-        
-        viewController.presentViewController(sheet, animated: true, completion: nil)
-
         return true
     }
     
