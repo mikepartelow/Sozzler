@@ -12,6 +12,8 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
         super.viewDidLoad()
         tableView.delegate = self
         
+        tableView.rowHeight = UITableViewAutomaticDimension
+
         definesPresentationContext = true
         refresh()
         
@@ -23,11 +25,11 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
         tableView.tableHeaderView = searchController!.searchBar
         searchController!.searchBar.sizeToFit()
         
-        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
     }
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 76;
+        return 32;
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

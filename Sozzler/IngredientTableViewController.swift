@@ -44,7 +44,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
     }
 
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 56;
+        return 32;
     }
 
     func dataReset() {
