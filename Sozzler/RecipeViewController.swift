@@ -10,20 +10,19 @@ class RecipeViewController: UIViewController {
     @IBOutlet weak var ratingView: RatingView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        render()
+    }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "data.reset", object: nil)
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "editRecipe" {
+            let nav = segue.destinationViewController as! UINavigationController
+            let addRecipeViewController = nav.topViewController as! AddRecipeViewController
+            
+            addRecipeViewController.recipe = recipe
+        }
     }
     
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver("data.reset")
-    }
-    
-    func dataReset() {
-        performSegueWithIdentifier("unwindToRecipes", sender: nil)
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    func render() {
         recipeName!.text = recipe!.name
         
         let sortedComponents = recipe!.sortedComponents
@@ -35,16 +34,8 @@ class RecipeViewController: UIViewController {
         recipeTextViewHeight.constant = fit
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "editRecipe" {
-            let nav = segue.destinationViewController as! UINavigationController
-            let addRecipeViewController = nav.topViewController as! AddRecipeViewController
-            
-            addRecipeViewController.recipe = recipe
-        }
-    }
-    
     @IBAction func unwindToRecipe(sender: UIStoryboardSegue)
     {
+        render()
     }    
 }
