@@ -2,7 +2,8 @@ import UIKit
 import CoreData
 
 class RecipeTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
-    let userSettings = (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings
+    let app = UIApplication.sharedApplication().delegate as! AppDelegate
+    let userSettings: UserSettings
     
     var exporter: RecipeExporter?
     
@@ -18,6 +19,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     var searchText = ""
     
     required init!(coder aDecoder: NSCoder!) {
+        userSettings = app.userSettings
         super.init(coder: aDecoder)
         
         if Recipe.count() == 0 {
@@ -29,6 +31,24 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if app.migrated {
+            let alert = UIAlertController(title: "Import New Sozzler 1.1 Recipes?", message: "", preferredStyle: .Alert)
+            
+            let yes = UIAlertAction(title: "Yes", style: .Default) { (action: UIAlertAction!) -> Void in
+                
+                RecipeImporter(viewController: self).importRecipes(NSURL(string: self.app.ONE_POINT_ONE_RECIPES_URL)!)
+            }
+            
+            let no = UIAlertAction(title: "No", style: .Default) { (action: UIAlertAction!) -> Void in
+            }
+            
+            alert.addAction(yes)
+            alert.addAction(no)
+            
+            presentViewController(alert, animated: true, completion: nil)
+            app.migrated = false
+        }
         
         tableView.delegate = self
         tableView.dataSource = self

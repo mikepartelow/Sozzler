@@ -3,15 +3,16 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    let ONE_POINT_ONE_RECIPES_URL = "https://raw.githubusercontent.com/mikepartelow/sozzler-recipes/master/SozzlerApp/1.1.sozzler"
+    
     var window: UIWindow?
     var userSettings = UserSettings()
+    var migrated = false
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
         let tabBarController = window!.rootViewController! as! UITabBarController
         let navController0 = (tabBarController.viewControllers as! [UINavigationController])[0]
-
-        var viewController = navController0.topViewController!
+        let viewController = navController0.topViewController!
         
         RecipeImporter(viewController: viewController).importRecipes(url)
         
@@ -101,6 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             // FIXME: handle error
             CoreDataHelper.save(nil)
+            self.migrated = true
         }
         
         return coordinator

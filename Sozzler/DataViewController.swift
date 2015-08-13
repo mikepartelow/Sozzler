@@ -3,8 +3,6 @@ import UIKit
 class DataViewController: UIViewController {
     let userSettings = (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings
     
-    let DEFAULT_IMPORT_URL = "https://raw.githubusercontent.com/mikepartelow/sozzler-recipes/master/SozzlerApp/1.1.sozzler"
-    
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var ingredientsLabel: UILabel!
     @IBOutlet weak var recipesLabel: UILabel!
@@ -45,8 +43,9 @@ class DataViewController: UIViewController {
         }
         
         alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
-            textField.placeholder   = self.DEFAULT_IMPORT_URL
-            textField.text          = self.DEFAULT_IMPORT_URL
+            let app = UIApplication.sharedApplication().delegate as! AppDelegate
+            textField.placeholder   = app.ONE_POINT_ONE_RECIPES_URL
+            textField.text          = app.ONE_POINT_ONE_RECIPES_URL
         }
         
         alert.addAction(importRecipes)
