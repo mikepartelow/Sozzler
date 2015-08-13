@@ -23,11 +23,6 @@ class DataViewController: UIViewController {
         recipesLabel!.text = "\(Recipe.count()) recipes"
         ingredientsLabel!.text = "\(Ingredient.count()) ingredients"
     }
-
-    @IBAction func onExportRecipes(sender: UIButton) {
-        exporter = RecipeExporter(viewController: self)
-        exporter!.export(Recipe.all())
-    }
    
     @IBAction func onImport(sender: UIButton) {
         var alert = UIAlertController(title: "Import Recipes", message: "", preferredStyle: .Alert)

@@ -639,7 +639,7 @@
                             </textField>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7xx-9W-DOg" userLabel="Divider">
                                 <rect key="frame" x="24" y="100" width="552" height="1"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="1Id-yS-vZ2"/>
                                     <constraint firstAttribute="height" constant="1" id="72S-2j-UZU"/>
@@ -835,7 +835,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onExportRecipes:" destination="TPs-VM-CSV" eventType="touchUpInside" id="vNa-B2-AbV"/>
+                                    <segue destination="Z8D-CX-mSb" kind="show" id="EwW-Z8-OpD"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="746" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cdj-fu-t3F">
@@ -971,7 +971,50 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="50w-u2-KRV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2663" y="3680"/>
+            <point key="canvasLocation" x="3475" y="3680"/>
+        </scene>
+        <!--Export Recipes Table View Controller-->
+        <scene sceneID="Kfe-Xn-hs8">
+            <objects>
+                <tableViewController title="Export Recipes Table View Controller" id="5Io-J9-qdy" customClass="ExportRecipesTableViewController" customModule="Sozzler" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="82" sectionHeaderHeight="22" sectionFooterHeight="22" id="eLv-bV-SSM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="5Io-J9-qdy" id="U1c-Du-sFJ"/>
+                            <outlet property="delegate" destination="5Io-J9-qdy" id="UcC-jA-9ie"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="4Yx-oH-PW2">
+                        <nil key="title"/>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="H6J-72-8fu" kind="unwind" identifier="unwindToData" unwindAction="unwindToData:" id="baK-6c-uNB"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Oh-3O-cfV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="H6J-72-8fu" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1983" y="3646"/>
+        </scene>
+        <!--Export Recipes Nav Controller-->
+        <scene sceneID="FRH-5P-vhy">
+            <objects>
+                <navigationController title="Export Recipes Nav Controller" automaticallyAdjustsScrollViewInsets="NO" id="Z8D-CX-mSb" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="T8m-TH-eWU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="5Io-J9-qdy" kind="relationship" relationship="rootViewController" id="91k-L5-LPq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mlA-r8-Myr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1171" y="3646"/>
         </scene>
     </scenes>
     <resources>

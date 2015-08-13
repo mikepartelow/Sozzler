@@ -4,13 +4,14 @@ import AddressBook
 
 class RecipeExporter: NSObject, MFMailComposeViewControllerDelegate {
     let viewController: UIViewController
+    var completion: (() -> ())?
     
     init(viewController: UIViewController) {
         self.viewController = viewController
         super.init()
     }
     
-    func export(recipes: [Recipe]) {
+    func export(recipes: [Recipe], completion: (() -> ())? = nil) {
         let composer = MFMailComposeViewController()
         let messageSubject = recipes.count == 1 ? "Sozzler Recipe" : "Sozzler Recipes"
         let messageBody = recipes.count == 1 ? recipes[0].name : "My Sozzler Recipes"
@@ -29,6 +30,8 @@ class RecipeExporter: NSObject, MFMailComposeViewControllerDelegate {
                 
                 composer.addAttachmentData(NSData(base64EncodedData: base64Data, options: .allZeros), mimeType: "application/sozzler", fileName: "Sozzler Recipes.sozzler")
                 
+                self.completion = completion
+                
                 viewController.presentViewController(composer, animated: true, completion: nil)
             }
         }
@@ -36,5 +39,8 @@ class RecipeExporter: NSObject, MFMailComposeViewControllerDelegate {
     
     func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
         viewController.dismissViewControllerAnimated(true, completion: nil)
-    }    
+        if let c = self.completion {
+            c()
+        }
+    }
 }

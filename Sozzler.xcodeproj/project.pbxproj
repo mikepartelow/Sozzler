@@ -40,6 +40,7 @@
 		405E3B351B2FD90000577DF8 /* RecipeSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029C9081AED3AB300D5F0C9 /* RecipeSource.swift */; };
 		405E3B361B2FD90000577DF8 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400832AD1AE9F53100112198 /* UserSettings.swift */; };
 		405E3B371B2FD96300577DF8 /* UnitSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BD5B61B0B9C1C00721CE5 /* UnitSource.swift */; };
+		405E802B1B698DE000DD2618 /* ExportRecipesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405E802A1B698DE000DD2618 /* ExportRecipesTableViewController.swift */; };
 		407BE6DA1B59BF7D0049BCD6 /* RecipeImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407BE6D91B59BF7D0049BCD6 /* RecipeImporter.swift */; };
 		408BD5B71B0B9C1C00721CE5 /* UnitSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BD5B61B0B9C1C00721CE5 /* UnitSource.swift */; };
 		408E28261B1970C60048FBB1 /* UnitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408E28251B1970C60048FBB1 /* UnitTableViewController.swift */; };
@@ -89,6 +90,7 @@
 		4029C9081AED3AB300D5F0C9 /* RecipeSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeSource.swift; sourceTree = "<group>"; };
 		40364A981B3CB24E00ACEDBF /* RecipeExporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeExporter.swift; sourceTree = "<group>"; };
 		405E3B2C1B2FD60B00577DF8 /* RecipeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTests.swift; sourceTree = "<group>"; };
+		405E802A1B698DE000DD2618 /* ExportRecipesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportRecipesTableViewController.swift; sourceTree = "<group>"; };
 		407BE6D91B59BF7D0049BCD6 /* RecipeImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeImporter.swift; sourceTree = "<group>"; };
 		408BD5B61B0B9C1C00721CE5 /* UnitSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitSource.swift; sourceTree = "<group>"; };
 		408E28251B1970C60048FBB1 /* UnitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTableViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				408E28251B1970C60048FBB1 /* UnitTableViewController.swift */,
 				400832AD1AE9F53100112198 /* UserSettings.swift */,
 				4096D8AE1B65EA9000DB709D /* EditUnitNavigationController.swift */,
+				405E802A1B698DE000DD2618 /* ExportRecipesTableViewController.swift */,
 			);
 			path = Sozzler;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				40DC56681AEC669500449B8A /* IngredientTableViewController.swift in Sources */,
 				408E28261B1970C60048FBB1 /* UnitTableViewController.swift in Sources */,
 				408BD5B71B0B9C1C00721CE5 /* UnitSource.swift in Sources */,
+				405E802B1B698DE000DD2618 /* ExportRecipesTableViewController.swift in Sources */,
 				400603181AECA1BC00A11957 /* RatingView.swift in Sources */,
 				400832AE1AE9F53100112198 /* UserSettings.swift in Sources */,
 				4096D8AF1B65EA9000DB709D /* EditUnitNavigationController.swift in Sources */,
