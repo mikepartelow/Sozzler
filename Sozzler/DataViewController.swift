@@ -39,8 +39,8 @@ class DataViewController: UIViewController {
         
         alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
             let app = UIApplication.sharedApplication().delegate as! AppDelegate
-            textField.placeholder   = app.ONE_POINT_ONE_RECIPES_URL
-            textField.text          = app.ONE_POINT_ONE_RECIPES_URL
+            textField.placeholder   = app.ONE_POINT_ONE_NEW_RECIPES_URL
+            textField.text          = app.ONE_POINT_ONE_NEW_RECIPES_URL
         }
         
         alert.addAction(importRecipes)

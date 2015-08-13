@@ -37,7 +37,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             
             let yes = UIAlertAction(title: "Yes", style: .Default) { (action: UIAlertAction!) -> Void in
                 
-                RecipeImporter(viewController: self).importRecipes(NSURL(string: self.app.ONE_POINT_ONE_RECIPES_URL)!)
+                RecipeImporter(viewController: self).importRecipes(NSURL(string: self.app.ONE_POINT_ONE_NEW_RECIPES_URL)!)
             }
             
             let no = UIAlertAction(title: "No", style: .Default) { (action: UIAlertAction!) -> Void in

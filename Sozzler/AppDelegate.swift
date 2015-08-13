@@ -3,7 +3,7 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    let ONE_POINT_ONE_RECIPES_URL = "https://raw.githubusercontent.com/mikepartelow/sozzler-recipes/master/SozzlerApp/1.1.sozzler"
+    let ONE_POINT_ONE_NEW_RECIPES_URL = "https://raw.githubusercontent.com/mikepartelow/sozzler-recipes/master/SozzlerApp/1.1-new.sozzler"
     
     var window: UIWindow?
     var userSettings = UserSettings()
