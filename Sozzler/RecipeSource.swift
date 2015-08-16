@@ -28,6 +28,8 @@ class JsonRecipeParser {
                         }
                     }
                     recipes.append(newRecipe)
+                } else {
+                    return nil // JSON parsing failed
                 }
             }
         } else {
