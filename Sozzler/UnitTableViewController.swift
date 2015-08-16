@@ -45,8 +45,8 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
     
     // FIXME: DRY
     func errorAlert(title: String, button: String) {
-        var alert = UIAlertController(title: title, message: "", preferredStyle: .Alert)
-        let action = UIAlertAction(title: button, style: .Default) { (action: UIAlertAction!) -> Void in }
+        let alert = UIAlertController(title: title, message: "", preferredStyle: .Alert)
+        let action = UIAlertAction(title: button, style: .Default) { (action: UIAlertAction) -> Void in }
         alert.addAction(action)
         presentViewController(alert, animated: true, completion: nil)
     }
@@ -58,7 +58,7 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
             let unit = self.frc!.objectAtIndexPath(indexPath) as! Unit
             
@@ -67,19 +67,17 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
             } else {
                 CoreDataHelper.delete(unit)
                 
-                var remainingUnits = filter(self.frc!.fetchedObjects as! [Unit]) { $0 != unit }                
-                for (index, unit) in enumerate(remainingUnits) {
+                let remainingUnits = (self.frc!.fetchedObjects as! [Unit]).filter { $0 != unit }
+                for (index, unit) in remainingUnits.enumerate() {
                     unit.index = Int16(index)
                 }
                 
-                var error: NSError?
-                if CoreDataHelper.save(&error) {
-                    assert(error == nil)
-                    self.refresh()
-                } else {
-                    // FIXME:
-                    // alert: could not blah blah
+                if let error = CoreDataHelper.save() {
                     NSLog("Delete Failed!: \(error)")
+                    assert(false)
+                    fatalError()
+                } else {
+                    self.refresh()
                 }
             }
             
@@ -102,7 +100,7 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         if segue.identifier == "editUnit" {
             let navController = segue.destinationViewController as! UINavigationController
             let euvc = navController.topViewController! as! EditUnitViewController
-            let index = tableView.indexPathForSelectedRow()!
+            let index = tableView.indexPathForSelectedRow!
             
             euvc.unit = frc!.objectAtIndexPath(index) as? Unit
             
@@ -115,11 +113,11 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return frc!.sections![section].numberOfObjects!
+        return frc!.sections![section].numberOfObjects
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("UnitCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("UnitCell", forIndexPath: indexPath) 
         let unit = frc!.objectAtIndexPath(indexPath) as! Unit
         
         cell.textLabel!.text = unit.plural_name != unit.name ? "\(unit.name) / \(unit.plural_name)" : unit.name
@@ -127,7 +125,7 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         return cell
     }
     
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         return frc!.sectionIndexTitles
     }
     
@@ -140,13 +138,15 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
     }
     
     func refresh() {
-        let predicate: NSPredicate?
         frc = Unit.fetchedResultsController()
         
         frc!.delegate = self
         
-        // FIXME: nil seems like a bad idea
-        frc!.performFetch(nil)
+        do {
+            // FIXME: nil seems like a bad idea
+            try frc!.performFetch()
+        } catch _ {
+        }
         
         navigationItem.title = "Units"
         
@@ -171,11 +171,11 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         var sortedUnits = frc!.fetchedObjects as! [Unit]
         
         if toIndexPath.row < fromIndexPath.row {
-            map(sortedUnits[toIndexPath.row..<fromIndexPath.row], { (unit) in
+            sortedUnits[toIndexPath.row..<fromIndexPath.row].map({ (unit) in
                 unit.index += 1
             })
         } else if fromIndexPath.row < toIndexPath.row {
-            map(sortedUnits[fromIndexPath.row+1...toIndexPath.row], { (unit) in
+            sortedUnits[fromIndexPath.row+1...toIndexPath.row].map({ (unit) in
                 unit.index -= 1
             })
         }
@@ -183,10 +183,12 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         sortedUnits[fromIndexPath.row].index = Int16(toIndexPath.row)        
 
         var error: NSError?
-        if moc.save(&error) {
+        do {
+            try moc.save()
             assert(error == nil)
             refresh()
-        } else {
+        } catch let error1 as NSError {
+            error = error1
             // FIXME: DO SOMETHING
         }
 

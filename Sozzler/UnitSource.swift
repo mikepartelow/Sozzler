@@ -8,7 +8,7 @@ class CannedUnitSource {
     ]
     
     func read() -> [Unit] {
-        return map(enumerate(unitNames), { (index, name) in
+        return unitNames.enumerate().map({ (index, name) in
             let pluralName = CannedUnitSource.unitPluralizations[name] ?? name
             return Unit.create(name, plural_name: pluralName, index: index)
         })

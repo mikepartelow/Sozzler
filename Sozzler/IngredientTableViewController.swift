@@ -60,38 +60,37 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     func errorAlert(title: String, button: String) {
-        var alert = UIAlertController(title: title, message: "", preferredStyle: .Alert)
-        let action = UIAlertAction(title: button, style: .Default) { (action: UIAlertAction!) -> Void in }
+        let alert = UIAlertController(title: title, message: "", preferredStyle: .Alert)
+        let action = UIAlertAction(title: button, style: .Default) { (action: UIAlertAction) -> Void in }
         alert.addAction(action)
         presentViewController(alert, animated: true, completion: nil)
     }
 
     @IBAction func onAdd(sender: UIBarButtonItem) {
-        var alert = UIAlertController(title: "Add Ingredient", message: "", preferredStyle: .Alert)
+        let alert = UIAlertController(title: "Add Ingredient", message: "", preferredStyle: .Alert)
         
-        let addAction = UIAlertAction(title: "Add", style: .Default) { (action: UIAlertAction!) -> Void in
-            let textField = alert.textFields![0] as! UITextField
-            let ingredientName = textField.text
-            
-            if let ingredient = Ingredient.find(ingredientName) {
+        let addAction = UIAlertAction(title: "Add", style: .Default) { (action: UIAlertAction) -> Void in
+            let textField = alert.textFields![0] 
+            let ingredientName = textField.text!
+        
+            if let _ = Ingredient.find(ingredientName) {
                 self.errorAlert("Ingredient already exists.", button: "Oops")
             } else {
                 let ingredient = Ingredient.create(ingredientName)
                 
-                var error: NSError?
-                if CoreDataHelper.save(&error) {
+                if let error = CoreDataHelper.save() {
+                    NSLog("Save Failed!: \(error)")
+                    assert(false)
+                    fatalError()
+                } else {
                     self.refresh()
                     let indexPath = self.frc!.indexPathForObject(ingredient)
                     self.tableView.selectRowAtIndexPath(indexPath!, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
-                } else {
-                    // FIXME:
-                    // alert: could not blah blah
-                    NSLog("Save Failed!: \(error)")
                 }
             }
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction) -> Void in
         }
         
         alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
@@ -112,7 +111,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
             let ingredient = self.frc!.objectAtIndexPath(indexPath) as! Ingredient
 
@@ -121,14 +120,12 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
             } else {
                 CoreDataHelper.delete(ingredient)
             
-                var error: NSError?
-                if CoreDataHelper.save(&error) {
-                    assert(error == nil)
-                    self.refresh()
-                } else {
-                    // FIXME:
-                    // alert: could not blah blah
+                if let error = CoreDataHelper.save() {
                     NSLog("Delete Failed!: \(error)")
+                    assert(false)
+                    fatalError()
+                } else {
+                    self.refresh()
                 }
             }
             
@@ -139,12 +136,14 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let navController = segue.destinationViewController as! UINavigationController
-        let rtvc = navController.topViewController! as! RecipeTableViewController
+        let rtvc = segue.destinationViewController as! RecipeTableViewController
         
-        let index = tableView.indexPathForSelectedRow()!
+        rtvc.navigationItem.leftBarButtonItem = nil
+        rtvc.navigationItem.rightBarButtonItem = nil
+
+        let index = tableView.indexPathForSelectedRow!
         rtvc.ingredient = frc!.objectAtIndexPath(index) as? Ingredient
-        tableView.deselectRowAtIndexPath(index, animated: false)
+        tableView.deselectRowAtIndexPath(index, animated: false)        
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -152,11 +151,11 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return frc!.sections![section].numberOfObjects!
+        return frc!.sections![section].numberOfObjects
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("IngredientCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("IngredientCell", forIndexPath: indexPath) 
         let ingredient = frc!.objectAtIndexPath(indexPath) as! Ingredient
         
         cell.textLabel!.text = ingredient.name
@@ -167,7 +166,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         return cell
     }
     
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         if searchText != "" {
             return []
         } else {
@@ -196,12 +195,15 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         } else {
             predicate = nil
         }
-        frc = Ingredient.fetchedResultsController(predicate: predicate)
+        frc = Ingredient.fetchedResultsController(predicate)
         
         frc!.delegate = self
         
-        // FIXME: nil seems like a bad idea
-        frc!.performFetch(nil)
+        do {
+            // FIXME: nil seems like a bad idea
+            try frc!.performFetch()
+        } catch _ {
+        }
         
         navigationItem.title = "Ingredients"
         
@@ -213,7 +215,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        searchText = searchController.searchBar.text
+        searchText = searchController.searchBar.text!
         refresh()
     }
 }

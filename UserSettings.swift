@@ -25,8 +25,6 @@ class UserSettings {
             return "Rating"
         case .Name:
             return "Name"
-        default:
-            return ""
         }
     }
     

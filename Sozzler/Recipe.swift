@@ -5,16 +5,16 @@ func ==(lhs: Recipe, rhs: Recipe) -> Bool {
     if lhs.name == rhs.name && lhs.rating == rhs.rating && lhs.text == rhs.text && lhs.components.count == rhs.components.count {
         let lhsSortedComponents = lhs.sortedComponents
         let rhsSortedComponents = rhs.sortedComponents
-        
+
         for i in 0..<Int(lhs.components.count) {
             if lhsSortedComponents[i] != rhsSortedComponents[i] {
                 return false
             }
         }
-        
+
         return true
     }
-    
+
     return false
 }
 
@@ -33,10 +33,10 @@ class Recipe: NSManagedObject {
     @NSManaged var text: String
     @NSManaged var component_count: Int16
     @NSManaged var components: NSMutableSet
-    
+
     var sortedComponents: [Component] {
         let componentArray = components.allObjects as! [Component]
-        return Swift.sorted(componentArray, { (lhs, rhs) -> Bool in
+        return componentArray.sort({ (lhs, rhs) -> Bool in
             lhs.index < rhs.index
         })
     }
@@ -47,16 +47,16 @@ class Recipe: NSManagedObject {
 extension Recipe {
     class func fetchedResultsController(predicate: NSPredicate? = nil) -> NSFetchedResultsController {
         let app = UIApplication.sharedApplication().delegate as! AppDelegate
-        
+
         let fetchRequest = NSFetchRequest(entityName: "Recipe")
         if predicate != nil {
             fetchRequest.predicate = predicate
         }
-        
+
         let sortByRating            = NSSortDescriptor(key: "rating", ascending: false)
         let sortByName              = NSSortDescriptor(key: "name", ascending: true)
         let sectionNameKeyPath: String
-        
+
         switch app.userSettings.recipeSortOrder {
         case .Rating:
             sectionNameKeyPath = "rating"
@@ -65,37 +65,37 @@ extension Recipe {
             sectionNameKeyPath = "name"
             fetchRequest.sortDescriptors = [sortByName, sortByRating]
         }
-        
+
         return CoreDataHelper.fetchedResultsController(fetchRequest, sectionNameKeyPath: sectionNameKeyPath)
     }
-    
+
     class func all() -> [Recipe] {
         return CoreDataHelper.all("Recipe") as! [Recipe]
     }
-    
+
     class func find(name: String) -> Recipe? {
         let predicate = NSPredicate(format: "name ==[c] %@", Recipe.fancyName(name))
         return CoreDataHelper.find("Recipe", predicate: predicate) as! Recipe?
     }
-    
+
     class func findDuplicate(recipe: Recipe) -> Recipe? {
         let predicate = NSPredicate(format: "name ==[c] %@", Recipe.fancyName(recipe.name))
         let recipes = CoreDataHelper.all("Recipe", predicate: predicate) as! [Recipe]
-        
+
         assert(recipes.count <= 2)
         for foundRecipe in recipes {
             if foundRecipe.objectID != recipe.objectID {
                 return foundRecipe
             }
         }
-        
+
         return nil
     }
 
     class func count() -> Int {
         return CoreDataHelper.count("Recipe", predicate: nil)
     }
-    
+
     class func countByName(name: String) -> Int {
         let searchName = Recipe.fancyName(name)
         let predicate = NSPredicate(format: "name == %@", searchName)
@@ -118,10 +118,10 @@ extension Recipe {
             recipe.component_count = 0
             return recipe
         })
-        
+
         return recipe as! Recipe
     }
-    
+
     class func create(recipeDict: NSDictionary) -> Recipe? {
         let name           = (recipeDict["name"] as? String) ?? nil
         let rating         = (recipeDict["rating"] as? Int) ?? nil
@@ -130,29 +130,29 @@ extension Recipe {
         if name == nil || rating == nil || text == nil {
             return nil
         }
-        
+
         let components     = (recipeDict["components"] as? [NSDictionary]) ?? [NSDictionary]()
-        
+
         let recipe = Recipe.create(name!, withRating: Int16(rating!), withText: text!)
-        
+
         for componentDict in components {
             let quantity        = (componentDict["quantity"] as? String) ?? nil
             let unitName        = (componentDict["unit"] as? String) ?? nil
             let unitPluralName  = (componentDict["unit_plural"] as? String) ?? unitName
             let ingredientName  = (componentDict["ingredient"] as? String) ?? nil
             let index           = (componentDict["index"] as? Int) ?? nil
-            
+
             if quantity == nil || unitName == nil || ingredientName == nil || index == nil {
                 return nil
             }
-            
+
             let unit            = Unit.findOrCreate(unitName!, plural_name: unitPluralName!)
             let ingredient      = Ingredient.findOrCreate(ingredientName!)
-            
+
             let (quantity_n, quantity_d) = Component.parseQuantity(quantity!)
             let component       = Component.create(Int16(quantity_n), quantity_d: Int16(quantity_d), unit: unit, ingredient: ingredient, recipe: recipe, index: Int16(index!))
         }
-        
+
         return recipe
     }
 }
@@ -164,9 +164,9 @@ extension NSMutableDictionary {
         setValue(recipe.name,               forKey: "name")
         setValue(Int(recipe.rating),        forKey: "rating")
         setValue(recipe.text,               forKey: "text")
-        
-        let components = map(recipe.components.allObjects, { NSMutableDictionary(component: $0 as! Component) })
-        
+
+        let components = recipe.components.allObjects.map({ NSMutableDictionary(component: $0 as! Component) })
+
         setValue(components, forKey: "components")
     }
 }
@@ -182,14 +182,15 @@ extension Recipe {
             return trimmedName.capitalizedString
         }
     }
-    
+
     override func willSave() {
         if !deleted {
             setPrimitiveValue(components.count, forKey: "component_count")
         }
     }
-    
-    func validate(error: NSErrorPointer) -> Bool {
+
+    func validate() throws {
+        var error: NSError! = NSError(domain: "Migrator", code: 0, userInfo: nil)
         var errorMessage = ""
         var errorCode = ValidationErrorCode.None
         // have to do this to get accurate name uniqueness count.
@@ -207,31 +208,25 @@ extension Recipe {
             errorMessage = "Sorry, that name is already taken."
             errorCode = .Name
         } else {
-            return true
+            return
         }
-        
+
         if !errorMessage.isEmpty {
-            if error != nil {
-                error.memory = NSError(domain: "CoreData", code: errorCode.rawValue, userInfo: [NSLocalizedDescriptionKey: errorMessage])
-            }
+            error = NSError(domain: "CoreData", code: errorCode.rawValue, userInfo: [NSLocalizedDescriptionKey: errorMessage])
         }
-        
-        return false
+
+        throw error
     }
-    
-    override func validateForUpdate(error: NSErrorPointer) -> Bool {
-        if !super.validateForUpdate(error) {
-            return false
-        }
-        
-        return validate(error)
+
+    override func validateForUpdate() throws {
+        try super.validateForUpdate()
+
+        try validate()
     }
-    
-    override func validateForInsert(error: NSErrorPointer) -> Bool {
-        if !super.validateForInsert(error) {
-            return false
-        }
-        
-        return validate(error)
+
+    override func validateForInsert() throws {
+        try super.validateForInsert()
+
+        try validate()
     }
 }

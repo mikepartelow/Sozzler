@@ -4,9 +4,11 @@ import CoreData
 
 class JsonRecipeParser {
     func parse(recipesJson: NSData?) -> [Recipe]? {
-        var recipes = [Recipe]()
-        
-        if let recipeDicts = NSJSONSerialization.JSONObjectWithData(recipesJson!, options: nil, error: nil) as? [NSDictionary] {
+        do {
+            let recipeDicts = try NSJSONSerialization.JSONObjectWithData(recipesJson!, options: []) as! [NSDictionary]
+
+            var recipes = [Recipe]()
+            
             recipeLoop: for recipeDict in recipeDicts {
                 if let newRecipe = Recipe.create(recipeDict) {
                     if let existingRecipe = Recipe.findDuplicate(newRecipe) {
@@ -16,7 +18,7 @@ class JsonRecipeParser {
                             CoreDataHelper.delete(newRecipe)
                             continue
                         } else {
-                            do {
+                            repeat {
                                 newRecipe.name += " (Alternate)"
                                 if let existingRecipe = Recipe.findDuplicate(newRecipe) where existingRecipe == newRecipe {
                                     NSLog("Deleting exact duplicate new recipe (2)")
@@ -32,11 +34,10 @@ class JsonRecipeParser {
                     return nil // JSON parsing failed
                 }
             }
-        } else {
-            return nil // JSON parsing failed
+            return recipes
+        } catch _ {
+            return nil
         }
-        
-        return recipes
     }
 }
 
@@ -48,15 +49,19 @@ class URLRecipeSource {
     }
     
     func read() -> [Recipe]? {
-        let parser = JsonRecipeParser()
-        return parser.parse(NSData(contentsOfURL: url, options: NSDataReadingOptions.DataReadingMappedIfSafe, error: nil))
+        do {
+            let data = try NSData(contentsOfURL: url, options: NSDataReadingOptions.DataReadingMappedIfSafe)
+            return JsonRecipeParser().parse(data)
+        } catch _ {
+            return nil
+        }
     }
 }
 
 class CannedRecipeSource: URLRecipeSource {
     init() {
         let path = NSBundle.mainBundle().pathForResource("recipes", ofType: "json")!
-        let recipesUrl = NSURL(fileURLWithPath: path)!
+        let recipesUrl = NSURL(fileURLWithPath: path)
 
         super.init(url: recipesUrl)
     }
@@ -70,7 +75,7 @@ class WebRecipeSource: NSObject, NSURLConnectionDelegate {
         self.completion = completion
         
         let request = NSURLRequest(URL: url)
-        NSURLConnection(request: request, delegate: self, startImmediately: true)
+        let _ = NSURLConnection(request: request, delegate: self, startImmediately: true)
     }
     
     func connection(connection: NSURLConnection!, didReceiveData data: NSData!) {

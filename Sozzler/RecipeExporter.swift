@@ -20,24 +20,27 @@ class RecipeExporter: NSObject, MFMailComposeViewControllerDelegate {
         composer.setSubject(messageSubject)
         composer.setMessageBody(messageBody, isHTML: true)
         
-        let recipeDicts = map(recipes, { NSMutableDictionary(recipe: $0 as Recipe) })
+        let recipeDicts = recipes.map({ NSMutableDictionary(recipe: $0 as Recipe) })
         let options = NSJSONWritingOptions.PrettyPrinted
         
-        if let data = NSJSONSerialization.dataWithJSONObject(recipeDicts, options: options, error: nil) {
+        do {
+            let data = try NSJSONSerialization.dataWithJSONObject(recipeDicts, options: options)
             if let string = NSString(data: data, encoding: NSUTF8StringEncoding) {
                 let data = string.dataUsingEncoding(NSUTF8StringEncoding)
-                let base64Data = data!.base64EncodedDataWithOptions(.allZeros)
+                let base64Data = data!.base64EncodedDataWithOptions([])
                 
-                composer.addAttachmentData(NSData(base64EncodedData: base64Data, options: .allZeros), mimeType: "application/sozzler", fileName: "Sozzler Recipes.sozzler")
+                let nsdata = NSData(base64EncodedData: base64Data, options: [])!
+                composer.addAttachmentData(nsdata, mimeType: "application/sozzler", fileName: "Sozzler Recipes.sozzler")
                 
                 self.completion = completion
                 
                 viewController.presentViewController(composer, animated: true, completion: nil)
             }
+        } catch _ {
         }
     }
     
-    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         viewController.dismissViewControllerAnimated(true, completion: nil)
         if let c = self.completion {
             c()

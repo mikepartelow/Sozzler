@@ -9,7 +9,7 @@ class RecipeCell: UITableViewCell {
     func populate(recipe: Recipe) {
         recipeName.text = recipe.name
         
-        let sortedIngredientNames = map(recipe.sortedComponents, { $0.ingredient.name })
+        let sortedIngredientNames = recipe.sortedComponents.map({ $0.ingredient.name })
         ingredients!.text = ", ".join(sortedIngredientNames)
         
         ratingView!.rating = Int(recipe.rating)

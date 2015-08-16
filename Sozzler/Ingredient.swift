@@ -9,7 +9,6 @@ class Ingredient: NSManagedObject {
     @NSManaged var components: NSSet
     
     class func fetchedResultsController(predicate: NSPredicate?=nil) -> NSFetchedResultsController {
-        let app = UIApplication.sharedApplication().delegate as! AppDelegate
         let fetchRequest = NSFetchRequest(entityName: "Ingredient")
         fetchRequest.predicate = predicate
 

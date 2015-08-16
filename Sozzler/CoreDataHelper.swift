@@ -9,34 +9,35 @@ class CoreDataHelper {
         let fetchRequest = NSFetchRequest(entityName: entityName)
         fetchRequest.predicate = predicate
         
-        // FIXME: error handling
-        let fetchedResults = moc.executeFetchRequest(fetchRequest, error: nil)
-        
-        if let results = fetchedResults {
-            return results.count
+        do {
+            return try moc.executeFetchRequest(fetchRequest).count
+        } catch _ {
+            assert(false)
+            return 0
         }
-        
-        return 0
     }
 
     class func find(entityName: String, predicate: NSPredicate) -> NSManagedObject? {
         let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
 
-        var obj: NSManagedObject?
-            
         let fetchRequest = NSFetchRequest(entityName: entityName)
         fetchRequest.predicate = predicate
             
-        // FIXME: error handling
-        if let results = moc.executeFetchRequest(fetchRequest, error: nil) {
-            if results.count == 1 {
-                obj = (results[0] as! NSManagedObject)
+        do {
+            let results = try moc.executeFetchRequest(fetchRequest)
+            if results.count == 0 {
+                return nil
             } else if results.count > 1 {
-                // FIXME: do something
+                assert(false)
                 NSLog("more than one result in CoreDataHelper.find(\(entityName))")
             }
+            return results[0] as? NSManagedObject
+        } catch _ {
+            assert(false)
+            fatalError()
         }
-        return obj
+
+        return nil
     }
     
     class func all(entityName: String, predicate: NSPredicate? = nil) -> [NSManagedObject] {
@@ -45,29 +46,31 @@ class CoreDataHelper {
         let fetchRequest = NSFetchRequest(entityName: entityName)
         fetchRequest.predicate = predicate
         
-        // FIXME: error handling
-        if let results = moc.executeFetchRequest(fetchRequest, error: nil) {
-            return results as! [NSManagedObject]
+        do {
+            return try moc.executeFetchRequest(fetchRequest) as! [NSManagedObject]
+        } catch _ {
+            return []
         }
-        
-        return []
     }
     
     class func create(entityName: String,
         initializer: (entity: NSEntityDescription, context: NSManagedObjectContext) -> NSManagedObject) -> NSManagedObject {
             let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
 
-            var obj: NSManagedObject?
-            if let entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: moc) {
-                obj = initializer(entity: entity, context: moc)
-            }
-            
-            return obj!
+            let entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: moc)!
+            return initializer(entity: entity, context: moc)
     }
 
-    class func save(error: NSErrorPointer) -> Bool {
+    class func save() -> NSError? {
         let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
-        return moc.save(error)
+
+        do {
+            try moc.save()
+        } catch let error as NSError {
+            return error
+        }
+        
+        return nil
     }
     
     class func rollback() {
@@ -102,18 +105,19 @@ class CoreDataHelper {
     class func factoryReset(save: Bool=true) {
         let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
 
-        map(CoreDataHelper.all("Component"), { moc.deleteObject($0) })
-        map(CoreDataHelper.all("Unit"), { moc.deleteObject($0) })
-        map(CoreDataHelper.all("Ingredient"), { moc.deleteObject($0) })
-        map(CoreDataHelper.all("Recipe"), { moc.deleteObject($0) })
+        CoreDataHelper.all("Component").map({ moc.deleteObject($0) })
+        CoreDataHelper.all("Unit").map({ moc.deleteObject($0) })
+        CoreDataHelper.all("Ingredient").map({ moc.deleteObject($0) })
+        CoreDataHelper.all("Recipe").map({ moc.deleteObject($0) })
 
         if save {
-            // FIXME: handle errors
-            var error: NSError?
-            CoreDataHelper.save(&error)
-            NSLog("\(error)")
-            NSLog("recipe count: \(Recipe.count())")
-            assert(error == nil)
+            if let error = CoreDataHelper.save() {
+                NSLog("[RESET] : \(error)")
+                assert(false)
+                fatalError()
+            } else {
+                NSLog("[RESET] : recipe count: \(Recipe.count())")
+            }
         }
     }
 }

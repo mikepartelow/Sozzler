@@ -4,21 +4,21 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     let ONE_POINT_ONE_NEW_RECIPES_URL = "https://raw.githubusercontent.com/mikepartelow/sozzler-recipes/master/SozzlerApp/1.1-new.sozzler"
-    
+
     var window: UIWindow?
     var userSettings = UserSettings()
     var migrated = false
-    
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         let tabBarController = window!.rootViewController! as! UITabBarController
         let navController0 = (tabBarController.viewControllers as! [UINavigationController])[0]
         let viewController = navController0.topViewController!
-        
+
         RecipeImporter(viewController: viewController).importRecipes(url)
-        
+
         return true
     }
-    
+
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         return true
@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.mikepartelow.Sozzler" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as! NSURL
+        return urls[urls.count-1]
     }()
 
     lazy var managedObjectModel: NSManagedObjectModel = {
@@ -67,20 +67,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("Sozzler.sqlite")
         var error: NSError? = nil
         var migrationNeeded = false
-        
-        if let sourceMetadata = NSPersistentStoreCoordinator.metadataForPersistentStoreOfType(NSSQLiteStoreType, URL: url, error: &error) {
+
+        do {
+            let sourceMetadata = try NSPersistentStoreCoordinator.metadataForPersistentStoreOfType(NSSQLiteStoreType, URL: url)
             let destinationModel = coordinator!.managedObjectModel
             let compatible = destinationModel.isConfiguration(nil, compatibleWithStoreMetadata: sourceMetadata)
-            
+
             migrationNeeded = !compatible
+        } catch var error1 as NSError {
+            error = error1
+        } catch {
+            fatalError()
         }
-        
+
         var failureReason = "There was an error creating or loading the application's saved data."
         let options = [
             NSMigratePersistentStoresAutomaticallyOption: true,
             NSInferMappingModelAutomaticallyOption: true
         ]
-        if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: options, error: &error) == nil {
+        do {
+            try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: options)
+        } catch var error1 as NSError {
+            error = error1
             coordinator = nil
             // Report any error we got.
             var dict = [String: AnyObject]()
@@ -92,8 +100,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(error), \(error!.userInfo)")
             abort()
+        } catch {
+            fatalError()
         }
-        
+
         if migrationNeeded {
             for unit in Unit.all() {
                 if unit.plural_name == "%%DEFAULT PLURAL NAME%%" {
@@ -101,10 +111,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
             // FIXME: handle error
-            CoreDataHelper.save(nil)
+            CoreDataHelper.save()
             self.migrated = true
         }
-        
+
         return coordinator
     }()
 
@@ -124,11 +134,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func saveContext () {
         if let moc = self.managedObjectContext {
             var error: NSError? = nil
-            if moc.hasChanges && !moc.save(&error) {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                NSLog("Unresolved error \(error), \(error!.userInfo)")
-                abort()
+            if moc.hasChanges {
+                do {
+                    try moc.save()
+                } catch let error1 as NSError {
+                    error = error1
+                    // Replace this implementation with code to handle the error appropriately.
+                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                    NSLog("Unresolved error \(error), \(error!.userInfo)")
+                    abort()
+                }
             }
         }
     }

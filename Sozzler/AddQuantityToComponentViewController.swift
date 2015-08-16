@@ -20,11 +20,14 @@ class AddQuantityToComponentViewController: UIViewController, UIPickerViewDelega
     var quantity_f: [Int]?
     var unit: Unit?
     
-    required init(coder aDecoder: NSCoder) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    required init?(coder aDecoder: NSCoder) {
+        _ = UIApplication.sharedApplication().delegate as! AppDelegate
         
         frc = Unit.fetchedResultsController()
-        frc.performFetch(nil)
+        do {
+            try frc.performFetch()
+        } catch _ {
+        }
         
         super.init(coder: aDecoder)
     }
@@ -55,13 +58,13 @@ class AddQuantityToComponentViewController: UIViewController, UIPickerViewDelega
         case fractionPicker:
             return fractions.count + 1
         case unitPicker:
-            return frc.sections![component].numberOfObjects!
+            return frc.sections![component].numberOfObjects
         default:
             return 0
         }
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView {
         case integerPicker:
             return row == 0 ? "" : "\(integers[row-1])"

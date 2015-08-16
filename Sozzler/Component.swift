@@ -77,7 +77,7 @@ extension Component {
         var partsIdx = 0
         
         var parts = quantity.componentsSeparatedByString(" ")
-        if let intPart = parts[partsIdx].toInt() {
+        if let intPart = Int(parts[partsIdx]) {
             quantity_n = intPart
             partsIdx += 1
         }
@@ -85,7 +85,7 @@ extension Component {
         if partsIdx < parts.count {
             let possibleFractionalParts = parts[partsIdx].componentsSeparatedByString("/")
             if possibleFractionalParts.count > 1 {
-                if let numerator = possibleFractionalParts[0].toInt(), let denominator = possibleFractionalParts[1].toInt() {
+                if let numerator = Int(possibleFractionalParts[0]), let denominator = Int(possibleFractionalParts[1]) {
                     quantity_d = denominator
                     quantity_n = (quantity_n * quantity_d) + numerator
                 }

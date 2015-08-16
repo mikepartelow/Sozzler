@@ -4,52 +4,52 @@ import CoreData
 class RecipeTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     let app = UIApplication.sharedApplication().delegate as! AppDelegate
     let userSettings: UserSettings
-    
+
     var exporter: RecipeExporter?
-    
+
     var frc: NSFetchedResultsController?
     var ingredient: Ingredient?
     var recipeNameFilter: [String]?
-    
+
     var shouldRefresh = true
     var shouldScroll = true
-    
+
     var searchEnabled = false
     var searchController: UISearchController?
     var searchText = ""
-    
-    required init!(coder aDecoder: NSCoder!) {
+
+    required init!(coder aDecoder: NSCoder) {
         userSettings = app.userSettings
         super.init(coder: aDecoder)
-        
+
         if Recipe.count() == 0 {
             CannedUnitSource().read()
             CannedRecipeSource().read()
-            CoreDataHelper.save(nil)
+            CoreDataHelper.save()
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         if app.migrated {
             let alert = UIAlertController(title: "Import New Sozzler 1.1 Recipes?", message: "", preferredStyle: .Alert)
-            
+
             let yes = UIAlertAction(title: "Yes", style: .Default) { (action: UIAlertAction!) -> Void in
-                
+
                 RecipeImporter(viewController: self).importRecipes(NSURL(string: self.app.ONE_POINT_ONE_NEW_RECIPES_URL)!)
             }
-            
+
             let no = UIAlertAction(title: "No", style: .Default) { (action: UIAlertAction!) -> Void in
             }
-            
+
             alert.addAction(yes)
             alert.addAction(no)
-            
+
             presentViewController(alert, animated: true, completion: nil)
             app.migrated = false
         }
-        
+
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -57,7 +57,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         tableView.rowHeight = UITableViewAutomaticDimension
 
         searchEnabled = (ingredient == nil)
-        
+
         if searchEnabled {
             definesPresentationContext = true
             refresh()
@@ -74,7 +74,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
                 tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
             }
         }
-        
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "data.reset", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "asset.reset", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "recipeUpdated", name: "recipe.updated", object: nil)
@@ -85,7 +85,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         NSNotificationCenter.defaultCenter().removeObserver("asset.reset")
         NSNotificationCenter.defaultCenter().removeObserver("recipe.updated")
     }
-    
+
     func dataReset() {
         shouldScroll = true
         ingredient = nil
@@ -97,13 +97,13 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     func recipeUpdated() {
         refresh()
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         if shouldRefresh {
             refresh()
         }
     }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         becomeFirstResponder()
@@ -111,41 +111,39 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
 
     @IBAction func onSort(sender: UIBarButtonItem) {
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-        
+
         let sortByRating = UIAlertAction(title: "Sort by Rating", style: .Default, handler: {
-            (alert: UIAlertAction!) -> Void in
+            (alert: UIAlertAction) -> Void in
             self.userSettings.recipeSortOrder = .Rating
             self.shouldScroll = true
             self.refresh()
         })
 
         let sortByName = UIAlertAction(title: "Sort by Name", style: .Default, handler: {
-            (alert: UIAlertAction!) -> Void in
+            (alert: UIAlertAction) -> Void in
             self.userSettings.recipeSortOrder = .Name
             self.shouldScroll = true
             self.refresh()
         })
 
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
-            (alert: UIAlertAction!) -> Void in
+            (alert: UIAlertAction) -> Void in
         })
 
         sheet.addAction(sortByName)
-        sheet.addAction(sortByRating)        
+        sheet.addAction(sortByRating)
         sheet.addAction(cancel)
 
         presentViewController(sheet, animated: true, completion: nil)
     }
-    
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let navController = segue.destinationViewController as! UINavigationController
-        
         if segue.identifier == "recipeDetails" {
-            let rvc = navController.topViewController! as! RecipeViewController
-            let index = tableView.indexPathForSelectedRow()!
+            let rvc = segue.destinationViewController as! RecipeViewController
+            let index = tableView.indexPathForSelectedRow!
 
             rvc.recipe = frc!.objectAtIndexPath(index) as? Recipe
-            
+
             tableView.deselectRowAtIndexPath(index, animated: false)
         }
     }
@@ -157,13 +155,13 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         performSegueWithIdentifier("recipeDetails", sender: self)
     }
-    
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return frc!.sections!.count
     }
-    
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return frc!.sections![section].numberOfObjects!
+        return frc!.sections![section].numberOfObjects
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -173,18 +171,18 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         return cell
     }
 
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         if ingredient != nil || searchText != "" || userSettings.recipeSortOrder != .Name {
             return []
         }
-        
+
         if searchEnabled {
             return [ UITableViewIndexSearch ] + frc!.sectionIndexTitles
         } else {
             return frc!.sectionIndexTitles
         }
     }
-    
+
     override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         if searchEnabled && userSettings.recipeSortOrder == .Name {
             if index > 0 {
@@ -198,42 +196,40 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             return frc!.sectionForSectionIndexTitle(title, atIndex: index)
         }
     }
-    
+
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
-    
+
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     }
-    
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let recipe = self.frc!.objectAtIndexPath(indexPath) as! Recipe
 
         let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
             CoreDataHelper.delete(recipe)
 
-            var error: NSError?
-            if CoreDataHelper.save(&error) {
-                assert(error == nil)                
+            if let error = CoreDataHelper.save() {
+                NSLog("Save Failed!: \(error)")
+                assert(false)
+                fatalError()
+            } else {
                 self.refresh()
                 NSNotificationCenter.defaultCenter().postNotificationName("recipe.deleted", object: self)
                 NSNotificationCenter.defaultCenter().postNotificationName("data.reset", object: self)
-            } else {
-                // FIXME:
-                // alert: could not blah blah
-                NSLog("Save Failed!: \(error)")
             }
-            
+
             tableView.editing = false
         }
-        
+
         let exportAction = UITableViewRowAction(style: .Normal, title: "Export") { (action, indexPath) -> Void in
             self.exporter = RecipeExporter(viewController: self)
             self.exporter!.export([recipe])
-            
+
             tableView.editing = false
         }
-        
+
         return [ deleteAction, exportAction ]
     }
 
@@ -253,12 +249,15 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
                 navigationItem.title = "Recipes by \(userSettings.recipeSortOrderName)"
             }
         }
-        
-        frc = Recipe.fetchedResultsController(predicate: predicate)
+
+        frc = Recipe.fetchedResultsController(predicate)
         frc!.delegate = self
 
-        // FIXME: nil seems like a bad idea
-        frc!.performFetch(nil)
+        do {
+            // FIXME: nil seems like a bad idea
+            try frc!.performFetch()
+        } catch _ {
+        }
 
         tableView.reloadData()
 
@@ -273,7 +272,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             }
         }
     }
-    
+
     @IBAction func unwindToRecipes(sender: UIStoryboardSegue)
     {
         if let arvc = sender.sourceViewController as? AddRecipeViewController {
@@ -285,32 +284,32 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             }
         }
     }
-    
+
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        searchText = searchController.searchBar.text
+        searchText = searchController.searchBar.text!
         refresh()
     }
 
     override func canBecomeFirstResponder() -> Bool {
         return true
     }
-    
-    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
-        if event.subtype == UIEventSubtype.MotionShake {
+
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        if event!.subtype == UIEventSubtype.MotionShake {
             let indexPath: NSIndexPath
-            
+
             if userSettings.recipeSortOrder == .Name {
                 let randomSection = Int(arc4random_uniform(UInt32(Recipe.count())))
                 indexPath = NSIndexPath(forRow: 0, inSection: randomSection)
             } else if userSettings.recipeSortOrder == .Rating {
                 let fiveStarSection = 0
-                let limit = frc!.sections![fiveStarSection].numberOfObjects!
+                let limit = frc!.sections![fiveStarSection].numberOfObjects
                 let randomRow = Int(arc4random_uniform(UInt32(limit)))
                 indexPath = NSIndexPath(forRow: randomRow, inSection: fiveStarSection)
             } else {
                 indexPath = NSIndexPath(forRow: 0, inSection: 0)
             }
-            
+
             tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
             performSegueWithIdentifier("recipeDetails", sender: self)
         }

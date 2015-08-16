@@ -97,7 +97,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
 
     func keyboardWillShow(notification: NSNotification) {
         if let userInfo = notification.userInfo {
-            if let r = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue() {
+            if let r = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue {
                 keyboardRect = r
             }
         }
@@ -174,12 +174,12 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = componentTable.dequeueReusableCellWithIdentifier("componentCell") as! UITableViewCell
+        let cell = componentTable.dequeueReusableCellWithIdentifier("componentCell")!
         cell.textLabel!.text = recipe!.sortedComponents[indexPath.row].string
         return cell
     }
 
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
             let component = self.recipe!.sortedComponents[indexPath.row]
             
@@ -189,7 +189,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             self.resizeComponentsTable()
             self.componentTable.scrollToRowAtIndexPath(NSIndexPath(forItem: self.recipe!.sortedComponents.count-1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
             
-            for (index, component) in enumerate(self.recipe!.sortedComponents) {
+            for (index, component) in self.recipe!.sortedComponents.enumerate() {
                 component.index = Int16(index)
             }
 
@@ -216,7 +216,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     @IBAction func onDone(sender: UIBarButtonItem) {
-        recipe!.name = recipeName!.text
+        recipe!.name = recipeName!.text!
         recipe!.rating = Int16(ratingView!.rating)
         
         if recipeText!.text == recipeTextPlaceholder {
@@ -226,7 +226,8 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         }
 
         var error: NSError?
-        if moc.save(&error) {
+        do {
+            try moc.save()
             added = true
             NSNotificationCenter.defaultCenter().postNotificationName("recipe.updated", object: self)
             if editingRecipe {
@@ -234,9 +235,10 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             } else {
                 performSegueWithIdentifier("unwindToRecipes", sender: self)
             }
-        } else {
+        } catch let error1 as NSError {
+            error = error1
             NSLog("\(error)")
-            let errorMessage = error!.userInfo![NSLocalizedDescriptionKey] as! String
+            let errorMessage = error!.userInfo[NSLocalizedDescriptionKey] as! String
             let errorCode = Recipe.ValidationErrorCode(rawValue: error!.code)
             
             if errorCode == Recipe.ValidationErrorCode.Name {
@@ -245,8 +247,8 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
                 recipeText.resignFirstResponder()
             }
             
-            var alert = UIAlertController(title: errorMessage, message: nil, preferredStyle: .Alert)
-            let cancelAction = UIAlertAction(title: "OK", style: .Default) { (action: UIAlertAction!) -> Void in }
+            let alert = UIAlertController(title: errorMessage, message: nil, preferredStyle: .Alert)
+            let cancelAction = UIAlertAction(title: "OK", style: .Default) { (action: UIAlertAction) -> Void in }
             alert.addAction(cancelAction)
             presentViewController(alert, animated: true, completion: nil)
         }
@@ -254,7 +256,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBAction func unwindToAddRecipe(sender: UIStoryboardSegue)
     {
-        if let vc = sender.sourceViewController as? AddIngredientToComponentViewController {
+        if let _ = sender.sourceViewController as? AddIngredientToComponentViewController {
         } else if let vc = sender.sourceViewController as? AddQuantityToComponentViewController {
             if let unit = vc.unit {
                 let quantity_d = Int16(vc.quantity_f![1])
@@ -281,11 +283,11 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         var sortedComponents = recipe!.sortedComponents
         
         if toIndexPath.row < fromIndexPath.row {
-            map(sortedComponents[toIndexPath.row..<fromIndexPath.row], { (component) in
+            sortedComponents[toIndexPath.row..<fromIndexPath.row].map({ (component) in
                 component.index += 1
             })
         } else if fromIndexPath.row < toIndexPath.row {
-            map(sortedComponents[fromIndexPath.row+1...toIndexPath.row], { (component) in
+            sortedComponents[fromIndexPath.row+1...toIndexPath.row].map({ (component) in
                 component.index -= 1
             })
         }

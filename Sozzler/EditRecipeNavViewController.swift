@@ -1,7 +1,7 @@
 import UIKit
 
 class EditRecipeNavViewController: UINavigationController {
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         // FIXME: https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html

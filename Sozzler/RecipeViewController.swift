@@ -26,7 +26,7 @@ class RecipeViewController: UIViewController {
         recipeName!.text = recipe!.name
         
         let sortedComponents = recipe!.sortedComponents
-        let componentText = "\n".join(map(sortedComponents, { $0.string }))
+        let componentText = "\n".join(sortedComponents.map({ $0.string }))
         recipeTextView!.text = "\(componentText)\n\n\(recipe!.text)"
         ratingView!.rating = Int(recipe!.rating)
         
