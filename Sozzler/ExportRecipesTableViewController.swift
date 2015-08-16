@@ -15,7 +15,7 @@ class ExportRecipesTableViewController: UITableViewController, NSFetchedResultsC
     var searchController: UISearchController?
     var searchText = ""
     
-    var selectedRecipes = Set<String>(map(Recipe.all(), { $0.name }))
+    var selectedRecipes = Set<String>(Recipe.all().map({ $0.name }))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,7 +91,7 @@ class ExportRecipesTableViewController: UITableViewController, NSFetchedResultsC
     @IBAction func onSelectAll(sender: UIBarButtonItem) {
         if sender.title == "Select All" {
             sender.title = "Deselect All"
-            selectedRecipes = Set<String>(map(Recipe.all(), { $0.name }))
+            selectedRecipes = Set<String>(Recipe.all().map({ $0.name }))
             refresh()
         } else {
             sender.title = "Select All"
@@ -102,7 +102,7 @@ class ExportRecipesTableViewController: UITableViewController, NSFetchedResultsC
 
     @IBAction func onDone(sender: UIBarButtonItem) {
         exporter = RecipeExporter(viewController: self)
-        exporter!.export(filter(Recipe.all(), { self.selectedRecipes.contains($0.name) }),
+        exporter!.export(Recipe.all().filter({ self.selectedRecipes.contains($0.name) }),
             completion: { self.performSegueWithIdentifier("unwindToData", sender: self) })
     }
 
@@ -144,7 +144,6 @@ class ExportRecipesTableViewController: UITableViewController, NSFetchedResultsC
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let recipe = (frc!.objectAtIndexPath(indexPath) as! Recipe)
-        let cell = tableView.dequeueReusableCellWithIdentifier("RecipeCell", forIndexPath: indexPath) as! RecipeCell
 
         if selectedRecipes.contains(recipe.name) {
             selectedRecipes.remove(recipe.name)
@@ -160,7 +159,7 @@ class ExportRecipesTableViewController: UITableViewController, NSFetchedResultsC
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return frc!.sections![section].numberOfObjects!
+        return frc!.sections![section].numberOfObjects
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -176,7 +175,7 @@ class ExportRecipesTableViewController: UITableViewController, NSFetchedResultsC
         return cell
     }
     
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         if searchText != "" || userSettings.recipeSortOrder != .Name {
             return []
         }
@@ -205,22 +204,20 @@ class ExportRecipesTableViewController: UITableViewController, NSFetchedResultsC
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let recipe = self.frc!.objectAtIndexPath(indexPath) as! Recipe
         
         let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
             CoreDataHelper.delete(recipe)
             
-            var error: NSError?
-            if CoreDataHelper.save(&error) {
-                assert(error == nil)
+            if let error = CoreDataHelper.save() {
+                NSLog("Save Failed!: \(error)")
+                assert(false)
+                fatalError()
+            } else {
                 self.refresh()
                 NSNotificationCenter.defaultCenter().postNotificationName("recipe.deleted", object: self)
                 NSNotificationCenter.defaultCenter().postNotificationName("data.reset", object: self)
-            } else {
-                // FIXME:
-                // alert: could not blah blah
-                NSLog("Save Failed!: \(error)")
             }
             
             tableView.editing = false
@@ -244,11 +241,14 @@ class ExportRecipesTableViewController: UITableViewController, NSFetchedResultsC
             predicate = nil
         }
         
-        frc = Recipe.fetchedResultsController(predicate: predicate)
+        frc = Recipe.fetchedResultsController(predicate)
         frc!.delegate = self
         
-        // FIXME: nil seems like a bad idea
-        frc!.performFetch(nil)
+        do {
+            // FIXME: nil seems like a bad idea
+            try frc!.performFetch()
+        } catch _ {
+        }
         
         tableView.reloadData()
         
@@ -265,7 +265,7 @@ class ExportRecipesTableViewController: UITableViewController, NSFetchedResultsC
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        searchText = searchController.searchBar.text
+        searchText = searchController.searchBar.text!
         refresh()
     }
     

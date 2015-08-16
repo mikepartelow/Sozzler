@@ -14,7 +14,7 @@ class DataViewController: UIViewController {
         
         if let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String {
             if let build = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String {
-                versionLabel!.text = "Sozzler version \(version)"
+                versionLabel!.text = "Sozzler version \(version).\(build)"
             }
         }
     }
