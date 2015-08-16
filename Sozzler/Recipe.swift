@@ -123,25 +123,34 @@ extension Recipe {
     }
     
     class func create(recipeDict: NSDictionary) -> Recipe? {
-        let name           = (recipeDict["name"] as? String) ?? ""
-        let rating         = (recipeDict["rating"] as? Int) ?? 0
-        let text           = (recipeDict["text"] as? String) ?? ""
+        let name           = (recipeDict["name"] as? String) ?? nil
+        let rating         = (recipeDict["rating"] as? Int) ?? nil
+        let text           = (recipeDict["text"] as? String) ?? nil
+
+        if name == nil || rating == nil || text == nil {
+            return nil
+        }
+        
         let components     = (recipeDict["components"] as? [NSDictionary]) ?? [NSDictionary]()
         
-        let recipe = Recipe.create(name, withRating: Int16(rating), withText: text)
+        let recipe = Recipe.create(name!, withRating: Int16(rating!), withText: text!)
         
         for componentDict in components {
-            let quantity        = componentDict["quantity"]     as! String
-            let unitName        = componentDict["unit"]         as! String
-            let unitPluralName  = (componentDict["unit_plural"]  as? String) ?? unitName
-            let ingredientName  = componentDict["ingredient"]   as! String
-            let index           = componentDict["index"]        as! Int
+            let quantity        = (componentDict["quantity"] as? String) ?? nil
+            let unitName        = (componentDict["unit"] as? String) ?? nil
+            let unitPluralName  = (componentDict["unit_plural"] as? String) ?? unitName
+            let ingredientName  = (componentDict["ingredient"] as? String) ?? nil
+            let index           = (componentDict["index"] as? Int) ?? nil
             
-            let unit            = Unit.findOrCreate(unitName, plural_name: unitPluralName)
-            let ingredient      = Ingredient.findOrCreate(ingredientName)
+            if quantity == nil || unitName == nil || ingredientName == nil || index == nil {
+                return nil
+            }
             
-            let (quantity_n, quantity_d) = Component.parseQuantity(quantity)
-            let component       = Component.create(Int16(quantity_n), quantity_d: Int16(quantity_d), unit: unit, ingredient: ingredient, recipe: recipe, index: Int16(index))
+            let unit            = Unit.findOrCreate(unitName!, plural_name: unitPluralName!)
+            let ingredient      = Ingredient.findOrCreate(ingredientName!)
+            
+            let (quantity_n, quantity_d) = Component.parseQuantity(quantity!)
+            let component       = Component.create(Int16(quantity_n), quantity_d: Int16(quantity_d), unit: unit, ingredient: ingredient, recipe: recipe, index: Int16(index!))
         }
         
         return recipe
