@@ -79,7 +79,7 @@ class Unit: NSManagedObject {
                 }
             }
             
-            let count = recipeCounts.values.array.reduce(0, combine: +)
+            let count = recipeCounts.values.count
             setPrimitiveValue(count, forKey: "recipe_count")
         }
     }    

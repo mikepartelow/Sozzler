@@ -93,7 +93,7 @@ class RatingView: UIView {
             let images = [ image0, image1, image2, image3, image4 ]
 
             var newRating: Int = 0
-            for i in stride(from: images.count-1, through: 0, by: -1) {
+            for i in (images.count-1).stride(through: 0, by: -1) {
                 if touchLocation.x > images[i].frame.origin.x {
                     newRating = i + 1
                     break
