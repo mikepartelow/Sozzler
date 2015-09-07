@@ -61,26 +61,32 @@ class Unit: NSManagedObject {
         return CoreDataHelper.count("Unit", predicate: nil)
     }
 
+    func computeRecipeCount(adjustment: Int = 0) {
+        var recipeCounts: [Recipe:Int] = [:]
+
+        for component in components.allObjects as! [Component] {
+            if recipeCounts[component.recipe] == nil {
+                recipeCounts[component.recipe] = 1
+            } else {
+                recipeCounts[component.recipe]! += 1
+            }
+        }
+        
+        let count = recipeCounts.values.count + adjustment
+        setPrimitiveValue(count, forKey: "recipe_count")
+
+        assert(recipe_count >= 0, "unit recipe count went negative")
+    }
+    
     override func willSave() {
         if !deleted {
-            var recipeCounts: [Recipe:Int] = [:]
-            
             setPrimitiveValue(Unit.fancyName(name), forKey: "name")
             
             if plural_name.isEmpty {
                 setPrimitiveValue(name, forKey: "plural_name")
             }
-
-            for component in components.allObjects as! [Component] {
-                if recipeCounts[component.recipe] == nil {
-                    recipeCounts[component.recipe] = 1
-                } else {
-                    recipeCounts[component.recipe]! += 1
-                }
-            }
             
-            let count = recipeCounts.values.count
-            setPrimitiveValue(count, forKey: "recipe_count")
+            computeRecipeCount()
         }
     }    
 }

@@ -85,12 +85,11 @@ class CoreDataHelper {
     
     class func delete(recipe: Recipe) {
         for component in recipe.components.allObjects as! [Component] {
-            // FIXME: duplicated effort! will be recalculated in willSave() but if we don't change the Ingredient, willSave() *wont* be called..
+            // FIXME: lame hack. recipe_count will be recalculated in willSave() but if we don't change the
+            // Ingredient, willSave() *wont* be called..
             //
-            component.ingredient.recipe_count -= 1
-            component.unit.recipe_count -= 1
-            assert(component.ingredient.recipe_count >= 0, "ingredient recipe count went negative")
-            assert(component.unit.recipe_count >= 0, "unit recipe count went negative")
+            component.ingredient.computeRecipeCount(-1)
+            component.unit.computeRecipeCount(-1)
             CoreDataHelper.delete(component)
         }
         CoreDataHelper.delete(recipe as NSManagedObject)

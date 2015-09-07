@@ -51,23 +51,28 @@ extension Ingredient {
         return CoreDataHelper.count("Ingredient", predicate: nil)
     }
     
+    func computeRecipeCount(adjustment: Int = 0) {
+        var recipeCounts: [Recipe:Int] = [:]
+
+        
+        for component in components.allObjects as! [Component] {
+            if recipeCounts[component.recipe] == nil {
+                recipeCounts[component.recipe] = 1
+            } else {
+                recipeCounts[component.recipe]! += 1
+            }
+        }
+        
+        let count = recipeCounts.values.count + adjustment
+        setPrimitiveValue(count, forKey: "recipe_count")
+
+        assert(recipe_count >= 0, "ingredient recipe count went negative")
+    }
     // FIXME: DRY: copypasta Unit
     override func willSave() {
         if !deleted {
-            var recipeCounts: [Recipe:Int] = [:]
-            
             setPrimitiveValue(Recipe.fancyName(name), forKey: "name")
-
-            for component in components.allObjects as! [Component] {
-                if recipeCounts[component.recipe] == nil {
-                   recipeCounts[component.recipe] = 1
-                } else {
-                    recipeCounts[component.recipe]! += 1
-                }
-            }
-            
-            let count = recipeCounts.values.count
-            setPrimitiveValue(count, forKey: "recipe_count")
+            computeRecipeCount()
         }
     }
 }
