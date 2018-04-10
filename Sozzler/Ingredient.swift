@@ -8,21 +8,21 @@ class Ingredient: NSManagedObject {
     @NSManaged var recipe_count: Int16
     @NSManaged var components: NSSet
     
-    class func fetchedResultsController(predicate: NSPredicate?=nil) -> NSFetchedResultsController {
-        let fetchRequest = NSFetchRequest(entityName: "Ingredient")
+    class func fetchedResultsController(predicate: NSPredicate?=nil) -> NSFetchedResultsController<NSFetchRequestResult> {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Ingredient")
         fetchRequest.predicate = predicate
 
         let sortByName              = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [sortByName]
 
-        return CoreDataHelper.fetchedResultsController(fetchRequest, sectionNameKeyPath: "name")
+        return CoreDataHelper.fetchedResultsController(fetchRequest: fetchRequest, sectionNameKeyPath: "name")
     }
 
     class func create(name: String) -> Ingredient {
-        return CoreDataHelper.create("Ingredient", initializer: {
+        return CoreDataHelper.create(entityName: "Ingredient", initializer: {
             (entity, context) -> NSManagedObject in
-                let ingredient = Ingredient(entity: entity, insertIntoManagedObjectContext: context)
-                ingredient.name = Recipe.fancyName(name)
+            let ingredient = Ingredient(entity: entity, insertInto: context)
+            ingredient.name = Recipe.fancyName(name: name)
                 ingredient.recipe_count = 0
                 return ingredient
             }
@@ -30,16 +30,16 @@ class Ingredient: NSManagedObject {
     }
     
     class func find(name: String) -> Ingredient? {
-        let predicate = NSPredicate(format: "name ==[c] %@", Recipe.fancyName(name))
-        return CoreDataHelper.find("Ingredient", predicate: predicate) as! Ingredient?
+        let predicate = NSPredicate(format: "name ==[c] %@", Recipe.fancyName(name: name))
+        return CoreDataHelper.find(entityName: "Ingredient", predicate: predicate) as! Ingredient?
     }
     
     class func findOrCreate(name: String) -> Ingredient {
-        let fancyName = Recipe.fancyName(name)
-        if let ingredient = Ingredient.find(fancyName) {
+        let fancyName = Recipe.fancyName(name: name)
+        if let ingredient = Ingredient.find(name: fancyName) {
             return ingredient
         } else {
-            return Ingredient.create(fancyName)
+            return Ingredient.create(name: fancyName)
         }
     }
 }
@@ -48,7 +48,7 @@ class Ingredient: NSManagedObject {
 //
 extension Ingredient {
     class func count() -> Int {
-        return CoreDataHelper.count("Ingredient", predicate: nil)
+        return CoreDataHelper.count(entityName: "Ingredient", predicate: nil)
     }
     
     func computeRecipeCount(adjustment: Int = 0) {
@@ -70,8 +70,8 @@ extension Ingredient {
     }
     // FIXME: DRY: copypasta Unit
     override func willSave() {
-        if !deleted {
-            setPrimitiveValue(Recipe.fancyName(name), forKey: "name")
+        if !isDeleted {
+            setPrimitiveValue(Recipe.fancyName(name: name), forKey: "name")
             computeRecipeCount()
         }
     }

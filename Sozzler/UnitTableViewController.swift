@@ -2,9 +2,9 @@ import UIKit
 import CoreData
 
 class UnitTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-    var frc: NSFetchedResultsController?
+    var frc: NSFetchedResultsController<NSFetchRequestResult>?
     var shouldRefresh = false
-    let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+    let moc = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -14,19 +14,19 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         
         refresh()
 
-        tableView.editing = true
+        tableView.isEditing = true
         
 //        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "data.reset", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "recipe.deleted", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "recipe.updated", object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "data.reset"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "recipe.deleted"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "recipe.updated"), object: nil)
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver("data.reset")
-        NSNotificationCenter.defaultCenter().removeObserver("recipe.deleted")
-        NSNotificationCenter.defaultCenter().removeObserver("recipe.updated")
+        NotificationCenter.default.removeObserver("data.reset")
+        NotificationCenter.default.removeObserver("recipe.deleted")
+        NotificationCenter.default.removeObserver("recipe.updated")
     }
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -37,7 +37,7 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         shouldRefresh = true
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         if shouldRefresh {
             refresh()
         }
@@ -45,10 +45,10 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
     
     // FIXME: DRY
     func errorAlert(title: String, button: String) {
-        let alert = UIAlertController(title: title, message: "", preferredStyle: .Alert)
-        let action = UIAlertAction(title: button, style: .Default) { (action: UIAlertAction) -> Void in }
+        let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: button, style: .default) { (action: UIAlertAction) -> Void in }
         alert.addAction(action)
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
         
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -59,13 +59,13 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
-            let unit = self.frc!.objectAtIndexPath(indexPath) as! Unit
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) -> Void in
+            let unit = self.frc!.object(at: indexPath) as! Unit
             
             if unit.recipe_count > 0 {
-                self.errorAlert("Unit is used by a recipe", button: "OK")
+                self.errorAlert(title: "Unit is used by a recipe", button: "OK")
             } else {
-                CoreDataHelper.delete(unit)
+                CoreDataHelper.delete(recipe: unit)
                 
                 let remainingUnits = (self.frc!.fetchedObjects as! [Unit]).filter { $0 != unit }
                 for (index, unit) in remainingUnits.enumerate() {
@@ -83,28 +83,28 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
             
             // this is intentional, believe it or not.
             //
-            tableView.editing = false
-            tableView.editing = true
+            tableView.isEditing = false
+            tableView.isEditing = true
         }
         
         return [ deleteAction ]
     }
     
     override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        let unit = frc!.objectAtIndexPath(indexPath) as! Unit
+        let unit = frc!.object(at: indexPath as IndexPath) as! Unit
         return unit.name != ""
 
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "editUnit" {
-            let navController = segue.destinationViewController as! UINavigationController
+            let navController = segue.destination as! UINavigationController
             let euvc = navController.topViewController! as! EditUnitViewController
             let index = tableView.indexPathForSelectedRow!
             
-            euvc.unit = frc!.objectAtIndexPath(index) as? Unit
+            euvc.unit = frc!.object(at: index) as? Unit
             
-            tableView.deselectRowAtIndexPath(index, animated: false)
+            tableView.deselectRow(at: index, animated: false)
         }
     }
 
@@ -112,13 +112,13 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         return frc!.sections!.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return frc!.sections![section].numberOfObjects
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("UnitCell", forIndexPath: indexPath) 
-        let unit = frc!.objectAtIndexPath(indexPath) as! Unit
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UnitCell", for: indexPath as IndexPath) 
+        let unit = frc!.object(at: indexPath as IndexPath) as! Unit
         
         cell.textLabel!.text = unit.plural_name != unit.name ? "\(unit.name) / \(unit.plural_name)" : unit.name
         
@@ -129,8 +129,8 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         return frc!.sectionIndexTitles
     }
     
-    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
-        return frc!.sectionForSectionIndexTitle(title, atIndex: index)
+    override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        return frc!.section(forSectionIndexTitle: title, at: index)
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -195,11 +195,11 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
     }
     
     @IBAction func unwindToUnitTable(sender: UIStoryboardSegue) {
-        if let euvc = sender.sourceViewController as? EditUnitViewController {
+        if let euvc = sender.source as? EditUnitViewController {
             if euvc.added {
                 self.refresh()
-                let indexPath = self.frc!.indexPathForObject(euvc.unit!)
-                self.tableView.selectRowAtIndexPath(indexPath!, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+                let indexPath = self.frc!.indexPath(forObject: euvc.unit!)
+                self.tableView.selectRow(at: indexPath!, animated: true, scrollPosition: UITableViewScrollPosition.middle)
             }
         }
     }

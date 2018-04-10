@@ -15,31 +15,31 @@ class Unit: NSManagedObject {
     }
     
     class func all() -> [Unit] {
-        return CoreDataHelper.all("Unit", predicate: nil) as! [Unit]
+        return CoreDataHelper.all(entityName: "Unit", predicate: nil) as! [Unit]
     }
     
-    class func fetchedResultsController() -> NSFetchedResultsController {
-        let fetchRequest = NSFetchRequest(entityName: "Unit")
+    class func fetchedResultsController() -> NSFetchedResultsController<NSFetchRequestResult> {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Unit")
 
         let sortByIndex = NSSortDescriptor(key: "index", ascending: true)
         
         fetchRequest.sortDescriptors = [sortByIndex]
         
-        return CoreDataHelper.fetchedResultsController(fetchRequest)
+        return CoreDataHelper.fetchedResultsController(fetchRequest: fetchRequest)
     }
 
     class func find(name: String) -> Unit? {
-        let predicate = NSPredicate(format: "name == %@", Unit.fancyName(name))
-        return CoreDataHelper.find("Unit", predicate: predicate) as! Unit?
+        let predicate = NSPredicate(format: "name == %@", Unit.fancyName(name: name))
+        return CoreDataHelper.find(entityName: "Unit", predicate: predicate) as! Unit?
     }
     
     class func create(name: String, plural_name: String, index: Int = Unit.count()) -> Unit {
-        return CoreDataHelper.create("Unit", initializer: {
+        return CoreDataHelper.create(entityName: "Unit", initializer: {
             (entity, context) -> NSManagedObject in
-                let unit = Unit(entity: entity, insertIntoManagedObjectContext: context)
+            let unit = Unit(entity: entity, insertInto: context)
 
-                unit.name = Unit.fancyName(name)
-                unit.plural_name = Unit.fancyName(plural_name)
+            unit.name = Unit.fancyName(name: name)
+            unit.plural_name = Unit.fancyName(name: plural_name)
                 unit.index = Int16(index)
                 unit.recipe_count = 0
                 return unit
@@ -48,17 +48,17 @@ class Unit: NSManagedObject {
     }
     
     class func findOrCreate(name: String, plural_name: String) -> Unit {
-        let fancyName = Unit.fancyName(name)
+        let fancyName = Unit.fancyName(name: name)
 
-        if let unit = Unit.find(fancyName) {
+        if let unit = Unit.find(name: fancyName) {
             return unit
         } else {
-            return Unit.create(fancyName, plural_name: plural_name)
+            return Unit.create(name: fancyName, plural_name: plural_name)
         }
     }
     
     class func count() -> Int {
-        return CoreDataHelper.count("Unit", predicate: nil)
+        return CoreDataHelper.count(entityName: "Unit", predicate: nil)
     }
 
     func computeRecipeCount(adjustment: Int = 0) {
@@ -79,8 +79,8 @@ class Unit: NSManagedObject {
     }
     
     override func willSave() {
-        if !deleted {
-            setPrimitiveValue(Unit.fancyName(name), forKey: "name")
+        if !isDeleted {
+            setPrimitiveValue(Unit.fancyName(name: name), forKey: "name")
             
             if plural_name.isEmpty {
                 setPrimitiveValue(name, forKey: "plural_name")

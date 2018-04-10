@@ -4,13 +4,13 @@ import UIKit
 class CoreDataHelper {
     
     class func count(entityName: String, predicate: NSPredicate?) -> Int {
-        let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+        let moc = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext!
 
-        let fetchRequest = NSFetchRequest(entityName: entityName)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         fetchRequest.predicate = predicate
         
         do {
-            return try moc.executeFetchRequest(fetchRequest).count
+            return try moc.fetch(fetchRequest).count
         } catch _ {
             assert(false)
             return 0
@@ -18,13 +18,13 @@ class CoreDataHelper {
     }
 
     class func find(entityName: String, predicate: NSPredicate) -> NSManagedObject? {
-        let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+        let moc = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext!
 
-        let fetchRequest = NSFetchRequest(entityName: entityName)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         fetchRequest.predicate = predicate
             
         do {
-            let results = try moc.executeFetchRequest(fetchRequest)
+            let results = try moc.fetch(fetchRequest)
             if results.count == 0 {
                 return nil
             } else if results.count > 1 {
@@ -41,28 +41,28 @@ class CoreDataHelper {
     }
     
     class func all(entityName: String, predicate: NSPredicate? = nil) -> [NSManagedObject] {
-        let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+        let moc = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext!
         
-        let fetchRequest = NSFetchRequest(entityName: entityName)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         fetchRequest.predicate = predicate
         
         do {
-            return try moc.executeFetchRequest(fetchRequest) as! [NSManagedObject]
+            return try moc.fetch(fetchRequest) as! [NSManagedObject]
         } catch _ {
             return []
         }
     }
     
     class func create(entityName: String,
-        initializer: (entity: NSEntityDescription, context: NSManagedObjectContext) -> NSManagedObject) -> NSManagedObject {
-            let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+                      initializer: (_ entity: NSEntityDescription, _ context: NSManagedObjectContext) -> NSManagedObject) -> NSManagedObject {
+        let moc = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext!
 
-            let entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: moc)!
-            return initializer(entity: entity, context: moc)
+        let entity = NSEntityDescription.entity(forEntityName: entityName, in: moc)!
+        return initializer(entity, moc)
     }
 
     class func save() -> NSError? {
-        let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+        let moc = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext!
 
         do {
             try moc.save()
@@ -74,13 +74,13 @@ class CoreDataHelper {
     }
     
     class func rollback() {
-        let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+        let moc = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext!
         moc.rollback()
     }
     
     class func delete(obj: NSManagedObject) {
-        let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
-        moc.deleteObject(obj)
+        let moc = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext!
+        moc.delete(obj)
     }
     
     class func delete(recipe: Recipe) {
@@ -88,26 +88,26 @@ class CoreDataHelper {
             // FIXME: lame hack. recipe_count will be recalculated in willSave() but if we don't change the
             // Ingredient, willSave() *wont* be called..
             //
-            component.ingredient.computeRecipeCount(-1)
-            component.unit.computeRecipeCount(-1)
-            CoreDataHelper.delete(component)
+            component.ingredient.computeRecipeCount(adjustment: -1)
+            component.unit.computeRecipeCount(adjustment: -1)
+            CoreDataHelper.delete(recipe: component)
         }
-        CoreDataHelper.delete(recipe as NSManagedObject)
+        CoreDataHelper.delete(recipe: recipe as NSManagedObject as! Recipe)
     }
     
-    class func fetchedResultsController(fetchRequest: NSFetchRequest, sectionNameKeyPath: String? = nil) -> NSFetchedResultsController {
-        let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+    class func fetchedResultsController(fetchRequest: NSFetchRequest<NSFetchRequestResult>, sectionNameKeyPath: String? = nil) -> NSFetchedResultsController<NSFetchRequestResult> {
+        let moc = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext!
 
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: sectionNameKeyPath, cacheName: nil)
     }
     
     class func factoryReset(save: Bool=true) {
-        let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+        let moc = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext!
 
-        CoreDataHelper.all("Component").map({ moc.deleteObject($0) })
-        CoreDataHelper.all("Unit").map({ moc.deleteObject($0) })
-        CoreDataHelper.all("Ingredient").map({ moc.deleteObject($0) })
-        CoreDataHelper.all("Recipe").map({ moc.deleteObject($0) })
+        CoreDataHelper.all(entityName: "Component").map({ moc.delete($0) })
+        CoreDataHelper.all(entityName: "Unit").map({ moc.delete($0) })
+        CoreDataHelper.all(entityName: "Ingredient").map({ moc.delete($0) })
+        CoreDataHelper.all(entityName: "Recipe").map({ moc.delete($0) })
 
         if save {
             if let error = CoreDataHelper.save() {

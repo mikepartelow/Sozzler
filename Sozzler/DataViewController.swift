@@ -1,7 +1,7 @@
 import UIKit
 
 class DataViewController: UIViewController {
-    let userSettings = (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings
+    let userSettings = (UIApplication.shared.delegate as! AppDelegate).userSettings
     
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var ingredientsLabel: UILabel!
@@ -12,33 +12,33 @@ class DataViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String {
-            if let build = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String {
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            if let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
                 versionLabel!.text = "Sozzler version \(version).\(build)"
             }
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         recipesLabel!.text = "\(Recipe.count()) recipes"
         ingredientsLabel!.text = "\(Ingredient.count()) ingredients"
     }
    
     @IBAction func onImport(sender: UIButton) {
-        let alert = UIAlertController(title: "Import Recipes", message: "", preferredStyle: .Alert)
+        let alert = UIAlertController(title: "Import Recipes", message: "", preferredStyle: .alert)
         
-        let importRecipes = UIAlertAction(title: "Import", style: .Default) { (action: UIAlertAction!) -> Void in
+        let importRecipes = UIAlertAction(title: "Import", style: .default) { (action: UIAlertAction!) -> Void in
             let textField = alert.textFields![0]
             let url = textField.text!
             
-            RecipeImporter(viewController: self).importRecipes(NSURL(string: url)!)
+            RecipeImporter(viewController: self).importRecipes(url: NSURL(string: url)!)
         }
 
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action: UIAlertAction!) -> Void in
         }
         
-        alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
-            let app = UIApplication.sharedApplication().delegate as! AppDelegate
+        alert.addTextField { (textField: UITextField!) -> Void in
+            let app = UIApplication.shared.delegate as! AppDelegate
             textField.placeholder   = app.ONE_POINT_ONE_NEW_RECIPES_URL
             textField.text          = app.ONE_POINT_ONE_NEW_RECIPES_URL
         }
@@ -46,16 +46,16 @@ class DataViewController: UIViewController {
         alert.addAction(importRecipes)
         alert.addAction(cancelAction)
         
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     @IBAction func onImportCanned(sender: UIButton) {
-        let alert = UIAlertController(title: "", message: "Restore default recipes and settings?", preferredStyle: .Alert)
+        let alert = UIAlertController(title: "", message: "Restore default recipes and settings?", preferredStyle: .alert)
         
-        let doitAction = UIAlertAction(title: "Do it", style: .Destructive) { (action: UIAlertAction!) -> Void in
+        let doitAction = UIAlertAction(title: "Do it", style: .destructive) { (action: UIAlertAction!) -> Void in
             CoreDataHelper.factoryReset()
             
-            (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings.factoryReset()
+            (UIApplication.shared.delegate as! AppDelegate).userSettings.factoryReset()
             
             CannedUnitSource().read()
             CannedRecipeSource().read()
@@ -66,22 +66,22 @@ class DataViewController: UIViewController {
                 assert(false)
                 fatalError()
             } else {
-                NSNotificationCenter.defaultCenter().postNotificationName("data.reset", object: self)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "data.reset"), object: self)
 
                 self.tabBarController!.selectedIndex = 0
                 
                 let viewControllers = self.tabBarController!.viewControllers as! [UINavigationController]
-                viewControllers[0].popToRootViewControllerAnimated(false)
-                viewControllers[1].popToRootViewControllerAnimated(false)
+                viewControllers[0].popToRootViewController(animated: false)
+                viewControllers[1].popToRootViewController(animated: false)
             }
         }
         
-        let cancelAction = UIAlertAction(title: "Forget it", style: .Default) { (action: UIAlertAction!) -> Void in }
+        let cancelAction = UIAlertAction(title: "Forget it", style: .default) { (action: UIAlertAction!) -> Void in }
         
         alert.addAction(doitAction)
         alert.addAction(cancelAction)
         
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }    
         
     @IBAction func unwindToData(sender: UIStoryboardSegue) {
@@ -92,7 +92,7 @@ class DataViewController: UIViewController {
     }
     
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent!) {
-        if event.subtype == UIEventSubtype.MotionShake {
+        if event.subtype == UIEventSubtype.motionShake {
             if userSettings.oliveAsset == "asset-olive-green" {
                 userSettings.oliveAsset = "asset-olive-green-outline"
             } else if userSettings.oliveAsset == "asset-olive-green-outline" {
@@ -100,7 +100,7 @@ class DataViewController: UIViewController {
             } else {
                 userSettings.oliveAsset = "asset-olive-green"
             }
-            NSNotificationCenter.defaultCenter().postNotificationName("asset.reset", object: self)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "asset.reset"), object: self)
         }
     }
 }

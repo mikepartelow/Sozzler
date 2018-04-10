@@ -4,9 +4,13 @@ import CoreData
 // http://stackoverflow.com/questions/2809192/core-data-fetchedresultscontroller-question-what-is-sections-for
 
 class IngredientTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
-    let userSettings = (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings
+    func updateSearchResults(for searchController: UISearchController) {
+        <#code#>
+    }
+    
+    let userSettings = (UIApplication.shared.delegate as! AppDelegate).userSettings
 
-    var frc: NSFetchedResultsController?
+    var frc: NSFetchedResultsController<NSFetchRequestResult>?
     
     var shouldRefresh = true
     
@@ -30,17 +34,17 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         tableView.tableHeaderView = searchController!.searchBar
         searchController!.searchBar.sizeToFit()
         
-        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+        tableView.scrollToRow(at: NSIndexPath(forRow: 0, inSection: 0) as IndexPath, at: UITableViewScrollPosition.top, animated: false)
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "data.reset", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "recipe.deleted", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataReset", name: "recipe.updated", object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "data.reset"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "recipe.deleted"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "recipe.updated"), object: nil)
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver("data.reset")
-        NSNotificationCenter.defaultCenter().removeObserver("recipe.deleted")
-        NSNotificationCenter.defaultCenter().removeObserver("recipe.updated")
+        NotificationCenter.default.removeObserver("data.reset")
+        NotificationCenter.default.removeObserver("recipe.deleted")
+        NotificationCenter.default.removeObserver("recipe.updated")
     }
 
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -50,33 +54,33 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
     func dataReset() {
         shouldRefresh = true
         searchText = ""
-        searchController?.active = false
+        searchController?.isActive = false
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         if shouldRefresh {
             refresh()
         }
     }
     
     func errorAlert(title: String, button: String) {
-        let alert = UIAlertController(title: title, message: "", preferredStyle: .Alert)
-        let action = UIAlertAction(title: button, style: .Default) { (action: UIAlertAction) -> Void in }
+        let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: button, style: .default) { (action: UIAlertAction) -> Void in }
         alert.addAction(action)
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 
     @IBAction func onAdd(sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "Add Ingredient", message: "", preferredStyle: .Alert)
+        let alert = UIAlertController(title: "Add Ingredient", message: "", preferredStyle: .alert)
         
-        let addAction = UIAlertAction(title: "Add", style: .Default) { (action: UIAlertAction) -> Void in
+        let addAction = UIAlertAction(title: "Add", style: .default) { (action: UIAlertAction) -> Void in
             let textField = alert.textFields![0] 
             let ingredientName = textField.text!
         
-            if let _ = Ingredient.find(ingredientName) {
-                self.errorAlert("Ingredient already exists.", button: "Oops")
+            if let _ = Ingredient.find(name: ingredientName) {
+                self.errorAlert(title: "Ingredient already exists.", button: "Oops")
             } else {
-                let ingredient = Ingredient.create(ingredientName)
+                let ingredient = Ingredient.create(name: ingredientName)
                 
                 if let error = CoreDataHelper.save() {
                     NSLog("Save Failed!: \(error)")
@@ -84,24 +88,24 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
                     fatalError()
                 } else {
                     self.refresh()
-                    let indexPath = self.frc!.indexPathForObject(ingredient)
-                    self.tableView.selectRowAtIndexPath(indexPath!, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+                    let indexPath = self.frc!.indexPath(forObject: ingredient)
+                    self.tableView.selectRow(at: indexPath!, animated: true, scrollPosition: UITableViewScrollPosition.middle)
                 }
             }
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction) -> Void in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action: UIAlertAction) -> Void in
         }
         
-        alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
+        alert.addTextField { (textField: UITextField!) -> Void in
             textField.placeholder = "Disgusting Artichoke"
-            textField.autocapitalizationType = UITextAutocapitalizationType.Words
+            textField.autocapitalizationType = UITextAutocapitalizationType.words
         }
         
         alert.addAction(addAction)
         alert.addAction(cancelAction)
         
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -112,13 +116,13 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
-            let ingredient = self.frc!.objectAtIndexPath(indexPath) as! Ingredient
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) -> Void in
+            let ingredient = self.frc!.object(at: indexPath) as! Ingredient
 
             if ingredient.recipe_count > 0 {
-                self.errorAlert("Ingredient is used by a recipe", button: "OK")
+                self.errorAlert(title: "Ingredient is used by a recipe", button: "OK")
             } else {
-                CoreDataHelper.delete(ingredient)
+                CoreDataHelper.delete(recipe: ingredient)
             
                 if let error = CoreDataHelper.save() {
                     NSLog("Delete Failed!: \(error)")
@@ -129,34 +133,34 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
                 }
             }
             
-            tableView.editing = false
+            tableView.isEditing = false
         }
         
         return [ deleteAction ]
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let rtvc = segue.destinationViewController as! RecipeTableViewController
+        let rtvc = segue.destination as! RecipeTableViewController
         
         rtvc.navigationItem.leftBarButtonItem = nil
         rtvc.navigationItem.rightBarButtonItem = nil
 
         let index = tableView.indexPathForSelectedRow!
-        rtvc.ingredient = frc!.objectAtIndexPath(index) as? Ingredient
-        tableView.deselectRowAtIndexPath(index, animated: false)        
+        rtvc.ingredient = frc!.object(at: index) as? Ingredient
+        tableView.deselectRow(at: index, animated: false)        
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return frc!.sections!.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return frc!.sections![section].numberOfObjects
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("IngredientCell", forIndexPath: indexPath) 
-        let ingredient = frc!.objectAtIndexPath(indexPath) as! Ingredient
+        let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath as IndexPath) 
+        let ingredient = frc!.object(at: indexPath as IndexPath) as! Ingredient
         
         cell.textLabel!.text = ingredient.name
         
@@ -174,9 +178,9 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         }
     }
     
-    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+    override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         if index > 0 {
-            return frc!.sectionForSectionIndexTitle(title, atIndex: index - 1)
+            return frc!.section(forSectionIndexTitle: title, at: index - 1)
         } else {
             let searchBarFrame = searchController!.searchBar.frame
             tableView.scrollRectToVisible(searchBarFrame, animated: false)
@@ -195,7 +199,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         } else {
             predicate = nil
         }
-        frc = Ingredient.fetchedResultsController(predicate)
+        frc = Ingredient.fetchedResultsController(predicate: predicate)
         
         frc!.delegate = self
         

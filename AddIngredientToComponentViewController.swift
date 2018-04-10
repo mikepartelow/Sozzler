@@ -2,7 +2,11 @@ import UIKit
 import CoreData
 
 class AddIngredientToComponentViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
-    var frc: NSFetchedResultsController?
+    func updateSearchResults(for searchController: UISearchController) {
+        <#code#>
+    }
+    
+    var frc: NSFetchedResultsController<NSFetchRequestResult>?
     var ingredient: Ingredient?
     
     var searchController: UISearchController?
@@ -25,7 +29,7 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
         tableView.tableHeaderView = searchController!.searchBar
         searchController!.searchBar.sizeToFit()
         
-        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+        tableView.scrollToRow(at: NSIndexPath(forRow: 0, inSection: 0) as IndexPath, at: UITableViewScrollPosition.top, animated: false)
     }
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -33,20 +37,20 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        ingredient = (frc!.objectAtIndexPath(indexPath) as! Ingredient)
+        ingredient = (frc!.object(at: indexPath as IndexPath) as! Ingredient)
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return frc!.sections!.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return frc!.sections![section].numberOfObjects
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ingredientCell", forIndexPath: indexPath) 
-        let ingredient = frc!.objectAtIndexPath(indexPath) as! Ingredient
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath as IndexPath) 
+        let ingredient = frc!.object(at: indexPath as IndexPath) as! Ingredient
         
         cell.textLabel!.text = ingredient.name
         
@@ -61,9 +65,9 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
         }
     }
     
-    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+    override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         if index > 0 {
-            return frc!.sectionForSectionIndexTitle(title, atIndex: index - 1)
+            return frc!.section(forSectionIndexTitle: title, at: index - 1)
         } else {
             let searchBarFrame = searchController!.searchBar.frame
             tableView.scrollRectToVisible(searchBarFrame, animated: false)
@@ -73,11 +77,11 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addQuantityToComponent" {
-            let nav = segue.destinationViewController as! UINavigationController
+            let nav = segue.destination as! UINavigationController
             let addQuantityToComponentViewController = nav.topViewController as! AddQuantityToComponentViewController
             let idx = tableView.indexPathForSelectedRow
             
-            addQuantityToComponentViewController.ingredient = (frc!.objectAtIndexPath(idx!) as! Ingredient)
+            addQuantityToComponentViewController.ingredient = (frc!.object(at: idx!) as! Ingredient)
         }
     }
     
@@ -106,23 +110,23 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
     }
     
     func errorAlert(title: String, button: String) {
-        let alert = UIAlertController(title: title, message: "", preferredStyle: .Alert)
-        let action = UIAlertAction(title: button, style: .Default) { (action: UIAlertAction) -> Void in }
+        let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: button, style: .default) { (action: UIAlertAction) -> Void in }
         alert.addAction(action)
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 
     @IBAction func onAdd(sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "Add Ingredient", message: "", preferredStyle: .Alert)
+        let alert = UIAlertController(title: "Add Ingredient", message: "", preferredStyle: .alert)
         
-        let addAction = UIAlertAction(title: "Add", style: .Default) { (action: UIAlertAction) -> Void in
+        let addAction = UIAlertAction(title: "Add", style: .default) { (action: UIAlertAction) -> Void in
             let textField = alert.textFields![0] 
             let ingredientName = textField.text!
             
-            if let _ = Ingredient.find(ingredientName) {
-                self.errorAlert("Ingredient already exists.", button: "Oops")
+            if let _ = Ingredient.find(name: ingredientName) {
+                self.errorAlert(title: "Ingredient already exists.", button: "Oops")
             } else {
-                let ingredient = Ingredient.create(ingredientName)
+                let ingredient = Ingredient.create(name: ingredientName)
                 
                 var error: NSError?
                 // NOTE: unlike in IngredientTableViewController we can't save here because the moc has a partially construted, invalid Recipe
@@ -130,8 +134,8 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
                 do {
                     try ingredient.validateForInsert()
                     self.refresh()
-                    let indexPath = self.frc!.indexPathForObject(ingredient)
-                    self.tableView.selectRowAtIndexPath(indexPath!, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+                    let indexPath = self.frc!.indexPath(forObject: ingredient)
+                    self.tableView.selectRow(at: indexPath!, animated: true, scrollPosition: UITableViewScrollPosition.middle)
                 } catch let error1 as NSError {
                     error = error1
                     // FIXME:
@@ -143,18 +147,18 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
             }
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction) -> Void in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action: UIAlertAction) -> Void in
         }
         
-        alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
+        alert.addTextField { (textField: UITextField!) -> Void in
             textField.placeholder = "Disgusting Artichoke"
-            textField.autocapitalizationType = UITextAutocapitalizationType.Words
+            textField.autocapitalizationType = UITextAutocapitalizationType.words
         }
         
         alert.addAction(addAction)
         alert.addAction(cancelAction)
         
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 
     func updateSearchResultsForSearchController(searchController: UISearchController) {
