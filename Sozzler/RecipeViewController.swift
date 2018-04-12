@@ -13,9 +13,9 @@ class RecipeViewController: UIViewController {
         render()
     }
         
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "editRecipe" {
-            let nav = segue.destinationViewController as! UINavigationController
+            let nav = segue.destination as! UINavigationController
             let addRecipeViewController = nav.topViewController as! AddRecipeViewController
             
             addRecipeViewController.recipe = recipe
@@ -26,7 +26,7 @@ class RecipeViewController: UIViewController {
         recipeName!.text = recipe!.name
         
         let sortedComponents = recipe!.sortedComponents
-        let componentText = sortedComponents.map({ $0.string }).joinWithSeparator("\n")
+        let componentText = sortedComponents.map({ $0.string }).joined(separator: "\n")
         recipeTextView!.text = "\(componentText)\n\n\(recipe!.text)"
         ratingView!.rating = Int(recipe!.rating)
         

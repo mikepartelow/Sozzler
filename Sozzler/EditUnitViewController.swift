@@ -23,22 +23,22 @@ class EditUnitViewController: UIViewController {
     
     // FIXME: DRY
     func errorAlert(title: String, button: String) {
-        let alert = UIAlertController(title: title, message: "", preferredStyle: .Alert)
-        let action = UIAlertAction(title: button, style: .Default) { (action: UIAlertAction) -> Void in }
+        let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: button, style: .default) { (action: UIAlertAction) -> Void in }
         alert.addAction(action)
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 
     @IBAction func onSave(sender: AnyObject) {
         if unit == nil {
-            if Unit.find(unitNameSingular.text!) != nil {
-                self.errorAlert("Unit already exists.", button: "Oops")
+            if Unit.find(name: unitNameSingular.text!) != nil {
+                self.errorAlert(title: "Unit already exists.", button: "Oops")
             } else {
-                unit = Unit.create(unitNameSingular.text!, plural_name: unitNamePlural.text!)
+                unit = Unit.create(name: unitNameSingular.text!, plural_name: unitNamePlural.text!)
             }
         } else {
-            unit!.name = Unit.fancyName(unitNameSingular.text!)
-            unit!.plural_name = Unit.fancyName(unitNamePlural.text!)
+            unit!.name = Unit.fancyName(name: unitNameSingular.text!)
+            unit!.plural_name = Unit.fancyName(name: unitNamePlural.text!)
         }
         
         if unit != nil {
@@ -48,7 +48,7 @@ class EditUnitViewController: UIViewController {
                 fatalError()
             } else {
                 added = true
-                performSegueWithIdentifier("unwindToUnitTable", sender: self)
+                performSegue(withIdentifier: "unwindToUnitTable", sender: self)
             }
         }
     }

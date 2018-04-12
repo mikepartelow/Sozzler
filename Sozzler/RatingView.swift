@@ -2,7 +2,7 @@ import UIKit
 
 @IBDesignable
 class RatingView: UIView {
-    let userSettings = (UIApplication.sharedApplication().delegate as! AppDelegate).userSettings
+    let userSettings = (UIApplication.shared.delegate as! AppDelegate).userSettings
 
     @IBOutlet weak var image0: UIImageView!
     @IBOutlet weak var image1: UIImageView!
@@ -38,15 +38,15 @@ class RatingView: UIView {
             let images = [ image0, image1, image2, image3, image4 ]
             
             for i in 0..<rating {
-                images[i].image = UIImage(named: userSettings.oliveAsset)
+                images[i]?.image = UIImage(named: userSettings.oliveAsset)
             }
             
             for j in rating..<5 {
-                images[j].image = UIImage(named: "asset-olive-white")
+                images[j]?.image = UIImage(named: "asset-olive-white")
                 // removing the unused images and resizing the frame might be better than this
                 //
-                images[j].image = images[j].image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-                images[j].tintColor = UIColor.lightGrayColor()
+                images[j]?.image = images[j]?.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+                images[j]?.tintColor = UIColor.lightGray
             }
         }
     }
@@ -64,7 +64,7 @@ class RatingView: UIView {
     func xibSetup() {
         view = loadViewFromNib()
         view.frame = bounds
-        view.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+        view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         
         // for reference, not for looks!
 //        view.layer.borderColor = UIColor.blackColor().CGColor
@@ -74,10 +74,10 @@ class RatingView: UIView {
     }
     
     func loadViewFromNib() -> UIView {
-        let bundle = NSBundle(forClass: self.dynamicType)
+        let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: "RatingView", bundle: bundle)
         
-        let view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
 
         return view
     }
@@ -88,13 +88,13 @@ class RatingView: UIView {
         }
 
         for touch in touches as! Set<UITouch> {
-            let touchLocation = touch.locationInView(self)
+            let touchLocation = touch.location(in: self)
 
             let images = [ image0, image1, image2, image3, image4 ]
 
             var newRating: Int = 0
-            for i in (images.count-1).stride(through: 0, by: -1) {
-                if touchLocation.x > images[i].frame.origin.x {
+            for i in stride(from: images.count-1, through: 0, by: -1) {
+                if touchLocation.x > (images[i]?.frame.origin.x)! {
                     newRating = i + 1
                     break
                 }
@@ -105,11 +105,11 @@ class RatingView: UIView {
     }
 
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        handleTouches(touches)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        handleTouches(touches: touches)
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        handleTouches(touches)
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        handleTouches(touches: touches)
     }
 }

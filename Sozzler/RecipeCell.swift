@@ -10,7 +10,7 @@ class RecipeCell: UITableViewCell {
         recipeName.text = recipe.name
         
         let sortedIngredientNames = recipe.sortedComponents.map({ $0.ingredient.name })
-        ingredients!.text = sortedIngredientNames.joinWithSeparator(", ")
+        ingredients!.text = sortedIngredientNames.joined(separator: ", ")
         
         ratingView!.rating = Int(recipe.rating)
         

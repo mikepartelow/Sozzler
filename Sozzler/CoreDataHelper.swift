@@ -90,7 +90,7 @@ class CoreDataHelper {
             //
             component.ingredient.computeRecipeCount(adjustment: -1)
             component.unit.computeRecipeCount(adjustment: -1)
-            CoreDataHelper.delete(recipe: component)
+            CoreDataHelper.delete(obj: component)
         }
         CoreDataHelper.delete(recipe: recipe as NSManagedObject as! Recipe)
     }

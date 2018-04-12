@@ -8,34 +8,34 @@ class RecipeImporter {
     }
 
     func importRecipes(url: NSURL) {
-        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let addToExisting = UIAlertAction(title: "Add to Existing Recipes", style: .Default) {
+        let addToExisting = UIAlertAction(title: "Add to Existing Recipes", style: .default) {
             (alert: UIAlertAction) -> Void in
-            self.loadRecipes(url)
+            self.loadRecipes(url: url)
         }
         
-        let replaceAll = UIAlertAction(title: "Replace All Recipes", style: .Default, handler: {
+        let replaceAll = UIAlertAction(title: "Replace All Recipes", style: .default, handler: {
             (alert: UIAlertAction) -> Void in
             
-            let alertAreYouSure = UIAlertController(title: "", message: "Delete All Existing Recipes and Import New Recipes?", preferredStyle: .Alert)
+            let alertAreYouSure = UIAlertController(title: "", message: "Delete All Existing Recipes and Import New Recipes?", preferredStyle: .alert)
             
-            let doitAction = UIAlertAction(title: "Do it", style: .Destructive) { (action: UIAlertAction) -> Void in
-                CoreDataHelper.factoryReset(false)
+            let doitAction = UIAlertAction(title: "Do it", style: .destructive) { (action: UIAlertAction) -> Void in
+                CoreDataHelper.factoryReset(save: false)
                 CannedUnitSource().read()
 
-                self.loadRecipes(url)
+                self.loadRecipes(url: url)
             }
             
-            let cancelAction = UIAlertAction(title: "Forget it", style: .Default) { (action: UIAlertAction) -> Void in }
+            let cancelAction = UIAlertAction(title: "Forget it", style: .default) { (action: UIAlertAction) -> Void in }
             
             alertAreYouSure.addAction(doitAction)
             alertAreYouSure.addAction(cancelAction)
             
-            self.viewController.presentViewController(alertAreYouSure, animated: true, completion: nil)
+            self.viewController.present(alertAreYouSure, animated: true, completion: nil)
         })
         
-        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: {
             (alert: UIAlertAction) -> Void in
         })
         
@@ -43,16 +43,16 @@ class RecipeImporter {
         sheet.addAction(replaceAll)
         sheet.addAction(cancel)
         
-        viewController.presentViewController(sheet, animated: true, completion: nil)
+        viewController.present(sheet, animated: true, completion: nil)
     }
     
     func loadRecipes(url: NSURL) {
-        if url.fileURL {
+        if url.isFileURL {
             let recipes = URLRecipeSource(url: url).read()
-            self.saveRecipes(recipes)
+            self.saveRecipes(newRecipes: recipes)
         } else {
-            WebRecipeSource().fetch(url, completion: { (recipes: [Recipe]?) -> Void in
-                self.saveRecipes(recipes)
+            WebRecipeSource().fetch(url: url, completion: { (recipes: [Recipe]?) -> Void in
+                self.saveRecipes(newRecipes: recipes)
             })
         }
     }
@@ -70,27 +70,27 @@ class RecipeImporter {
 
                 let viewControllers = self.viewController.tabBarController!.viewControllers as! [UINavigationController]
 
-                viewControllers[0].popToRootViewControllerAnimated(false)
-                viewControllers[1].popToRootViewControllerAnimated(false)
+                viewControllers[0].popToRootViewController(animated: false)
+                viewControllers[1].popToRootViewController(animated: false)
 
                 let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let recipeTableViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RecipeTableViewController") as! RecipeTableViewController
+                let recipeTableViewController = mainStoryboard.instantiateViewController(withIdentifier: "RecipeTableViewController") as! RecipeTableViewController
 
                 recipeTableViewController.recipeNameFilter = (newRecipes!).map({ $0.name })
                 recipeTableViewController.navigationItem.leftBarButtonItem = nil
                 recipeTableViewController.navigationItem.rightBarButtonItem = nil
                 viewControllers[0].pushViewController(recipeTableViewController, animated: true)
 
-                NSNotificationCenter.defaultCenter().postNotificationName("data.reset", object: self)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "data.reset"), object: self)
             }
         }
 
         if errors {
             CoreDataHelper.rollback()
-            let alert = UIAlertController(title: "", message: "Errors in Sozzler file, canceling import.", preferredStyle: .Alert)
-            let cancelAction = UIAlertAction(title: "OK", style: .Default) { (action: UIAlertAction) -> Void in }
+            let alert = UIAlertController(title: "", message: "Errors in Sozzler file, canceling import.", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction) -> Void in }
             alert.addAction(cancelAction)
-            viewController.presentViewController(alert, animated: true, completion: nil)
+            viewController.present(alert, animated: true, completion: nil)
         }
         
     }

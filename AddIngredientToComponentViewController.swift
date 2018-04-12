@@ -3,7 +3,6 @@ import CoreData
 
 class AddIngredientToComponentViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
-        <#code#>
     }
     
     var frc: NSFetchedResultsController<NSFetchRequestResult>?
@@ -29,18 +28,18 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
         tableView.tableHeaderView = searchController!.searchBar
         searchController!.searchBar.sizeToFit()
         
-        tableView.scrollToRow(at: NSIndexPath(forRow: 0, inSection: 0) as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0) as IndexPath, at: UITableViewScrollPosition.top, animated: false)
     }
     
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 32;
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         ingredient = (frc!.object(at: indexPath as IndexPath) as! Ingredient)
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return frc!.sections!.count
     }
     
@@ -48,7 +47,7 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
         return frc!.sections![section].numberOfObjects
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath as IndexPath) 
         let ingredient = frc!.object(at: indexPath as IndexPath) as! Ingredient
         
@@ -57,7 +56,7 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
         return cell
     }
 
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         if searchText != "" {
             return []
         } else {
@@ -75,7 +74,7 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
         }
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addQuantityToComponent" {
             let nav = segue.destination as! UINavigationController
             let addQuantityToComponentViewController = nav.topViewController as! AddQuantityToComponentViewController
@@ -94,7 +93,7 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
             predicate = nil
         }
 
-        frc = Ingredient.fetchedResultsController(predicate)
+        frc = Ingredient.fetchedResultsController(predicate: predicate)
         
         frc!.delegate = self
         

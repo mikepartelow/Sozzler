@@ -11,7 +11,7 @@ class Unit: NSManagedObject {
     @NSManaged var components: NSSet
     
     class func fancyName(name: String) -> String {
-        return name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        return name.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
     
     class func all() -> [Unit] {

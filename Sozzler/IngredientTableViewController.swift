@@ -5,7 +5,6 @@ import CoreData
 
 class IngredientTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
-        <#code#>
     }
     
     let userSettings = (UIApplication.shared.delegate as! AppDelegate).userSettings
@@ -34,7 +33,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         tableView.tableHeaderView = searchController!.searchBar
         searchController!.searchBar.sizeToFit()
         
-        tableView.scrollToRow(at: NSIndexPath(forRow: 0, inSection: 0) as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0) as IndexPath, at: UITableViewScrollPosition.top, animated: false)
 
         NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "data.reset"), object: nil)
         NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "recipe.deleted"), object: nil)
@@ -47,7 +46,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         NotificationCenter.default.removeObserver("recipe.updated")
     }
 
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 32;
     }
 
@@ -108,21 +107,21 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         present(alert, animated: true, completion: nil)
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) -> Void in
             let ingredient = self.frc!.object(at: indexPath) as! Ingredient
 
             if ingredient.recipe_count > 0 {
                 self.errorAlert(title: "Ingredient is used by a recipe", button: "OK")
             } else {
-                CoreDataHelper.delete(recipe: ingredient)
+                CoreDataHelper.delete(obj: ingredient)
             
                 if let error = CoreDataHelper.save() {
                     NSLog("Delete Failed!: \(error)")
@@ -139,7 +138,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         return [ deleteAction ]
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let rtvc = segue.destination as! RecipeTableViewController
         
         rtvc.navigationItem.leftBarButtonItem = nil
@@ -150,7 +149,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         tableView.deselectRow(at: index, animated: false)        
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return frc!.sections!.count
     }
     
@@ -158,7 +157,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         return frc!.sections![section].numberOfObjects
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath as IndexPath) 
         let ingredient = frc!.object(at: indexPath as IndexPath) as! Ingredient
         
@@ -170,7 +169,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         return cell
     }
     
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         if searchText != "" {
             return []
         } else {
@@ -188,7 +187,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         }
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(52)
     }
     

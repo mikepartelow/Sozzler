@@ -2,7 +2,8 @@ import UIKit
 import CoreData
 
 class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UIGestureRecognizerDelegate {
-    let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+    
+    let moc = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext!
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var recipeName: UITextField!
@@ -26,7 +27,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        recipeName.autocapitalizationType = UITextAutocapitalizationType.Words
+        recipeName.autocapitalizationType = UITextAutocapitalizationType.words
         
         componentTable!.dataSource = self
         componentTable!.delegate = self
@@ -34,16 +35,16 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         recipeText.delegate = self
 
         if recipe == nil {
-            recipe = Recipe.create("", withRating: 0, withText: "")
+            recipe = Recipe.create(name: "", withRating: 0, withText: "")
             recipeText.text = recipeTextPlaceholder
-            recipeText.textColor = UIColor.lightGrayColor()
+            recipeText.textColor = UIColor.lightGray
         } else {
             navigationItem.title = "Edit Recipe"
 
             recipeName!.text = recipe!.name
             if recipe!.text.isEmpty {
                 recipeText!.text = recipeTextPlaceholder
-                recipeText.textColor = UIColor.lightGrayColor()
+                recipeText.textColor = UIColor.lightGray
             } else {
                 recipeText!.text = recipe!.text
             }
@@ -55,40 +56,40 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         ratingView!.rating = Int(recipe!.rating)
         
         resizeComponentsTable()
-        componentTable!.editing = true
+        componentTable!.isEditing = true
         resizeRecipeText()
         
-        let scrollPoint = CGPointMake(0, recipeText.frame.origin.y)
+        let scrollPoint = CGPoint(x: 0, y: recipeText.frame.origin.y)
         recipeText.setContentOffset(scrollPoint, animated: false)
 
         // ridiculous hack to avoid "scrolling uitextfield" rotation bug
         //
-        recipeName!.layer.borderColor = UIColor.whiteColor().CGColor
+        recipeName!.layer.borderColor = UIColor.white.cgColor
         recipeName!.layer.borderWidth = 1.0
 
 //        recipeText.layer.borderColor = UIColor.blackColor().CGColor
 //        recipeText.layer.borderWidth = 1.0
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector(("keyboardWillShow:")), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
-        let pan = UIPanGestureRecognizer(target: self, action: "dismissKeyboard")
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         pan.cancelsTouchesInView = false
         pan.delegate = self
         scrollView.addGestureRecognizer(pan)
         
-        let tap = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         scrollView.addGestureRecognizer(tap)
         
-        recipeName.addTarget(self, action: "dismissKeyboard", forControlEvents: UIControlEvents.EditingDidEndOnExit)
+        recipeName.addTarget(self, action: #selector(UIInputViewController.dismissKeyboard), for: UIControlEvents.editingDidEndOnExit)
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(UIKeyboardWillShowNotification)
+        NotificationCenter.default.removeObserver(NSNotification.Name.UIKeyboardWillShow)
     }
 
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return !recipeName.isFirstResponder() && !recipeText.isFirstResponder()
+        return !recipeName.isFirstResponder && !recipeText.isFirstResponder
     }
 
     func dismissKeyboard() {
@@ -97,18 +98,18 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
 
     func keyboardWillShow(notification: NSNotification) {
         if let userInfo = notification.userInfo {
-            if let r = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue {
+            if let r = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue {
                 keyboardRect = r
             }
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         resizeComponentsTable()
     }
 
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+    override func didRotate(from: UIInterfaceOrientation) {
         resizeComponentsTable()
         recipeText.resignFirstResponder()
     }
@@ -117,10 +118,10 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         if textView == recipeText {
             if recipeText!.text == recipeTextPlaceholder {
                 recipeText!.text = ""
-                recipeText!.textColor = UIColor.blackColor()
+                recipeText!.textColor = UIColor.black
             }
             
-            scrollView.setContentOffset(CGPointMake(0, 0), animated: false)
+            scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
             
             let contentInsets = UIEdgeInsetsMake(0, 0, keyboardRect.height, 0)
             scrollView.contentInset = contentInsets
@@ -128,15 +129,15 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             
             let h = view.frame.height - keyboardRect.height
             let nbh = navigationController!.navigationBar.frame.size.height
-            let sbh = UIApplication.sharedApplication().statusBarFrame.size.height
+            let sbh = UIApplication.shared.statusBarFrame.size.height
             
             let newHeight = h - 8 - nbh - 8 - sbh
 
             let y = recipeText.frame.origin.y - 8
 
-            scrollView.setContentOffset(CGPointMake(0, y), animated: true)
+            scrollView.setContentOffset(CGPoint(x: 0, y: y), animated: true)
             recipeTextHeight.constant = newHeight
-            recipeText.scrollEnabled = true
+            recipeText.isScrollEnabled = true
         }
     }
 
@@ -144,7 +145,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         if textView == recipeText {
             if recipeText!.text.isEmpty {
                 recipeText!.text = recipeTextPlaceholder
-                recipeText!.textColor = UIColor.lightGrayColor()
+                recipeText!.textColor = UIColor.lightGray
             }
 
             resizeRecipeText()
@@ -154,7 +155,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             scrollView.scrollIndicatorInsets = contentInsets
             
             recipeText.scrollRectToVisible(CGRect(x: 0, y: 0, width: 0, height: 0), animated: true)
-            recipeText.scrollEnabled = false
+            recipeText.isScrollEnabled = false
         }
     }
     
@@ -169,27 +170,27 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recipe!.sortedComponents.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = componentTable.dequeueReusableCellWithIdentifier("componentCell")!
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = componentTable.dequeueReusableCell(withIdentifier: "componentCell")!
         cell.textLabel!.text = recipe!.sortedComponents[indexPath.row].string
         return cell
     }
 
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) -> Void in
             let component = self.recipe!.sortedComponents[indexPath.row]
             
-            self.recipe!.components.removeObject(component)
-            CoreDataHelper.delete(component)
+            self.recipe!.components.remove(component)
+            CoreDataHelper.delete(obj: component)
             self.componentTable.reloadData()
             self.resizeComponentsTable()
-            self.componentTable.scrollToRowAtIndexPath(NSIndexPath(forItem: self.recipe!.sortedComponents.count-1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+            self.componentTable.scrollToRow(at: IndexPath(row: self.recipe!.sortedComponents.count-1, section: 0) as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
             
-            for (index, component) in self.recipe!.sortedComponents.enumerate() {
+            for (index, component) in self.recipe!.sortedComponents.enumerated() {
                 component.index = Int16(index)
             }
 
@@ -209,9 +210,9 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func onCancel(sender: UIBarButtonItem) {
         moc.rollback()
         if editingRecipe {
-            performSegueWithIdentifier("unwindToRecipe", sender: self)
+            performSegue(withIdentifier: "unwindToRecipe", sender: self)
         } else {
-            performSegueWithIdentifier("unwindToRecipes", sender: self)
+            performSegue(withIdentifier: "unwindToRecipes", sender: self)
         }
     }
     
@@ -229,11 +230,11 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         do {
             try moc.save()
             added = true
-            NSNotificationCenter.defaultCenter().postNotificationName("recipe.updated", object: self)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "recipe.updated"), object: self)
             if editingRecipe {
-                performSegueWithIdentifier("unwindToRecipe", sender: self)
+                performSegue(withIdentifier: "unwindToRecipe", sender: self)
             } else {
-                performSegueWithIdentifier("unwindToRecipes", sender: self)
+                performSegue(withIdentifier: "unwindToRecipes", sender: self)
             }
         } catch let error1 as NSError {
             error = error1
@@ -247,26 +248,26 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
                 recipeText.resignFirstResponder()
             }
             
-            let alert = UIAlertController(title: errorMessage, message: nil, preferredStyle: .Alert)
-            let cancelAction = UIAlertAction(title: "OK", style: .Default) { (action: UIAlertAction) -> Void in }
+            let alert = UIAlertController(title: errorMessage, message: nil, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction) -> Void in }
             alert.addAction(cancelAction)
-            presentViewController(alert, animated: true, completion: nil)
+            present(alert, animated: true, completion: nil)
         }
     }
     
     @IBAction func unwindToAddRecipe(sender: UIStoryboardSegue)
     {
-        if let _ = sender.sourceViewController as? AddIngredientToComponentViewController {
-        } else if let vc = sender.sourceViewController as? AddQuantityToComponentViewController {
+        if let _ = sender.source as? AddIngredientToComponentViewController {
+        } else if let vc = sender.source as? AddQuantityToComponentViewController {
             if let unit = vc.unit {
                 let quantity_d = Int16(vc.quantity_f![1])
                 let quantity_n = Int16((vc.quantity_f![1] * vc.quantity_i!) + vc.quantity_f![0])
                 
-                Component.create(quantity_n, quantity_d: quantity_d, unit: unit, ingredient: vc.ingredient!, recipe: recipe!, index: Int16(recipe!.components.count))
+                Component.create(quantity_n: quantity_n, quantity_d: quantity_d, unit: unit, ingredient: vc.ingredient!, recipe: recipe!, index: Int16(recipe!.components.count))
                 
                 componentTable.reloadData()
                 resizeComponentsTable()
-                componentTable.scrollToRowAtIndexPath(NSIndexPath(forItem: recipe!.sortedComponents.count-1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+                componentTable.scrollToRow(at: IndexPath(row: recipe!.sortedComponents.count-1, section: 0) as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
             }
         }
     }
@@ -275,23 +276,23 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         return true
     }
     
-    func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-        if fromIndexPath == toIndexPath {
+    func tableView(_ tableView: UITableView, moveRowAt from: IndexPath, to: IndexPath) {
+        if from == to {
             return
         }
     
         var sortedComponents = recipe!.sortedComponents
         
-        if toIndexPath.row < fromIndexPath.row {
-            sortedComponents[toIndexPath.row..<fromIndexPath.row].map({ (component) in
+        if to.row < from.row {
+            sortedComponents[to.row..<from.row].map({ (component) in
                 component.index += 1
             })
-        } else if fromIndexPath.row < toIndexPath.row {
-            sortedComponents[fromIndexPath.row+1...toIndexPath.row].map({ (component) in
+        } else if from.row < to.row {
+            sortedComponents[from.row+1...to.row].map({ (component) in
                 component.index -= 1
             })
         }
         
-        sortedComponents[fromIndexPath.row].index = Int16(toIndexPath.row)
+        sortedComponents[from.row].index = Int16(to.row)
     }
 }

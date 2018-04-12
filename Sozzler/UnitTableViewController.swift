@@ -29,7 +29,7 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         NotificationCenter.default.removeObserver("recipe.updated")
     }
     
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 56;
     }
     
@@ -51,24 +51,24 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         present(alert, animated: true, completion: nil)
     }
         
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) -> Void in
             let unit = self.frc!.object(at: indexPath) as! Unit
             
             if unit.recipe_count > 0 {
                 self.errorAlert(title: "Unit is used by a recipe", button: "OK")
             } else {
-                CoreDataHelper.delete(recipe: unit)
+                CoreDataHelper.delete(obj: unit)
                 
                 let remainingUnits = (self.frc!.fetchedObjects as! [Unit]).filter { $0 != unit }
-                for (index, unit) in remainingUnits.enumerate() {
+                for (index, unit) in remainingUnits.enumerated() {
                     unit.index = Int16(index)
                 }
                 
@@ -90,13 +90,13 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         return [ deleteAction ]
     }
     
-    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         let unit = frc!.object(at: indexPath as IndexPath) as! Unit
         return unit.name != ""
 
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "editUnit" {
             let navController = segue.destination as! UINavigationController
             let euvc = navController.topViewController! as! EditUnitViewController
@@ -108,7 +108,7 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         }
     }
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return frc!.sections!.count
     }
     
@@ -116,7 +116,7 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         return frc!.sections![section].numberOfObjects
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UnitCell", for: indexPath as IndexPath) 
         let unit = frc!.object(at: indexPath as IndexPath) as! Unit
         
@@ -125,7 +125,7 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         return cell
     }
     
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return frc!.sectionIndexTitles
     }
     
@@ -133,7 +133,7 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         return frc!.section(forSectionIndexTitle: title, at: index)
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(52)
     }
     
@@ -157,30 +157,30 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         shouldRefresh = false
     }
     
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-        NSLog("\(fromIndexPath.row) => \(toIndexPath.row)")
+    override func tableView(_ tableView: UITableView, moveRowAt from: IndexPath, to: IndexPath) {
+        NSLog("\(from.row) => \(to.row)")
 
-        if fromIndexPath == toIndexPath {
+        if from == to {
             return
         }
 
         var sortedUnits = frc!.fetchedObjects as! [Unit]
         
-        if toIndexPath.row < fromIndexPath.row {
-            sortedUnits[toIndexPath.row..<fromIndexPath.row].map({ (unit) in
+        if to.row < from.row {
+            sortedUnits[to.row..<from.row].map({ (unit) in
                 unit.index += 1
             })
-        } else if fromIndexPath.row < toIndexPath.row {
-            sortedUnits[fromIndexPath.row+1...toIndexPath.row].map({ (unit) in
+        } else if from.row < to.row {
+            sortedUnits[from.row+1...to.row].map({ (unit) in
                 unit.index -= 1
             })
         }
 
-        sortedUnits[fromIndexPath.row].index = Int16(toIndexPath.row)        
+        sortedUnits[from.row].index = Int16(to.row)
 
         var error: NSError?
         do {

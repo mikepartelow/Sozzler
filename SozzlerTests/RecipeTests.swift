@@ -18,18 +18,18 @@ class RecipeTests: XCTestCase {
     }
 
     func testExample() {
-        XCTAssertEqual(Recipe.fancyName("fancy"), "Fancy", "fancy")
-        XCTAssertEqual(Recipe.fancyName(" fancy"), "Fancy", "fancy")
-        XCTAssertEqual(Recipe.fancyName(" fancy "), "Fancy", "fancy")
-        XCTAssertEqual(Recipe.fancyName("fancy "), "Fancy", "fancy")
-        XCTAssertEqual(Recipe.fancyName("faNcy"), "Fancy", "fancy")
-        XCTAssertEqual(Recipe.fancyName("fancy de fance"), "Fancy De Fance", "Fancy")
-        XCTAssertEqual(Recipe.fancyName(" fancy de fance "), "Fancy De Fance", "Fancy")
+        XCTAssertEqual(Recipe.fancyName(name: "fancy"), "Fancy", "fancy")
+        XCTAssertEqual(Recipe.fancyName(name: " fancy"), "Fancy", "fancy")
+        XCTAssertEqual(Recipe.fancyName(name: " fancy "), "Fancy", "fancy")
+        XCTAssertEqual(Recipe.fancyName(name: "fancy "), "Fancy", "fancy")
+        XCTAssertEqual(Recipe.fancyName(name: "faNcy"), "Fancy", "fancy")
+        XCTAssertEqual(Recipe.fancyName(name: "fancy de fance"), "Fancy De Fance", "Fancy")
+        XCTAssertEqual(Recipe.fancyName(name: " fancy de fance "), "Fancy De Fance", "Fancy")
     }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock() {
+        self.measure() {
             // Put the code you want to measure the time of here.
         }
     }

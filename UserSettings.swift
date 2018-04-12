@@ -13,8 +13,8 @@ class UserSettings {
         }
         
         set(newSortOrder) {
-            let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setInteger(newSortOrder.rawValue, forKey: "recipeSortOrder")
+            let defaults = UserDefaults.standard
+            defaults.set(newSortOrder.rawValue, forKey: "recipeSortOrder")
             _recipeSortOrder = newSortOrder
         }
     }
@@ -35,7 +35,7 @@ class UserSettings {
         }
         
         set(newOliveAsset) {
-            let defaults = NSUserDefaults.standardUserDefaults()
+            let defaults = UserDefaults.standard
             defaults.setValue(newOliveAsset, forKeyPath: "oliveAsset")
             _oliveAsset = newOliveAsset
         }
@@ -47,16 +47,16 @@ class UserSettings {
     }
 
     init() {
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = UserDefaults.standard
         
-        let recipeSortOrderDefault = defaults.integerForKey("recipeSortOrder")
+        let recipeSortOrderDefault = defaults.integer(forKey: "recipeSortOrder")
         if let recipeSortOrder = RecipeSortOrder(rawValue: recipeSortOrderDefault) {
             _recipeSortOrder = recipeSortOrder
         } else {
             _recipeSortOrder = .Name
         }
         
-        if let oliveAsset = defaults.stringForKey("oliveAsset") {
+        if let oliveAsset = defaults.string(forKey: "oliveAsset") {
             _oliveAsset = oliveAsset
         } else {
             _oliveAsset = "asset-olive-green-outline"

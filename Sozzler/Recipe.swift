@@ -35,8 +35,8 @@ class Recipe: NSManagedObject {
     @NSManaged var components: NSMutableSet
 
     var sortedComponents: [Component] {
-        let componentArray = components.allObjects as! [Component]
-        return componentArray.sort({ (lhs, rhs) -> Bool in
+        var componentArray = components.allObjects as! [Component]
+        return componentArray.sorted(by: { (lhs, rhs) -> Bool in
             lhs.index < rhs.index
         })
     }
@@ -45,10 +45,10 @@ class Recipe: NSManagedObject {
 // querying
 //
 extension Recipe {
-    class func fetchedResultsController(predicate: NSPredicate? = nil) -> NSFetchedResultsController {
-        let app = UIApplication.sharedApplication().delegate as! AppDelegate
+    class func fetchedResultsController(predicate: NSPredicate? = nil) -> NSFetchedResultsController<NSFetchRequestResult> {
+        let app = UIApplication.shared.delegate as! AppDelegate
 
-        let fetchRequest = NSFetchRequest(entityName: "Recipe")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Recipe")
         if predicate != nil {
             fetchRequest.predicate = predicate
         }
@@ -66,21 +66,21 @@ extension Recipe {
             fetchRequest.sortDescriptors = [sortByName, sortByRating]
         }
 
-        return CoreDataHelper.fetchedResultsController(fetchRequest, sectionNameKeyPath: sectionNameKeyPath)
+        return CoreDataHelper.fetchedResultsController(fetchRequest: fetchRequest, sectionNameKeyPath: sectionNameKeyPath)
     }
 
     class func all() -> [Recipe] {
-        return CoreDataHelper.all("Recipe") as! [Recipe]
+        return CoreDataHelper.all(entityName: "Recipe") as! [Recipe]
     }
 
     class func find(name: String) -> Recipe? {
-        let predicate = NSPredicate(format: "name ==[c] %@", Recipe.fancyName(name))
-        return CoreDataHelper.find("Recipe", predicate: predicate) as! Recipe?
+        let predicate = NSPredicate(format: "name ==[c] %@", Recipe.fancyName(name: name))
+        return CoreDataHelper.find(entityName: "Recipe", predicate: predicate) as! Recipe?
     }
 
     class func findDuplicate(recipe: Recipe) -> Recipe? {
-        let predicate = NSPredicate(format: "name ==[c] %@", Recipe.fancyName(recipe.name))
-        let recipes = CoreDataHelper.all("Recipe", predicate: predicate) as! [Recipe]
+        let predicate = NSPredicate(format: "name ==[c] %@", Recipe.fancyName(name: recipe.name))
+        let recipes = CoreDataHelper.all(entityName: "Recipe", predicate: predicate) as! [Recipe]
 
         assert(recipes.count <= 2)
         for foundRecipe in recipes {
@@ -93,13 +93,13 @@ extension Recipe {
     }
 
     class func count() -> Int {
-        return CoreDataHelper.count("Recipe", predicate: nil)
+        return CoreDataHelper.count(entityName: "Recipe", predicate: nil)
     }
 
     class func countByName(name: String) -> Int {
-        let searchName = Recipe.fancyName(name)
+        let searchName = Recipe.fancyName(name: name)
         let predicate = NSPredicate(format: "name == %@", searchName)
-        let count = CoreDataHelper.count("Recipe", predicate: predicate)
+        let count = CoreDataHelper.count(entityName: "Recipe", predicate: predicate)
         return count
     }
 }
@@ -110,9 +110,9 @@ extension Recipe {
     class func create(name: String, withRating rating: Int16, withText text: String) -> Recipe {
         NSLog("create: [\(name)]")
 
-        let recipe = CoreDataHelper.create("Recipe", initializer: { (entity, context) in
-            let recipe = Recipe(entity: entity, insertIntoManagedObjectContext: context)
-            recipe.name = Recipe.fancyName(name)
+        let recipe = CoreDataHelper.create(entityName: "Recipe", initializer: { (entity, context) in
+            let recipe = Recipe(entity: entity, insertInto: context)
+            recipe.name = Recipe.fancyName(name: name)
             recipe.rating = rating
             recipe.text = text
             recipe.component_count = 0
@@ -133,7 +133,7 @@ extension Recipe {
 
         let components     = (recipeDict["components"] as? [NSDictionary]) ?? [NSDictionary]()
 
-        let recipe = Recipe.create(name!, withRating: Int16(rating!), withText: text!)
+        let recipe = Recipe.create(name: name!, withRating: Int16(rating!), withText: text!)
 
         for componentDict in components {
             let quantity        = (componentDict["quantity"] as? String) ?? nil
@@ -146,11 +146,11 @@ extension Recipe {
                 return nil
             }
 
-            let unit            = Unit.findOrCreate(unitName!, plural_name: unitPluralName!)
-            let ingredient      = Ingredient.findOrCreate(ingredientName!)
+            let unit            = Unit.findOrCreate(name: unitName!, plural_name: unitPluralName!)
+            let ingredient      = Ingredient.findOrCreate(name: ingredientName!)
 
-            let (quantity_n, quantity_d) = Component.parseQuantity(quantity!)
-            let _ = Component.create(Int16(quantity_n), quantity_d: Int16(quantity_d), unit: unit, ingredient: ingredient, recipe: recipe, index: Int16(index!))
+            let (quantity_n, quantity_d) = Component.parseQuantity(quantity: quantity!)
+            let _ = Component.create(quantity_n: Int16(quantity_n), quantity_d: Int16(quantity_d), unit: unit, ingredient: ingredient, recipe: recipe, index: Int16(index!))
         }
 
         return recipe
@@ -175,16 +175,16 @@ extension NSMutableDictionary {
 //
 extension Recipe {
     class func fancyName(name: String) -> String {
-        let trimmedName = name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        if !trimmedName.isEmpty && String(trimmedName[trimmedName.startIndex]) == String(trimmedName[trimmedName.startIndex]).capitalizedString {
+        let trimmedName = name.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        if !trimmedName.isEmpty && String(trimmedName[trimmedName.startIndex]) == String(trimmedName[trimmedName.startIndex]).capitalized {
             return trimmedName
         } else {
-            return trimmedName.capitalizedString
+            return trimmedName.capitalized
         }
     }
 
     override func willSave() {
-        if !deleted {
+        if !isDeleted {
             setPrimitiveValue(components.count, forKey: "component_count")
         }
     }
@@ -196,15 +196,15 @@ extension Recipe {
         // have to do this to get accurate name uniqueness count.
         // if we don't, we may be searching for "XX" while this recipe is named " XX" -- so no dup!
         //
-        setPrimitiveValue(Recipe.fancyName(name), forKey: "name")
+        setPrimitiveValue(Recipe.fancyName(name: name), forKey: "name")
 
         if components.count < 1 {
             errorMessage = "Please add at least one ingredient."
             errorCode = .Ingredients
-        } else if name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).isEmpty {
+        } else if name.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty {
             errorMessage = "Please add a name for your recipe."
             errorCode = .Name
-        } else if Recipe.countByName(name) > 1 {
+        } else if Recipe.countByName(name: name) > 1 {
             errorMessage = "Sorry, that name is already taken."
             errorCode = .Name
         } else {

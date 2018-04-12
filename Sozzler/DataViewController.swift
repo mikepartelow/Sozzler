@@ -87,11 +87,10 @@ class DataViewController: UIViewController {
     @IBAction func unwindToData(sender: UIStoryboardSegue) {
     }
     
-    override func canBecomeFirstResponder() -> Bool {
+    override var canBecomeFirstResponder: Bool {
         return true
     }
-    
-    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent!) {
+    override func motionEnded(_ with: UIEventSubtype, with event: UIEvent!) {
         if event.subtype == UIEventSubtype.motionShake {
             if userSettings.oliveAsset == "asset-olive-green" {
                 userSettings.oliveAsset = "asset-olive-green-outline"

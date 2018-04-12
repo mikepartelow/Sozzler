@@ -48,15 +48,15 @@ class Component: NSManagedObject {
         
         let unit_name = (quantity_n / quantity_d) > 1 ? unit.plural_name : unit.name
         
-        return "\(quantity) \(unit_name) \(ingredient.name)".stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).stringByReplacingOccurrencesOfString("  ", withString: " ")
+        return "\(quantity) \(unit_name) \(ingredient.name)".trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).replacingOccurrences(of: "  ", with: " ")
 
     }
         
     class func create(quantity_n: Int16, quantity_d: Int16, unit: Unit, ingredient: Ingredient, recipe: Recipe, index: Int16) -> Component {
         
-        return CoreDataHelper.create("Component", initializer: {
+        return CoreDataHelper.create(entityName: "Component", initializer: {
             (entity, context) in
-            let component = Component(entity: entity, insertIntoManagedObjectContext: context)
+            let component = Component(entity: entity, insertInto: context)
             
             component.quantity_n    = quantity_n
             component.quantity_d    = quantity_d
@@ -76,14 +76,14 @@ extension Component {
         
         var partsIdx = 0
         
-        var parts = quantity.componentsSeparatedByString(" ")
+        var parts = quantity.components(separatedBy: " ")
         if let intPart = Int(parts[partsIdx]) {
             quantity_n = intPart
             partsIdx += 1
         }
             
         if partsIdx < parts.count {
-            let possibleFractionalParts = parts[partsIdx].componentsSeparatedByString("/")
+            let possibleFractionalParts = parts[partsIdx].components(separatedBy: "/")
             if possibleFractionalParts.count > 1 {
                 if let numerator = Int(possibleFractionalParts[0]), let denominator = Int(possibleFractionalParts[1]) {
                     quantity_d = denominator

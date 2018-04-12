@@ -2,6 +2,10 @@ import UIKit
 import CoreData
 
 class AddQuantityToComponentViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 0;
+    }
+    
 
     @IBOutlet weak var integerPicker: UIPickerView!
     @IBOutlet weak var fractionPicker: UIPickerView!
@@ -9,8 +13,8 @@ class AddQuantityToComponentViewController: UIViewController, UIPickerViewDelega
     
     var ingredient: Ingredient?
     
-    let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
-    let frc: NSFetchedResultsController
+    let moc = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext!
+    let frc: NSFetchedResultsController<NSFetchRequestResult>
     
     let integers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
     let fractions = ["⅛", "¼", "½", "¾", "⅓", "⅔"]
@@ -21,7 +25,7 @@ class AddQuantityToComponentViewController: UIViewController, UIPickerViewDelega
     var unit: Unit?
     
     required init?(coder aDecoder: NSCoder) {
-        _ = UIApplication.sharedApplication().delegate as! AppDelegate
+        _ = UIApplication.shared.delegate as! AppDelegate
         
         frc = Unit.fetchedResultsController()
         do {
@@ -51,7 +55,7 @@ class AddQuantityToComponentViewController: UIViewController, UIPickerViewDelega
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch pickerView {
         case integerPicker:
             return integers.count + 1
@@ -71,7 +75,7 @@ class AddQuantityToComponentViewController: UIViewController, UIPickerViewDelega
         case fractionPicker:
             return row == 0 ? "" : fractions[row-1]
         case unitPicker:
-            let unit = frc.objectAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) as! Unit
+            let unit = frc.object(at: NSIndexPath(row: row, section: 0) as IndexPath) as! Unit
             return unit.name
         default:
             return ""
@@ -79,15 +83,15 @@ class AddQuantityToComponentViewController: UIViewController, UIPickerViewDelega
     }
 
     @IBAction func onDone(sender: UIBarButtonItem) {
-        let selectedUnit        = unitPicker.selectedRowInComponent(0)
-        unit                    = frc.objectAtIndexPath(NSIndexPath(forRow: selectedUnit, inSection: 0)) as? Unit
+        let selectedUnit        = unitPicker.selectedRow(inComponent: 0)
+        unit                    = frc.object(at: IndexPath(row: selectedUnit, section: 0) as IndexPath) as? Unit
         
-        let selectedInteger     = integerPicker.selectedRowInComponent(0)
+        let selectedInteger     = integerPicker.selectedRow(inComponent: 0)
         quantity_i              = selectedInteger == 0 ? 0 : integers[selectedInteger-1]
 
-        let selectedFraction    = fractionPicker.selectedRowInComponent(0)
+        let selectedFraction    = fractionPicker.selectedRow(inComponent: 0)
         quantity_f              = selectedFraction == 0 ? [0, 1] : fractionArrs[selectedFraction-1]
         
-        performSegueWithIdentifier("unwindToAddRecipe", sender: self)
+        performSegue(withIdentifier: "unwindToAddRecipe", sender: self)
     }
 }
