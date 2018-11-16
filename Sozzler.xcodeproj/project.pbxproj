@@ -278,6 +278,7 @@
 					40F65BA71AE8BAE000D15898 = {
 						CreatedOnToolsVersion = 6.3;
 						DevelopmentTeam = ZY6MQPKQ94;
+						LastSwiftMigration = 1010;
 						SystemCapabilities = {
 							com.apple.iCloud = {
 								enabled = 0;
@@ -286,6 +287,7 @@
 					};
 					40F65BBF1AE8BAE100D15898 = {
 						CreatedOnToolsVersion = 6.3;
+						LastSwiftMigration = 1010;
 						TestTargetID = 40F65BA71AE8BAE000D15898;
 					};
 				};
@@ -525,6 +527,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mikepartelow.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -539,6 +542,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mikepartelow.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -558,6 +562,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mikepartelow.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sozzler.app/Sozzler";
 			};
 			name = Debug;
@@ -574,6 +579,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mikepartelow.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sozzler.app/Sozzler";
 			};
 			name = Release;

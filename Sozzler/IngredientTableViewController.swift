@@ -20,7 +20,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         super.viewDidLoad()
         tableView.delegate = self
 
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
 
         definesPresentationContext = true
         refresh()
@@ -33,7 +33,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         tableView.tableHeaderView = searchController!.searchBar
         searchController!.searchBar.sizeToFit()
         
-        tableView.scrollToRow(at: IndexPath(row: 0, section: 0) as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0) as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
 
         NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "data.reset"), object: nil)
         NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "recipe.deleted"), object: nil)
@@ -88,7 +88,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
                 } else {
                     self.refresh()
                     let indexPath = self.frc!.indexPath(forObject: ingredient)
-                    self.tableView.selectRow(at: indexPath!, animated: true, scrollPosition: UITableViewScrollPosition.middle)
+                    self.tableView.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.middle)
                 }
             }
         }
@@ -111,7 +111,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         return true
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -173,7 +173,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         if searchText != "" {
             return []
         } else {
-            return [ UITableViewIndexSearch ] + frc!.sectionIndexTitles
+            return [ UITableView.indexSearch ] + frc!.sectionIndexTitles
         }
     }
     

@@ -57,7 +57,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         tableView.dataSource = self
 
         tableView.register(UINib(nibName: "RecipeCell", bundle: nil), forCellReuseIdentifier: "RecipeCell")
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
 
         searchEnabled = (ingredient == nil)
 
@@ -74,7 +74,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             searchController!.searchBar.sizeToFit()
 
             if (frc?.sections?.count)! > 0 {
-                tableView.scrollToRow(at: IndexPath(row: 0, section: 0) as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                tableView.scrollToRow(at: IndexPath(row: 0, section: 0) as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
             }
         }
 
@@ -180,7 +180,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         }
 
         if searchEnabled {
-            return [ UITableViewIndexSearch ] + frc!.sectionIndexTitles
+            return [ UITableView.indexSearch ] + frc!.sectionIndexTitles
         } else {
             return frc!.sectionIndexTitles
         }
@@ -204,7 +204,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         return true
     }
 
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     }
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -271,7 +271,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         if shouldScroll {
             shouldScroll = false
             if (frc?.sections?.count)! > 0 {
-                tableView.scrollToRow(at: IndexPath(row: 0, section: 0) as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                tableView.scrollToRow(at: IndexPath(row: 0, section: 0) as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
             }
         }
     }
@@ -282,7 +282,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             if arvc.added {
                 refresh()
                 if let indexPath = self.frc!.indexPath(forObject: arvc.recipe!) {
-                    self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: UITableViewScrollPosition.middle)
+                    self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: UITableView.ScrollPosition.middle)
                 }
             }
         }
@@ -298,8 +298,8 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             return true
         }
     }
-    override func motionEnded(_ with: UIEventSubtype, with event: UIEvent?) {
-        if event!.subtype == UIEventSubtype.motionShake {
+    override func motionEnded(_ with: UIEvent.EventSubtype, with event: UIEvent?) {
+        if event!.subtype == UIEvent.EventSubtype.motionShake {
             let indexPath: IndexPath
 
             if userSettings.recipeSortOrder == .Name {
@@ -314,7 +314,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
                 indexPath = IndexPath(row: 0, section: 0)
             }
 
-            tableView.selectRow(at: indexPath as IndexPath, animated: false, scrollPosition: UITableViewScrollPosition.middle)
+            tableView.selectRow(at: indexPath as IndexPath, animated: false, scrollPosition: UITableView.ScrollPosition.middle)
             performSegue(withIdentifier: "recipeDetails", sender: self)
         }
     }

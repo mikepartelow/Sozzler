@@ -45,7 +45,7 @@ class RatingView: UIView {
                 images[j]?.image = UIImage(named: "asset-olive-white")
                 // removing the unused images and resizing the frame might be better than this
                 //
-                images[j]?.image = images[j]?.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+                images[j]?.image = images[j]?.image!.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
                 images[j]?.tintColor = UIColor.lightGray
             }
         }
@@ -64,7 +64,7 @@ class RatingView: UIView {
     func xibSetup() {
         view = loadViewFromNib()
         view.frame = bounds
-        view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
+        view.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
         
         // for reference, not for looks!
 //        view.layer.borderColor = UIColor.blackColor().CGColor

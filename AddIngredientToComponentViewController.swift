@@ -15,7 +15,7 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
         super.viewDidLoad()
         tableView.delegate = self
         
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
 
         definesPresentationContext = true
         refresh()
@@ -28,7 +28,7 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
         tableView.tableHeaderView = searchController!.searchBar
         searchController!.searchBar.sizeToFit()
         
-        tableView.scrollToRow(at: IndexPath(row: 0, section: 0) as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0) as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
     }
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -60,7 +60,7 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
         if searchText != "" {
             return []
         } else {
-            return [ UITableViewIndexSearch ] + frc!.sectionIndexTitles
+            return [ UITableView.indexSearch ] + frc!.sectionIndexTitles
         }
     }
     
@@ -134,7 +134,7 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
                     try ingredient.validateForInsert()
                     self.refresh()
                     let indexPath = self.frc!.indexPath(forObject: ingredient)
-                    self.tableView.selectRow(at: indexPath!, animated: true, scrollPosition: UITableViewScrollPosition.middle)
+                    self.tableView.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.middle)
                 } catch let error1 as NSError {
                     error = error1
                     // FIXME:

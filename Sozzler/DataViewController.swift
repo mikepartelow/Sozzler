@@ -90,8 +90,8 @@ class DataViewController: UIViewController {
     override var canBecomeFirstResponder: Bool {
         return true
     }
-    override func motionEnded(_ with: UIEventSubtype, with event: UIEvent!) {
-        if event.subtype == UIEventSubtype.motionShake {
+    override func motionEnded(_ with: UIEvent.EventSubtype, with event: UIEvent!) {
+        if event.subtype == UIEvent.EventSubtype.motionShake {
             if userSettings.oliveAsset == "asset-olive-green" {
                 userSettings.oliveAsset = "asset-olive-green-outline"
             } else if userSettings.oliveAsset == "asset-olive-green-outline" {

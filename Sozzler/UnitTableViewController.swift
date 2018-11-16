@@ -10,7 +10,7 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         super.viewDidLoad()
         tableView.delegate = self
         
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         
         refresh()
 
@@ -55,7 +55,7 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         return true
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -199,7 +199,7 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
             if euvc.added {
                 self.refresh()
                 let indexPath = self.frc!.indexPath(forObject: euvc.unit!)
-                self.tableView.selectRow(at: indexPath!, animated: true, scrollPosition: UITableViewScrollPosition.middle)
+                self.tableView.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.middle)
             }
         }
     }

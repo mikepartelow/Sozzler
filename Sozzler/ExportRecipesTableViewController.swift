@@ -27,7 +27,7 @@ class ExportRecipesTableViewController: UITableViewController, NSFetchedResultsC
         tableView.dataSource = self
         
         tableView.register(UINib(nibName: "RecipeCell", bundle: nil), forCellReuseIdentifier: "RecipeCell")
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         
 //        navigationItem.title = "Export"
 
@@ -55,7 +55,7 @@ class ExportRecipesTableViewController: UITableViewController, NSFetchedResultsC
         
         
         if (frc?.sections?.count)! > 0 {
-            tableView.scrollToRow(at: IndexPath(row: 0, section: 0) as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0) as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
         }
         
         NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "data.reset"), object: nil)
@@ -154,7 +154,7 @@ class ExportRecipesTableViewController: UITableViewController, NSFetchedResultsC
             selectedRecipes.insert(recipe.name)
         }
         
-        tableView.reloadRows(at: [indexPath as IndexPath], with: UITableViewRowAnimation.none)
+        tableView.reloadRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.none)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -183,7 +183,7 @@ class ExportRecipesTableViewController: UITableViewController, NSFetchedResultsC
             return []
         }
         
-        return [ UITableViewIndexSearch ] + frc!.sectionIndexTitles
+        return [ UITableView.indexSearch ] + frc!.sectionIndexTitles
     }
     
     override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
@@ -204,7 +204,7 @@ class ExportRecipesTableViewController: UITableViewController, NSFetchedResultsC
         return true
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -262,7 +262,7 @@ class ExportRecipesTableViewController: UITableViewController, NSFetchedResultsC
         if shouldScroll {
             shouldScroll = false
             if (frc?.sections?.count)! > 0 {
-                tableView.scrollToRow(at: IndexPath(row: 0, section: 0) as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                tableView.scrollToRow(at: IndexPath(row: 0, section: 0) as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
             }
         }
     }

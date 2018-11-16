@@ -70,7 +70,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
 //        recipeText.layer.borderColor = UIColor.blackColor().CGColor
 //        recipeText.layer.borderWidth = 1.0
 
-        NotificationCenter.default.addObserver(self, selector: Selector(("keyboardWillShow:")), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector(("keyboardWillShow:")), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         let pan = UIPanGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         pan.cancelsTouchesInView = false
@@ -81,11 +81,11 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         tap.cancelsTouchesInView = false
         scrollView.addGestureRecognizer(tap)
         
-        recipeName.addTarget(self, action: #selector(UIInputViewController.dismissKeyboard), for: UIControlEvents.editingDidEndOnExit)
+        recipeName.addTarget(self, action: #selector(UIInputViewController.dismissKeyboard), for: UIControl.Event.editingDidEndOnExit)
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(NSNotification.Name.UIKeyboardWillShow)
+        NotificationCenter.default.removeObserver(UIResponder.keyboardWillShowNotification)
     }
 
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -98,7 +98,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
 
     func keyboardWillShow(notification: NSNotification) {
         if let userInfo = notification.userInfo {
-            if let r = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue {
+            if let r = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue {
                 keyboardRect = r
             }
         }
@@ -123,7 +123,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             
             scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
             
-            let contentInsets = UIEdgeInsetsMake(0, 0, keyboardRect.height, 0)
+            let contentInsets = UIEdgeInsets.init(top: 0, left: 0, bottom: keyboardRect.height, right: 0)
             scrollView.contentInset = contentInsets
             scrollView.scrollIndicatorInsets = contentInsets
             
@@ -150,7 +150,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
 
             resizeRecipeText()
 
-            let contentInsets = UIEdgeInsetsMake(0, 0, 0, 0)
+            let contentInsets = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
             scrollView.contentInset = contentInsets
             scrollView.scrollIndicatorInsets = contentInsets
             
@@ -188,7 +188,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             CoreDataHelper.delete(obj: component)
             self.componentTable.reloadData()
             self.resizeComponentsTable()
-            self.componentTable.scrollToRow(at: IndexPath(row: self.recipe!.sortedComponents.count-1, section: 0) as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+            self.componentTable.scrollToRow(at: IndexPath(row: self.recipe!.sortedComponents.count-1, section: 0) as IndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
             
             for (index, component) in self.recipe!.sortedComponents.enumerated() {
                 component.index = Int16(index)
@@ -203,7 +203,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         return indexPath.row < recipe!.sortedComponents.count
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCell.EditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         // even if it does nothing this needs to be here if we want to get a delete event
     }
     
@@ -267,7 +267,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
                 
                 componentTable.reloadData()
                 resizeComponentsTable()
-                componentTable.scrollToRow(at: IndexPath(row: recipe!.sortedComponents.count-1, section: 0) as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                componentTable.scrollToRow(at: IndexPath(row: recipe!.sortedComponents.count-1, section: 0) as IndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
             }
         }
     }
