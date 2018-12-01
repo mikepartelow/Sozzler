@@ -171,11 +171,11 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         var sortedUnits = frc!.fetchedObjects as! [Unit]
         
         if to.row < from.row {
-            sortedUnits[to.row..<from.row].map({ (unit) in
+            _ = sortedUnits[to.row..<from.row].map({ (unit) in
                 unit.index += 1
             })
         } else if from.row < to.row {
-            sortedUnits[from.row+1...to.row].map({ (unit) in
+            _ = sortedUnits[from.row+1...to.row].map({ (unit) in
                 unit.index -= 1
             })
         }

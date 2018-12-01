@@ -26,9 +26,9 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         super.init(coder: aDecoder)
 
         if Recipe.count() == 0 {
-            CannedUnitSource().read()
-            CannedRecipeSource().read()
-            CoreDataHelper.save()
+            _ = CannedUnitSource().read()
+            _ = CannedRecipeSource().read()
+            _ = CoreDataHelper.save()
         }
     }
 

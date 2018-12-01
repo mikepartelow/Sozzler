@@ -35,7 +35,7 @@ class Recipe: NSManagedObject {
     @NSManaged var components: NSMutableSet
 
     var sortedComponents: [Component] {
-        var componentArray = components.allObjects as! [Component]
+        let componentArray = components.allObjects as! [Component]
         return componentArray.sorted(by: { (lhs, rhs) -> Bool in
             lhs.index < rhs.index
         })

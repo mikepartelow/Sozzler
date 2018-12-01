@@ -57,8 +57,8 @@ class DataViewController: UIViewController {
             
             (UIApplication.shared.delegate as! AppDelegate).userSettings.factoryReset()
             
-            CannedUnitSource().read()
-            CannedRecipeSource().read()
+            _ = CannedUnitSource().read()
+            _ = CannedRecipeSource().read()
             NSLog("recipe count: \(Recipe.count())")
             
             if let error = CoreDataHelper.save() {

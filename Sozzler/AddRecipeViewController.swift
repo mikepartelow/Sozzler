@@ -88,7 +88,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         NotificationCenter.default.removeObserver(UIResponder.keyboardWillShowNotification)
     }
 
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return !recipeName.isFirstResponder && !recipeText.isFirstResponder
     }
 
@@ -114,7 +114,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         recipeText.resignFirstResponder()
     }
     
-    func textViewDidBeginEditing(textView: UITextView) {
+    func textViewDidBeginEditing(_ textView: UITextView) {
         if textView == recipeText {
             if recipeText!.text == recipeTextPlaceholder {
                 recipeText!.text = ""
@@ -141,7 +141,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
 
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         if textView == recipeText {
             if recipeText!.text.isEmpty {
                 recipeText!.text = recipeTextPlaceholder
@@ -180,7 +180,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         return cell
     }
 
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: IndexPath) -> [UITableViewRowAction]? {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) -> Void in
             let component = self.recipe!.sortedComponents[indexPath.row]
             
@@ -199,11 +199,11 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         return [ deleteAction ]
     }
 
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return indexPath.row < recipe!.sortedComponents.count
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCell.EditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         // even if it does nothing this needs to be here if we want to get a delete event
     }
     
@@ -238,7 +238,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             }
         } catch let error1 as NSError {
             error = error1
-            NSLog("\(error)")
+            NSLog("\(String(describing: error))")
             let errorMessage = error!.userInfo[NSLocalizedDescriptionKey] as! String
             let errorCode = Recipe.ValidationErrorCode(rawValue: error!.code)
             
@@ -263,7 +263,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
                 let quantity_d = Int16(vc.quantity_f![1])
                 let quantity_n = Int16((vc.quantity_f![1] * vc.quantity_i!) + vc.quantity_f![0])
                 
-                Component.create(quantity_n: quantity_n, quantity_d: quantity_d, unit: unit, ingredient: vc.ingredient!, recipe: recipe!, index: Int16(recipe!.components.count))
+                _ = Component.create(quantity_n: quantity_n, quantity_d: quantity_d, unit: unit, ingredient: vc.ingredient!, recipe: recipe!, index: Int16(recipe!.components.count))
                 
                 componentTable.reloadData()
                 resizeComponentsTable()
@@ -272,7 +272,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
@@ -284,11 +284,11 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         var sortedComponents = recipe!.sortedComponents
         
         if to.row < from.row {
-            sortedComponents[to.row..<from.row].map({ (component) in
+            _ = sortedComponents[to.row..<from.row].map({ (component) in
                 component.index += 1
             })
         } else if from.row < to.row {
-            sortedComponents[from.row+1...to.row].map({ (component) in
+            _ = sortedComponents[from.row+1...to.row].map({ (component) in
                 component.index -= 1
             })
         }

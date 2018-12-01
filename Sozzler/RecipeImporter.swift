@@ -22,7 +22,7 @@ class RecipeImporter {
             
             let doitAction = UIAlertAction(title: "Do it", style: .destructive) { (action: UIAlertAction) -> Void in
                 CoreDataHelper.factoryReset(save: false)
-                CannedUnitSource().read()
+                _ = CannedUnitSource().read()
 
                 self.loadRecipes(url: url)
             }

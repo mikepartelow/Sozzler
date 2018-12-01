@@ -139,7 +139,7 @@ class AddIngredientToComponentViewController: UITableViewController, NSFetchedRe
                     error = error1
                     // FIXME:
                     // alert: could not blah blah
-                    NSLog("Save Failed!: \(error)")
+                    NSLog("Save Failed!: \(String(describing: error))")
                 } catch {
                     fatalError()
                 }

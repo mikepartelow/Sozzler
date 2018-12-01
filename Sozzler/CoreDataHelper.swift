@@ -92,7 +92,7 @@ class CoreDataHelper {
             component.unit.computeRecipeCount(adjustment: -1)
             CoreDataHelper.delete(obj: component)
         }
-        CoreDataHelper.delete(recipe: recipe as NSManagedObject as! Recipe)
+        CoreDataHelper.delete(obj: recipe)
     }
     
     class func fetchedResultsController(fetchRequest: NSFetchRequest<NSFetchRequestResult>, sectionNameKeyPath: String? = nil) -> NSFetchedResultsController<NSFetchRequestResult> {
@@ -104,10 +104,10 @@ class CoreDataHelper {
     class func factoryReset(save: Bool=true) {
         let moc = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext!
 
-        CoreDataHelper.all(entityName: "Component").map({ moc.delete($0) })
-        CoreDataHelper.all(entityName: "Unit").map({ moc.delete($0) })
-        CoreDataHelper.all(entityName: "Ingredient").map({ moc.delete($0) })
-        CoreDataHelper.all(entityName: "Recipe").map({ moc.delete($0) })
+        _ = CoreDataHelper.all(entityName: "Component").map({ moc.delete($0) })
+        _ = CoreDataHelper.all(entityName: "Unit").map({ moc.delete($0) })
+        _ = CoreDataHelper.all(entityName: "Ingredient").map({ moc.delete($0) })
+        _ = CoreDataHelper.all(entityName: "Recipe").map({ moc.delete($0) })
 
         if save {
             if let error = CoreDataHelper.save() {

@@ -68,7 +68,7 @@ class AddQuantityToComponentViewController: UIViewController, UIPickerViewDelega
         }
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView {
         case integerPicker:
             return row == 0 ? "" : "\(integers[row-1])"
