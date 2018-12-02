@@ -112,34 +112,34 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         becomeFirstResponder()
     }
 
-    @IBAction func onSort(sender: UIBarButtonItem) {
+    @IBAction func onSort(_ sender: UIBarButtonItem) {
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
+        
         let sortByRating = UIAlertAction(title: "Sort by Rating", style: .default, handler: {
             (alert: UIAlertAction) -> Void in
             self.userSettings.recipeSortOrder = .Rating
             self.shouldScroll = true
             self.refresh()
         })
-
+        
         let sortByName = UIAlertAction(title: "Sort by Name", style: .default, handler: {
             (alert: UIAlertAction) -> Void in
             self.userSettings.recipeSortOrder = .Name
             self.shouldScroll = true
             self.refresh()
         })
-
+        
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: {
             (alert: UIAlertAction) -> Void in
         })
-
+        
         sheet.addAction(sortByName)
         sheet.addAction(sortByRating)
         sheet.addAction(cancel)
-
+        
         present(sheet, animated: true, completion: nil)
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "recipeDetails" {
             let rvc = segue.destination as! RecipeViewController
