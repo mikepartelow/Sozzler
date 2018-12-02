@@ -72,16 +72,16 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
 
         NotificationCenter.default.addObserver(self, selector: Selector(("keyboardWillShow:")), name: UIResponder.keyboardWillShowNotification, object: nil)
         
-        let pan = UIPanGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         pan.cancelsTouchesInView = false
         pan.delegate = self
         scrollView.addGestureRecognizer(pan)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false
         scrollView.addGestureRecognizer(tap)
         
-        recipeName.addTarget(self, action: #selector(UIInputViewController.dismissKeyboard), for: UIControl.Event.editingDidEndOnExit)
+        recipeName.addTarget(self, action: #selector(self.dismissKeyboard), for: UIControl.Event.editingDidEndOnExit)
     }
     
     deinit {
@@ -92,7 +92,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         return !recipeName.isFirstResponder && !recipeText.isFirstResponder
     }
 
-    func dismissKeyboard() {
+    @objc func dismissKeyboard(_ sender: UIButton) {
         view.endEditing(true)
     }
 
@@ -207,7 +207,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         // even if it does nothing this needs to be here if we want to get a delete event
     }
     
-    @IBAction func onCancel(sender: UIBarButtonItem) {
+    @IBAction func onCancel(_ sender: UIBarButtonItem) {
         moc.rollback()
         if editingRecipe {
             performSegue(withIdentifier: "unwindToRecipe", sender: self)
@@ -216,7 +216,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    @IBAction func onDone(sender: UIBarButtonItem) {
+    @IBAction func onSave(_ sender: UIBarButtonItem) {
         recipe!.name = recipeName!.text!
         recipe!.rating = Int16(ratingView!.rating)
         

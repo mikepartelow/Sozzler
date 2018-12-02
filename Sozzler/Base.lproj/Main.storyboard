@@ -119,11 +119,11 @@
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="hF2-yC-lSn"/>
-                                                <exclude reference="yqF-Kk-suX"/>
                                                 <exclude reference="Sco-dp-iMr"/>
                                                 <exclude reference="l4I-9V-frF"/>
                                                 <exclude reference="x7j-xt-8q4"/>
+                                                <exclude reference="hF2-yC-lSn"/>
+                                                <exclude reference="yqF-Kk-suX"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -315,12 +315,12 @@
                     <navigationItem key="navigationItem" title="Add Recipe" id="U9u-Qd-UH8">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="2JF-Hs-1uJ">
                             <connections>
-                                <action selector="onCancel:" destination="vvM-8B-AZE" id="2bu-hK-3SR"/>
+                                <action selector="onCancel:" destination="vvM-8B-AZE" id="x9V-TG-puz"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="R7r-nr-VoU">
                             <connections>
-                                <action selector="onDone:" destination="vvM-8B-AZE" id="hkE-SC-3be"/>
+                                <action selector="onSave:" destination="vvM-8B-AZE" id="4NY-D0-SkQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -717,6 +717,7 @@
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="bNh-sk-b7n">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
