@@ -78,9 +78,9 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
             }
         }
 
-        NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "data.reset"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "asset.reset"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: Selector(("recipeUpdated")), name: NSNotification.Name(rawValue: "recipe.updated"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dataReset), name: NSNotification.Name(rawValue: "data.reset"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dataReset), name: NSNotification.Name(rawValue: "asset.reset"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(RecipeTableViewController.recipeUpdated), name: NSNotification.Name(rawValue: "recipe.updated"), object: nil)
     }
 
     deinit {
@@ -89,7 +89,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         NotificationCenter.default.removeObserver("recipe.updated")
     }
 
-    func dataReset() {
+    @objc func dataReset() {
         shouldScroll = true
         ingredient = nil
         searchText = ""
@@ -97,7 +97,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         refresh()
     }
 
-    func recipeUpdated() {
+    @objc func recipeUpdated() {
         refresh()
     }
 

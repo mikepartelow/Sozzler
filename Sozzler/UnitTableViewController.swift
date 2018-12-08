@@ -18,9 +18,9 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         
 //        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
         
-        NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "data.reset"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "recipe.deleted"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "recipe.updated"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dataReset), name: NSNotification.Name(rawValue: "data.reset"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dataReset), name: NSNotification.Name(rawValue: "recipe.deleted"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dataReset), name: NSNotification.Name(rawValue: "recipe.updated"), object: nil)
     }
     
     deinit {
@@ -33,7 +33,7 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
         return 56;
     }
     
-    func dataReset() {
+    @objc func dataReset() {
         shouldRefresh = true
     }
     

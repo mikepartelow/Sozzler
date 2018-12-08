@@ -70,7 +70,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
 //        recipeText.layer.borderColor = UIColor.blackColor().CGColor
 //        recipeText.layer.borderWidth = 1.0
 
-        NotificationCenter.default.addObserver(self, selector: Selector(("keyboardWillShow:")), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         let pan = UIPanGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         pan.cancelsTouchesInView = false
@@ -96,7 +96,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         view.endEditing(true)
     }
 
-    func keyboardWillShow(notification: NSNotification) {
+    @objc func keyboardWillShow(notification: NSNotification) {
         if let userInfo = notification.userInfo {
             if let r = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue {
                 keyboardRect = r

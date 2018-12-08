@@ -35,9 +35,9 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0) as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
 
-        NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "data.reset"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "recipe.deleted"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "recipe.updated"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dataReset), name: NSNotification.Name(rawValue: "data.reset"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dataReset), name: NSNotification.Name(rawValue: "recipe.deleted"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dataReset), name: NSNotification.Name(rawValue: "recipe.updated"), object: nil)
     }
     
     deinit {
@@ -50,7 +50,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         return 32;
     }
 
-    func dataReset() {
+    @objc func dataReset() {
         shouldRefresh = true
         searchText = ""
         searchController?.isActive = false

@@ -43,13 +43,13 @@ class ExportRecipesTableViewController: UITableViewController, NSFetchedResultsC
         searchController!.searchBar.sizeToFit()
         
 
-        let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: Selector(("onCancel:")))
-        let sort = UIBarButtonItem(title: "Sort", style: .plain, target: self, action: Selector(("onSort:")))
+        let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.onCancel))
+        let sort = UIBarButtonItem(title: "Sort", style: .plain, target: self, action: #selector(self.onSort))
         
         navigationItem.leftBarButtonItems = [cancel, sort]
         
-        let selectAll = UIBarButtonItem(title: "Deselect All", style: .plain, target: self, action: Selector(("onSelectAll:")))
-        let export = UIBarButtonItem(title: "Export", style: .plain, target: self, action: Selector(("onDone:")))
+        let selectAll = UIBarButtonItem(title: "Deselect All", style: .plain, target: self, action: #selector(self.onSelectAll))
+        let export = UIBarButtonItem(title: "Export", style: .plain, target: self, action: #selector(self.onDone))
         
         navigationItem.rightBarButtonItems = [export, selectAll]
         
@@ -58,9 +58,9 @@ class ExportRecipesTableViewController: UITableViewController, NSFetchedResultsC
             tableView.scrollToRow(at: IndexPath(row: 0, section: 0) as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
         }
         
-        NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "data.reset"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: Selector(("dataReset")), name: NSNotification.Name(rawValue: "asset.reset"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: Selector(("recipeUpdated")), name: NSNotification.Name(rawValue: "recipe.updated"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dataReset), name: NSNotification.Name(rawValue: "data.reset"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dataReset), name: NSNotification.Name(rawValue: "asset.reset"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.recipeUpdated), name: NSNotification.Name(rawValue: "recipe.updated"), object: nil)
     }
     
     deinit {
@@ -69,14 +69,14 @@ class ExportRecipesTableViewController: UITableViewController, NSFetchedResultsC
         NotificationCenter.default.removeObserver("recipe.updated")
     }
     
-    func dataReset() {
+    @objc func dataReset() {
         shouldScroll = true
         searchText = ""
         searchController?.isActive = false
         refresh()
     }
     
-    func recipeUpdated() {
+    @objc func recipeUpdated() {
         refresh()
     }
     
