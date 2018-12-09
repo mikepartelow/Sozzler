@@ -91,7 +91,7 @@ class ExportRecipesTableViewController: UITableViewController, NSFetchedResultsC
         becomeFirstResponder()
     }
 
-    @IBAction func onSelectAll(sender: UIBarButtonItem) {
+    @IBAction func onSelectAll(_ sender: UIBarButtonItem) {
         if sender.title == "Select All" {
             sender.title = "Deselect All"
             selectedRecipes = Set<String>(Recipe.all().map({ $0.name }))
@@ -103,17 +103,17 @@ class ExportRecipesTableViewController: UITableViewController, NSFetchedResultsC
         }
     }
 
-    @IBAction func onDone(sender: UIBarButtonItem) {
+    @IBAction func onDone(_ sender: UIBarButtonItem) {
         exporter = RecipeExporter(viewController: self)
         exporter!.export(recipes: Recipe.all().filter({ self.selectedRecipes.contains($0.name) }),
                          completion: { self.performSegue(withIdentifier: "unwindToData", sender: self) })
     }
 
-    @IBAction func onCancel(sender: UIBarButtonItem) {
+    @IBAction func onCancel(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "unwindToData", sender: self)
     }
 
-    @IBAction func onSort(sender: UIBarButtonItem) {
+    @IBAction func onSort(_ sender: UIBarButtonItem) {
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let sortByRating = UIAlertAction(title: "Sort by Rating", style: .default, handler: {

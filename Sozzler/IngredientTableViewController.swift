@@ -69,7 +69,7 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         present(alert, animated: true, completion: nil)
     }
 
-    @IBAction func onAdd(sender: UIBarButtonItem) {
+    @IBAction func onAdd(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Add Ingredient", message: "", preferredStyle: .alert)
         
         let addAction = UIAlertAction(title: "Add", style: .default) { (action: UIAlertAction) -> Void in

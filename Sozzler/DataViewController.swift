@@ -24,7 +24,7 @@ class DataViewController: UIViewController {
         ingredientsLabel!.text = "\(Ingredient.count()) ingredients"
     }
    
-    @IBAction func onImport(sender: UIButton) {
+    @IBAction func onImport(_ sender: UIButton) {
         let alert = UIAlertController(title: "Import Recipes", message: "", preferredStyle: .alert)
         
         let importRecipes = UIAlertAction(title: "Import", style: .default) { (action: UIAlertAction!) -> Void in
@@ -49,7 +49,7 @@ class DataViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func onImportCanned(sender: UIButton) {
+    @IBAction func onImportCanned(_ sender: UIButton) {
         let alert = UIAlertController(title: "", message: "Restore default recipes and settings?", preferredStyle: .alert)
         
         let doitAction = UIAlertAction(title: "Do it", style: .destructive) { (action: UIAlertAction!) -> Void in

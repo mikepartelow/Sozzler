@@ -28,8 +28,8 @@ class EditUnitViewController: UIViewController {
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
-
-    @IBAction func onSave(sender: AnyObject) {
+    
+    @IBAction func onSave(_ sender: UIBarButtonItem) {
         if unit == nil {
             if Unit.find(name: unitNameSingular.text!) != nil {
                 self.errorAlert(title: "Unit already exists.", button: "Oops")
