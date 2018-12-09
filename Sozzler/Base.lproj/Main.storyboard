@@ -470,12 +470,12 @@
                     <navigationItem key="navigationItem" title="Select Quantity" id="MDo-Uk-zhp">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Nzt-RO-QNZ">
                             <connections>
-                                <segue destination="qeD-0z-1DZ" kind="unwind" identifier="unwindToAddIngredientToComponent" unwindAction="unwindToAddIngredientToComponent:" id="AbI-gz-nZN"/>
+                                <segue destination="qeD-0z-1DZ" kind="unwind" unwindAction="unwindToAddIngredientToComponentWithSender:" id="1LG-3d-eBc"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="xDx-Yk-dcK">
                             <connections>
-                                <action selector="onDone:" destination="GL4-Ag-gko" id="jgq-8o-AZr"/>
+                                <action selector="onDone:" destination="GL4-Ag-gko" id="0fa-as-MXG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -483,7 +483,7 @@
                         <outlet property="fractionPicker" destination="B3x-Sg-GaT" id="LXG-cQ-bbQ"/>
                         <outlet property="integerPicker" destination="Vbs-sR-0PY" id="Mop-JY-Jdo"/>
                         <outlet property="unitPicker" destination="mad-px-wup" id="mhR-j9-wYZ"/>
-                        <segue destination="qeD-0z-1DZ" kind="unwind" identifier="unwindToAddRecipe" unwindAction="unwindToAddRecipe:" id="UWP-uS-hPu"/>
+                        <segue destination="qeD-0z-1DZ" kind="unwind" identifier="unwindToAddRecipe" unwindAction="unwindToAddRecipe:" id="sfT-9T-09e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OZC-r9-THW" userLabel="First Responder" sceneMemberID="firstResponder"/>

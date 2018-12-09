@@ -2,11 +2,6 @@ import UIKit
 import CoreData
 
 class AddQuantityToComponentViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 0;
-    }
-    
-
     @IBOutlet weak var integerPicker: UIPickerView!
     @IBOutlet weak var fractionPicker: UIPickerView!
     @IBOutlet weak var unitPicker: UIPickerView!
@@ -51,7 +46,7 @@ class AddQuantityToComponentViewController: UIViewController, UIPickerViewDelega
         navigationItem.title = ingredient!.name
     }
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
@@ -82,7 +77,7 @@ class AddQuantityToComponentViewController: UIViewController, UIPickerViewDelega
         }
     }
 
-    @IBAction func onDone(sender: UIBarButtonItem) {
+    @IBAction func onDone(_ sender: UIBarButtonItem) {
         let selectedUnit        = unitPicker.selectedRow(inComponent: 0)
         unit                    = frc.object(at: IndexPath(row: selectedUnit, section: 0) as IndexPath) as? Unit
         

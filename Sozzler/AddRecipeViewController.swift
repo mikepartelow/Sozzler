@@ -255,7 +255,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    @IBAction func unwindToAddRecipe(sender: UIStoryboardSegue)
+    @IBAction func unwindToAddRecipe(_ sender: UIStoryboardSegue)
     {
         if let _ = sender.source as? AddIngredientToComponentViewController {
         } else if let vc = sender.source as? AddQuantityToComponentViewController {
