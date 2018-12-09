@@ -158,7 +158,7 @@
                         <outlet property="recipeName" destination="o76-Kl-aPF" id="b2G-ai-QqK"/>
                         <outlet property="recipeTextView" destination="xjL-To-Zeg" id="Cbk-MA-o85"/>
                         <outlet property="recipeTextViewHeight" destination="2PB-ib-8eA" id="UlI-zy-dvP"/>
-                        <segue destination="QCR-WO-5ra" kind="unwind" identifier="unwindToRecipes" unwindAction="unwindToRecipes:" id="koR-UR-TRI"/>
+                        <segue destination="QCR-WO-5ra" kind="unwind" identifier="unwindToRecipes" unwindAction="unwindToRecipesWithSender:" id="koR-UR-TRI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="goy-yi-713" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -333,8 +333,8 @@
                         <outlet property="recipeText" destination="olF-dE-YVU" id="gIa-pu-9Eb"/>
                         <outlet property="recipeTextHeight" destination="mHe-gU-JM4" id="4qE-Iu-Dya"/>
                         <outlet property="scrollView" destination="i5L-6A-6A1" id="nCw-A9-xGk"/>
-                        <segue destination="dtn-kK-1MD" kind="unwind" identifier="unwindToRecipes" unwindAction="unwindToRecipes:" id="Vy0-Jj-sLF"/>
-                        <segue destination="dtn-kK-1MD" kind="unwind" identifier="unwindToRecipe" unwindAction="unwindToRecipe:" id="tlT-bb-Ms1"/>
+                        <segue destination="dtn-kK-1MD" kind="unwind" identifier="unwindToRecipes" unwindAction="unwindToRecipesWithSender:" id="Vy0-Jj-sLF"/>
+                        <segue destination="dtn-kK-1MD" kind="unwind" identifier="unwindToRecipe" unwindAction="unwindToRecipeWithSender:" id="tlT-bb-Ms1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OpO-yD-K1Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -380,7 +380,7 @@
                     <navigationItem key="navigationItem" title="Select Ingredient" id="wx7-gM-I2F">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="1Go-Zp-6eW">
                             <connections>
-                                <segue destination="LrM-OJ-KJ1" kind="unwind" unwindAction="unwindToAddRecipe:" id="g3m-nw-1Z4"/>
+                                <segue destination="LrM-OJ-KJ1" kind="unwind" unwindAction="unwindToAddRecipeWithSender:" id="g3m-nw-1Z4"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="TM8-X4-l1A">
@@ -390,7 +390,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="LrM-OJ-KJ1" kind="unwind" identifier="unwindToAddRecipe" unwindAction="unwindToAddRecipe:" id="xEL-Ic-F1K"/>
+                        <segue destination="LrM-OJ-KJ1" kind="unwind" identifier="unwindToAddRecipe" unwindAction="unwindToAddRecipeWithSender:" id="xEL-Ic-F1K"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KBx-VZ-90R" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -483,7 +483,7 @@
                         <outlet property="fractionPicker" destination="B3x-Sg-GaT" id="LXG-cQ-bbQ"/>
                         <outlet property="integerPicker" destination="Vbs-sR-0PY" id="Mop-JY-Jdo"/>
                         <outlet property="unitPicker" destination="mad-px-wup" id="mhR-j9-wYZ"/>
-                        <segue destination="qeD-0z-1DZ" kind="unwind" identifier="unwindToAddRecipe" unwindAction="unwindToAddRecipe:" id="sfT-9T-09e"/>
+                        <segue destination="qeD-0z-1DZ" kind="unwind" identifier="unwindToAddRecipe" unwindAction="unwindToAddRecipeWithSender:" id="sfT-9T-09e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OZC-r9-THW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -524,8 +524,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="12g-uX-l3M" kind="unwind" identifier="unwindToRecipes" unwindAction="unwindToRecipesWithSender:" id="9Z1-Wl-VDA"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q2K-2Z-eS7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="12g-uX-l3M" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2743" y="1234"/>
         </scene>

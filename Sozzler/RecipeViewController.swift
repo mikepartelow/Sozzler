@@ -34,7 +34,7 @@ class RecipeViewController: UIViewController {
         recipeTextViewHeight.constant = fit
     }
     
-    @IBAction func unwindToRecipe(_ sender: UIStoryboardSegue)
+    @IBAction func unwindToRecipe(sender: UIStoryboardSegue)
     {
         render()
     }    

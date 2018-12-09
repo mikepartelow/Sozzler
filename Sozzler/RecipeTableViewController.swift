@@ -276,7 +276,7 @@ class RecipeTableViewController: UITableViewController, NSFetchedResultsControll
         }
     }
 
-    @IBAction func unwindToRecipes(with sender: UIStoryboardSegue)
+    @IBAction func unwindToRecipes(sender: UIStoryboardSegue)
     {
         if let arvc = sender.source as? AddRecipeViewController {
             if arvc.added {
