@@ -221,4 +221,13 @@ class IngredientTableViewController: UITableViewController, NSFetchedResultsCont
         searchText = searchController.searchBar.text!
         refresh()
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        updateSearchResultsForSearchController(searchController: searchController!)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchText = ""
+        refresh()
+    }
 }

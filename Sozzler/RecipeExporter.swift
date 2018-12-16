@@ -33,8 +33,9 @@ class RecipeExporter: NSObject, MFMailComposeViewControllerDelegate {
                 composer.addAttachmentData(nsdata as Data, mimeType: "application/sozzler", fileName: "Sozzler Recipes.sozzler")
                 
                 self.completion = completion
-                
-                viewController.present(composer, animated: true, completion: nil)
+                if MFMailComposeViewController.canSendMail() {
+                    viewController.present(composer, animated: true, completion: nil)
+                }
             }
         } catch _ {
         }
