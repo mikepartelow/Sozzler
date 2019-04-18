@@ -36,8 +36,6 @@ class CoreDataHelper {
             assert(false)
             fatalError()
         }
-
-        return nil
     }
     
     class func all(entityName: String, predicate: NSPredicate? = nil) -> [NSManagedObject] {
