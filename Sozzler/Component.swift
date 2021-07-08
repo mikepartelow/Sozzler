@@ -76,7 +76,7 @@ extension Component {
         
         var partsIdx = 0
         
-        var parts = quantity.components(separatedBy: " ")
+        let parts = quantity.components(separatedBy: " ")
         if let intPart = Int(parts[partsIdx]) {
             quantity_n = intPart
             partsIdx += 1

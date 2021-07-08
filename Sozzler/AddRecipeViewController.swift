@@ -188,7 +188,9 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             CoreDataHelper.delete(obj: component)
             self.componentTable.reloadData()
             self.resizeComponentsTable()
-            self.componentTable.scrollToRow(at: IndexPath(row: self.recipe!.sortedComponents.count-1, section: 0) as IndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
+            
+            let row = self.recipe!.sortedComponents.count > 1 ? self.recipe!.sortedComponents.count-1 : NSNotFound
+            self.componentTable.scrollToRow(at: IndexPath(row: row, section: 0) as IndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
             
             for (index, component) in self.recipe!.sortedComponents.enumerated() {
                 component.index = Int16(index)
@@ -281,7 +283,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             return
         }
     
-        var sortedComponents = recipe!.sortedComponents
+        let sortedComponents = recipe!.sortedComponents
         
         if to.row < from.row {
             _ = sortedComponents[to.row..<from.row].map({ (component) in

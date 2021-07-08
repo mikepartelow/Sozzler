@@ -168,7 +168,7 @@ class UnitTableViewController: UITableViewController, NSFetchedResultsController
             return
         }
 
-        var sortedUnits = frc!.fetchedObjects as! [Unit]
+        let sortedUnits = frc!.fetchedObjects as! [Unit]
         
         if to.row < from.row {
             _ = sortedUnits[to.row..<from.row].map({ (unit) in
